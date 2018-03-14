@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		58CF0FA99110D9363161758D /* Pods_Food_Love.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76602EB115892ADD0A77C58C /* Pods_Food_Love.framework */; };
+		813E32352058E4CD0076A98F /* restaurant.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 813E32322058E4CC0076A98F /* restaurant.mp4 */; };
+		813E32362058E4CD0076A98F /* coffeecouple.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 813E32332058E4CC0076A98F /* coffeecouple.mp4 */; };
+		813E32372058E4CD0076A98F /* coupleInRestaurant.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 813E32342058E4CD0076A98F /* coupleInRestaurant.mp4 */; };
+		813E323A2058F0A80076A98F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813E32392058F0A80076A98F /* MapKit.framework */; };
+		817F9B47205863B10061E1B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B46205863B10061E1B6 /* AppDelegate.swift */; };
+		817F9B4C205863B10061E1B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4A205863B10061E1B6 /* Main.storyboard */; };
+		817F9B4E205863B10061E1B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4D205863B10061E1B6 /* Images.xcassets */; };
+		817F9B51205863B10061E1B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4F205863B10061E1B6 /* LaunchScreen.storyboard */; };
+		817F9B5F2058B79D0061E1B6 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B5E2058B79D0061E1B6 /* LoadingVC.swift */; };
+		817F9B612058B7B50061E1B6 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B602058B7B50061E1B6 /* WelcomeVC.swift */; };
+		817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B622058B7D70061E1B6 /* LoginVC.swift */; };
+		817F9B652058B7F20061E1B6 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B642058B7F20061E1B6 /* SignupVC.swift */; };
+		817F9B672058B8060061E1B6 /* FillOutProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B662058B8060061E1B6 /* FillOutProfileVC.swift */; };
+		817F9B692058B81C0061E1B6 /* DiscoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B682058B81C0061E1B6 /* DiscoverVC.swift */; };
+		817F9B6B2058B8340061E1B6 /* ViewProfileDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B6A2058B8340061E1B6 /* ViewProfileDVC.swift */; };
+		817F9B6D2058B8600061E1B6 /* MatchesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B6C2058B8600061E1B6 /* MatchesVC.swift */; };
+		817F9B6F2058B8840061E1B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B6E2058B8830061E1B6 /* GoogleService-Info.plist */; };
+		817F9B712058B8D00061E1B6 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B702058B8D00061E1B6 /* ChatVC.swift */; };
+		817F9B732058B8E40061E1B6 /* ChatVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B722058B8E40061E1B6 /* ChatVideoVC.swift */; };
+		817F9B752058B8F70061E1B6 /* PlanDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B742058B8F70061E1B6 /* PlanDateVC.swift */; };
+		817F9B772058B90F0061E1B6 /* RestaurantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B762058B90F0061E1B6 /* RestaurantVC.swift */; };
+		817F9B792058B9200061E1B6 /* RestaurantDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B782058B9200061E1B6 /* RestaurantDVC.swift */; };
+		817F9B7B2058B9BA0061E1B6 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B7A2058B9BA0061E1B6 /* ProfileVC.swift */; };
+		817F9B7F2058D5BB0061E1B6 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B7E2058D5BB0061E1B6 /* Icons.xcassets */; };
+		81D26F0420598AB200BEBC47 /* FourSquareSearchAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0320598AB200BEBC47 /* FourSquareSearchAPIClient.swift */; };
+		81D26F0620598AF800BEBC47 /* FourSquarePhotoJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0520598AF800BEBC47 /* FourSquarePhotoJSON.swift */; };
+		81D26F0820598B3C00BEBC47 /* FourSquarePhotoAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0720598B3C00BEBC47 /* FourSquarePhotoAPIClient.swift */; };
+		81D26F0A20598B7000BEBC47 /* FourSquareSearchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0920598B7000BEBC47 /* FourSquareSearchJSON.swift */; };
+		81D26F0C20598C0100BEBC47 /* YelpSearchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0B20598C0100BEBC47 /* YelpSearchJSON.swift */; };
+		81D26F0E20598C3300BEBC47 /* YelpSearchAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0D20598C3300BEBC47 /* YelpSearchAPIClient.swift */; };
+		81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0F20598C5E00BEBC47 /* MapAnnotation.swift */; };
+		81D26F1220598C9700BEBC47 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F1120598C9700BEBC47 /* FileManager.swift */; };
+		81D26F1720598D1600BEBC47 /* FourSquareAPIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F1620598D1600BEBC47 /* FourSquareAPIKeys.swift */; };
+		81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F1820598D3000BEBC47 /* YelpAPIKeys.swift */; };
+		81D26F1B20598D6300BEBC47 /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F1A20598D6300BEBC47 /* LocationServices.swift */; };
+		81D26F1D20598D9200BEBC47 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F1C20598D9200BEBC47 /* ImageService.swift */; };
+		81D26F1F20598DAD00BEBC47 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F1E20598DAD00BEBC47 /* NetworkHelper.swift */; };
+		81D26F222059912000BEBC47 /* Gifs.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81D26F212059912000BEBC47 /* Gifs.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5572B6424E0BD1A00464C0FD /* Pods-Food+Love.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food+Love.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love.debug.xcconfig"; sourceTree = "<group>"; };
+		76602EB115892ADD0A77C58C /* Pods_Food_Love.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Food_Love.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		813E32322058E4CC0076A98F /* restaurant.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = restaurant.mp4; path = "Food+Love/SupportingFiles/Videos/restaurant.mp4"; sourceTree = SOURCE_ROOT; };
+		813E32332058E4CC0076A98F /* coffeecouple.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = coffeecouple.mp4; path = "Food+Love/SupportingFiles/Videos/coffeecouple.mp4"; sourceTree = SOURCE_ROOT; };
+		813E32342058E4CD0076A98F /* coupleInRestaurant.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = coupleInRestaurant.mp4; path = "Food+Love/SupportingFiles/Videos/coupleInRestaurant.mp4"; sourceTree = SOURCE_ROOT; };
+		813E32382058F09F0076A98F /* Food+Love.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Food+Love.entitlements"; sourceTree = "<group>"; };
+		813E32392058F0A80076A98F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		817F9B43205863B10061E1B6 /* Food+Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food+Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		817F9B46205863B10061E1B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		817F9B4B205863B10061E1B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		817F9B4D205863B10061E1B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		817F9B50205863B10061E1B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		817F9B52205863B10061E1B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		817F9B5E2058B79D0061E1B6 /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
+		817F9B602058B7B50061E1B6 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		817F9B622058B7D70061E1B6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		817F9B642058B7F20061E1B6 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		817F9B662058B8060061E1B6 /* FillOutProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillOutProfileVC.swift; sourceTree = "<group>"; };
+		817F9B682058B81C0061E1B6 /* DiscoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverVC.swift; sourceTree = "<group>"; };
+		817F9B6A2058B8340061E1B6 /* ViewProfileDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProfileDVC.swift; sourceTree = "<group>"; };
+		817F9B6C2058B8600061E1B6 /* MatchesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesVC.swift; sourceTree = "<group>"; };
+		817F9B6E2058B8830061E1B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		817F9B702058B8D00061E1B6 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		817F9B722058B8E40061E1B6 /* ChatVideoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVideoVC.swift; sourceTree = "<group>"; };
+		817F9B742058B8F70061E1B6 /* PlanDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDateVC.swift; sourceTree = "<group>"; };
+		817F9B762058B90F0061E1B6 /* RestaurantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantVC.swift; sourceTree = "<group>"; };
+		817F9B782058B9200061E1B6 /* RestaurantDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDVC.swift; sourceTree = "<group>"; };
+		817F9B7A2058B9BA0061E1B6 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		817F9B7E2058D5BB0061E1B6 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		81D26F0320598AB200BEBC47 /* FourSquareSearchAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareSearchAPIClient.swift; sourceTree = "<group>"; };
+		81D26F0520598AF800BEBC47 /* FourSquarePhotoJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquarePhotoJSON.swift; sourceTree = "<group>"; };
+		81D26F0720598B3C00BEBC47 /* FourSquarePhotoAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquarePhotoAPIClient.swift; sourceTree = "<group>"; };
+		81D26F0920598B7000BEBC47 /* FourSquareSearchJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareSearchJSON.swift; sourceTree = "<group>"; };
+		81D26F0B20598C0100BEBC47 /* YelpSearchJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchJSON.swift; sourceTree = "<group>"; };
+		81D26F0D20598C3300BEBC47 /* YelpSearchAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchAPIClient.swift; sourceTree = "<group>"; };
+		81D26F0F20598C5E00BEBC47 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
+		81D26F1120598C9700BEBC47 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		81D26F1620598D1600BEBC47 /* FourSquareAPIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareAPIKeys.swift; sourceTree = "<group>"; };
+		81D26F1820598D3000BEBC47 /* YelpAPIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIKeys.swift; sourceTree = "<group>"; };
+		81D26F1A20598D6300BEBC47 /* LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
+		81D26F1C20598D9200BEBC47 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		81D26F1E20598DAD00BEBC47 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		81D26F202059908700BEBC47 /* date1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = date1.mp4; path = "New Resources/date1.mp4"; sourceTree = SOURCE_ROOT; };
+		81D26F212059912000BEBC47 /* Gifs.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Gifs.xcassets; sourceTree = "<group>"; };
+		F854EBC64664453D7ACE358A /* Pods-Food+Love.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food+Love.release.xcconfig"; path = "Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		817F9B40205863B10061E1B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				813E323A2058F0A80076A98F /* MapKit.framework in Frameworks */,
+				58CF0FA99110D9363161758D /* Pods_Food_Love.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		813E323B205961BE0076A98F /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				813E32332058E4CC0076A98F /* coffeecouple.mp4 */,
+				813E32322058E4CC0076A98F /* restaurant.mp4 */,
+				813E32342058E4CD0076A98F /* coupleInRestaurant.mp4 */,
+				81D26F202059908700BEBC47 /* date1.mp4 */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		817F9B3A205863B10061E1B6 = {
+			isa = PBXGroup;
+			children = (
+				817F9B45205863B10061E1B6 /* Food+Love */,
+				817F9B44205863B10061E1B6 /* Products */,
+				8CB0A3244DA855F3B2A0B41A /* Pods */,
+				AF9362DDF127B9A0E1F33BB8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		817F9B44205863B10061E1B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				817F9B43205863B10061E1B6 /* Food+Love.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		817F9B45205863B10061E1B6 /* Food+Love */ = {
+			isa = PBXGroup;
+			children = (
+				813E32382058F09F0076A98F /* Food+Love.entitlements */,
+				81D26F1520598D0300BEBC47 /* APIKeys */,
+				817F9B5D2058646E0061E1B6 /* Storyboards */,
+				817F9B5C205863D60061E1B6 /* SupportingFiles */,
+				817F9B5B205863CF0061E1B6 /* Services */,
+				817F9B5A205863CA0061E1B6 /* Models */,
+				817F9B59205863C50061E1B6 /* Views */,
+				817F9B58205863B90061E1B6 /* Controllers */,
+			);
+			path = "Food+Love";
+			sourceTree = "<group>";
+		};
+		817F9B58205863B90061E1B6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				817F9B5E2058B79D0061E1B6 /* LoadingVC.swift */,
+				817F9B602058B7B50061E1B6 /* WelcomeVC.swift */,
+				817F9B622058B7D70061E1B6 /* LoginVC.swift */,
+				817F9B642058B7F20061E1B6 /* SignupVC.swift */,
+				817F9B662058B8060061E1B6 /* FillOutProfileVC.swift */,
+				817F9B682058B81C0061E1B6 /* DiscoverVC.swift */,
+				817F9B6A2058B8340061E1B6 /* ViewProfileDVC.swift */,
+				817F9B6C2058B8600061E1B6 /* MatchesVC.swift */,
+				817F9B702058B8D00061E1B6 /* ChatVC.swift */,
+				817F9B722058B8E40061E1B6 /* ChatVideoVC.swift */,
+				817F9B742058B8F70061E1B6 /* PlanDateVC.swift */,
+				817F9B762058B90F0061E1B6 /* RestaurantVC.swift */,
+				817F9B782058B9200061E1B6 /* RestaurantDVC.swift */,
+				817F9B7A2058B9BA0061E1B6 /* ProfileVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		817F9B59205863C50061E1B6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		817F9B5A205863CA0061E1B6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81D26F0920598B7000BEBC47 /* FourSquareSearchJSON.swift */,
+				81D26F0320598AB200BEBC47 /* FourSquareSearchAPIClient.swift */,
+				81D26F0520598AF800BEBC47 /* FourSquarePhotoJSON.swift */,
+				81D26F0720598B3C00BEBC47 /* FourSquarePhotoAPIClient.swift */,
+				81D26F0B20598C0100BEBC47 /* YelpSearchJSON.swift */,
+				81D26F0D20598C3300BEBC47 /* YelpSearchAPIClient.swift */,
+				81D26F0F20598C5E00BEBC47 /* MapAnnotation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		817F9B5B205863CF0061E1B6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				81D26F1120598C9700BEBC47 /* FileManager.swift */,
+				81D26F1A20598D6300BEBC47 /* LocationServices.swift */,
+				81D26F1C20598D9200BEBC47 /* ImageService.swift */,
+				81D26F1E20598DAD00BEBC47 /* NetworkHelper.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		817F9B5C205863D60061E1B6 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				813E323B205961BE0076A98F /* Videos */,
+				817F9B6E2058B8830061E1B6 /* GoogleService-Info.plist */,
+				817F9B7E2058D5BB0061E1B6 /* Icons.xcassets */,
+				817F9B4D205863B10061E1B6 /* Images.xcassets */,
+				81D26F212059912000BEBC47 /* Gifs.xcassets */,
+				817F9B46205863B10061E1B6 /* AppDelegate.swift */,
+				817F9B52205863B10061E1B6 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		817F9B5D2058646E0061E1B6 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				817F9B4F205863B10061E1B6 /* LaunchScreen.storyboard */,
+				817F9B4A205863B10061E1B6 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		81D26F1520598D0300BEBC47 /* APIKeys */ = {
+			isa = PBXGroup;
+			children = (
+				81D26F1620598D1600BEBC47 /* FourSquareAPIKeys.swift */,
+				81D26F1820598D3000BEBC47 /* YelpAPIKeys.swift */,
+			);
+			path = APIKeys;
+			sourceTree = "<group>";
+		};
+		8CB0A3244DA855F3B2A0B41A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5572B6424E0BD1A00464C0FD /* Pods-Food+Love.debug.xcconfig */,
+				F854EBC64664453D7ACE358A /* Pods-Food+Love.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AF9362DDF127B9A0E1F33BB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				813E32392058F0A80076A98F /* MapKit.framework */,
+				76602EB115892ADD0A77C58C /* Pods_Food_Love.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		817F9B42205863B10061E1B6 /* Food+Love */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 817F9B55205863B10061E1B6 /* Build configuration list for PBXNativeTarget "Food+Love" */;
+			buildPhases = (
+				492A291A8E3333DAE77B97C4 /* [CP] Check Pods Manifest.lock */,
+				817F9B3F205863B10061E1B6 /* Sources */,
+				817F9B40205863B10061E1B6 /* Frameworks */,
+				817F9B41205863B10061E1B6 /* Resources */,
+				7C00F414734BA7917F979D38 /* [CP] Embed Pods Frameworks */,
+				56452CF8FFAB40D673EBF86A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Food+Love";
+			productName = "Food+Love";
+			productReference = 817F9B43205863B10061E1B6 /* Food+Love.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		817F9B3B205863B10061E1B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Winston Maragh";
+				TargetAttributes = {
+					817F9B42205863B10061E1B6 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 817F9B3E205863B10061E1B6 /* Build configuration list for PBXProject "Food+Love" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 817F9B3A205863B10061E1B6;
+			productRefGroup = 817F9B44205863B10061E1B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				817F9B42205863B10061E1B6 /* Food+Love */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		817F9B41205863B10061E1B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				817F9B51205863B10061E1B6 /* LaunchScreen.storyboard in Resources */,
+				817F9B6F2058B8840061E1B6 /* GoogleService-Info.plist in Resources */,
+				813E32352058E4CD0076A98F /* restaurant.mp4 in Resources */,
+				817F9B4E205863B10061E1B6 /* Images.xcassets in Resources */,
+				81D26F222059912000BEBC47 /* Gifs.xcassets in Resources */,
+				817F9B7F2058D5BB0061E1B6 /* Icons.xcassets in Resources */,
+				813E32372058E4CD0076A98F /* coupleInRestaurant.mp4 in Resources */,
+				817F9B4C205863B10061E1B6 /* Main.storyboard in Resources */,
+				813E32362058E4CD0076A98F /* coffeecouple.mp4 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		492A291A8E3333DAE77B97C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Food+Love-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56452CF8FFAB40D673EBF86A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C00F414734BA7917F979D38 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Toucan/Toucan.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toucan.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		817F9B3F205863B10061E1B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81D26F1F20598DAD00BEBC47 /* NetworkHelper.swift in Sources */,
+				817F9B7B2058B9BA0061E1B6 /* ProfileVC.swift in Sources */,
+				81D26F0820598B3C00BEBC47 /* FourSquarePhotoAPIClient.swift in Sources */,
+				81D26F1D20598D9200BEBC47 /* ImageService.swift in Sources */,
+				817F9B6D2058B8600061E1B6 /* MatchesVC.swift in Sources */,
+				817F9B612058B7B50061E1B6 /* WelcomeVC.swift in Sources */,
+				817F9B692058B81C0061E1B6 /* DiscoverVC.swift in Sources */,
+				81D26F1720598D1600BEBC47 /* FourSquareAPIKeys.swift in Sources */,
+				81D26F0620598AF800BEBC47 /* FourSquarePhotoJSON.swift in Sources */,
+				817F9B652058B7F20061E1B6 /* SignupVC.swift in Sources */,
+				81D26F0A20598B7000BEBC47 /* FourSquareSearchJSON.swift in Sources */,
+				817F9B772058B90F0061E1B6 /* RestaurantVC.swift in Sources */,
+				81D26F1220598C9700BEBC47 /* FileManager.swift in Sources */,
+				817F9B712058B8D00061E1B6 /* ChatVC.swift in Sources */,
+				817F9B752058B8F70061E1B6 /* PlanDateVC.swift in Sources */,
+				817F9B6B2058B8340061E1B6 /* ViewProfileDVC.swift in Sources */,
+				817F9B792058B9200061E1B6 /* RestaurantDVC.swift in Sources */,
+				81D26F0C20598C0100BEBC47 /* YelpSearchJSON.swift in Sources */,
+				81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */,
+				81D26F0420598AB200BEBC47 /* FourSquareSearchAPIClient.swift in Sources */,
+				81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */,
+				817F9B672058B8060061E1B6 /* FillOutProfileVC.swift in Sources */,
+				81D26F1B20598D6300BEBC47 /* LocationServices.swift in Sources */,
+				817F9B47205863B10061E1B6 /* AppDelegate.swift in Sources */,
+				81D26F0E20598C3300BEBC47 /* YelpSearchAPIClient.swift in Sources */,
+				817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */,
+				817F9B5F2058B79D0061E1B6 /* LoadingVC.swift in Sources */,
+				817F9B732058B8E40061E1B6 /* ChatVideoVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		817F9B4A205863B10061E1B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				817F9B4B205863B10061E1B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		817F9B4F205863B10061E1B6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				817F9B50205863B10061E1B6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		817F9B53205863B10061E1B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		817F9B54205863B10061E1B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		817F9B56205863B10061E1B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5572B6424E0BD1A00464C0FD /* Pods-Food+Love.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DRF3BB53BA;
+				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		817F9B57205863B10061E1B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F854EBC64664453D7ACE358A /* Pods-Food+Love.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DRF3BB53BA;
+				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		817F9B3E205863B10061E1B6 /* Build configuration list for PBXProject "Food+Love" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				817F9B53205863B10061E1B6 /* Debug */,
+				817F9B54205863B10061E1B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		817F9B55205863B10061E1B6 /* Build configuration list for PBXNativeTarget "Food+Love" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				817F9B56205863B10061E1B6 /* Debug */,
+				817F9B57205863B10061E1B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 817F9B3B205863B10061E1B6 /* Project object */;
+}
