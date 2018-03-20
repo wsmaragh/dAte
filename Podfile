@@ -17,5 +17,5 @@ target 'Food+Love' do
     pod 'Alamofire'
     pod 'SnapKit'
     pod 'Kingfisher'
-    pod 'Toucan'		
+    pod 'Toucan'
 end
