@@ -6,72 +6,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="CourierNewBold.ttf">
-            <string>CourierNewPS-BoldMT</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cook" translatesAutoresizingMaskIntoConstraints="NO" id="GeO-kG-CqX">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A meaningful connection through food." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtB-Sr-MTB">
-                                <rect key="frame" x="11.5" y="323" width="353" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="highlightedColor" red="1" green="0.98910187360000001" blue="0.98191100180000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food + Love" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9g4-0N-B7l">
-                                <rect key="frame" x="95" y="46" width="185" height="28"/>
-                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="28"/>
-                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dHG-lW-wmJ">
-                                <rect key="frame" x="90" y="90" width="150" height="150"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="dHG-lW-wmJ" firstAttribute="top" secondItem="9g4-0N-B7l" secondAttribute="bottom" constant="15" id="00B-LZ-ohV"/>
-                            <constraint firstItem="KtB-Sr-MTB" firstAttribute="top" secondItem="dHG-lW-wmJ" secondAttribute="bottom" constant="75" id="3MT-fc-C4P"/>
-                            <constraint firstItem="KtB-Sr-MTB" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KmG-qX-8Pm"/>
-                            <constraint firstItem="GeO-kG-CqX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RN8-C5-t9I"/>
-                            <constraint firstItem="GeO-kG-CqX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="VBm-7t-nqW"/>
-                            <constraint firstItem="GeO-kG-CqX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="VES-D5-6Tx"/>
-                            <constraint firstItem="dHG-lW-wmJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fgV-BO-cID"/>
-                            <constraint firstItem="9g4-0N-B7l" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="kZ4-sC-tUy"/>
-                            <constraint firstItem="dHG-lW-wmJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="rcQ-iK-Lwc"/>
-                            <constraint firstItem="GeO-kG-CqX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yHl-RI-E2A"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="GeO-kG-CqX"/>
-                                <exclude reference="KtB-Sr-MTB"/>
-                                <exclude reference="9g4-0N-B7l"/>
-                                <exclude reference="dHG-lW-wmJ"/>
-                            </mask>
-                        </variation>
-                    </view>
-                </viewController>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="bg_cook" width="5000" height="3000"/>
-    </resources>
 </document>

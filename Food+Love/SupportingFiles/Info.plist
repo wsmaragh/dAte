@@ -31,6 +31,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is used for Photos and video Chat</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location used to help find matches and restaurants</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location used to help find matches and restaurants</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone is used in video chat</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
