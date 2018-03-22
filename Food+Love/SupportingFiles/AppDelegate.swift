@@ -1,3 +1,4 @@
+
 //  AppDelegate.swift
 //  Food+Love
 //  Created by C4Q on 3/13/18.
@@ -17,7 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 
 		FirebaseApp.configure()
-//		StyleSheet.setupNavBarAndTabBarColors()
+
+		//Navigation Bar
+			UINavigationBar.appearance().tintColor = UIColor.white
+			UINavigationBar.appearance().alpha = 1.0
+			UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
+
+		//Tab Bar
+			UITabBar.appearance().tintColor = UIColor.white
+			UITabBar.appearance().alpha = 1.0
+			UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 
 		return true
 	}

@@ -1,7 +1,11 @@
+//
 //  ProfileVC.swift
 //  Food+Love
-//  Created by C4Q on 3/13/18.
-//  Copyright © 2018 Winston Maragh. All rights reserved.
+//
+//
+//
+
+
 
 import UIKit
 import Firebase
@@ -17,13 +21,11 @@ class ProfileVC: UIViewController {
 	@IBAction func logoutPressed(_ sender: UIBarButtonItem) {
 		let alertView = UIAlertController(title: "Are you sure you want to Logout?", message: nil, preferredStyle: .alert)
 		let yesOption = UIAlertAction(title: "Yes", style: .destructive) { (alertAction) in
-			do {
-				try Auth.auth().signOut()
-				let welcomeVC = WelcomeVC()
-				let welcomeNavCon = UINavigationController(rootViewController: welcomeVC)
-				self.present(welcomeNavCon, animated: true)
-			}
-			catch { print("Error signing out: \(error)") }
+			self.logout()
+			//Go to WelcomeVC
+//			let welcomeVC = WelcomeVC()
+//			let welcomeNavCon = UINavigationController(rootViewController: welcomeVC)
+//			self.present(welcomeNavCon, animated: true)
 		}
 		let noOption = UIAlertAction(title: "No", style: .cancel, handler: nil)
 		alertView.addAction(yesOption)
@@ -32,27 +34,29 @@ class ProfileVC: UIViewController {
 	}
 
 	@IBAction func settingsPressed(_ sender: UIBarButtonItem) {
-		//TODO: Settings page
+
 
 	}
 
 
 	// MARK: Properties
-	private var currentAuthUser = Auth.auth().currentUser
+	private var currentAuthUser: User? 
 
 
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		configureNavBar()
+		currentAuthUser = Auth.auth().currentUser!
+//		configureNavBar()
 	}
 
 
 	//MARK: Helper Functions
-	private func configureNavBar() {
-		self.navigationItem.title = "Profile"
+
+
+	func logout(){
+		do { try Auth.auth().signOut() }
+		catch { print("Error signing out: \(error)") }
 	}
-
-
 
 }
