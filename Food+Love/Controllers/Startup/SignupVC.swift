@@ -89,70 +89,70 @@ class SignupVC: UIViewController {
 	}
 
 	@objc private func createNewAccount() {
-		print("create new account button pressed")
-		guard let nameText = self.firstNameTF.text else {print("name is nil"); return}
-		guard !nameText.isEmpty else {print("name field is empty"); return}
-		guard let emailText = self.emailTF.text else {print("email is nil"); return}
-		guard !emailText.isEmpty else {print("email field is empty"); return}
-		guard let passwordText = self.passwordTF.text else {print("password is nil"); return}
-		guard !passwordText.isEmpty else {print("password field is empty"); return}
-		if passwordText.contains(" ") {
+		guard let name = self.firstNameTF.text,
+					let email = self.emailTF.text,
+					let password = self.passwordTF.text
+			else {return}
+		guard !name.isEmpty else {print("name field is empty"); return}
+		guard !email.isEmpty else {print("email field is empty"); return}
+		guard !password.isEmpty else {print("password field is empty"); return}
+		if password.contains(" ") {
 			showAlert(title: "Come on, really!? No spaces allowed!", message: nil)
 			return
 		}
-		authUserService.createUser(name: nameText, email: emailText, password: passwordText)
-	}
+//		authUserService.createUser(name: nameText, email: emailText, password: passwordText)
 
-}
-
-
-// MARK: Create User
-extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-	@objc func handleRegister() {
-		guard let email = emailTF.text, let password = passwordTF.text, let name = firstNameTF.text else {
-			print("Form is not valid")
-			return
-		}
-
-		Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-			if error != nil { print(error!); return }
-			guard let uid = user?.uid else { return }
-			//successfully authenticated user
-			let imageName = UUID().uuidString
-			let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).jpg")
-			if let profileImage = self.profileImageView.image,
-					let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
-				storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
-					if error != nil { print(error!); return }
+		//Create user in Auth
+		Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
+			if error != nil { print(error ?? "Not Trackable Error"); return }
+			guard let uid = user?.uid else { return}
+			let imageName = "my_profile_image_\(uid).png"
+			// upload image
+			let storageRef = Storage.storage().reference().child("Profile_images").child(imageName)
+			if let profileImage = self.profileImageView.image ,let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
+				storageRef.putData(uploadData, metadata: nil, completion: { (metadata, err) in
+					if err != nil { print(err ?? "not traceable error"); return }
 					if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-						let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
-						self.registerUserIntoDatabaseWithUID(uid, values: values as [String : String])
+						let values = ["name": name, "email": email,"profileImageUrl": profileImageUrl]
+						//Regster user in Database
+						let ref = Database.database().reference()
+						let userRef = ref.child("users").child(uid)
+						userRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
+							if err != nil { print(err ?? "Not Trackable Error"); return }
+							self.messagesController?.getUserInfoFromDatabase()
+						})
 					}
 				})
 			}
-		}
-	}
-
-	// Register User in Database
-	fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: String]) {
-		let ref = Database.database().reference()
-		let usersReference = ref.child("users").child(uid)
-		usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
-			if error != nil { print(error!); return }
-			let lover = Lover(dictionary: values)
-			self.messagesController?.setupNavBarWithUser(lover)
-//			self.dismiss(animated: true, completion: nil)
 		})
+
 	}
 
 
-	@objc func handleSelectProfileImageView() {
+
+	// Select Profile Image
+	@objc func selectProfileImage() {
 		let picker = UIImagePickerController()
 		picker.delegate = self
 		picker.allowsEditing = true
 		present(picker, animated: true, completion: nil)
 	}
+
+
+}
+
+
+// MARK: TextField Delegate
+extension SignupVC: UITextFieldDelegate {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
+	}
+}
+
+
+// MARK: Create User
+extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
 
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -164,12 +164,14 @@ extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
 		}
 		if let selectedImage = selectedImageFromPicker {
 			profileImageView.image = selectedImage
+			profileImageView.layer.cornerRadius = 40.0
+			profileImageView.layer.masksToBounds = true
 		}
 		dismiss(animated: true, completion: nil)
 	}
 
+	//Cancel camera
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		print("canceled picker")
 		dismiss(animated: true, completion: nil)
 	}
 

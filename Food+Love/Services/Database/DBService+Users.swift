@@ -6,12 +6,23 @@
 import Foundation
 import UIKit
 import FirebaseDatabase
-import CoreData
+import FirebaseAuth
 
 extension DBService {
 
+	func getUserInfoFromDatabase() -> Lover {
+		let uid = Auth.auth().currentUser?.uid
+		var lover: Lover!
+		Database.database().reference().child("lovers").child(uid!).observe(.value, with: { (snapshot) in
+			if let userInfoDict = snapshot.value as? [String : AnyObject] {
+				lover = Lover(dictionary: userInfoDict)
+			}
+		}, withCancel: nil)
+		return lover
+	}
+	
 	public func addUser() {
-		let user = DBService.manager.getUsers().child((AuthUserService.getCurrentUser()?.uid)!)
+		let user = DBService.manager.getLovers().child((AuthUserService.getCurrentUser()?.uid)!)
 		user.setValue(["name"     : AuthUserService.getCurrentUser()?.displayName,
 									 "email"		: AuthUserService.getCurrentUser()?.email,
 									 "profileImageUrl": AuthUserService.getCurrentUser()?.photoURL])
@@ -22,7 +33,7 @@ extension DBService {
 	}
 
 	public func addUser(name: String, email: String, profileImageUrl: String) {
-		let user = DBService.manager.getUsers().child((AuthUserService.getCurrentUser()?.uid)!)
+		let user = DBService.manager.getLovers().child((AuthUserService.getCurrentUser()?.uid)!)
 		user.setValue(["name"     : AuthUserService.getCurrentUser()?.displayName,
 									 "email"		: AuthUserService.getCurrentUser()?.email,
 									 "profileImageUrl": AuthUserService.getCurrentUser()?.photoURL])
@@ -33,12 +44,12 @@ extension DBService {
 	}
 
 	public func loadAllUsers(completionHandler: @escaping ([Lover]?) -> Void) {
-			let usersRef = DBService.manager.getUsers()
+			let usersRef = DBService.manager.getLovers()
 			usersRef.observe(.value) { (snapshot) in
 					var allLovers = [Lover]()
 					for child in snapshot.children {
 							let dataSnapshot = child as! DataSnapshot
-							if let dict = dataSnapshot.value as? [String: String] {
+							if let dict = dataSnapshot.value as? [String: AnyObject] {
 								let lover = Lover.init(dictionary: dict)
 								allLovers.append(lover)
 							}
@@ -47,17 +58,21 @@ extension DBService {
 			}
 	}
 
-	public func updateUserName(userID: String, name: String) {
-		DBService.manager.getUsers().child(userID).updateChildValues(["name": name])
+	public func updateUserName(name: String) {
+		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
+		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["name": name])
 	}
 
-	public func updateEmail(userID: String, email: String) {
-		DBService.manager.getUsers().child(userID).updateChildValues(["email": email])
+	public func updateEmail(email: String) {
+		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
+		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["email": email])
 	}
 
-	public func updateUserImage(userID: String, profileImageUrl: String) {
-		DBService.manager.getUsers().child(userID).updateChildValues(["profileImageUrl": profileImageUrl])
+	public func updateUserImage(profileImageUrl: String) {
+		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
+		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 	}
+
 
 }
 

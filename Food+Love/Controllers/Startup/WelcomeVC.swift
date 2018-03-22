@@ -37,6 +37,7 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 		welcomeSlides = createSlides()
 		addSlidesToScrollView(slides: welcomeSlides)
 		setupPageControl()
+		AuthUserService.manager.signOut()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {

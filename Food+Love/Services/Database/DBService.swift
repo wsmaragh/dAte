@@ -6,14 +6,13 @@
 
 import Foundation
 import FirebaseDatabase
-import CoreData
 
 
 class DBService {
 
 	//MARK: Properties
 	private var dbRef: DatabaseReference!
-	private var usersRef: DatabaseReference!
+	private var loversRef: DatabaseReference!
 	private var imagesRef: DatabaseReference!
 
 
@@ -22,7 +21,7 @@ class DBService {
 		dbRef = Database.database().reference()
 
 		// children of root database node
-		usersRef = dbRef.child("users")
+		loversRef = dbRef.child("lovers")
 		imagesRef = dbRef.child("images")
 	}
 	static let manager = DBService()
@@ -34,6 +33,6 @@ class DBService {
     }
 
 	public func getDB()-> DatabaseReference { return dbRef }
-	public func getUsers()-> DatabaseReference { return usersRef }
+	public func getLovers()-> DatabaseReference { return loversRef }
 	public func getImages()-> DatabaseReference { return imagesRef }
 }

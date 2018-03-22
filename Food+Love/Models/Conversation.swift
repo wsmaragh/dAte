@@ -1,21 +1,21 @@
-//  Message.swift
+//  Conversation.swift
 //  Food+Love
-//  Created by Winston Maragh on 3/16/18.
+//  Created by Winston Maragh on 3/21/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import UIKit
-import FirebaseAuth
+import Firebase
 
 
-class Message: NSObject {
+class Conversation: NSObject {
 	var fromId: String?
-	var toId: String?
 	var text: String?
+	var timeStamp: NSNumber?
+	var toId: String?
 	var imageUrl: String?
 	var imageWidth: NSNumber?
 	var imageHeight: NSNumber?
 	var videoUrl: String?
-	var timeStamp: NSNumber?
 
 	func chatPartnerId() -> String {
 		return (fromId == Auth.auth().currentUser?.uid ? toId : fromId)!
@@ -23,24 +23,13 @@ class Message: NSObject {
 
 	init(dictionary: [String: AnyObject]) {
 		self.fromId = dictionary["fromId"] as? String
-		self.toId = dictionary["toId"] as? String
 		self.text = dictionary["text"] as? String
+		self.timeStamp = dictionary["timeStamp"] as? NSNumber
+		self.toId = dictionary["toId"] as? String
 		self.imageUrl = dictionary["imageUrl"] as? String
 		self.imageWidth = dictionary["imageWidth"] as? NSNumber
 		self.imageHeight = dictionary["imageHeight"] as? NSNumber
 		self.videoUrl = dictionary["videoUrl"] as? String
-		self.timeStamp = dictionary["timeStamp"] as? NSNumber
-	}
-
-	init(fromId: String?, toId: String?, text: String?, imageUrl: String?, imageWidth: NSNumber?, imageHeight: NSNumber?, videoUrl: String?, timeStamp: NSNumber?){
-		self.fromId = fromId
-		self.toId = toId
-		self.text = text
-		self.imageUrl = imageUrl
-		self.imageWidth = imageWidth
-		self.imageHeight = imageHeight
-		self.videoUrl = videoUrl
-		self.timeStamp = timeStamp
 	}
 
 }

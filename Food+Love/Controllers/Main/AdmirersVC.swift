@@ -1,7 +1,7 @@
 //  AdmirersVC.swift
 //  Food+Love
-//  Created by C4Q on 3/20/18.
-//  Copyright © 2018 Winston Maragh. All rights reserved.
+//  Created by Gloria Washington on 3/21/18.
+//  Copyright © 2018 Gloria Washington. All rights reserved.
 
 
 import UIKit

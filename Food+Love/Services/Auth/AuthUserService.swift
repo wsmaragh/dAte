@@ -23,6 +23,7 @@ import Firebase
 }
 
 class AuthUserService: NSObject {
+	static let manager = AuthUserService()
     weak var delegate: AuthUserServiceDelegate?
 
     public static func getCurrentUser() -> User?{
@@ -54,6 +55,28 @@ class AuthUserService: NSObject {
         }
     }
 
+	public func changeAuthProfilePhoto(urlString: String) {
+		let currentUser  = Auth.auth().currentUser!
+		let changeRequest = currentUser.createProfileChangeRequest()
+		changeRequest.photoURL = URL(string: urlString)
+		changeRequest.commitChanges(completion: {(error) in
+			if let error = error {print("changeRequest error: \(error)")}
+			else {
+				print("changeRequest was successful for username: \(currentUser.displayName)")
+			}
+		})
+	}
+	public func changeAuthProfileName(name: String) {
+		let currentUser  = Auth.auth().currentUser!
+		let changeRequest = currentUser.createProfileChangeRequest()
+		changeRequest.displayName = name
+		changeRequest.commitChanges(completion: {(error) in
+			if let error = error {print("changeRequest error: \(error)")}
+			else {
+				print("changeRequest was successful for username: \(currentUser.displayName)")
+			}
+		})
+	}
 
     public func signOut() {
         do{

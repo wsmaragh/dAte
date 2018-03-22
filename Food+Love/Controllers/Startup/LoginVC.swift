@@ -70,22 +70,20 @@ class LoginVC: UIViewController {
 
 	// MARK: Actions for buttons
 	@IBAction func loginInUser(){
-
 		guard let email = emailTF.text, let password = passwordTF.text else {	return }
 		Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-			if error != nil {
-				print(error ?? "")
-				return
-			}
-			
+			if error != nil { print(error); return }
 			//successfully logged in our user
-			self.messagesController?.fetchUserAndSetupNavBarTitle()
-			let messageVC = MatchesVC()
-			self.navigationController?.pushViewController(messageVC, animated: true)
-			//			self.dismiss(animated: true, completion: nil)
+			let user = Auth.auth().currentUser!
+			print(user)
+			print(user.uid)
+			print(user.displayName)
+			print(user.email!)
+			print(user.photoURL)
 		})
 
 	}
+
 
 	@IBAction func FacebookLogin(){
 
@@ -164,5 +162,13 @@ class LoginVC: UIViewController {
 		present(alertController, animated: true, completion: nil)
 	}
 
+}
 
+
+// MARK: TextField Delegate
+extension LoginVC: UITextFieldDelegate {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
+	}
 }

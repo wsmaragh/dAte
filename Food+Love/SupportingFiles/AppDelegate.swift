@@ -17,7 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 
 		FirebaseApp.configure()
-//		StyleSheet.setupNavBarAndTabBarColors()
+
+		//	//Navigation Bar
+			UINavigationBar.appearance().backgroundColor = UIColor.blue
+			UINavigationBar.appearance().tintColor = UIColor.white
+			UINavigationBar.appearance().alpha = 1.0
+			UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
+
+		//
+		//	//Tab Bar
+		//	UITabBar.appearance().backgroundColor = UIColor.white
+			UITabBar.appearance().tintColor = UIColor.white
+			UITabBar.appearance().alpha = 1.0
+			UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+		//
 
 		return true
 	}

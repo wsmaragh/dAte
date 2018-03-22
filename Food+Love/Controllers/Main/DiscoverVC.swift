@@ -1,29 +1,31 @@
-//
 //  DiscoverVC.swift
 //  Food+Love
-//
-//  Created by C4Q on 3/13/18.
-//  Copyright © 2018 Winston Maragh. All rights reserved.
-//
+//  Created by Gloria Washington on 3/21/18.
+//  Copyright © 2018 Gloria Washington. All rights reserved.
 
 import UIKit
+import FirebaseAuth
+
 
 class DiscoverVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	// MARK: View Lifecycle
 
-    }
+	override func viewDidLoad() {
+		super.viewDidLoad()
+	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(false)
+		//Check if user is authenticated
+		if Auth.auth().currentUser == nil {
+			let welcomeVC = WelcomeVC()
+			self.present(welcomeVC, animated: true, completion: nil)
+		} 
+	}
+
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
