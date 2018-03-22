@@ -15,10 +15,19 @@ class WelcomeLogoSlide: UIView {
 		return iv
 	}()
 
+	lazy var title: UILabel = {
+		let label = UILabel()
+		label.text = "dAte"
+		label.textColor = .white
+		label.textAlignment = .center
+		label.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.bold)
+		return label
+	}()
+
 	lazy var details: UITextView = {
 		let tv = UITextView()
 		tv.text = "Create meaningful connections through food."
-		tv.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)
+		tv.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium)
 		tv.textColor = UIColor.white
 		tv.textAlignment = .center
 		tv.backgroundColor = .clear
@@ -47,7 +56,16 @@ class WelcomeLogoSlide: UIView {
 			picture.centerXAnchor.constraint(equalTo: centerXAnchor),
 			picture.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -70)
 			])
-		//Details Label
+		// Title
+		addSubview(title)
+		title.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			title.bottomAnchor.constraint(equalTo: picture.topAnchor, constant: 10),
+			title.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+			title.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+			title.centerXAnchor.constraint(equalTo: centerXAnchor)
+			])
+		// Details
 		addSubview(details)
 		details.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
