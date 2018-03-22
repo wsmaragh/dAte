@@ -2,10 +2,10 @@
 //@IBDesignable - UI TextField
 //
 
-
 import UIKit
 
-@IBDesignable class UITextFieldX: UITextField {
+@IBDesignable
+class UITextFieldX: UITextField {
     @IBInspectable var leftImage: UIImage? {
         didSet {
             updateView()

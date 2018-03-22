@@ -14,8 +14,4 @@ target 'Food+Love' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKShareKit'
     pod 'FBSDKLoginKit'
-    pod 'Alamofire'
-    pod 'SnapKit'
-    pod 'Kingfisher'
-    pod 'Toucan'
 end

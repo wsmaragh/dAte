@@ -1,6 +1,7 @@
-//  ChatVideoVC.swift
+
+//  VideoVC.swift
 //  Food+Love
-//  Created by C4Q on 3/13/18.
+//  Created by Winston Maragh on 3/22/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import UIKit
@@ -11,6 +12,7 @@ class VideoVC: UIViewController {
 
     override func viewDidLoad() {
 			super.viewDidLoad()
+			tabBarController?.tabBar.isHidden = true
 
     }
 
