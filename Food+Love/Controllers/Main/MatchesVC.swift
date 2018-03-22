@@ -1,4 +1,9 @@
 
+//  DiscoverVC.swift
+//  Food+Love
+//  Created by Winston Maragh on 3/13/18.
+//  Copyright © 2018 Winston Maragh. All rights reserved.
+
 import UIKit
 import Firebase
 
@@ -7,38 +12,119 @@ class MatchesVC: UIViewController {
 
 	// MARK: Outlet Properties
 	@IBOutlet var matchesTableView: UITableView!
-	@IBOutlet weak var matchesCollectionView: UICollectionView!
+	@IBOutlet weak var conversationsCollectionView: UICollectionView!
 
 	
 	// MARK: Properties
-	var timer: Timer?
-	var messages = [Message]()
-	var messagesDictionary = [String: Message]()
-	var matches = [Lover]()
-
-
-	// MARK: view Lifecycle
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		checkIfUserIsLoggedIn()
-		matchesTableView.delegate = self
-		matchesTableView.dataSource = self
-		matchesTableView.register(LoverCell.self, forCellReuseIdentifier: "ConversationsCell")
+	var timer: Timer!
+	var matches = [Lover]() {
+		didSet {
+			DispatchQueue.main.async { self.conversationsCollectionView.reloadData() }
+		}
+	}
+	var conversations = [Message](){
+		didSet {
+			DispatchQueue.main.async { self.matchesTableView.reloadData() }
+		}
+	}
+	var conversationsDict = [String: Message](){
+		didSet {
+			DispatchQueue.main.async { self.matchesTableView.reloadData() }
+		}
 	}
 
 
-	// MARK: Helper Methods
+	// MARK: View Lifecycle
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		setupTableview()
+		setupcollectionView()
+		getAllLovers()
+		observeUserMessages()
+		fetchUser()
+	}
 
-	// Observe Messages for changes
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+	}
+
+	//Setup Tableview
+	func setupTableview(){
+		matchesTableView.delegate = self
+		matchesTableView.dataSource = self
+		matchesTableView.allowsMultipleSelectionDuringEditing = true
+	}
+
+	func setupcollectionView(){
+		conversationsCollectionView.delegate = self
+		conversationsCollectionView.dataSource = self
+	}
+
+
+	// Get currentUser info from database
+	func getUserInfoFromDatabase() -> Lover {
+		let uid = Auth.auth().currentUser?.uid
+		var lover: Lover!
+		Database.database().reference().child("lovers").child(uid!).observe(.value, with: { (snapshot) in
+			if let userInfoDict = snapshot.value as? [String : AnyObject] {
+				lover = Lover(dictionary: userInfoDict)
+			}
+		}, withCancel: nil)
+		return lover
+	}
+
+	// Show Conversation with User
+	func showConversationWithUser(lover: Lover) {
+		let chatVC = ChatVC(lover: lover)
+		navigationController?.pushViewController(chatVC, animated: true)
+	}
+	
+
+
+	// MARK: Helper Methods
+	func getAllLovers() {
+		Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
+			if let dict = snapshot.value as? [String: AnyObject]{
+				let lover = Lover(dictionary: dict)
+				lover.id = snapshot.key
+				if lover.id != Auth.auth().currentUser?.uid {
+					self.matches.append(lover)
+				}
+			}
+		}, withCancel: nil)
+	}
+
+
+
+	// Matches
 	func observeUserMessages() {
 		guard let uid = Auth.auth().currentUser?.uid else { return }
 		let ref = Database.database().reference().child("user-messages").child(uid)
+
+		// Observe for New Messages
 		ref.observe(.childAdded, with: { (snapshot) in
-			let newId = snapshot.key
-			Database.database().reference().child("user-messages").child(uid).child(newId).observe(.childAdded, with: { (snapshot) in
-				let messageId = snapshot.key
-				self.fetchMessageWithMessageId(messageId)
+			let userId = snapshot.key
+			Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (mSnapshot) in
+				let messageId = mSnapshot.key
+				let messagesReference = Database.database().reference().child("messages").child(messageId)
+				messagesReference.observeSingleEvent(of:.value, with: { (snapshot) in
+					if let dict = snapshot.value as? [String: AnyObject] {
+						let message = Message(dictionary: dict)
+						let chatPartnerID = message.chatPartnerId()
+						self.conversationsDict[chatPartnerID] = message
+						self.conversations = Array(self.conversationsDict.values)
+						self.conversations =  self.conversations.sorted(by: { (message1, message2) -> Bool in
+							return Date.init(timeIntervalSince1970: Double(message1.timeStamp!)) > Date.init(timeIntervalSince1970: Double(message2.timeStamp!))
+						})
+						self.reloadTable()
+					}
+				}, withCancel: nil)
 			}, withCancel: nil)
+		}, withCancel: nil)
+
+		// Observe for Delete Messages
+		ref.observe(.childRemoved, with: { (snapshot) in
+			self.conversationsDict.removeValue(forKey: snapshot.key)
 		}, withCancel: nil)
 	}
 
@@ -49,9 +135,8 @@ class MatchesVC: UIViewController {
 		messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
 			if let dictionary = snapshot.value as? [String: AnyObject] {
 				let message = Message(dictionary: dictionary)
-				if let chatPartnerId = message.chatPartnerId() {
-					self.messagesDictionary[chatPartnerId] = message
-				}
+				let chatPartnerId = message.chatPartnerId()
+				self.conversationsDict[chatPartnerId] = message
 				self.attemptReloadOfTable()
 			}
 		}, withCancel: nil)
@@ -61,16 +146,16 @@ class MatchesVC: UIViewController {
 	// (Timer) Attempt to Reload Table
 	fileprivate func attemptReloadOfTable() {
 		self.timer?.invalidate()
-		self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+		self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.reloadTable), userInfo: nil, repeats: false)
 	}
 
 
 	// Reload Table
-	@objc func handleReloadTable() {
-		self.messages = Array(self.messagesDictionary.values)
-		self.messages.sort(by: { (message1, message2) -> Bool in
-			//				return message1.timestamp?.int32Value > message2.timestamp?.int32Value
-			return Int(message1.timestamp!) > Int(message2.timestamp!)
+	@objc func reloadTable() {
+		self.conversations = Array(self.conversationsDict.values)
+		self.conversations.sort(by: { (conversation1, conversation2) -> Bool in
+			// return message1.timestamp?.int32Value > message2.timestamp?.int32Value
+			return Int(conversation1.timeStamp!) > Int(conversation2.timeStamp!)
 		})
 		DispatchQueue.main.async(execute: {self.matchesTableView.reloadData()})
 	}
@@ -78,163 +163,159 @@ class MatchesVC: UIViewController {
 
 	// Chat for User
 	func showChatControllerForUser(_ lover: Lover) {
-		let chatLogController = ConversationVC(collectionViewLayout: UICollectionViewFlowLayout())
-		chatLogController.lover = lover
-		navigationController?.pushViewController(chatLogController, animated: true)
-	}
-
-
-	// Check Login
-	func checkIfUserIsLoggedIn() {
-			fetchUserAndSetupNavBarTitle()
+//		let chatLogController = ChatVC(collectionViewLayout: UICollectionViewFlowLayout())
+		let chatVC = ChatVC(lover: lover)
+		navigationController?.pushViewController(chatVC, animated: true)
 	}
 
 
 	// Fetch User and set Title for person chatting with
-	func fetchUserAndSetupNavBarTitle() {
+	func fetchUser() {
 		guard let uid = Auth.auth().currentUser?.uid else {	return }
 		Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-			if let dict = snapshot.value as? [String: String] {
+			if let dict = snapshot.value as? [String: AnyObject] {
 				let lover = Lover(dictionary: dict)
-				lover.setValuesForKeys(dict)
-				self.setupNavBarWithUser(lover)
 			}
 		}, withCancel: nil)
 	}
 
 
-	// Setup Nav Bar with User
-	func setupNavBarWithUser(_ lover: Lover) {
-		messages.removeAll()
-		messagesDictionary.removeAll()
+	// Add current user info to Nav Bar center
+	func addUserInfoToNavBar(_ user: Lover){
+		conversations.removeAll()
+		conversationsDict.removeAll()
 		matchesTableView.reloadData()
 		observeUserMessages()
-		let titleView = UIView()
-		titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-		let containerView = UIView()
-		containerView.translatesAutoresizingMaskIntoConstraints = false
-		titleView.addSubview(containerView)
-		let profileImageView = UIImageView()
-		profileImageView.translatesAutoresizingMaskIntoConstraints = false
-		profileImageView.contentMode = .scaleAspectFill
-		profileImageView.layer.cornerRadius = 20
-		profileImageView.clipsToBounds = true
-		if let profileImageUrl = lover.profileImageUrl {
-			profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
-		}
-		containerView.addSubview(profileImageView)
-		profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-		profileImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-		profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
-		profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-		let nameLabel = UILabel()
-		containerView.addSubview(nameLabel)
-		nameLabel.text = lover.name
-		nameLabel.translatesAutoresizingMaskIntoConstraints = false
-		nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
-		nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
-		nameLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-		nameLabel.heightAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
-		containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
-		containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
-		self.navigationItem.titleView = titleView
 	}
 
 }
 
 
 
-// MARK: TableView Delegate & Datasource
-extension MatchesVC: UITableViewDataSource, UITableViewDelegate {
-
-	// Number of Rows In Section
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if messages.count > 0 { return messages.count}
-		return 3
+//////////////////////// Matches CollectionView ////////////////////////
+//MARK: CollectionView Datasource
+extension MatchesVC: UICollectionViewDataSource {
+	//Number of items in Section
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return matches.count
 	}
 
+	//setup for each cell
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		if matches.isEmpty {return collectionView.dequeueReusableCell(withReuseIdentifier: "MatchesCell", for: indexPath) as! MatchesCell}
+		let match = matches[indexPath.row]
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MatchesCell", for: indexPath) as! MatchesCell
+		cell.configureCell(match: match)
+		return cell
+	}
+}
+
+//MARK: CollectionView Delegate
+extension MatchesVC: UICollectionViewDelegate {
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let selectedMatch = matches[indexPath.row]
+		showConversationWithUser(lover: selectedMatch)
+	}
+
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
+}
+
+//MARK: CollectionView - Delegate Flow Layout
+extension MatchesVC: UICollectionViewDelegateFlowLayout {
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		let numCells: CGFloat = 3.5
+		let numSpaces: CGFloat = numCells + 1
+		let screenWidth = UIScreen.main.bounds.width
+		let screenHeight = UIScreen.main.bounds.height
+		return CGSize(width: (screenWidth - (10.0 * numSpaces)) / numCells, height: screenHeight * 0.16)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0, right: 5.0)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 2.0
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 5.0
+	}
+}
+
+
+
+//////////////////////// Conversation TableView ////////////////////////
+// MARK: TableView Datasource
+extension MatchesVC: UITableViewDataSource {
+	// Number of Rows In Section
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return conversations.count
+	}
 
 	// Cell for Row at
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if messages.isEmpty {return UITableViewCell()}
-		let message = messages[indexPath.row]
-//		let match = messages[indexPath.row]
-		let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationsCell", for: indexPath) as! LoverCell
-		cell.message = message
+		let conversation = conversations[indexPath.row]
+		let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as! ConversationCell
+		cell.configureCell(conversation: conversation)
 		return cell
 	}
 
+}
 
-	// Height for Row at
+// MARK: TableView Delegate & Datasource
+extension MatchesVC: UITableViewDelegate {
+
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return "Conversations"
+	}
+
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 25
+	}
+
+	func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+		let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+		header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
+		header.textLabel?.textColor = UIColor.red
+		header.textLabel?.textAlignment = NSTextAlignment.left
+	}
+
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 72
 	}
 
-
-	// Did Select Row at
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let message = messages[indexPath.row]
-		guard let chatPartnerId = message.chatPartnerId() else { return}
-		let ref = Database.database().reference().child("users").child(chatPartnerId)
+		let conversation = conversations[indexPath.row]
+		let chartPartnerId = conversation.chatPartnerId()
+		let ref = Database.database().reference().child("lovers").child(chartPartnerId)
 		ref.observeSingleEvent(of: .value, with: { (snapshot) in
-			guard let dictionary = snapshot.value as? [String: String] else { return }
+			guard let dictionary = snapshot.value as? [String: AnyObject] else {return}
 			let lover = Lover(dictionary: dictionary)
-			lover.id = chatPartnerId
-			self.showChatControllerForUser(lover)
+			lover.id = chartPartnerId
+			self.showConversationWithUser(lover: lover)
 		}, withCancel: nil)
 	}
 
+	//Can Edit row
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+
+	// Editing Style
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		guard let uid = Auth.auth().currentUser?.uid else { return }
+		let conversations = self.conversations[indexPath.row]
+		Database.database().reference().child("user-messages").child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
+			if error != nil { print(error!) ; return}
+			self.conversations.remove(at: indexPath.row)
+			self.matchesTableView.deleteRows(at: [indexPath], with: .automatic)
+		}
+	}
+
 }
 
-
-
-// MARK: CollectionView - Datasource
-extension MatchesVC: UICollectionViewDataSource {
-	//Number of items in Section
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		if matches.isEmpty {return 4}
-		return matches.count
-	}
-
-	// setup for each cell
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if matches.isEmpty {return collectionView.dequeueReusableCell(withReuseIdentifier: "MatchesCell", for: indexPath)}
-//		guard let matches = matches else {return collectionView.dequeueReusableCell(withReuseIdentifier: "MatchesCell", for: indexPath)}
-		let match = matches[indexPath.row]
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MatchesCell", for: indexPath) //as! MatchesCell
-//		cell.configureCell(object: customObject)
-		return cell
-	}
-}
-
-
-// MARK: CollectionView - Delegate
-extension MatchesVC: UICollectionViewDelegate {
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let cell = collectionView.cellForItem(at: indexPath) //as! CustomCell
-	}
-}
-
-
-//MARK: CollectionView - Delegate Flow Layout
-extension MatchesVC: UICollectionViewDelegateFlowLayout {
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let numCells: CGFloat = 2
-		let spaceBetweenCells: CGFloat = 10.0
-		let numSpaces: CGFloat = numCells + 1
-		let cellWidth = (collectionView.layer.bounds.width - (spaceBetweenCells * numSpaces))/numCells
-		let cellHeight = collectionView.layer.bounds.height * 0.95
-		let cellSize = CGSize(width: cellWidth, height: cellHeight)
-		return cellSize
-	}
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-		return UIEdgeInsets(top: 0, left: 10.0, bottom: 0, right: 10.0)
-	}
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return 5
-	}
-	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-		return 0
-	}
-}
 
