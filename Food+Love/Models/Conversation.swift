@@ -1,3 +1,4 @@
+
 //  Conversation.swift
 //  Food+Love
 //  Created by Winston Maragh on 3/21/18.
@@ -8,6 +9,13 @@ import Firebase
 
 
 class Conversation: NSObject {
+
+//	PartnerID
+//	PartnerPhoto
+//	lastMessage
+//	timestamp
+
+
 	var fromId: String?
 	var text: String?
 	var timeStamp: NSNumber?

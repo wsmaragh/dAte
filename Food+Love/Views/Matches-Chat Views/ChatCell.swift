@@ -1,3 +1,4 @@
+
 //  ConversationCell.swift
 //  Food+Love
 //  Created by Winston Maragh on 3/21/18.
@@ -20,11 +21,9 @@ class ChatCell: UICollectionViewCell {
 
 
 
-
 	//Actions for buttons
 	//playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
 	//messageImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(zoom)))
-
 
 
 	// MARK: Properties
@@ -39,7 +38,7 @@ class ChatCell: UICollectionViewCell {
 	@objc func zoom(tapGesture: UITapGestureRecognizer) {
 		if message?.videoUrl != nil { return}
 		if let imgVIew = tapGesture.view as? UIImageView {
-			self.chatVC?.zoomInForStartingImageView(startingImageView: imgVIew)
+//			self.chatVC?.zoomInForStartingImageView(startingImageView: imgVIew)
 		}
 	}
 

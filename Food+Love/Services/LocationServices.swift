@@ -1,13 +1,13 @@
+
 //  LocationServices.swift
 //  Food+Love
-//  Created by C4Q on 3/14/18.
+//  Created by Winston Maragh on 3/14/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import Foundation
 import CoreLocation
 import UIKit
 import MapKit
-
 
 class LocationService: NSObject {
 

@@ -1,15 +1,12 @@
+
 //  DiscoverVC.swift
 //  Food+Love
 //  Created by Winston Maragh on 3/13/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
-
-
 import UIKit
 import Firebase
-import FirebaseAuth
-import FirebaseDatabase
-import FirebaseStorage
+
 
 class MatchesVC: UIViewController {
 
@@ -78,9 +75,7 @@ class MatchesVC: UIViewController {
 
 	// Show Conversation with User
 	func showConversationWithUser(lover: Lover) {
-		//		let chatVC = ChatVC(collectionViewLayout: UICollectionViewFlowLayout())
-		let chatVC = ChatVC()
-		chatVC.lover = lover
+		let chatVC = ChatVC(lover: lover)
 		navigationController?.pushViewController(chatVC, animated: true)
 	}
 	
@@ -108,7 +103,6 @@ class MatchesVC: UIViewController {
 
 		// Observe for New Messages
 		ref.observe(.childAdded, with: { (snapshot) in
-			print(snapshot)
 			let userId = snapshot.key
 			Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (mSnapshot) in
 				let messageId = mSnapshot.key
@@ -170,9 +164,8 @@ class MatchesVC: UIViewController {
 	// Chat for User
 	func showChatControllerForUser(_ lover: Lover) {
 //		let chatLogController = ChatVC(collectionViewLayout: UICollectionViewFlowLayout())
-		let chatLogController = ChatVC()
-		chatLogController.lover = lover
-		navigationController?.pushViewController(chatLogController, animated: true)
+		let chatVC = ChatVC(lover: lover)
+		navigationController?.pushViewController(chatVC, animated: true)
 	}
 
 
@@ -196,7 +189,6 @@ class MatchesVC: UIViewController {
 	}
 
 }
-
 
 
 
@@ -290,7 +282,6 @@ extension MatchesVC: UITableViewDelegate {
 		header.textLabel?.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
 		header.textLabel?.textColor = UIColor.red
 		header.textLabel?.textAlignment = NSTextAlignment.left
-		header.backgroundColor = .white
 	}
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

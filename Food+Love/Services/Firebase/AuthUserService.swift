@@ -1,14 +1,14 @@
+
 //  AuthUserService.swift
-//  POSTR
-//  Created by Lisa J on 2/1/18.
-//  Copyright © 2018 On-The-Line. All rights reserved.
+//  Food+Love
+//  Created by Winston Maragh on 3/15/18.
+//  Copyright © 2018 Winston Maragh. All rights reserved.
 
-
-import Foundation
 import Firebase
+import UIKit
+
 
 @objc protocol AuthUserServiceDelegate: class {
-    
     //create user delegate protocols
     @objc optional func didFailCreatingUser(_ userService: AuthUserService, error: Error)
     @objc optional func didCreateUser(_ userService: AuthUserService, user: User)
@@ -22,6 +22,7 @@ import Firebase
     @objc optional func didSignIn(_ userService: AuthUserService, user: User)
 }
 
+
 class AuthUserService: NSObject {
 	static let manager = AuthUserService()
     weak var delegate: AuthUserServiceDelegate?
@@ -30,30 +31,23 @@ class AuthUserService: NSObject {
 			return Auth.auth().currentUser
     }
 	
-	public func createUser(name: String, email: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password){(user, error) in
-            if let error = error {self.delegate?.didFailCreatingUser?(self, error: error)} //inform delegate of error
-						else if let user = user {
-                //update Authenticated user displayName with their email prefix
-
-								//create change Request
-                let changeRequest = user.createProfileChangeRequest()
-								//add things to change in change request
-                changeRequest.displayName = name
-//								changeRequest.photoURL = URL(string: "http://santetotal.com/wp-content/uploads/2014/05/default-user-image-0f2a2adaf9515a88fb9b1a911d9f46bb-60x60.png")
-
-							 //commit change request
-                changeRequest.commitChanges(completion: {(error) in
-                    if let error = error {print("changeRequest error: \(error)")}
-										else {
-                        print("changeRequest was successful for username: \(name)")
-												DBService.manager.addUser() //add user to Database
-                        self.delegate?.didCreateUser?(self, user: user) //let delegate know
-                    }
-                })
-            }
-        }
-    }
+	public func createUser(name: String, email: String, password: String, profileImage: UIImage?) {
+		Auth.auth().createUser(withEmail: email, password: password){(user, error) in
+			if let error = error {self.delegate?.didFailCreatingUser?(self, error: error)}
+			else if let user = user {
+				let changeRequest = user.createProfileChangeRequest()
+				changeRequest.displayName = name
+				changeRequest.commitChanges(completion: {(error) in
+					if let error = error {print("changeRequest error: \(error)")}
+					else {
+						print("changeRequest was successful for username: \(name)")
+						DBService.manager.addLover(name: name, email: email, profileImage: profileImage ?? #imageLiteral(resourceName: "user2"))
+					}
+					self.delegate?.didCreateUser?(self, user: user)
+				})
+			}
+		}
+	}
 
 	public func changeAuthProfilePhoto(urlString: String) {
 		let currentUser  = Auth.auth().currentUser!

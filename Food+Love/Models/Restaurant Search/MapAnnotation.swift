@@ -1,11 +1,13 @@
+
 //  MapAnnotation.swift
 //  Food+Love
-//  Created by C4Q on 3/14/18.
+//  Created by Winston Maragh on 3/14/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import Foundation
 import UIKit
 import MapKit
+
 
 //custom class for storing Annotations for the Map on SearchViewController
 class venueLocation: NSObject, MKAnnotation {

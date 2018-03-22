@@ -1,12 +1,13 @@
+
 //  FourSquareAPIKeys.swift
 //  Food+Love
-//  Created by C4Q on 3/14/18.
+//  Created by Winston Maragh on 3/14/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import Foundation
 
-struct FourSquareAPIKeys {
 
+struct FourSquareAPIKeys {
 	static let CLIENT_ID = "PWWSABHMRSWVYZNHL1QG20A5050WJAI2MIU3AUFWVRQHCITA"
 	static let CLIENT_SECRET = "WFF2451MT2QIYKDCQEXN3ADT5ZKCYQOFIRXPODYUZSSYBSDT"
 

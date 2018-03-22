@@ -1,13 +1,12 @@
-//  StorageService.swift
-//  POSTR2.0
-//  Created by Winston Maragh on 2/2/18.
-//  Copyright © 2018 Winston Maragh. All rights reserved.
 
+//  StorageService.swift
+//  Food+Love
+//  Created by Winston Maragh on 3/15/18.
+//  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import UIKit
 import Firebase
-//import FirebaseStorage
-//import FirebaseAuth
+
 
 class StorageService {
 	private init(){
@@ -45,20 +44,8 @@ extension StorageService {
 		uploadTask.observe(.success) { snapshot in
 			guard let imageURL = snapshot.metadata?.downloadURL() else { return }
 			let imageStr = String(describing: imageURL)
-
-			//update userImage on Auth
-//			let changeRequest = user?.createProfileChangeRequest()
-//			changeRequest?.photoURL = imageURL
-//			changeRequest?.commitChanges(completion: {(error) in
-//				if let error = error { print("error changing userImage in Auth. Error: \(error)") }
-//				else { print("user Image addes to Authenticated User: \(String(describing: user))") } //changes successful
-//			})
-
-			//update userImage on all posts (redundant if storing userImage in Auth)
 			DBService.manager.updateUserImage(profileImageUrl: imageStr)
 			AuthUserService.manager.changeAuthProfilePhoto(urlString: imageStr)
-
-
 		}
 
 	}

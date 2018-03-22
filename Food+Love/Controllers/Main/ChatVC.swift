@@ -1,4 +1,9 @@
 
+//  ChatVC.swift
+//  Food+Love
+//  Created by Winston Maragh on 3/21/18.
+//  Copyright © 2018 Winston Maragh. All rights reserved.
+
 import UIKit
 import Firebase
 import MobileCoreServices
@@ -7,39 +12,68 @@ import AVFoundation
 
 class ChatVC: UIViewController {
 
+	// MARK: Outlets
+	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var messageTF: UITextField!
+	@IBOutlet weak var photoButton: UIButton!
+	@IBOutlet weak var smileyButton: UIButton!
+	@IBOutlet weak var sendButton: UIButton!
+	@IBOutlet weak var loverImageView: UIImageViewX!
+	@IBOutlet weak var loverName: UILabel!
+	@IBOutlet weak var loverInfo: UILabel!
+	@IBOutlet weak var loverFoodPreference: UILabel!
+
+
+	// MARK: Actions
+	@IBAction func sendButtonPressed(){
+		if messageTF.text == "" {return}
+		else {
+			sendMessageWithProperty(["text":messageTF.text! as AnyObject])
+		}
+	}
+
+	@IBAction func photoButtonPressed(_ sender: UIButton) {
+		//open camera for photo
+		upload()
+
+	}
+
+	@IBAction func smileyButtonPressed(_ sender: UIButton) {
+		//add smiley photo
+		print("smileyButton pressed")
+	}
+
+
 	// MARK: Properties
-	var lover : Lover? {
+	var lover : Lover! {
 		didSet {
-			navigationItem.title = lover?.name
 			observeMessages()
+//			loverImageView
+//				loverName.text = lover.name
+				//loverInfo.text = "\(lover.age), \(lover.occupation), \(lover.kids)"
+				//loverFoodPreference.text = "\(lover.foodPreference)"
+				//
 		}
 	}
 	var messages = [Message]()
-	var startingFrame: CGRect?
-	var backBackgroundView: UIView?
-	var startingImageView: UIImageView?
-	var containerViewBottomAnchor: NSLayoutConstraint?
 
-	@IBOutlet weak var collectionView: UICollectionView!
-
-	// ACTIONS:
-	//Send Message
-	@IBAction func sendButtonPressed(){
-		if inputTextField.text == "" {return}
-		else {
-			sendMessageWithProperty(["text":inputTextField.text! as AnyObject])
-		}
+	init(lover: Lover) {
+		super.init(nibName: nil, bundle: nil)
+		self.lover = lover
 	}
 
-
-
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		setupCollectionView()
-		self.configureSendContainer()
-		setUpKeyboardObservers()
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		messageTF.delegate = self
 		configureNavBar()
+		tabBarController?.tabBar.isHidden = true
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
@@ -47,47 +81,22 @@ class ChatVC: UIViewController {
 		NotificationCenter.default.removeObserver(self)
 	}
 
-	// MARK: Helper Functions
-	func setupCollectionView(){
-//		collectionView?.backgroundColor = UIColor.white
-//		collectionView?.contentInset = UIEdgeInsetsMake(8, 0, 8, 0)
-//		collectionView?.alwaysBounceVertical = true
-//		collectionView?.keyboardDismissMode = .interactive
-	}
-
 	private func configureNavBar() {
 		let videoChatBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camcorder"), style: .plain, target: self, action: #selector(startVideoChat))
 		navigationItem.rightBarButtonItem = videoChatBarItem
 	}
+
 	@objc private func startVideoChat() {
 		let alertView = UIAlertController(title: "Are you sure you on Wifi?", message: nil, preferredStyle: .alert)
 		let yesOption = UIAlertAction(title: "Yes", style: .destructive) { (alertAction) in
-			////
+			let videoVC = VideoVC()
+			self.navigationController?.pushViewController(videoVC, animated: true)
 		}
 		let noOption = UIAlertAction(title: "No", style: .cancel, handler: nil)
 		alertView.addAction(yesOption)
 		alertView.addAction(noOption)
 		present(alertView, animated: true, completion: nil)
 	}
-
-	// Objects
-	var containerViewBottomAncher: NSLayoutConstraint?
-
-	lazy var containerview: UIView = {
-		let cView = UIView()
-		cView.backgroundColor = UIColor.white
-		return cView
-	}()
-
-	lazy var inputTextField: UITextField = {
-		let inputTf = UITextField()
-		inputTf.placeholder = "Enter Message ....."
-		inputTf.translatesAutoresizingMaskIntoConstraints = false
-		inputTf.delegate = self
-		inputTf.backgroundColor = UIColor.clear
-		return inputTf
-	}()
-
 
 
 	// Height for Text
@@ -115,9 +124,9 @@ class ChatVC: UIViewController {
 				let message = Message(dictionary: dict)
 				self.messages.append(message)
 				DispatchQueue.main.async {
-//					self.collectionView?.reloadData()
+					self.collectionView.reloadData()
 					let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
-//					self.collectionView?.scrollToItem(at: indexpath as IndexPath, at: .bottom, animated: true)
+					self.collectionView.scrollToItem(at: indexpath as IndexPath, at: .bottom, animated: true)
 				}
 			}, withCancel: nil)
 		}, withCancel: nil)
@@ -137,7 +146,7 @@ class ChatVC: UIViewController {
 		childRef.updateChildValues(values)
 		childRef.updateChildValues(values) { (error, ref) in
 			if error != nil { print(error!); return}
-			self.inputTextField.text = nil
+			self.messageTF.text = nil
 			let userMessageRef = Database.database().reference().child("user-messages").child(fromId).child(toId!)
 			let messageId = childRef.key
 			userMessageRef.updateChildValues([messageId: 1])
@@ -222,133 +231,6 @@ class ChatVC: UIViewController {
 		}
 	}
 
-
-	//////// KEYBOARD //////////////
-	func setUpKeyboardObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-	}
-
-	@objc func keyboardDidShow() {
-		if messages.count > 0 {
-			let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
-//			self.collectionView?.scrollToItem(at: indexpath as IndexPath, at: .top, animated: true)
-		}
-	}
-
-	@objc func keyboardWillShow(notification: NSNotification) {
-		let keyboardFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue
-		let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
-		containerViewBottomAncher?.constant = -keyboardFrame!.height
-		UIView.animate(withDuration: keyboardDuration!) {
-			self.view.layoutIfNeeded()
-		}
-	}
-
-	@objc func keyboardWillHide(notification: NSNotification){
-		containerViewBottomAncher?.constant = 0
-		let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
-		UIView.animate(withDuration: keyboardDuration!) {
-			self.view.layoutIfNeeded()
-		}
-	}
-
-
-	////////////////// SEND CONTAINER ///////////////////
-	override var inputAccessoryView: UIView? {
-		get { return containerview }
-	}
-
-	override var canBecomeFirstResponder: Bool {
-		return true
-	}
-
-	// Send container
-	func configureSendContainer() {
-		containerview.frame = CGRect.init(x: 0, y: 0, width: view.frame.size.width, height: 50)
-		let uploadImageView = UIImageView()
-		uploadImageView.image = UIImage.init(named: "upload-image")
-		uploadImageView.isUserInteractionEnabled = true
-		uploadImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(upload)))
-		uploadImageView.translatesAutoresizingMaskIntoConstraints = false
-		containerview.addSubview(uploadImageView)
-		uploadImageView.leftAnchor.constraint(equalTo: containerview.leftAnchor, constant: 10).isActive = true
-		uploadImageView.centerYAnchor.constraint(equalTo: containerview.centerYAnchor).isActive = true
-		uploadImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
-		uploadImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-		let separatorView = UIView()
-		separatorView.backgroundColor = UIColor.lightGray
-		separatorView.translatesAutoresizingMaskIntoConstraints = false
-		containerview.addSubview(separatorView)
-		separatorView.leftAnchor.constraint(equalTo: containerview.leftAnchor).isActive = true
-		separatorView.rightAnchor.constraint(equalTo: containerview.rightAnchor).isActive = true
-		separatorView.topAnchor.constraint(equalTo: containerview.topAnchor).isActive = true
-		separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-		let sendButton = UIButton(type: .system)
-		sendButton.setTitle("Send", for: .normal)
-		sendButton.translatesAutoresizingMaskIntoConstraints = false
-
-		sendButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
-
-		containerview.addSubview(sendButton)
-		sendButton.rightAnchor.constraint(equalTo: containerview.rightAnchor, constant: -20).isActive = true
-		sendButton.widthAnchor.constraint(equalToConstant: sendButton.intrinsicContentSize.width).isActive = true
-		sendButton.centerYAnchor.constraint(equalTo: containerview.centerYAnchor).isActive = true
-		sendButton.heightAnchor.constraint(equalTo: containerview.heightAnchor).isActive = true
-		containerview.addSubview(inputTextField)
-		inputTextField.leftAnchor.constraint(equalTo: uploadImageView.rightAnchor , constant: 10).isActive = true
-		inputTextField.centerYAnchor.constraint(equalTo: containerview.centerYAnchor).isActive = true
-		inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -10).isActive = true
-		inputTextField.heightAnchor.constraint(lessThanOrEqualTo: containerview.heightAnchor).isActive = true
-	}
-
-
-	///////////////// ZOOM /////////////////////
-	// Zoom In
-	func zoomInForStartingImageView(startingImageView: UIImageView) {
-		self.startingImageView = startingImageView
-		self.startingImageView?.isHidden = true
-		startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
-		let zoomingImageView = UIImageView.init(frame: startingFrame!)
-		zoomingImageView.image = startingImageView.image
-		zoomingImageView.backgroundColor = UIColor.red
-		zoomingImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(zoomOut)))
-		zoomingImageView.isUserInteractionEnabled = true
-		if let keyWindow =  UIApplication.shared.keyWindow {
-			backBackgroundView = UIView.init(frame: keyWindow.frame)
-			if let backBackgroundView = backBackgroundView {
-				backBackgroundView.backgroundColor = UIColor.black
-				backBackgroundView.alpha = 0
-				keyWindow.addSubview(backBackgroundView)
-			}
-			keyWindow.addSubview(zoomingImageView)
-			UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-				self.backBackgroundView!.alpha = 1
-				self.inputAccessoryView?.alpha = 0
-				let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
-				zoomingImageView.frame = CGRect.init(x: 0, y: 0, width: keyWindow.frame.width, height: height)
-				zoomingImageView.center = keyWindow.center
-			}, completion: nil)
-		}
-	}
-
-	// Zoom Out
-	@objc func zoomOut(tapGesture: UITapGestureRecognizer){
-		if let zoomOutImageView = tapGesture.view {
-			zoomOutImageView.layer.cornerRadius = 16
-			zoomOutImageView.clipsToBounds = true
-			UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-				zoomOutImageView.frame = self.startingFrame!
-				self.backBackgroundView?.alpha = 0
-				self.inputAccessoryView?.alpha = 1
-			}, completion: { (completed) in
-				zoomOutImageView.removeFromSuperview()
-				self.startingImageView?.isHidden = false
-			})
-		}
-	}
-	
 }
 
 
@@ -356,9 +238,9 @@ class ChatVC: UIViewController {
 // MARK: TextField Delegate
 extension ChatVC: UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		if inputTextField.text == "" {return false}
+		if messageTF.text == "" {return false}
 		else {
-			sendMessageWithProperty(["text":inputTextField.text! as AnyObject])
+			sendMessageWithProperty(["text":messageTF.text! as AnyObject])
 		}
 		textField.resignFirstResponder()
 		return true
@@ -406,6 +288,12 @@ extension ChatVC: UICollectionViewDataSource {
 	}
 }
 
+// MARK: CollectionView Delegate
+extension ChatVC: UICollectionViewDelegate {
+
+
+}
+
 // MARK: CollectionView Delegate Flow Layout
 extension ChatVC: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView,
@@ -423,6 +311,90 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 }
 
 
+//////////////////////////////
+// MARK: Zoom for Video
+extension ChatVC {
+	/*
+	// Zoom In
+	func zoomInForStartingImageView(startingImageView: UIImageView) {
+	//		self.startingImageView = startingImageView
+	//		self.startingImageView?.isHidden = true
+	//		startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
+	let zoomingImageView = UIImageView.init(frame: startingFrame!)
+	zoomingImageView.image = startingImageView.image
+	zoomingImageView.backgroundColor = UIColor.red
+	zoomingImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(zoomOut)))
+	zoomingImageView.isUserInteractionEnabled = true
+	if let keyWindow =  UIApplication.shared.keyWindow {
+	//			backBackgroundView = UIView.init(frame: keyWindow.frame)
+	//			if let backBackgroundView = backBackgroundView {
+	//				backBackgroundView.backgroundColor = UIColor.black
+	//				backBackgroundView.alpha = 0
+	keyWindow.addSubview(backBackgroundView)
+	}
+	keyWindow.addSubview(zoomingImageView)
+	UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+	self.backBackgroundView!.alpha = 1
+	self.inputAccessoryView?.alpha = 0
+	let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
+	zoomingImageView.frame = CGRect.init(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+	zoomingImageView.center = keyWindow.center
+	}, completion: nil)
+	}
+	}
+
+	// Zoom Out
+	@objc func zoomOut(tapGesture: UITapGestureRecognizer){
+	if let zoomOutImageView = tapGesture.view {
+	zoomOutImageView.layer.cornerRadius = 16
+	zoomOutImageView.clipsToBounds = true
+	UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+	//				zoomOutImageView.frame = self.startingFrame!
+	self.backBackgroundView?.alpha = 0
+	self.inputAccessoryView?.alpha = 1
+	}, completion: { (completed) in
+	zoomOutImageView.removeFromSuperview()
+	//				self.startingImageView?.isHidden = false
+	})
+	}
+	}
+	*/
+
+}
 
 
-	
+//////////////////////////////
+// MARK: KEYBOARD Handling
+extension ChatVC {
+	/*
+	func setUpKeyboardObservers() {
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+	}
+
+	@objc func keyboardDidShow() {
+		if messages.count > 0 {
+			let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
+			//			self.collectionView?.scrollToItem(at: indexpath as IndexPath, at: .top, animated: true)
+		}
+	}
+
+	@objc func keyboardWillShow(notification: NSNotification) {
+		let keyboardFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue
+		let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
+		//		containerViewBottomAncher?.constant = -keyboardFrame!.height
+		UIView.animate(withDuration: keyboardDuration!) {
+			self.view.layoutIfNeeded()
+		}
+	}
+
+	@objc func keyboardWillHide(notification: NSNotification){
+		//		containerViewBottomAncher?.constant = 0
+		let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
+		UIView.animate(withDuration: keyboardDuration!) {
+			self.view.layoutIfNeeded()
+		}
+	}
+*/
+}

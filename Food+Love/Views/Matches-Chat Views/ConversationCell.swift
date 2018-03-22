@@ -1,10 +1,12 @@
+
 //  ConversationCell.swift
 //  Food+Love
-//  Created by C4Q on 3/21/18.
+//  Created by Winston Maragh on 3/21/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import UIKit
 import Firebase
+
 
 class ConversationCell: UITableViewCell {
 	@IBOutlet weak var loverImage: UIImageViewX!
@@ -25,7 +27,6 @@ class ConversationCell: UITableViewCell {
 				if let seconds = conversation.timeStamp?.doubleValue {
 					let timesnapDate = Date.init(timeIntervalSince1970: seconds)
 					let dateFormatter = DateFormatter()
-//					dateFormatter.dateFormat = "hh:mm:ss a"
 					dateFormatter.dateFormat = "E, MMM d, hh:mm a"
 					self.timeStamp.text = dateFormatter.string(from: timesnapDate as Date)
 				}

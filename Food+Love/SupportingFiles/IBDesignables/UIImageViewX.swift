@@ -2,7 +2,6 @@
 //@IBDesignable - UI Image View
 //
 
-
 import UIKit
 
 @IBDesignable
