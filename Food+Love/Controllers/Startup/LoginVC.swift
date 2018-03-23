@@ -81,6 +81,11 @@ class LoginVC: UIViewController {
 			print(user.displayName)
 			print(user.email!)
 			print(user.photoURL)
+
+			let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+			if let window = UIApplication.shared.delegate?.window {
+				window?.rootViewController = mainVC
+			}
 		})
 
 	}

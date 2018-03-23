@@ -13,8 +13,10 @@ class DiscoverVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(false)
 		if Auth.auth().currentUser == nil {
-			let welcomeVC = WelcomeVC()
-			self.present(welcomeVC, animated: true, completion: nil)
+			let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+			if let window = UIApplication.shared.delegate?.window {
+				window?.rootViewController = welcomeVC
+			}
 		}
 	}
 

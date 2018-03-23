@@ -29,6 +29,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UITabBar.appearance().alpha = 1.0
 			UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 
+
+		let startingVC: UIViewController?
+
+		//Window setup
+		window = UIWindow(frame: UIScreen.main.bounds)
+		window?.makeKeyAndVisible()
+
+		//Check if user is authenticated
+		if Auth.auth().currentUser == nil {
+			//welcome
+			window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+
+			let startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+		} else {
+			//main
+			window?.rootViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		}
+
+
+
+
 		return true
 	}
 

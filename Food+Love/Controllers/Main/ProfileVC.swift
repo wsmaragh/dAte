@@ -55,7 +55,13 @@ class ProfileVC: UIViewController {
 
 
 	func logout(){
-		do { try Auth.auth().signOut() }
+		do {
+			try Auth.auth().signOut()
+			let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+			if let window = UIApplication.shared.delegate?.window {
+				window?.rootViewController = welcomeVC
+			}
+		}
 		catch { print("Error signing out: \(error)") }
 	}
 
