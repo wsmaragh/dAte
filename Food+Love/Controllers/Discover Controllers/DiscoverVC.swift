@@ -19,9 +19,7 @@ class DiscoverVC: UIViewController {
 	//Properties
 	let cellSpacing: CGFloat = 0.6
 	//Dummy Data
-	var lover1 = Lover(id: "0001", name: "susan", email: "susan@gmail.com", profileImageUrl: "")
-	var lover2 = Lover(id: "0002", name: "jeff", email: "jeff@gmail.com", profileImageUrl: "")
-	var lover3 = Lover(id: "0003", name: "li", email: "li@gmail.com", profileImageUrl: "")
+	var lover1 = Lover(id: "0001", name: "Susan", email: "susan@gmail.com", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/foodnlove-84523.appspot.com/o/images%2FSAh0Op05UXWT9nUybEfDw3bzmlc2?alt=media&token=64b165c5-b299-4194-967a-93a498a26f86", profileVideoUrl: nil, dateOfBirth: nil, zipcode: nil, city: nil, bio: nil, gender: "Male", genderPreference: "Female", smoke: "Yes", drink: "Yes", drugs: "No", favRestaurants: nil, likedUsers: nil, usersThatLikeYou: nil)
 	var lovers = [Lover]() {
 		didSet{
 			discoverCV.reloadData()
@@ -38,7 +36,6 @@ class DiscoverVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(false)
 		if Auth.auth().currentUser == nil {
-//			let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
 			let welcomeVC = UIViewController.storyboardInstance(storyboardName: "Main", viewControllerIdentifiier: "WelcomeController")
 			if let window = UIApplication.shared.delegate?.window {
 				window?.rootViewController = welcomeVC
@@ -101,12 +98,24 @@ class DiscoverVC: UIViewController {
 
 	private func loadLovers() {
 		//Load data here
-		lovers = [lover1, lover2, lover3]
-
+		lovers = [lover1]
+		getAllLoversExceptCurrent()
 	}
 
 	private func loadFoodTags(){
 		foodTags = ["Thai", "Japanese", "Tacos"]
+	}
+
+	func getAllLoversExceptCurrent() {
+		Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
+			if let dict = snapshot.value as? [String: AnyObject]{
+				let lover = Lover(dictionary: dict)
+				lover.id = snapshot.key
+				if lover.id != Auth.auth().currentUser?.uid {
+					self.lovers.append(lover)
+				}
+			}
+		}, withCancel: nil)
 	}
 
 
@@ -139,6 +148,11 @@ extension DiscoverVC: UICollectionViewDataSource {
 		let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as! DiscoverCollectionViewCell
 		let lover = lovers[indexPath.row]
 		cell.userNameAgeLabel.text = lover.name
+		if let image = lover.profileImageUrl {
+			cell.userPictureImageView.loadImageUsingCacheWithUrlString(image)
+		} else {
+			cell.userPictureImageView.image = #imageLiteral(resourceName: "user2")
+		}
 		return cell
 	}
 
