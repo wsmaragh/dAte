@@ -51,8 +51,9 @@ class DBService {
 	}
 
 
-	public func addLover(name: String, email: String, profileImage: UIImage) {
-		let user = DBService.manager.getLovers().child((AuthUserService.getCurrentUser()?.uid)!)
+	public func addLover(uid: String, name: String, email: String, profileImage: UIImage) {
+//		let user = DBService.manager.getLovers().child((AuthUserService.getCurrentUser()?.uid)!)
+		let user = DBService.manager.getLovers().child((Auth.auth().currentUser?.uid)!)
 		user.setValue(["name"     : name,
 									 "email"		: email])
 		{ (error, dbRef) in
@@ -62,20 +63,20 @@ class DBService {
 		StorageService.manager.storeUserImage(image: profileImage)
 	}
 
-		public func loadAllLovers(completionHandler: @escaping ([Lover]?) -> Void) {
-				let usersRef = DBService.manager.getLovers()
-				usersRef.observe(.value) { (snapshot) in
-						var allLovers = [Lover]()
-						for child in snapshot.children {
-								let dataSnapshot = child as! DataSnapshot
-								if let dict = dataSnapshot.value as? [String: AnyObject] {
-									let lover = Lover.init(dictionary: dict)
-									allLovers.append(lover)
-								}
+	public func retrieveAllLovers(completionHandler: @escaping ([Lover]?) -> Void) {
+		let loversRef = DBService.manager.getLovers()
+		loversRef.observe(.value) { (snapshot) in
+				var allLovers = [Lover]()
+				for child in snapshot.children {
+						let dataSnapshot = child as! DataSnapshot
+						if let dict = dataSnapshot.value as? [String: AnyObject] {
+							let lover = Lover.init(dictionary: dict)
+							allLovers.append(lover)
 						}
-						completionHandler(allLovers)
 				}
+				completionHandler(allLovers)
 		}
+	}
 
 	public func updateUserName(name: String) {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
