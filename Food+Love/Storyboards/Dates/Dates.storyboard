@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R5Z-1D-Oiw">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Dates-->
+        <scene sceneID="Ray-g9-CK0">
+            <objects>
+                <viewController storyboardIdentifier="Dates" title="Dates" id="R5Z-1D-Oiw" customClass="DatesVC" customModule="Food_Love" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7ng-0K-aWy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SqZ-L6-Dx5">
+                                <rect key="frame" x="0.0" y="20" width="375" height="29"/>
+                                <color key="backgroundColor" red="0.97382798729999998" green="0.99845844510000004" blue="0.92992148949999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <segments>
+                                    <segment title="Confirmed"/>
+                                    <segment title="Pending"/>
+                                    <segment title="Available"/>
+                                </segments>
+                                <color key="tintColor" name="appColorRed"/>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oc8-FQ-xDw" userLabel="PendingDates">
+                                <rect key="frame" x="0.0" y="48" width="375" height="619"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PendingDatesCell" id="6EG-dq-FJx">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6EG-dq-FJx" id="WEV-2r-SPT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wWC-4Z-uMR" userLabel="ConfirmedDates">
+                                <rect key="frame" x="0.0" y="48" width="375" height="619"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConfirmedDatesCell" id="uNB-aZ-wem">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uNB-aZ-wem" id="5LY-Ye-nL9">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="Bg"/>
+                        <constraints>
+                            <constraint firstItem="Oc8-FQ-xDw" firstAttribute="top" secondItem="SqZ-L6-Dx5" secondAttribute="bottom" id="0Qk-pE-d3i"/>
+                            <constraint firstItem="SqZ-L6-Dx5" firstAttribute="top" secondItem="kzj-ZZ-mLY" secondAttribute="top" id="CeT-tq-xLW"/>
+                            <constraint firstItem="Oc8-FQ-xDw" firstAttribute="leading" secondItem="kzj-ZZ-mLY" secondAttribute="leading" id="H2S-1w-c0T"/>
+                            <constraint firstItem="SqZ-L6-Dx5" firstAttribute="centerX" secondItem="7ng-0K-aWy" secondAttribute="centerX" id="TWF-Ct-ovJ"/>
+                            <constraint firstItem="wWC-4Z-uMR" firstAttribute="centerX" secondItem="7ng-0K-aWy" secondAttribute="centerX" id="Yj1-3p-lxs"/>
+                            <constraint firstItem="wWC-4Z-uMR" firstAttribute="bottom" secondItem="kzj-ZZ-mLY" secondAttribute="bottom" id="Z9u-7D-Ozf"/>
+                            <constraint firstItem="SqZ-L6-Dx5" firstAttribute="width" secondItem="7ng-0K-aWy" secondAttribute="width" id="dgD-cJ-nww"/>
+                            <constraint firstItem="Oc8-FQ-xDw" firstAttribute="trailing" secondItem="kzj-ZZ-mLY" secondAttribute="trailing" id="gov-82-zUB"/>
+                            <constraint firstItem="wWC-4Z-uMR" firstAttribute="leading" secondItem="kzj-ZZ-mLY" secondAttribute="leading" id="h4a-dl-YbM"/>
+                            <constraint firstItem="wWC-4Z-uMR" firstAttribute="trailing" secondItem="kzj-ZZ-mLY" secondAttribute="trailing" id="iAq-2F-w7G"/>
+                            <constraint firstItem="wWC-4Z-uMR" firstAttribute="top" secondItem="SqZ-L6-Dx5" secondAttribute="bottom" id="loF-bJ-rNp"/>
+                            <constraint firstItem="Oc8-FQ-xDw" firstAttribute="bottom" secondItem="kzj-ZZ-mLY" secondAttribute="bottom" id="pL1-gb-p63"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kzj-ZZ-mLY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Dates" id="e8S-B0-mgv">
+                        <leftBarButtonItems>
+                            <barButtonItem id="ifU-YD-ALy"/>
+                            <barButtonItem image="mixer" style="done" id="Jq5-pB-835"/>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="calendar_Add" id="GJz-yh-QUY"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MIE-cN-UfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4234" y="279"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="calendar_Add" width="25" height="25"/>
+        <image name="mixer" width="25" height="25"/>
+        <namedColor name="Bg">
+            <color red="0.85900002720000002" green="0.851000011" blue="0.70999997849999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appColorRed">
+            <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
