@@ -17,20 +17,20 @@ class SignupVC: UIViewController {
 	@IBOutlet weak var emailTF: UITextField!
 	@IBOutlet weak var passwordTF: UITextField!
 
+
 	var messagesController: MatchesVC?
 	var profileImageView: UIImageView!
 	private var authUserService = AuthUserService()
+	let imagePicker = UIImagePickerController()
+	private var newUserImage: UIImage!
 
 
-	@IBAction func signup(_ sender: UIButton) {
-		//handleRegister()
-		let setupProfileVC = SetupProfileVC()
-		self.navigationController?.pushViewController(setupProfileVC, animated: true)
-	}
+
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.view.backgroundColor = .white
+		imagePicker.delegate = self
 		self.firstNameTF.underlined(color: .white)
 		self.emailTF.underlined(color: .white)
 		self.passwordTF.underlined(color: .white)
@@ -44,7 +44,20 @@ class SignupVC: UIViewController {
 		self.view.alpha = 0.0
 	}
 
-	func addShadeView(){
+
+	// MARK: Actions
+	@IBAction func addProfilePressed(_ sender: UIButton) {
+		addProfileImage()
+	}
+
+
+	@IBAction func register(_ sender: UIButtonX) {
+		createNewAccount()
+
+	}
+
+
+	fileprivate func addShadeView(){
 		let shade = UIView(frame: self.view.frame)
 		shade.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9)
 		view.addSubview(shade)
@@ -52,7 +65,7 @@ class SignupVC: UIViewController {
 	}
 
 
-	func makeNavigationBarTransparent(){
+	fileprivate func makeNavigationBarTransparent(){
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		self.navigationController?.navigationBar.isTranslucent = true
@@ -63,7 +76,7 @@ class SignupVC: UIViewController {
 		]
 	}
 
-	func setPlaceholderTextColor(color: UIColor){
+	fileprivate func setPlaceholderTextColor(color: UIColor){
 		if let firstNamePlaceholder = firstNameTF.placeholder {
 			firstNameTF.attributedPlaceholder = NSAttributedString(string: firstNamePlaceholder, attributes: [NSAttributedStringKey.foregroundColor: color])
 		}
@@ -86,59 +99,77 @@ class SignupVC: UIViewController {
 		let okAction = UIAlertAction(title: "Ok", style: .default) {alert in }
 		alertController.addAction(okAction)
 		present(alertController, animated: true, completion: nil)
-
 	}
 
+
 	@objc private func createNewAccount() {
-		guard let name = self.firstNameTF.text,
-					let email = self.emailTF.text,
-					let password = self.passwordTF.text
-			else {return}
-		guard !name.isEmpty else {print("name field is empty"); return}
-		guard !email.isEmpty else {print("email field is empty"); return}
-		guard !password.isEmpty else {print("password field is empty"); return}
-		if password.contains(" ") {
-			showAlert(title: "Come on, really!? No spaces allowed!", message: nil)
-			return
+		guard let name = self.firstNameTF.text, name != "" else {
+			showAlert(title: "Please enter a name", message: ""); return
 		}
-//		authUserService.createUser(name: nameText, email: emailText, password: passwordText)
+		guard let email = self.firstNameTF.text, email != "" else {
+			showAlert(title: "Please enter an email", message: ""); return
+		}
+		guard let password = self.passwordTF.text, password != "" else {
+			showAlert(title: "Please enter a valid password", message: ""); return
+		}
+		if profileImageButton.image(for: UIControlState.normal) == #imageLiteral(resourceName: "selfieCamera") {
+			showAlert(title: "Please add a profile image", message: ""); return
+		}
+		guard let image = self.profileImageButton.image(for: .normal) else {
+			showAlert(title: "Please add a profile image", message: ""); return
+		}
+		if email.contains(" ") {
+			showAlert(title: "No spaces allowed in email!", message: nil); return
+		}
+		if password.contains(" ") {
+			showAlert(title: "No spaces allowed in password!", message: nil); return
+		}
 
 		//Create user in Auth
 		Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
-			if error != nil { print(error ?? "Not Trackable Error"); return }
-			guard let uid = user?.uid else { return}
-			let imageName = "my_profile_image_\(uid).png"
-			// upload image
-			let storageRef = Storage.storage().reference().child("Profile_images").child(imageName)
-			if let profileImage = self.profileImageView.image ,let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
-				storageRef.putData(uploadData, metadata: nil, completion: { (metadata, err) in
-					if err != nil { print(err ?? "not traceable error"); return }
-					if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-						let values = ["name": name, "email": email,"profileImageUrl": profileImageUrl]
-						//Regster user in Database
-						let ref = Database.database().reference()
-						let userRef = ref.child("users").child(uid)
-						userRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
-							if err != nil { print(err ?? "Not Trackable Error"); return }
-							self.messagesController?.getUserInfoFromDatabase()
-						})
-					}
-				})
+			if error != nil { print(error); return }
+			guard let user = user else {self.showAlert(title: "Error creating profile. Try Again", message: ""); return}
+
+			if user.uid == Auth.auth().currentUser?.uid {
+				//Add user to database
+				DBService.manager.addLover(uid: user.uid, name: name, email: email, profileImage: image)
+				self.transitionToMain()
 			}
 		})
-
 	}
 
 
-
-	// Select Profile Image
-	@objc func selectProfileImage() {
-		let picker = UIImagePickerController()
-		picker.delegate = self
-		picker.allowsEditing = true
-		present(picker, animated: true, completion: nil)
+	private func transitionToMain(){
+		//transition to Main
+		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		if let window = UIApplication.shared.delegate?.window {
+			window?.rootViewController = mainVC
+		}
 	}
 
+	// MARK: Camera
+	func addProfileImage() {
+		let alertController = UIAlertController(title: "Add profile image", message: "", preferredStyle: UIAlertControllerStyle.alert)
+		let existingPhotoAction = UIAlertAction(title: "Choose Existing Photo", style: .default) { (alertAction) in
+			self.launchCameraFunctions(type: UIImagePickerControllerSourceType.photoLibrary)
+		}
+		let newPhotoAction = UIAlertAction(title: "Take New Photo", style: .default) { (alertAction) in
+			self.launchCameraFunctions(type: UIImagePickerControllerSourceType.camera)
+		}
+		alertController.addAction(existingPhotoAction)
+		alertController.addAction(newPhotoAction)
+		present(alertController, animated: true, completion: nil)
+	}
+
+	//Camera Functions
+	func launchCameraFunctions(type: UIImagePickerControllerSourceType){
+		if UIImagePickerController.isSourceTypeAvailable(type){
+//			let imagePicker = UIImagePickerController()
+			imagePicker.sourceType = type
+			imagePicker.allowsEditing = true
+			self.present(imagePicker, animated: true, completion: nil)
+		}
+	}
 
 }
 
@@ -155,25 +186,31 @@ extension SignupVC: UITextFieldDelegate {
 // MARK: Create User
 extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 		var selectedImageFromPicker: UIImage?
+		print("in image picker")
 		if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
 			selectedImageFromPicker = editedImage
-		} else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+			print("Edited image selected from library/camera")
+		}
+		else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
 			selectedImageFromPicker = originalImage
+			print("original image selected from library/camera")
+
 		}
+
 		if let selectedImage = selectedImageFromPicker {
-			profileImageView.image = selectedImage
-			profileImageView.layer.cornerRadius = 40.0
-			profileImageView.layer.masksToBounds = true
+			//set button image
+			profileImageButton.setImage(selectedImage, for: .normal)
+			print("image set to button")
+
 		}
-		dismiss(animated: true, completion: nil)
+		imagePicker.dismiss(animated: true, completion: nil)
 	}
 
 	//Cancel camera
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		dismiss(animated: true, completion: nil)
+		imagePicker.dismiss(animated: true, completion: nil)
 	}
 
 }

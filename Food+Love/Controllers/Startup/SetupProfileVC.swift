@@ -71,5 +71,8 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		let currentPage = scrollView.contentOffset.x / scrollView.frame.size.width
 		pageControl.currentPage = Int(currentPage)
 	}
+	
+	//let flowersGif = UIImage.gifImageWithName("flowers")
+	//let slide2 = Slide(title: "Bond over food", details: "Food plays an vital part in fostering conversations", picture: flowersGif!)
 
 }
