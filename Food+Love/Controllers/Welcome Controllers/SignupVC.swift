@@ -51,12 +51,16 @@ class SignupVC: UIViewController {
 
 	@IBAction func signup(_ sender: UIButtonX) {
 //		createNewAccount()
-		let name = "Marlon"
-		let email = "marlonrugama@ac.c4q.nyc"
+		createDummyUser()
+
+	}
+
+	func createDummyUser(){
+		let name = "Tony"
+		let email = "tony@ac.c4q.nyc"
 		let password = "123456"
-		let image = #imageLiteral(resourceName: "marlon")
+		let image = #imageLiteral(resourceName: "user4")
 		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
-		AuthUserService.manager.signOut()
 	}
 
 	fileprivate func addShadeView(){
