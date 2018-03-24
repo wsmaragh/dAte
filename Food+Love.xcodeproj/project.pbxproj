@@ -30,6 +30,7 @@
 		818BEE7C2066068E00D9C62F /* UserLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7B2066068E00D9C62F /* UserLikes.swift */; };
 		818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */; };
 		818BEE80206609C200D9C62F /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7F206609C200D9C62F /* StorageService+Images.swift */; };
+		8195758A2066B009001F86F0 /* FaveFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819575892066B009001F86F0 /* FaveFoodCollectionViewCell.swift */; };
 		819934AE2061CD440075696F /* MatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934AD2061CD440075696F /* MatchesCell.swift */; };
 		819934B2206308D30075696F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934B1206308D30075696F /* Conversation.swift */; };
 		81A7B0752063368200566323 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A7B0742063368200566323 /* ChatCell.swift */; };
@@ -67,7 +68,6 @@
 		81EB93FF2065B80A006CD0AA /* AdmirerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB93FC2065B809006CD0AA /* AdmirerCollectionViewCell.swift */; };
 		81EB94002065B80A006CD0AA /* FoodTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB93FD2065B809006CD0AA /* FoodTagCollectionViewCell.swift */; };
 		81EB94012065B80A006CD0AA /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB93FE2065B809006CD0AA /* DiscoverCollectionViewCell.swift */; };
-		81EB94062065B840006CD0AA /* UserTraitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB94052065B840006CD0AA /* UserTraitCollectionViewCell.swift */; };
 		81EB94082065B984006CD0AA /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB94072065B984006CD0AA /* FeedVC.swift */; };
 		81F633FD206026A3003E2A82 /* couple.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 81F633FC206026A3003E2A82 /* couple.mp4 */; };
 		81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC382065E5B100FB2174 /* MatchesVC.swift */; };
@@ -103,6 +103,7 @@
 		818BEE7B2066068E00D9C62F /* UserLikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLikes.swift; sourceTree = "<group>"; };
 		818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+UserProfile.swift"; sourceTree = "<group>"; };
 		818BEE7F206609C200D9C62F /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
+		819575892066B009001F86F0 /* FaveFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaveFoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		819934AD2061CD440075696F /* MatchesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesCell.swift; sourceTree = "<group>"; };
 		819934B1206308D30075696F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		81A7B0742063368200566323 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		81EB93FC2065B809006CD0AA /* AdmirerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdmirerCollectionViewCell.swift; sourceTree = "<group>"; };
 		81EB93FD2065B809006CD0AA /* FoodTagCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		81EB93FE2065B809006CD0AA /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
-		81EB94052065B840006CD0AA /* UserTraitCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTraitCollectionViewCell.swift; sourceTree = "<group>"; };
 		81EB94072065B984006CD0AA /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		81F633FC206026A3003E2A82 /* couple.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = couple.mp4; sourceTree = "<group>"; };
 		81F8DC382065E5B100FB2174 /* MatchesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesVC.swift; sourceTree = "<group>"; };
@@ -396,7 +396,7 @@
 		81EB94022065B81D006CD0AA /* Profile Views */ = {
 			isa = PBXGroup;
 			children = (
-				81EB94052065B840006CD0AA /* UserTraitCollectionViewCell.swift */,
+				819575892066B009001F86F0 /* FaveFoodCollectionViewCell.swift */,
 			);
 			path = "Profile Views";
 			sourceTree = "<group>";
@@ -674,6 +674,7 @@
 			files = (
 				81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */,
 				81E615F32060C3AA00347CDA /* UIViewX.swift in Sources */,
+				8195758A2066B009001F86F0 /* FaveFoodCollectionViewCell.swift in Sources */,
 				818BEE7C2066068E00D9C62F /* UserLikes.swift in Sources */,
 				81EB93FF2065B80A006CD0AA /* AdmirerCollectionViewCell.swift in Sources */,
 				819934AE2061CD440075696F /* MatchesCell.swift in Sources */,
@@ -717,7 +718,6 @@
 				817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */,
 				81E615F82060E1C400347CDA /* WelcomeLogoSlide.swift in Sources */,
 				81EB94012065B80A006CD0AA /* DiscoverCollectionViewCell.swift in Sources */,
-				81EB94062065B840006CD0AA /* UserTraitCollectionViewCell.swift in Sources */,
 				81BE0A00205DDD5E0099215D /* UITextFieldX.swift in Sources */,
 				817F9B732058B8E40061E1B6 /* VideoVC.swift in Sources */,
 				81EB93F52065B467006CD0AA /* OtherUserProfileVC.swift in Sources */,

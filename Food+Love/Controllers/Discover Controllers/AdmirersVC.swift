@@ -14,8 +14,9 @@ import Firebase
 
 class AdmirersVC: UIViewController {
 
-	@IBOutlet weak var admirerCV: UICollectionView!
-
+//    @IBOutlet weak var admirerCV: UICollectionView!
+    @IBOutlet weak var admirerCV: UICollectionView!
+    
 	var admirers = [Lover](){
 		didSet{
 			admirerCV.reloadData()
@@ -50,16 +51,11 @@ class AdmirersVC: UIViewController {
 		}, withCancel: nil)
 	}
 	func setUpCollectionViewLayout() {
-		let layout = VegaScrollFlowLayout()
 		admirerCV.dataSource = self
 		admirerCV.delegate = self
-		admirerCV.collectionViewLayout = layout
-		layout.minimumLineSpacing = 20
-		layout.itemSize = CGSize(width: admirerCV.frame.width, height: 200)
-		layout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-		layout.isPagingEnabled = false
-		layout.springHardness = 200
-		admirerCV.collectionViewLayout.invalidateLayout()
+        let layout = admirerCV.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionInset = UIEdgeInsetsMake(5, 0, 5, 0)
+        layout.minimumInteritemSpacing = 5
 	}
 
 }

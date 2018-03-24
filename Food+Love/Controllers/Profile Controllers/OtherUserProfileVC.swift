@@ -26,15 +26,16 @@ class OtherUserProfileVC: UIViewController {
 	@IBOutlet weak var otherUserPagerControl: FSPageControl!
 	@IBOutlet weak var ageLocationView: UIView!
 	@IBOutlet weak var ageLocationLabel: UILabel!
-	@IBOutlet weak var otherUserTraitCV: UICollectionView!
 	@IBOutlet weak var bioView: UIView!
 	@IBOutlet weak var favoriteRestaurantLab: UILabel!
 	@IBOutlet weak var favoriteRestaurantAnswerLab: UILabel!
 	@IBOutlet weak var favoriteCuisinesCV: UICollectionView!
 	@IBOutlet weak var oneLineBioLabel: UILabel!
-	@IBOutlet weak var oneLineBioAnswer: UILabel!
+    @IBOutlet weak var userBioAnswerTextField: UITextView!
+    @IBOutlet weak var userSearchAnswerTextField: UITextView!
+    
 	@IBOutlet weak var whatTheyLookForLabel: UILabel!
-	@IBOutlet weak var whatTheyLookForAnswerLab: UILabel!
+
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -42,6 +43,9 @@ class OtherUserProfileVC: UIViewController {
 		setUpPagerView()
 		setUpPageControl()
 		setUpViews()
+        favoriteCuisinesCV.delegate = self
+        favoriteCuisinesCV.dataSource = self
+        setUpFoodCollectionView()
 
 	}
 
@@ -53,6 +57,7 @@ class OtherUserProfileVC: UIViewController {
 	}
 
 
+    private var foodLabel = ["Thai", "Japanese", "Tacoes", "Estonian", "Welsh"]
 	@objc private func likeButtonTapped() {
 		//Function sends like to Firebase Storage
 	}
@@ -71,7 +76,7 @@ class OtherUserProfileVC: UIViewController {
 	}
 
 	private func setUpViews() {
-		let views = [ageLocationView, otherUserTraitCV, otherUserPagerView] as [UIView]
+		let views = [ageLocationView, otherUserPagerView] as [UIView]
 		views.forEach {
 			$0.layer.borderColor = UIColor.black.cgColor
 			$0.layer.borderWidth = 0.5
@@ -81,6 +86,16 @@ class OtherUserProfileVC: UIViewController {
 			$0.layer.shadowOpacity = 2
 		}
 	}
+    
+    private func setUpFoodCollectionView() {
+        favoriteCuisinesCV.delegate = self
+        favoriteCuisinesCV.dataSource = self
+        let layout = favoriteCuisinesCV.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
+        layout.minimumInteritemSpacing = 1
+
+    }
+
 
 
 	/*
@@ -92,8 +107,32 @@ class OtherUserProfileVC: UIViewController {
 	// Pass the selected object to the new view controller.
 	}
 	*/
-
 }
+
+extension OtherUserProfileVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return foodLabel.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = favoriteCuisinesCV.dequeueReusableCell(withReuseIdentifier: "FavFoods", for: indexPath) as! FaveFoodCollectionViewCell
+        let favFood = foodLabel[indexPath.row]
+        cell.faveFoodLab.text = favFood
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let foodTitle = foodLabel[indexPath.row]
+//        let cGValue = CGSizeFromString(foodTitle)
+//        return cGValue
+//    }
+}
+
+
 
 extension OtherUserProfileVC: FSPagerViewDataSource, FSPagerViewDelegate {
 
