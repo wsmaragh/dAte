@@ -30,13 +30,12 @@ extension StorageService {
 	public func storeUserImage(image: UIImage) {
 		let user = AuthUserService.getCurrentUser()
 		guard let id = user?.uid else {return}
-
-		guard let data = UIImageJPEGRepresentation(image, 1.0) else { print("image is nil"); return }
+		guard let data = UIImageJPEGRepresentation(image, 0.1) else { print("image is nil"); return }
 		let metadata = StorageMetadata()
 		metadata.contentType = "image/jpeg"
 
 		//create UploadTask
-		let uploadTask = StorageService.manager.getImagesRef().child((user?.uid)!).putData(data, metadata: metadata) { (storageMetadata, error) in
+		let uploadTask = StorageService.manager.getImagesRef().child(id).putData(data, metadata: metadata) { (storageMetadata, error) in
 			if let error = error { print("uploadTask error: \(error)") }
 			else if let storageMetadata = storageMetadata { print("storageMetadata: \(storageMetadata)") }
 		}
@@ -44,8 +43,8 @@ extension StorageService {
 		uploadTask.observe(.success) { snapshot in
 			guard let imageURL = snapshot.metadata?.downloadURL() else { return }
 			let imageStr = String(describing: imageURL)
-			DBService.manager.updateUserImage(profileImageUrl: imageStr)
-			AuthUserService.manager.changeAuthProfilePhoto(urlString: imageStr)
+			DBService.manager.updatePhoto(profileImageUrl: imageStr)
+			AuthUserService.manager.updatePhoto(urlString: imageStr)
 		}
 
 	}
