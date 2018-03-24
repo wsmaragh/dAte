@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JGj-6Y-llS" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                <rect key="frame" x="93.5" y="356.5" width="188" height="21"/>
+                                <rect key="frame" x="94" y="356.5" width="187.5" height="21"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -39,7 +39,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UFE-GR-oco" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                <rect key="frame" x="93.5" y="393.5" width="188" height="21"/>
+                                <rect key="frame" x="94" y="393.5" width="187.5" height="21"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -48,7 +48,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="szW-hq-1gR" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                <rect key="frame" x="94" y="431" width="188" height="21"/>
+                                <rect key="frame" x="94" y="431" width="187.5" height="21"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -79,7 +79,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="register:" destination="ssa-N8-dSA" eventType="touchUpInside" id="pfS-Zp-lnE"/>
+                                    <action selector="signup:" destination="ssa-N8-dSA" eventType="touchUpInside" id="pfS-Zp-lnE"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo3" translatesAutoresizingMaskIntoConstraints="NO" id="QVY-ut-iIw">
@@ -89,7 +89,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xi-An-W3i">
-                                <rect key="frame" x="131" y="236" width="112.5" height="112.5"/>
+                                <rect key="frame" x="131.5" y="236" width="112.5" height="112.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3xi-An-W3i" secondAttribute="height" multiplier="1:1" id="2ko-C7-JlW"/>
                                 </constraints>
@@ -97,7 +97,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="selfieCamera"/>
                                 <connections>
-                                    <action selector="addProfilePressed:" destination="ssa-N8-dSA" eventType="touchUpInside" id="2cb-1I-Nfn"/>
+                                    <action selector="addProfileImage:" destination="ssa-N8-dSA" eventType="touchUpInside" id="2cb-1I-Nfn"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -329,7 +329,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6X-HC-Exi" customClass="UIButtonX" customModule="Food_Love" customModuleProvider="target">
-                                <rect key="frame" x="75" y="409" width="225" height="40"/>
+                                <rect key="frame" x="75" y="409.5" width="225" height="40"/>
                                 <color key="backgroundColor" name="Buttoncolor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="d4P-LD-ISd"/>
@@ -352,7 +352,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBl-vH-nak" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="75" y="546" width="225" height="40"/>
+                                <rect key="frame" x="75" y="546.5" width="225" height="40"/>
                                 <color key="backgroundColor" name="appColorBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="eXv-DL-SDj"/>
@@ -370,8 +370,8 @@
                                     <action selector="FacebookLogin" destination="rJd-m7-hpe" eventType="touchUpInside" id="GGq-h3-HaI"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wsmaragh@yahoo.com" placeholder="Email" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QeN-BM-hwp" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                <rect key="frame" x="75" y="323" width="225" height="20"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QeN-BM-hwp" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
+                                <rect key="frame" x="75" y="323.5" width="225" height="20"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="continue"/>
@@ -382,8 +382,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="Password" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-Fs-8NP" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                <rect key="frame" x="75" y="365" width="225" height="21"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-Fs-8NP" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
+                                <rect key="frame" x="75" y="365.5" width="225" height="21"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="continue" secureTextEntry="YES"/>
@@ -402,13 +402,13 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <imageView userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo3" translatesAutoresizingMaskIntoConstraints="NO" id="FLU-ur-qmD">
-                                <rect key="frame" x="141" y="174" width="93.5" height="93.5"/>
+                                <rect key="frame" x="140.5" y="174" width="94" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="FLU-ur-qmD" secondAttribute="height" multiplier="1:1" id="Yjx-im-WnQ"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ga-Vx-5jJ" customClass="UIButtonX" customModule="Food_Love" customModuleProvider="target">
-                                <rect key="frame" x="75" y="594" width="225" height="40"/>
+                                <rect key="frame" x="75" y="594.5" width="225" height="40"/>
                                 <color key="backgroundColor" name="appColorBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ANK-uQ-oni"/>
@@ -427,7 +427,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or sign in with:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBQ-Aj-dd7">
-                                <rect key="frame" x="122" y="505" width="130" height="22"/>
+                                <rect key="frame" x="122.5" y="505.5" width="130" height="22"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
