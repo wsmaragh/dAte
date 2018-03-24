@@ -13,11 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 
+	override init() {
+		super.init()
+		FirebaseApp.configure()
+	}
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 
-		FirebaseApp.configure()
+//		FirebaseApp.configure()
+
 
 		//Navigation Bar
 			UINavigationBar.appearance().tintColor = UIColor.white
@@ -28,6 +33,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UITabBar.appearance().tintColor = UIColor.white
 			UITabBar.appearance().alpha = 1.0
 			UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
+
+
+
+//		//Window setup
+//		window = UIWindow(frame: UIScreen.main.bounds)
+//		window?.makeKeyAndVisible()
+//
+//		//Check if user is authenticated
+//		if Auth.auth().currentUser == nil {
+//			//welcome
+//			window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+//
+//			let startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+//		} else {
+//			//main
+//			window?.rootViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+//		}
+
+
+		let startingVC: UIViewController?
+
+		//Check if user is authenticated
+		if Auth.auth().currentUser == nil {
+			//welcome
+			startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+		} else {
+			//main
+			startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		}
+
+		//Window setup
+		window = UIWindow(frame: UIScreen.main.bounds)
+		window?.makeKeyAndVisible()
+		window?.rootViewController = startingVC
+
+
 
 		return true
 	}

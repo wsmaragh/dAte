@@ -41,7 +41,8 @@ class AuthUserService: NSObject {
 					if let error = error {print("changeRequest error: \(error)")}
 					else {
 						print("changeRequest was successful for username: \(name)")
-						DBService.manager.addLover(name: name, email: email, profileImage: profileImage ?? #imageLiteral(resourceName: "user2"))
+						DBService.manager.addLover(uid: "", name: name, email: email, profileImage: profileImage ?? #imageLiteral(resourceName: "user2"))
+//						DBService.manager.addLover(name: name, email: email, profileImage: profileImage ?? #imageLiteral(resourceName: "user2"))
 					}
 					self.delegate?.didCreateUser?(self, user: user)
 				})
@@ -60,6 +61,7 @@ class AuthUserService: NSObject {
 			}
 		})
 	}
+	
 	public func changeAuthProfileName(name: String) {
 		let currentUser  = Auth.auth().currentUser!
 		let changeRequest = currentUser.createProfileChangeRequest()
@@ -83,10 +85,10 @@ class AuthUserService: NSObject {
 
 
     public func signIn(email: String, password: String) {
-        Auth.auth().signIn(withEmail: email, password: password) {(user, error) in
-            if let error = error { self.delegate?.didFailSignIn?(self, error: error) } //inform delegate of signin error
-						else if let user = user { self.delegate?.didSignIn?(self, user: user) } //inform delegate of signin success
-        }
+			Auth.auth().signIn(withEmail: email, password: password) {(user, error) in
+					if let error = error { self.delegate?.didFailSignIn?(self, error: error) } //inform delegate of signin error
+					else if let user = user { self.delegate?.didSignIn?(self, user: user) } //inform delegate of signin success
+			}
     }
     
     

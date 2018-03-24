@@ -61,9 +61,8 @@ class ChatVC: UIViewController {
 		super.init(nibName: nil, bundle: nil)
 		self.lover = lover
 	}
-
 	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
 	}
 	
 	// MARK: View Lifecycle

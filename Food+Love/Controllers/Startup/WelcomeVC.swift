@@ -10,7 +10,7 @@ import AVKit
 
 class WelcomeVC: UIViewController, UIScrollViewDelegate {
 
-	// MARK: Outlets/Properties
+	// MARK: Outlet Properties
 	@IBOutlet weak var welcomeSlideScrollView: UIScrollView!
 	@IBOutlet weak var welcomePageControl: UIPageControl!
 	@IBOutlet weak var loginButton: UIButton!
@@ -19,16 +19,6 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	// MARK: Properties
 	private var welcomeSlides = [UIView]()
 
-	// MARK: Action Buttons
-	@IBAction func loginPressed() {
-//		let loginVC = LoginVC.storyboardInstance()
-//		self.navigationController?.pushViewController(loginVC, animated: true)
-	}
-
-	@IBAction func signupPressed() {
-//		let signupVC = SignupVC()
-//		self.navigationController?.pushViewController(signupVC, animated: true)
-	}
 
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
@@ -38,7 +28,7 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 		welcomeSlides = createSlides()
 		addSlidesToScrollView(slides: welcomeSlides)
 		setupPageControl()
-		AuthUserService.manager.signOut()
+//		AuthUserService.manager.signOut()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -54,29 +44,18 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 
 
 	// MARK: Helper Methods
-
 	///Slides
 	func createSlides() -> [UIView] {
-
-		//let flowersGif = UIImage.gifImageWithName("flowers")
-		//let slide2 = Slide(title: "Bond over food", details: "Food plays an vital part in fostering conversations", picture: flowersGif!)
-
 		let slide1 = WelcomeLogoSlide()
-		let slide2 = WelcomeSlide(title: "Bond over food", details: "Start with a simple meal...", picture: #imageLiteral(resourceName: "bg_coffee"))
+		let slide2 = WelcomeSlide(title: "Bond over food", details: "St...", picture: #imageLiteral(resourceName: "bg_coffee"))
 		let slide3 = WelcomeSlide(title: "Companionship", details: "Why eat alone, when you can also meet your soulmate.", picture: #imageLiteral(resourceName: "bg_plandate"))
-		let slide4 = WelcomeSlide(title: "Real Connections", details: "Spend quality time exploring...", picture: #imageLiteral(resourceName: "holdinghands"))
-
-		let slide5 = WelcomeSlide(title: "Start Simple, go deeper", details: "The beautiful first slide is amazing", picture: #imageLiteral(resourceName: "bg_love1"))
-
-		let slide6 = WelcomeSlide(title: "Take it to the next level", details: "Wow you may be even more stunning than the previous", picture: #imageLiteral(resourceName: "bg_date2"))
-		return [slide1, slide2, slide3, slide4, slide5, slide6]
+		let slide4 = WelcomeSlide(title: "Plan date in app", details: "Spend quality time exploring each other...", picture: #imageLiteral(resourceName: "bg_love1"))
+		return [slide1, slide2, slide3, slide4]
 	}
 
 	func setupPageControl(){
 		welcomePageControl.numberOfPages = welcomeSlides.count
 		welcomePageControl.currentPage = 0
-		welcomePageControl.currentPageIndicatorTintColor = UIColor.white
-		welcomePageControl.pageIndicatorTintColor = UIColor.red
 		view.bringSubview(toFront: welcomePageControl)
 	}
 
@@ -134,11 +113,6 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 		if let player = notification.object as? AVPlayerItem {
 			player.seek(to: kCMTimeZero, completionHandler: nil)
 		}
-	}
-
-	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return UIStatusBarStyle.lightContent
-		//return UIStatusBarStyle.default
 	}
 
 }
