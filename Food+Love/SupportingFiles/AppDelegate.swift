@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		//Check if user is authenticated
 		if Auth.auth().currentUser == nil {
 			//welcome
-			startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
+			startingVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
 		} else {
 			//main
 			startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
