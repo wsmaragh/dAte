@@ -9,13 +9,17 @@ import FirebaseDatabase
 import FirebaseAuth
 
 
+
 class DBService {
 
 	//MARK: Properties
 	private var dbRef: DatabaseReference!
 	private var loversRef: DatabaseReference!
 	private var imagesRef: DatabaseReference!
-
+    // added
+    private var usersRef: DatabaseReference!
+    private var userProfileRef: DatabaseReference!
+    private var userLikeRef: DatabaseReference!
 
 	private init(){
 		// reference to the root of the Firebase database
@@ -24,6 +28,9 @@ class DBService {
 		// children of root database node
 		loversRef = dbRef.child("lovers")
 		imagesRef = dbRef.child("images")
+        // added
+        userProfileRef = dbRef.child("userProfile")
+        userLikeRef = dbRef.child("userLikes")
 	}
 	static let manager = DBService()
 
@@ -33,10 +40,12 @@ class DBService {
         return dateFormatter.string(from: date)
     }
 
-	public func getDB()-> DatabaseReference { return dbRef }
+	public func getDBRef()-> DatabaseReference { return dbRef }
 	public func getLovers()-> DatabaseReference { return loversRef }
-	public func getImages()-> DatabaseReference { return imagesRef }
-
+// added
+    public func getImagesRef()-> DatabaseReference { return imagesRef }
+    public func getUserProfileRef()-> DatabaseReference { return userProfileRef }
+    public func getUserLikeRef()-> DatabaseReference { return userLikeRef }
 
 	
 	func getUserInfoFromDatabase() -> Lover {
@@ -60,7 +69,7 @@ class DBService {
 			if let error = error { print("addUser error: \(error.localizedDescription)")}
 			else { print("user successfully added to database reference: \(dbRef)")}
 		}
-		StorageService.manager.storeUserImage(image: profileImage)
+		StorageService.manager.storeProfileImage(image: profileImage, userId: uid)
 	}
 
 	public func retrieveAllLovers(completionHandler: @escaping ([Lover]?) -> Void) {

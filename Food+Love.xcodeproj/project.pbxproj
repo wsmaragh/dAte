@@ -26,6 +26,10 @@
 		817F9B752058B8F70061E1B6 /* DatesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B742058B8F70061E1B6 /* DatesVC.swift */; };
 		817F9B7B2058B9BA0061E1B6 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B7A2058B9BA0061E1B6 /* ProfileVC.swift */; };
 		817F9B7F2058D5BB0061E1B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B7E2058D5BB0061E1B6 /* Images.xcassets */; };
+		818BEE7A2066067100D9C62F /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE792066067100D9C62F /* UserProfile.swift */; };
+		818BEE7C2066068E00D9C62F /* UserLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7B2066068E00D9C62F /* UserLikes.swift */; };
+		818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */; };
+		818BEE80206609C200D9C62F /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7F206609C200D9C62F /* StorageService+Images.swift */; };
 		819934AE2061CD440075696F /* MatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934AD2061CD440075696F /* MatchesCell.swift */; };
 		819934B2206308D30075696F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934B1206308D30075696F /* Conversation.swift */; };
 		81A7B0752063368200566323 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A7B0742063368200566323 /* ChatCell.swift */; };
@@ -89,6 +93,10 @@
 		817F9B742058B8F70061E1B6 /* DatesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesVC.swift; sourceTree = "<group>"; };
 		817F9B7A2058B9BA0061E1B6 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		817F9B7E2058D5BB0061E1B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		818BEE792066067100D9C62F /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		818BEE7B2066068E00D9C62F /* UserLikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLikes.swift; sourceTree = "<group>"; };
+		818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+UserProfile.swift"; sourceTree = "<group>"; };
+		818BEE7F206609C200D9C62F /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
 		819934AD2061CD440075696F /* MatchesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesCell.swift; sourceTree = "<group>"; };
 		819934B1206308D30075696F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		81A7B0742063368200566323 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -223,6 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				81BE0A01205DF8B80099215D /* Lover.swift */,
+				818BEE792066067100D9C62F /* UserProfile.swift */,
+				818BEE7B2066068E00D9C62F /* UserLikes.swift */,
 				81BE0A02205DF8B80099215D /* Message.swift */,
 				819934B1206308D30075696F /* Conversation.swift */,
 				81E615E82060C1A800347CDA /* Restaurant Search */,
@@ -351,7 +361,9 @@
 			children = (
 				81E954B8205E1CEA004036D5 /* AuthUserService.swift */,
 				81E954B9205E1CEA004036D5 /* DBService.swift */,
+				818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */,
 				81E954B6205E1CE9004036D5 /* StorageService.swift */,
+				818BEE7F206609C200D9C62F /* StorageService+Images.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -566,6 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81E615F32060C3AA00347CDA /* UIViewX.swift in Sources */,
+				818BEE7C2066068E00D9C62F /* UserLikes.swift in Sources */,
 				81EB93FF2065B80A006CD0AA /* AdmirerCollectionViewCell.swift in Sources */,
 				819934AE2061CD440075696F /* MatchesCell.swift in Sources */,
 				811E24CB20634BDF00E7CAF5 /* ConversationCell.swift in Sources */,
@@ -582,6 +595,7 @@
 				81EB93F12065B2F0006CD0AA /* AdmirersVC.swift in Sources */,
 				81D26F0620598AF800BEBC47 /* FSPhoto.swift in Sources */,
 				817F9B652058B7F20061E1B6 /* SignupVC.swift in Sources */,
+				818BEE7A2066067100D9C62F /* UserProfile.swift in Sources */,
 				81D26F0A20598B7000BEBC47 /* FSSearch.swift in Sources */,
 				81D26F1220598C9700BEBC47 /* FileManager.swift in Sources */,
 				81EB94002065B80A006CD0AA /* FoodTagCollectionViewCell.swift in Sources */,
@@ -589,8 +603,10 @@
 				8106D84F205D665B00F6EB3E /* WelcomeSlide.swift in Sources */,
 				81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */,
 				815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */,
+				818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */,
 				81EB94082065B984006CD0AA /* FeedVC.swift in Sources */,
 				81E615E52060B9D800347CDA /* UIButtonX.swift in Sources */,
+				818BEE80206609C200D9C62F /* StorageService+Images.swift in Sources */,
 				81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */,
 				81BE0A03205DF8B90099215D /* Lover.swift in Sources */,
 				817F9B672058B8060061E1B6 /* SetupProfileVC.swift in Sources */,
