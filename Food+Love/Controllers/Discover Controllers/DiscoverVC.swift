@@ -13,8 +13,8 @@ import VegaScrollFlowLayout
 class DiscoverVC: UIViewController {
 
 	// Outlets
-	@IBOutlet weak var discoverCV: UICollectionView!
-	@IBOutlet var foodTagCV: UICollectionView!
+    @IBOutlet weak var discoverCV: UICollectionView!
+    
 
 	//Properties
 	let cellSpacing: CGFloat = 0.6
@@ -25,11 +25,7 @@ class DiscoverVC: UIViewController {
 			discoverCV.reloadData()
 		}
 	}
-	var foodTags = [String]() {
-		didSet {
-			foodTagCV.reloadData()
-		}
-	}
+
 
 
 	// view lifecycle
@@ -42,14 +38,12 @@ class DiscoverVC: UIViewController {
 			}
 		}
 		loadLovers()
-		loadFoodTags()
+
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpDiscoverCV()
-		setUpBackground()
-		setUpTagCV()
 	}
 
 
@@ -58,41 +52,28 @@ class DiscoverVC: UIViewController {
 	private func setUpDiscoverCV() {
 		discoverCV.dataSource = self
 		discoverCV.delegate = self
-		foodTagCV.dataSource = self
-		foodTagCV.delegate = self
 
-		let screenSize = UIScreen.main.bounds.size
-		let cellWidth = floor(screenSize.width * cellSpacing)
-		let cellHeight = floor(screenSize.height * cellSpacing)
-
-		let insetX = (view.bounds.width  - cellWidth) / 3
-		let insetY = (view.bounds.height - cellHeight) / 3
-
-		let layout = VegaScrollFlowLayout()
-		discoverCV.collectionViewLayout = layout
-		layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-		discoverCV?.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
+        let layout = discoverCV.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13)
+        layout.minimumInteritemSpacing = 1
+        layout.itemSize = CGSize(width: discoverCV.frame.size.width * 0.5, height: discoverCV.frame.size.height * 0.65)
 	}
 
-	private func setUpTagCV() {
-		foodTagCV.layer.cornerRadius = 45
-		foodTagCV.layer.borderColor = UIColor.black.cgColor
-		foodTagCV.layer.borderWidth = 0.5
-	}
 
-	private func setUpBackground() {
 
-		let backgroundImage = UIImageView()
-		backgroundImage.image = #imageLiteral(resourceName: "bg_desert")
-		backgroundImage.contentMode = .scaleToFill
-		view.addSubview(backgroundImage)
-
-		let blur = UIBlurEffect(style: .regular)
-		let blurView = UIVisualEffectView(effect: blur)
-		blurView.frame = backgroundImage.frame
-		blurView.translatesAutoresizingMaskIntoConstraints = false
-		backgroundImage.addSubview(blurView)
-	}
+//    private func setUpBackground() {
+//
+//        let backgroundImage = UIImageView()
+//        backgroundImage.image = #imageLiteral(resourceName: "bg_desert")
+//        backgroundImage.contentMode = .scaleToFill
+//        view.addSubview(backgroundImage)
+//
+//        let blur = UIBlurEffect(style: .regular)
+//        let blurView = UIVisualEffectView(effect: blur)
+//        blurView.frame = backgroundImage.frame
+//        blurView.translatesAutoresizingMaskIntoConstraints = false
+//        backgroundImage.addSubview(blurView)
+//    }
 
 
 
@@ -102,9 +83,7 @@ class DiscoverVC: UIViewController {
 		getAllLoversExceptCurrent()
 	}
 
-	private func loadFoodTags(){
-		foodTags = ["Thai", "Japanese", "Tacos"]
-	}
+
 
 	func getAllLoversExceptCurrent() {
 		Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
@@ -131,20 +110,10 @@ extension DiscoverVC: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-		if collectionView == foodTagCV {
-			return foodTags.isEmpty ? 1 : foodTags.count
-		}
 		return lovers.isEmpty ? 1 : lovers.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		if collectionView == foodTagCV {
-			let cell = foodTagCV.dequeueReusableCell(withReuseIdentifier: "FoodTagCell", for: indexPath) as! FoodTagCollectionViewCell
-			let tag = foodTags[indexPath.row]
-			cell.foodTagLabel.text = tag
-			return cell
-		}
-
 		let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as! DiscoverCollectionViewCell
 		let lover = lovers[indexPath.row]
 		cell.userNameAgeLabel.text = lover.name
@@ -161,13 +130,9 @@ extension DiscoverVC: UICollectionViewDataSource {
 
 extension DiscoverVC: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-		if collectionView == foodTagCV {
-			//perform filter of discover CV here
-		}
 		//perform segue to profile here
 		//        let selectedLover = lovers[indexPath.row]
-		let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}

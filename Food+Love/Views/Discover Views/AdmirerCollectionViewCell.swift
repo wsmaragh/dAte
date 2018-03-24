@@ -10,11 +10,16 @@ import UIKit
 
 class AdmirerCollectionViewCell: UICollectionViewCell {
 
+//    @IBOutlet weak var admirerImageView: UIImageView!
+//    @IBOutlet weak var admirerFoodsLabel: UILabel!
+//    @IBOutlet weak var admirerNameLabel: UILabel!
+//    @IBOutlet weak var admirerShareLabel: UILabel!
+    @IBOutlet weak var colorSplashView: UIView!
     @IBOutlet weak var admirerImageView: UIImageView!
-    @IBOutlet weak var admirerFoodsLabel: UILabel!
+    
     @IBOutlet weak var admirerNameLabel: UILabel!
     @IBOutlet weak var admirerShareLabel: UILabel!
-   
+    @IBOutlet weak var admirerFoodsLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         fixImageView()
@@ -33,10 +38,9 @@ class AdmirerCollectionViewCell: UICollectionViewCell {
       override func layoutSubviews() {
         admirerNameLabel.textColor = UIColor.black
         layer.cornerRadius = 14
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.3
-        layer.shadowOffset = CGSize(width: 0, height: 5)
         layer.masksToBounds = false
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderWidth = 0.5
     }
     
     

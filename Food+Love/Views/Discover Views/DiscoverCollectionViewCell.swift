@@ -10,11 +10,12 @@ import UIKit
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var userPictureImageView: UIImageView!
+
+    
     @IBOutlet weak var labelView: UIView!
     @IBOutlet weak var labelBackgroundColorView: UIView!
     @IBOutlet weak var userNameAgeLabel: UILabel!
-    @IBOutlet weak var commonFoodLabel: UILabel!
+    @IBOutlet weak var userPictureImageView: UIImageView!
     
     public func configCell(userImage: UIImage, name: String, age: Int) {
         self.userPictureImageView.image = userImage
