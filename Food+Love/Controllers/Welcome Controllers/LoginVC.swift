@@ -15,7 +15,6 @@ class LoginVC: UIViewController {
 	@IBOutlet weak var emailTF: UITextField!
 	@IBOutlet weak var passwordTF: UITextField!
 	@IBOutlet weak var loginButton: UIButton!
-	var messagesController: MatchesVC?
 
 
 	//Facebook button
@@ -31,6 +30,8 @@ class LoginVC: UIViewController {
 		self.passwordTF.leftViewMode = .always
 		makeNavigationBarTransparent()
 		setPlaceholderTextColor(color: UIColor.lightText)
+		emailTF.text = "winstonmaragh@ac.c4q.nyc"
+		passwordTF.text = "123456"
 
 		//Shade
 		let shade = UIView(frame: self.view.frame)
@@ -43,7 +44,6 @@ class LoginVC: UIViewController {
 		super.viewWillDisappear(false)
 		self.view.alpha = 0.0
 	}
-
 
 	func makeNavigationBarTransparent(){
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -71,22 +71,13 @@ class LoginVC: UIViewController {
 	// MARK: Actions for buttons
 	@IBAction func loginInUser(){
 		guard let email = emailTF.text, let password = passwordTF.text else {	return }
-		Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-			if error != nil { print(error); return }
-			//successfully logged in our user
-			let user = Auth.auth().currentUser!
-			print(user)
-			print(user.uid)
-			print(user.displayName)
-			print(user.email!)
-			print(user.photoURL)
-
+		AuthUserService.manager.signIn(email: email, password: password)
+		if AuthUserService.getCurrentUser() != nil {
 			let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
 			if let window = UIApplication.shared.delegate?.window {
 				window?.rootViewController = mainVC
 			}
-		})
-
+		}
 	}
 
 

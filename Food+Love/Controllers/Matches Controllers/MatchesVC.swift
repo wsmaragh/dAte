@@ -39,9 +39,12 @@ class MatchesVC: UIViewController {
 		super.viewDidLoad()
 		setupTableview()
 		setupcollectionView()
-		getAllLovers()
-		observeUserMessages()
-		fetchUser()
+
+		getAllLoversExceptCurrent()
+		getMessages()
+//		getLover()
+//		matches = DBService.manager.getAllLoversExceptCurrent()
+//		DBService.manager.getCurrentLover()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -62,16 +65,18 @@ class MatchesVC: UIViewController {
 
 
 	// Get currentUser info from database
-	func getUserInfoFromDatabase() -> Lover {
-		let uid = Auth.auth().currentUser?.uid
-		var lover: Lover!
-		Database.database().reference().child("lovers").child(uid!).observe(.value, with: { (snapshot) in
-			if let userInfoDict = snapshot.value as? [String : AnyObject] {
-				lover = Lover(dictionary: userInfoDict)
-			}
-		}, withCancel: nil)
-		return lover
-	}
+
+//	func getUser() -> Lover {
+//		let uid = Auth.auth().currentUser?.uid
+//		var lover: Lover!
+//		Database.database().reference().child("lovers").child(uid!).observe(.value, with: { (snapshot) in
+//			if let userInfoDict = snapshot.value as? [String : AnyObject] {
+//				lover = Lover(dictionary: userInfoDict)
+//			}
+//		}, withCancel: nil)
+//		return lover
+//	}
+
 
 	// Show Conversation with User
 	func showConversationWithUser(lover: Lover) {
@@ -82,7 +87,7 @@ class MatchesVC: UIViewController {
 
 
 	// MARK: Helper Methods
-	func getAllLovers() {
+	func getAllLoversExceptCurrent() {
 		Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
 			if let dict = snapshot.value as? [String: AnyObject]{
 				let lover = Lover(dictionary: dict)
@@ -97,7 +102,7 @@ class MatchesVC: UIViewController {
 
 
 	// Matches
-	func observeUserMessages() {
+	func getMessages() {
 		guard let uid = Auth.auth().currentUser?.uid else { return }
 		let ref = Database.database().reference().child("user-messages").child(uid)
 
@@ -130,7 +135,7 @@ class MatchesVC: UIViewController {
 
 
 	// Fetch Message with message ID
-	fileprivate func fetchMessageWithMessageId(_ messageId: String) {
+	fileprivate func getMessageWithID(_ messageId: String) {
 		let messagesReference = Database.database().reference().child("messages").child(messageId)
 		messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
 			if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -162,7 +167,7 @@ class MatchesVC: UIViewController {
 
 
 	// Chat for User
-	func showChatControllerForUser(_ lover: Lover) {
+	func showChat(_ lover: Lover) {
 //		let chatLogController = ChatVC(collectionViewLayout: UICollectionViewFlowLayout())
 		let chatVC = ChatVC(lover: lover)
 		navigationController?.pushViewController(chatVC, animated: true)
@@ -170,7 +175,7 @@ class MatchesVC: UIViewController {
 
 
 	// Fetch User and set Title for person chatting with
-	func fetchUser() {
+	func getLover() {
 		guard let uid = Auth.auth().currentUser?.uid else {	return }
 		Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
 			if let dict = snapshot.value as? [String: AnyObject] {
@@ -185,7 +190,7 @@ class MatchesVC: UIViewController {
 		conversations.removeAll()
 		conversationsDict.removeAll()
 		matchesTableView.reloadData()
-		observeUserMessages()
+		getMessages()
 	}
 
 }

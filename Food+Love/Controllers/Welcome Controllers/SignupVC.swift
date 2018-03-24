@@ -40,20 +40,24 @@ class SignupVC: UIViewController {
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(false)
 		self.view.alpha = 0.0
+		AuthUserService.manager.signOut()
 	}
 
 
 	// MARK: Actions
-	@IBAction func addProfilePressed(_ sender: UIButton) {
+	@IBAction func addProfileImage(_ sender: UIButton) {
 		addProfileImage()
 	}
 
-
-	@IBAction func register(_ sender: UIButtonX) {
-		createNewAccount()
-
+	@IBAction func signup(_ sender: UIButtonX) {
+//		createNewAccount()
+		let name = "Marlon"
+		let email = "marlonrugama@ac.c4q.nyc"
+		let password = "123456"
+		let image = #imageLiteral(resourceName: "marlon")
+		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
+		AuthUserService.manager.signOut()
 	}
-
 
 	fileprivate func addShadeView(){
 		let shade = UIView(frame: self.view.frame)
@@ -130,7 +134,7 @@ class SignupVC: UIViewController {
 
 			if user.uid == Auth.auth().currentUser?.uid {
 				//Add user to database
-				DBService.manager.addLover(uid: user.uid, name: name, email: email, profileImage: image)
+				DBService.manager.addLover(name: name, email: email, profileImage: image)
 				self.transitionToMain()
 			}
 		})
