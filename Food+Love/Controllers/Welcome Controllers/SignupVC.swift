@@ -50,8 +50,8 @@ class SignupVC: UIViewController {
 	}
 
 	@IBAction func signup(_ sender: UIButtonX) {
-//		createNewAccount()
-		createDummyUser()
+		createNewAccount()
+//		createDummyUser()
 
 	}
 
@@ -130,18 +130,10 @@ class SignupVC: UIViewController {
 		if password.contains(" ") {
 			showAlert(title: "No spaces allowed in password!", message: nil); return
 		}
-
-		//Create user in Auth
-		Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
-			if error != nil { print(error); return }
-			guard let user = user else {self.showAlert(title: "Error creating profile. Try Again", message: ""); return}
-
-			if user.uid == Auth.auth().currentUser?.uid {
-				//Add user to database
-				DBService.manager.addLover(name: name, email: email, profileImage: image)
-				self.transitionToMain()
-			}
-		})
+		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
+		if AuthUserService.getCurrentUser() != nil {
+			transitionToMain()
+		}
 	}
 
 
