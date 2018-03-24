@@ -19,16 +19,6 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	// MARK: Properties
 	private var welcomeSlides = [UIView]()
 
-	// MARK: Action Buttons
-	@IBAction func loginPressed() {
-//		let loginVC = LoginVC()
-//		self.navigationController?.pushViewController(loginVC, animated: true)
-	}
-
-	@IBAction func signupPressed() {
-//		let signupVC = SignupVC()
-//		self.navigationController?.pushViewController(signupVC, animated: true)
-	}
 
 	// MARK: View Lifecycle
 	override func viewDidLoad() {

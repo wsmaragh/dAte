@@ -17,14 +17,20 @@ class SignupVC: UIViewController {
 	@IBOutlet weak var emailTF: UITextField!
 	@IBOutlet weak var passwordTF: UITextField!
 
+
 	var messagesController: MatchesVC?
 	var profileImageView: UIImageView!
 	private var authUserService = AuthUserService()
+	let imagePicker = UIImagePickerController()
+	private var newUserImage: UIImage!
+
+
 
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.view.backgroundColor = .white
+		imagePicker.delegate = self
 		self.firstNameTF.underlined(color: .white)
 		self.emailTF.underlined(color: .white)
 		self.passwordTF.underlined(color: .white)
@@ -44,10 +50,10 @@ class SignupVC: UIViewController {
 		addProfileImage()
 	}
 
-	@IBAction func signup(_ sender: UIButton) {
-		//handleRegister()
-//		let setupProfileVC = SetupProfileVC()
-//		self.navigationController?.pushViewController(setupProfileVC, animated: true)
+
+	@IBAction func register(_ sender: UIButtonX) {
+		createNewAccount()
+
 	}
 
 
@@ -93,7 +99,6 @@ class SignupVC: UIViewController {
 		let okAction = UIAlertAction(title: "Ok", style: .default) {alert in }
 		alertController.addAction(okAction)
 		present(alertController, animated: true, completion: nil)
-
 	}
 
 
@@ -107,9 +112,11 @@ class SignupVC: UIViewController {
 		guard let password = self.passwordTF.text, password != "" else {
 			showAlert(title: "Please enter a valid password", message: ""); return
 		}
+		if profileImageButton.image(for: UIControlState.normal) == #imageLiteral(resourceName: "selfieCamera") {
+			showAlert(title: "Please add a profile image", message: ""); return
+		}
 		guard let image = self.profileImageButton.image(for: .normal) else {
 			showAlert(title: "Please add a profile image", message: ""); return
-			return
 		}
 		if email.contains(" ") {
 			showAlert(title: "No spaces allowed in email!", message: nil); return
@@ -120,21 +127,25 @@ class SignupVC: UIViewController {
 
 		//Create user in Auth
 		Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
-			if error != nil { print(error ?? "Not Trackable Error"); return }
+			if error != nil { print(error); return }
 			guard let user = user else {self.showAlert(title: "Error creating profile. Try Again", message: ""); return}
 
 			if user.uid == Auth.auth().currentUser?.uid {
 				//Add user to database
 				DBService.manager.addLover(uid: user.uid, name: name, email: email, profileImage: image)
-				//transition to Main
-				let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
-				if let window = UIApplication.shared.delegate?.window {
-					window?.rootViewController = mainVC
-				}
+				self.transitionToMain()
 			}
 		})
 	}
 
+
+	private func transitionToMain(){
+		//transition to Main
+		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		if let window = UIApplication.shared.delegate?.window {
+			window?.rootViewController = mainVC
+		}
+	}
 
 	// MARK: Camera
 	func addProfileImage() {
@@ -153,7 +164,7 @@ class SignupVC: UIViewController {
 	//Camera Functions
 	func launchCameraFunctions(type: UIImagePickerControllerSourceType){
 		if UIImagePickerController.isSourceTypeAvailable(type){
-			let imagePicker = UIImagePickerController()
+//			let imagePicker = UIImagePickerController()
 			imagePicker.sourceType = type
 			imagePicker.allowsEditing = true
 			self.present(imagePicker, animated: true, completion: nil)
@@ -177,21 +188,29 @@ extension SignupVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
 
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 		var selectedImageFromPicker: UIImage?
+		print("in image picker")
 		if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
 			selectedImageFromPicker = editedImage
-		} else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-			selectedImageFromPicker = originalImage
+			print("Edited image selected from library/camera")
 		}
+		else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+			selectedImageFromPicker = originalImage
+			print("original image selected from library/camera")
+
+		}
+
 		if let selectedImage = selectedImageFromPicker {
 			//set button image
 			profileImageButton.setImage(selectedImage, for: .normal)
+			print("image set to button")
+
 		}
-		dismiss(animated: true, completion: nil)
+		imagePicker.dismiss(animated: true, completion: nil)
 	}
 
 	//Cancel camera
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		dismiss(animated: true, completion: nil)
+		imagePicker.dismiss(animated: true, completion: nil)
 	}
 
 }
