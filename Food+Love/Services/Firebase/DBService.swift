@@ -42,13 +42,55 @@ class DBService {
 
 	public func getDBRef()-> DatabaseReference { return dbRef }
 	public func getLovers()-> DatabaseReference { return loversRef }
+
 // added
     public func getImagesRef()-> DatabaseReference { return imagesRef }
     public func getUserProfileRef()-> DatabaseReference { return userProfileRef }
     public func getUserLikeRef()-> DatabaseReference { return userLikeRef }
 
+	public func getImages()-> DatabaseReference { return imagesRef }
+
+	// Add
+	public func addLover(name: String, email: String, profileImage: UIImage) {
+		let user = DBService.manager.getLovers().child((Auth.auth().currentUser?.uid)!)
+		user.setValue(["name"     : name,
+									 "email"		: email])
+		{ (error, dbRef) in
+			if let error = error { print("addUser error: \(error.localizedDescription)")}
+			else { print("user successfully added to database reference: \(dbRef)")}
+		}
 	
-	func getUserInfoFromDatabase() -> Lover {
+	}
+
+	public func addLoverDetails(dateOfBirth: String?,
+															zipcode: String?,
+															city: String?,
+															bio: String?,
+															gender: String?,
+															genderPreference: String?,
+															smoke: String?,
+															drink: String?,
+															drugs: String?) {
+		let user = DBService.manager.getLovers().child((Auth.auth().currentUser?.uid)!)
+		user.setValue(["dateOfBirth": dateOfBirth,
+									 "zipcode": zipcode,
+									 "city": city,
+									 "bio": bio,
+									 "gender" : gender,
+									 "genderPreference"	: genderPreference,
+									 "smoke" : smoke,
+									 "drink": drink,
+									 "drugs" : drugs])
+		{ (error, dbRef) in
+			if let error = error { print("addUser error: \(error.localizedDescription)")}
+			else { print("user successfully added to database reference: \(dbRef)")}
+		}
+	}
+
+
+
+	// Get
+	func getCurrentLover() -> Lover {
 		let uid = Auth.auth().currentUser?.uid
 		var lover: Lover!
 		Database.database().reference().child("lovers").child(uid!).observe(.value, with: { (snapshot) in
@@ -59,20 +101,47 @@ class DBService {
 		return lover
 	}
 
-
-	public func addLover(uid: String, name: String, email: String, profileImage: UIImage) {
-//		let user = DBService.manager.getLovers().child((AuthUserService.getCurrentUser()?.uid)!)
-		let user = DBService.manager.getLovers().child((Auth.auth().currentUser?.uid)!)
-		user.setValue(["name"     : name,
-									 "email"		: email])
-		{ (error, dbRef) in
-			if let error = error { print("addUser error: \(error.localizedDescription)")}
-			else { print("user successfully added to database reference: \(dbRef)")}
-		}
-		StorageService.manager.storeProfileImage(image: profileImage, userId: uid)
+	func getLover(uid: String) -> Lover {
+		var lover: Lover!
+		Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
+			if let userInfoDict = snapshot.value as? [String : AnyObject] {
+				lover = Lover(dictionary: userInfoDict)
+			}
+		}, withCancel: nil)
+		return lover
 	}
 
-	public func retrieveAllLovers(completionHandler: @escaping ([Lover]?) -> Void) {
+	func getMultipleLovers(uids: [String]) -> [Lover] {
+		var lovers = [Lover]()
+		for uid in uids {
+			Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
+				if let userInfoDict = snapshot.value as? [String : AnyObject] {
+					let lover = Lover(dictionary: userInfoDict)
+					lovers.append(lover)
+				}
+			}, withCancel: nil)
+		}
+		return lovers
+	}
+
+	func getAllLovers() -> [Lover] {
+		let loversRef = DBService.manager.getLovers()
+		var lovers = [Lover]()
+		loversRef.observe(.value) { (snapshot) in
+			for child in snapshot.children {
+				let dataSnapshot = child as! DataSnapshot
+				if let dict = dataSnapshot.value as? [String: AnyObject] {
+					let lover = Lover.init(dictionary: dict)
+					lovers.append(lover)
+				}
+			}
+        }
+
+		return lovers
+
+	}
+
+	func retrieveAllLovers(completionHandler: @escaping ([Lover]?) -> Void) {
 		let loversRef = DBService.manager.getLovers()
 		loversRef.observe(.value) { (snapshot) in
 				var allLovers = [Lover]()
@@ -87,7 +156,21 @@ class DBService {
 		}
 	}
 
-	public func updateUserName(name: String) {
+//	func getAllLoversExceptCurrent() -> [Lover]{
+//		var lovers = [Lover]()
+//		Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
+//			if let dict = snapshot.value as? [String: AnyObject]{
+//				let lover = Lover(dictionary: dict)
+//				lover.id = snapshot.key
+//				if lover.id != Auth.auth().currentUser?.uid {
+//					lovers.append(lover)
+//				}
+//			}
+//		}, withCancel: nil)
+//		return lovers
+//	}
+
+	public func updateName(name: String) {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["name": name])
 	}
@@ -97,7 +180,7 @@ class DBService {
 		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["email": email])
 	}
 
-	public func updateUserImage(profileImageUrl: String) {
+	public func updatePhoto(profileImageUrl: String) {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 	}

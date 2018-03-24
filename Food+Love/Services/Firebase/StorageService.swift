@@ -33,6 +33,7 @@ class StorageService {
 
 
 //Store User Image
+
 //extension StorageService {
 //    public func storeUserImage(image: UIImage) {
 //        let user = AuthUserService.getCurrentUser()
@@ -57,4 +58,7 @@ class StorageService {
 //
 //    }
 //}
+
+
+
 
