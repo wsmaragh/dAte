@@ -13,6 +13,8 @@
 		813E323A2058F0A80076A98F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813E32392058F0A80076A98F /* MapKit.framework */; };
 		815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B2B3E205C2F91005C1C32 /* Extensions.swift */; };
 		815B2B41205C2FD6005C1C32 /* Theme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B2B40205C2FD6005C1C32 /* Theme.xcassets */; };
+		816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */; };
+		816511F2206714F200F27F34 /* UserPicturesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */; };
 		817F9B47205863B10061E1B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B46205863B10061E1B6 /* AppDelegate.swift */; };
 		817F9B4E205863B10061E1B6 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4D205863B10061E1B6 /* Icons.xcassets */; };
 		817F9B51205863B10061E1B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4F205863B10061E1B6 /* LaunchScreen.storyboard */; };
@@ -31,6 +33,9 @@
 		818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */; };
 		818BEE80206609C200D9C62F /* StorageService+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE7F206609C200D9C62F /* StorageService+Images.swift */; };
 		8195758A2066B009001F86F0 /* FaveFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819575892066B009001F86F0 /* FaveFoodCollectionViewCell.swift */; };
+		8195758C2066C023001F86F0 /* Restaurant.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8195758B2066C023001F86F0 /* Restaurant.storyboard */; };
+		8195758F2066C8B9001F86F0 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195758E2066C8B9001F86F0 /* RestaurantDetailViewController.swift */; };
+		819575922066CAAE001F86F0 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819575912066CAAE001F86F0 /* RestaurantTableViewCell.swift */; };
 		819934AE2061CD440075696F /* MatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934AD2061CD440075696F /* MatchesCell.swift */; };
 		819934B2206308D30075696F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934B1206308D30075696F /* Conversation.swift */; };
 		81A7B0752063368200566323 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A7B0742063368200566323 /* ChatCell.swift */; };
@@ -84,6 +89,8 @@
 		813E32392058F0A80076A98F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		815B2B3E205C2F91005C1C32 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		815B2B40205C2FD6005C1C32 /* Theme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Theme.xcassets; sourceTree = "<group>"; };
+		816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormViewController.swift; sourceTree = "<group>"; };
+		816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPicturesCollectionViewCell.swift; sourceTree = "<group>"; };
 		817F9B43205863B10061E1B6 /* Food+Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food+Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		817F9B46205863B10061E1B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		817F9B4D205863B10061E1B6 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -104,6 +111,9 @@
 		818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+UserProfile.swift"; sourceTree = "<group>"; };
 		818BEE7F206609C200D9C62F /* StorageService+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageService+Images.swift"; sourceTree = "<group>"; };
 		819575892066B009001F86F0 /* FaveFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaveFoodCollectionViewCell.swift; sourceTree = "<group>"; };
+		8195758B2066C023001F86F0 /* Restaurant.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Restaurant.storyboard; sourceTree = "<group>"; };
+		8195758E2066C8B9001F86F0 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
+		819575912066CAAE001F86F0 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		819934AD2061CD440075696F /* MatchesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesCell.swift; sourceTree = "<group>"; };
 		819934B1206308D30075696F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		81A7B0742063368200566323 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -227,6 +237,7 @@
 				81F8DC332065E45900FB2174 /* Matches Controllers */,
 				81F8DC342065E46300FB2174 /* Dates Controllers */,
 				81F8DC362065E47C00FB2174 /* Profile Controllers */,
+				819575902066C8C0001F86F0 /* Restaurant View Controllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -239,6 +250,7 @@
 				81F4F8E82063B9D8008D716B /* Matches Views */,
 				81F8DC372065E51D00FB2174 /* Dates Views */,
 				81EB94022065B81D006CD0AA /* Profile Views */,
+				81BF94222066E74200103C7E /* Restaurant Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,8 +307,25 @@
 				81AD5D992065DC1C007A5963 /* Matches */,
 				81AD5D922065DACE007A5963 /* Dates */,
 				81AD5D9C2065DC9E007A5963 /* Profile */,
+				8195758D2066C02B001F86F0 /* Restaurant */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		8195758D2066C02B001F86F0 /* Restaurant */ = {
+			isa = PBXGroup;
+			children = (
+				8195758B2066C023001F86F0 /* Restaurant.storyboard */,
+			);
+			path = Restaurant;
+			sourceTree = "<group>";
+		};
+		819575902066C8C0001F86F0 /* Restaurant View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8195758E2066C8B9001F86F0 /* RestaurantDetailViewController.swift */,
+			);
+			path = "Restaurant View Controllers";
 			sourceTree = "<group>";
 		};
 		81AD5D922065DACE007A5963 /* Dates */ = {
@@ -350,6 +379,14 @@
 			path = "Welcome Controllers";
 			sourceTree = "<group>";
 		};
+		81BF94222066E74200103C7E /* Restaurant Views */ = {
+			isa = PBXGroup;
+			children = (
+				819575912066CAAE001F86F0 /* RestaurantTableViewCell.swift */,
+			);
+			path = "Restaurant Views";
+			sourceTree = "<group>";
+		};
 		81E615E82060C1A800347CDA /* Restaurant Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				819575892066B009001F86F0 /* FaveFoodCollectionViewCell.swift */,
+				816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */,
 			);
 			path = "Profile Views";
 			sourceTree = "<group>";
@@ -465,6 +503,7 @@
 			children = (
 				817F9B7A2058B9BA0061E1B6 /* ProfileVC.swift */,
 				81EB93F42065B467006CD0AA /* OtherUserProfileVC.swift */,
+				816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */,
 			);
 			path = "Profile Controllers";
 			sourceTree = "<group>";
@@ -573,6 +612,7 @@
 				81E615FA2060E2AA00347CDA /* girlguy.gif in Resources */,
 				81AD5D912065DAC8007A5963 /* Dates.storyboard in Resources */,
 				817F9B4E205863B10061E1B6 /* Icons.xcassets in Resources */,
+				8195758C2066C023001F86F0 /* Restaurant.storyboard in Resources */,
 				81AD5D972065DBFA007A5963 /* Welcome.storyboard in Resources */,
 				81AD5D9B2065DC2C007A5963 /* Matches.storyboard in Resources */,
 				81AD5D952065DBD6007A5963 /* Discover.storyboard in Resources */,
@@ -633,6 +673,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -648,6 +689,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -690,9 +732,11 @@
 				817F9B612058B7B50061E1B6 /* WelcomeVC.swift in Sources */,
 				817F9B692058B81C0061E1B6 /* DiscoverVC.swift in Sources */,
 				81D26F1720598D1600BEBC47 /* FourSquareAPIKeys.swift in Sources */,
+				816511F2206714F200F27F34 /* UserPicturesCollectionViewCell.swift in Sources */,
 				81EB93F12065B2F0006CD0AA /* AdmirersVC.swift in Sources */,
 				81D26F0620598AF800BEBC47 /* FSPhoto.swift in Sources */,
 				817F9B652058B7F20061E1B6 /* SignupVC.swift in Sources */,
+				8195758F2066C8B9001F86F0 /* RestaurantDetailViewController.swift in Sources */,
 				818BEE7A2066067100D9C62F /* UserProfile.swift in Sources */,
 				81D26F0A20598B7000BEBC47 /* FSSearch.swift in Sources */,
 				81D26F1220598C9700BEBC47 /* FileManager.swift in Sources */,
@@ -702,6 +746,7 @@
 				81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */,
 				815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */,
 				818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */,
+				819575922066CAAE001F86F0 /* RestaurantTableViewCell.swift in Sources */,
 				81EB94082065B984006CD0AA /* FeedVC.swift in Sources */,
 				81E615E52060B9D800347CDA /* UIButtonX.swift in Sources */,
 				818BEE80206609C200D9C62F /* StorageService+Images.swift in Sources */,
@@ -718,6 +763,7 @@
 				817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */,
 				81E615F82060E1C400347CDA /* WelcomeLogoSlide.swift in Sources */,
 				81EB94012065B80A006CD0AA /* DiscoverCollectionViewCell.swift in Sources */,
+				816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */,
 				81BE0A00205DDD5E0099215D /* UITextFieldX.swift in Sources */,
 				817F9B732058B8E40061E1B6 /* VideoVC.swift in Sources */,
 				81EB93F52065B467006CD0AA /* OtherUserProfileVC.swift in Sources */,

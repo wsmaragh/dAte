@@ -85,7 +85,7 @@ extension AdmirersVC: UICollectionViewDataSource {
 
 extension AdmirersVC: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}
