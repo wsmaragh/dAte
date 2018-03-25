@@ -37,7 +37,7 @@ class DiscoverVC: UIViewController {
 				window?.rootViewController = welcomeVC
 			}
 		}
-		loadLovers()
+        loadLovers()
 
 	}
 
@@ -56,7 +56,7 @@ class DiscoverVC: UIViewController {
         let layout = discoverCV.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13)
         layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: discoverCV.frame.size.width * 0.5, height: discoverCV.frame.size.height * 0.65)
+        layout.itemSize = CGSize(width: discoverCV.frame.size.width * 0.5, height: discoverCV.frame.size.height * 0.45)
 	}
 
 
@@ -116,7 +116,7 @@ extension DiscoverVC: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as! DiscoverCollectionViewCell
 		let lover = lovers[indexPath.row]
-		cell.userNameAgeLabel.text = lover.name
+      cell.configCell(lover: lover)
 		if let image = lover.profileImageUrl {
 			cell.userPictureImageView.loadImageUsingCacheWithUrlString(image)
 		} else {
@@ -131,9 +131,11 @@ extension DiscoverVC: UICollectionViewDataSource {
 extension DiscoverVC: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		//perform segue to profile here
-		//        let selectedLover = lovers[indexPath.row]
+		 let selectedLover = lovers[indexPath.row]
 		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
+        profileVC.visitedUser = selectedLover
+
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}
 }

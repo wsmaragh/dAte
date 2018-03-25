@@ -10,4 +10,8 @@ import UIKit
 
 class UserPicturesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userPictureImageView: UIImageView!
+
+    public func configureCell(image: UIImage) {
+        self.userPictureImageView.image = image
+    }
 }

@@ -46,6 +46,7 @@ class OtherUserProfileVC: UIViewController {
         favoriteCuisinesCV.delegate = self
         favoriteCuisinesCV.dataSource = self
         setUpFoodCollectionView()
+        setUpVCInformation()
 
 	}
 
@@ -56,6 +57,9 @@ class OtherUserProfileVC: UIViewController {
 
 	}
 
+    private func setUpVCInformation() {
+        ageLocationLabel.text = "\(String(describing: visitedUser.dateOfBirth)), \(String(describing: visitedUser.city))"
+    }
 
     private var foodLabel = ["Thai", "Japanese", "Tacoes", "Estonian", "Welsh"]
 	@objc private func likeButtonTapped() {

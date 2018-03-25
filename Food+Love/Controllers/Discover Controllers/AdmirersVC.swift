@@ -87,6 +87,8 @@ extension AdmirersVC: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
+        let admirer = admirers[indexPath.row]
+        profileVC.visitedUser = admirer
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}
 }
