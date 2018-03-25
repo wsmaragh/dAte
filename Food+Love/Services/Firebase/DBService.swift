@@ -17,23 +17,25 @@ class DBService {
 		dbRef = Database.database().reference()
 		loversRef = dbRef.child("lovers")
 		messagesRef = dbRef.child("messages")
-		userMessagesRef = dbRef.child("user-messages")
-		//		imagesRef = dbRef.child("images")
+		userMessagesRef = dbRef.child("userMessages")
+		
 	}
+
 
 	// MARK: Properties
 	private var dbRef: DatabaseReference!
 	private var loversRef: DatabaseReference!
 	private var messagesRef: DatabaseReference!
 	private var userMessagesRef: DatabaseReference!
-//	private var imagesRef: DatabaseReference!
+	private var categoriesRef: DatabaseReference!
 
 	// MARK: Helper Methods
 	public func getDBRef()-> DatabaseReference { return dbRef }
 	public func getLoversRef()-> DatabaseReference { return loversRef }
 	public func getMessagesRef()-> DatabaseReference { return messagesRef }
 	public func getUserMessagesRef()-> DatabaseReference { return userMessagesRef }
-	//	public func getImages()-> DatabaseReference { return imagesRef }
+	public func getCategoriesRef()-> DatabaseReference {return categoriesRef}
+
 
 	// Format date
 	public func formatDate(with date: Date) -> String {
@@ -222,12 +224,6 @@ class DBService {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 	}
-
-//	public func updatePhoto(profileImageUrl: String) {
-//		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-//		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
-//	}
-
 
 
 }
