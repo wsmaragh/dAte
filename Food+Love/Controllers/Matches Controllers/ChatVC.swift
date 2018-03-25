@@ -12,23 +12,71 @@ import AVFoundation
 
 class ChatVC: UIViewController {
 
+
 	// MARK: Outlets
+
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var messageTF: UITextField!
 	@IBOutlet weak var photoButton: UIButton!
 	@IBOutlet weak var smileyButton: UIButton!
 	@IBOutlet weak var sendButton: UIButton!
 	@IBOutlet weak var loverImageView: UIImageViewX!
-	@IBOutlet weak var loverName: UILabel!
-	@IBOutlet weak var loverInfo: UILabel!
+	@IBOutlet weak var loverNameLabel: UILabel!
+	@IBOutlet weak var loverInfoLabel: UILabel!
 	@IBOutlet weak var loverFoodPreference: UILabel!
+	let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+
+
+	// MARK: Properties
+	var lover: Lover? {
+		didSet {
+			getMessages()
+//			loverNameLabel.text = lover?.name
+//			loverInfoLabel.text = "No Info yet"
+//			loverFoodPreference.text = "No Food preference yet"
+		}
+	}
+	var messages = [Message]() {
+		didSet {
+
+		}
+	}
+
+
+
+
+
+//	init(lover: Lover) {
+//		super.init(nibName: nil, bundle: nil)
+//		self.lover = lover
+//	}
+//	required init?(coder aDecoder: NSCoder) {
+//		super.init(coder: aDecoder)
+//	}
+
+
+	
+	// MARK: View Lifecycle
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		configureNavBar()
+		tabBarController?.tabBar.isHidden = true
+		messageTF.delegate = self
+	}
+
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(true)
+		NotificationCenter.default.removeObserver(self)
+	}
 
 
 	// MARK: Actions
 	@IBAction func sendButtonPressed(){
 		if messageTF.text == "" {return}
 		else {
-			sendMessageWithProperty(["text":messageTF.text! as AnyObject])
+			sendMessage(["text":messageTF.text! as AnyObject])
 		}
 	}
 
@@ -44,41 +92,6 @@ class ChatVC: UIViewController {
 	}
 
 
-	// MARK: Properties
-	var lover : Lover! {
-		didSet {
-			observeMessages()
-//			loverImageView
-//				loverName.text = lover.name
-				//loverInfo.text = "\(lover.age), \(lover.occupation), \(lover.kids)"
-				//loverFoodPreference.text = "\(lover.foodPreference)"
-				//
-		}
-	}
-	var messages = [Message]()
-
-	init(lover: Lover) {
-		super.init(nibName: nil, bundle: nil)
-		self.lover = lover
-	}
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	
-	// MARK: View Lifecycle
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		collectionView.delegate = self
-		collectionView.dataSource = self
-		messageTF.delegate = self
-		configureNavBar()
-		tabBarController?.tabBar.isHidden = true
-	}
-
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(true)
-		NotificationCenter.default.removeObserver(self)
-	}
 
 	private func configureNavBar() {
 		let videoChatBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camcorder"), style: .plain, target: self, action: #selector(startVideoChat))
@@ -106,38 +119,34 @@ class ChatVC: UIViewController {
 	}
 
 
-	///////////////////////////////////////////
-	// OBSERVE MESSAGES
-	func observeMessages() {
-		guard let uid = Auth.auth().currentUser?.uid,
-			let toId = lover?.id
-			else {return}
-
-		let userMessageRef = Database.database().reference().child("user-messages").child(uid).child(toId)
-
+	///////////////////// MESSAGES  //////////////////////
+	func getMessages() {
+		guard let uid = Auth.auth().currentUser?.uid, let toId = lover?.id else {return}
+		let userMessageRef = DBService.manager.getUserMessagesRef().child(uid).child(toId)
 		userMessageRef.observe(.childAdded, with: { (snapshot) in
 			let messageId = snapshot.key
-			let messagesRef = Database.database().reference().child("messages").child(messageId)
+			let messagesRef = DBService.manager.getMessagesRef().child(messageId)
 			messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
 				guard let dict = snapshot.value as? [String: AnyObject] else {return}
 				let message = Message(dictionary: dict)
 				self.messages.append(message)
 				DispatchQueue.main.async {
-					self.collectionView.reloadData()
-					let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
-					self.collectionView.scrollToItem(at: indexpath as IndexPath, at: .bottom, animated: true)
+					if let collectionView = self.collectionView {
+						collectionView.reloadData()
+						let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
+						collectionView.scrollToItem(at: indexpath as IndexPath, at: .bottom, animated: true)
+					}
 				}
 			}, withCancel: nil)
 		}, withCancel: nil)
 	}
 
 
-	////////////////////// SEND MESSAGES //////////////////
 	// Send Message
-	fileprivate func sendMessageWithProperty(_ property: [String: AnyObject]){
-		let ref = Database.database().reference().child("messages")
-		let childRef = ref.childByAutoId()
-		let toId = lover!.id
+	fileprivate func sendMessage(_ property: [String: AnyObject]){
+		let messagesRef = DBService.manager.getMessagesRef()
+		let childRef = messagesRef.childByAutoId()
+		guard let toId = lover?.id else {return}
 		let fromId = Auth.auth().currentUser!.uid
 		let timeStamp = NSNumber.init(value: Date().timeIntervalSince1970)
 		var values: [String : AnyObject] = ["toId":toId as AnyObject, "fromId":fromId as AnyObject, "timeStamp":timeStamp]
@@ -145,18 +154,18 @@ class ChatVC: UIViewController {
 		childRef.updateChildValues(values)
 		childRef.updateChildValues(values) { (error, ref) in
 			if error != nil { print(error!); return}
-			self.messageTF.text = nil
-			let userMessageRef = Database.database().reference().child("user-messages").child(fromId).child(toId!)
+			self.messageTF.text = "" //nil
+			let userMessageRef = DBService.manager.getUserMessagesRef().child(fromId).child(toId)
 			let messageId = childRef.key
 			userMessageRef.updateChildValues([messageId: 1])
-			let recipentUserMessageRef = Database.database().reference().child("user-messages").child(toId!).child(fromId)
+			let recipentUserMessageRef = DBService.manager.getUserMessagesRef().child(toId).child(fromId)
 			recipentUserMessageRef.updateChildValues([messageId: 1])
 		}
 	}
 
-	// Send Message with Image
-	private func sendMessageWithImageUrl(_ imageUrl: String , _ image: UIImage){
-		sendMessageWithProperty(["imageUrl":imageUrl,"imageWidth":image.size.width , "imageHeight":image.size.height] as [String: AnyObject])
+	// add Image to Message
+	private func addImageToMessage(_ imageUrl: String , _ image: UIImage){
+		sendMessage(["imageUrl":imageUrl,"imageWidth":image.size.width , "imageHeight":image.size.height] as [String: AnyObject])
 	}
 
 	// Select Video
@@ -169,7 +178,7 @@ class ChatVC: UIViewController {
 				if let thumbnailImage = self.thumnailImageForPrivateVideoUrl(videoUrl: videoURL){
 					self.uploadToFirebaseStorage(thumbnailImage, completion: { (imageUrl) in
 						let properties: [String: AnyObject] = ["imageUrl":imageUrl,"imageWidth":thumbnailImage.size.width , "imageHeight":thumbnailImage.size.height,"videoUrl": videoUrl] as [String: AnyObject]
-						self.sendMessageWithProperty(properties)
+						self.sendMessage(properties)
 					})
 				}
 			}
@@ -202,7 +211,7 @@ class ChatVC: UIViewController {
 		}
 		if let selectedImage = selectedImageFromPicker {
 			uploadToFirebaseStorage(selectedImage, completion: { (imageUrl) in
-				self.sendMessageWithImageUrl(imageUrl, selectedImage)
+				self.addImageToMessage(imageUrl, selectedImage)
 			})
 		}
 	}
@@ -239,7 +248,7 @@ extension ChatVC: UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		if messageTF.text == "" {return false}
 		else {
-			sendMessageWithProperty(["text":messageTF.text! as AnyObject])
+			sendMessage(["text":messageTF.text! as AnyObject])
 		}
 		textField.resignFirstResponder()
 		return true
@@ -271,16 +280,16 @@ extension ChatVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
 
 ///////////////////////// Collection View /////////////////////////
 // MARK: CollectionView Datasource
-extension ChatVC: UICollectionViewDataSource {
+extension ChatVC: UICollectionViewDataSource  {
 	// # of items in section
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return messages.count
+		return messages.isEmpty ? 0 : messages.count
 	}
 
 	// Cell for item at
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let message = self.messages[indexPath.item]
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! ChatCell
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatCell", for: indexPath) as! ChatCell
 		cell.chatVC = self
 		cell.configureCell(message: message)
 		return cell
@@ -293,11 +302,15 @@ extension ChatVC: UICollectionViewDelegate {
 
 }
 
-// MARK: CollectionView Delegate Flow Layout
+
+//MARK: CollectionView - Delegate Flow Layout
 extension ChatVC: UICollectionViewDelegateFlowLayout {
-	func collectionView(_ collectionView: UICollectionView,
-											layout collectionViewLayout: UICollectionViewLayout,
-											sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//		let numCells: CGFloat = 3.5
+//		let numSpaces: CGFloat = numCells + 1
+//		let screenWidth = UIScreen.main.bounds.width
+//		let screenHeight = UIScreen.main.bounds.height
 		var height: CGFloat = 80
 		let message = messages[indexPath.row]
 		if let text = message.text {
@@ -305,9 +318,33 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 		}else if let imageWidth = message.imageWidth?.floatValue , let imageHeight = message.imageHeight?.floatValue {
 			height = CGFloat(imageHeight / imageWidth * 200)
 		}
-		return CGSize.init(width: view.frame.width, height: height)
+		return CGSize(width: view.frame.width, height: height)
+	}
+
+//	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//		var height: CGFloat = 80
+//		let message = messages[indexPath.row]
+//		if let text = message.text {
+//			height = estimatedHeightBasedOnText(text: text).height + 20
+//		}else if let imageWidth = message.imageWidth?.floatValue , let imageHeight = message.imageHeight?.floatValue {
+//			height = CGFloat(imageHeight / imageWidth * 200)
+//		}
+//		return CGSize.init(width: view.frame.width, height: height)
+//	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+		return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0, right: 5.0)
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return 2.0
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		return 5.0
 	}
 }
+
 
 
 //////////////////////////////

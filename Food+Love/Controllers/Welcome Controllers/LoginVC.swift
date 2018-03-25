@@ -7,6 +7,9 @@
 import UIKit
 import AVKit
 import FirebaseAuth
+import GoogleSignIn
+import FBSDKLoginKit
+import LocalAuthentication
 
 
 class LoginVC: UIViewController {
@@ -15,29 +18,25 @@ class LoginVC: UIViewController {
 	@IBOutlet weak var emailTF: UITextField!
 	@IBOutlet weak var passwordTF: UITextField!
 	@IBOutlet weak var loginButton: UIButton!
+	@IBOutlet weak var googleButton: UIButton!
+	@IBOutlet weak var facebookButton: FBSDKLoginButton!
+
+	// MARK: Properties
 
 
 	//Facebook button
 	//Google button
 	//Twitter Button
 
+
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.emailTF.underlined(color: .white)
-		self.passwordTF.underlined(color: .white)
-		self.emailTF.leftViewMode = .always
-		self.passwordTF.leftViewMode = .always
 		makeNavigationBarTransparent()
-		setPlaceholderTextColor(color: UIColor.lightText)
-		emailTF.text = "winstonmaragh@ac.c4q.nyc"
-		passwordTF.text = "123456"
-
-		//Shade
-		let shade = UIView(frame: self.view.frame)
-		shade.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
-		view.addSubview(shade)
-		view.sendSubview(toBack: shade)
+		setupTextFields()
+		setupShade()
+		setupGoogleButton()
+		setupFacebookButton()
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
@@ -45,7 +44,9 @@ class LoginVC: UIViewController {
 		self.view.alpha = 0.0
 	}
 
-	func makeNavigationBarTransparent(){
+
+	// MARK: Helper Methods
+	private func makeNavigationBarTransparent(){
 		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 		self.navigationController?.navigationBar.shadowImage = UIImage()
 		self.navigationController?.navigationBar.isTranslucent = true
@@ -56,28 +57,52 @@ class LoginVC: UIViewController {
 		]
 	}
 
-	func setPlaceholderTextColor(color: UIColor){
-		if let emailPlaceholder = emailTF.placeholder {
-			emailTF.attributedPlaceholder = NSAttributedString(string: emailPlaceholder, attributes: [NSAttributedStringKey.foregroundColor: color])
-		}
-		if let passwordPlaceholder = passwordTF.placeholder {
-			passwordTF.attributedPlaceholder = NSAttributedString(string: passwordPlaceholder, attributes: [NSAttributedStringKey.foregroundColor: color])
-		}
+	private func setupTextFields(){
+		self.emailTF.underlined(color: .white)
+		self.passwordTF.underlined(color: .white)
+		self.emailTF.leftViewMode = .always
+		self.passwordTF.leftViewMode = .always
+		emailTF.text = "winstonmaragh@ac.c4q.nyc"
+		passwordTF.text = "123456"
+		//Text Color
 		emailTF.textColor = .white
 		passwordTF.textColor = .white
+		//Placeholder Color
+		if let emailPlaceholder = emailTF.placeholder {
+			emailTF.attributedPlaceholder = NSAttributedString(string: emailPlaceholder, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightText])
+		}
+		if let passwordPlaceholder = passwordTF.placeholder {
+			passwordTF.attributedPlaceholder = NSAttributedString(string: passwordPlaceholder, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightText])
+		}
 	}
 
+	private func setupShade(){
+		let shade = UIView(frame: self.view.frame)
+		shade.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+		view.addSubview(shade)
+		view.sendSubview(toBack: shade)
+	}
 
+	private func setupGoogleButton(){
+		GIDSignIn.sharedInstance().uiDelegate = self
+		GIDSignIn.sharedInstance().delegate = self
+	}
+
+	private func setupFacebookButton(){
+		facebookButton.delegate = self
+		facebookButton.readPermissions = ["email", "public_profile"]
+	}
+
+	
 	// MARK: Actions for buttons
 	@IBAction func loginInUser(){
-		guard let email = emailTF.text, let password = passwordTF.text else {	return }
-		AuthUserService.manager.signIn(email: email, password: password)
-		if AuthUserService.getCurrentUser() != nil {
-			let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
-			if let window = UIApplication.shared.delegate?.window {
-				window?.rootViewController = mainVC
-			}
+		guard let email = emailTF.text, let password = passwordTF.text else {return}
+		if email == "" {showAlert(title: "Please enter an email", message: ""); return}
+		if password == "" {showAlert(title: "Please enter a valid password", message: ""); return}
+		if password.contains(" "), email.contains(" ") {
+			showAlert(title: "No spaces allowed!", message: nil); return
 		}
+		AuthUserService.manager.signIn(email: email, password: password)
 	}
 
 
@@ -87,23 +112,29 @@ class LoginVC: UIViewController {
 	}
 
 	@IBAction func GoogleLogin(){
-
-
+		GIDSignIn.sharedInstance().signIn()
 	}
 
+	@IBAction func forgotPassword(){
+		guard let email = emailTF.text else {return}
+		Auth.auth().sendPasswordReset(withEmail: email) {(error) in
+			if let error = error {print("Error sending password reset: \(error)")}
+			else {
+				self.showAlert(title: "Password Reset", message: "Password email sent, check spam inbox")
+			}
+		}
+	}
 
-	// MARK:
+	private func transitionToMain(){
+		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		if let window = UIApplication.shared.delegate?.window {
+			window?.rootViewController = mainVC
+		}
+	}
+
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.emailTF.resignFirstResponder()
 		self.passwordTF.resignFirstResponder()
-	}
-
-	@objc private func forgotPassword(){
-		//TODO: Check if email is a verified user
-		Auth.auth().sendPasswordReset(withEmail: self.emailTF.text!){(error) in
-			print("sent")
-			self.showAlert(title: "Password Reset", message: "Password email sent, check spam inbox")
-		}
 	}
 
 	private func showAlert(title: String, message: String?) {
@@ -113,7 +144,12 @@ class LoginVC: UIViewController {
 		present(alertController, animated: true, completion: nil)
 	}
 
+	@objc public func dismissView() {
+		self.dismiss(animated: true, completion: nil)
+	}
+
 }
+
 
 
 // MARK: TextField Delegate
@@ -123,3 +159,57 @@ extension LoginVC: UITextFieldDelegate {
 		return true
 	}
 }
+
+
+// MARK: Facebook Login
+extension LoginVC: FBSDKLoginButtonDelegate {
+	func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+		print("logged out of Facebook")
+	}
+	func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!){
+		if let error = error { print("Error signing into Facebook:", error) }
+		print("Successfully logged into Facebook")
+
+		let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+		Auth.auth().signIn(with: credential) { (user, error) in
+			if let error = error {
+				print("Error signing into Firebase with Facebook:", error); return }
+				print("User signed into Firebase with Facebook")
+			//transition to main
+			let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+			if let window = UIApplication.shared.delegate?.window {
+				window?.rootViewController = mainVC
+			}
+		}
+	}
+}
+
+
+// MARK: Google Login
+extension LoginVC: GIDSignInUIDelegate, GIDSignInDelegate {
+	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+		if let error = error {print("Error signing in with Google. Error: \(error)"); return}
+		print("Successfully logged into Google")
+
+		guard let authentication = user.authentication else { return }
+		let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+																									 accessToken: authentication.accessToken)
+
+		Auth.auth().signIn(with: credential, completion: {(user, error) in
+			if let error = error {
+				print("Failed to create a Firebase user with Google Account: ", error); return
+			}
+			if let user = user {
+				print("Successfully signed in with Google. User: \(user), with ID: \(user.uid)")
+				//transition to main
+				let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+				if let window = UIApplication.shared.delegate?.window {
+					window?.rootViewController = mainVC
+				}
+			} else {
+				print("Error signing into Firebase with Google.")
+			}
+		})
+	}
+}
+

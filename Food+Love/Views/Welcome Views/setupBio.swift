@@ -1,23 +1,63 @@
-
-//  WelcomeSlide.swift
+//
+//  setupBio.swift
 //  Food+Love
-//  Created by Winston Maragh on 3/17/18.
+//
+//  Created by C4Q on 3/25/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
+//
 
+import Foundation
 import UIKit
 
-
-class WelcomeSlide: UIView {
+class SetupBio: UIView {
 
 	lazy var title: UILabel = {
 		let label = UILabel()
-		label.text = "Title"
+		label.text = "Bio"
 		label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
 		label.textColor = UIColor.white
 		label.textAlignment = .center
 		label.numberOfLines = 0
 		return label
 	}()
+
+	lazy var bioTF: UITextField = {
+		let tf = UITextField()
+
+		return tf
+	}()
+
+	lazy var genderSC: UISegmentedControl = {
+		let sc = UISegmentedControl()
+
+		return sc
+	}()
+
+
+	/*
+	foodPref:			[Chinese, Italian, French]
+	favRestaurant: [Thai Tree, Silvia's, Balchi]
+	drink: 				[Yes][No]
+
+	borough: 			[Manhattan][Brooklyn][Queens][Bronx][Staten Island]
+	zipcode: 			String
+
+	gender: 			[Male][Female]
+	preference:  	[Male][Female]
+
+
+	dob:  				[Month] [day] [Year]
+	smoke: 				[Yes][No]
+	weed: 				[Yes][No]
+	drugs: 				[Yes][No]
+	kids: 				[Yes][No]
+	bio:  				blah blah blah blah
+
+	profileVideoURL : String
+
+	*/
+
+
 
 	lazy var details: UITextView = {
 		let tv = UITextView()
@@ -63,7 +103,7 @@ class WelcomeSlide: UIView {
 			picture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.30),
 			picture.centerXAnchor.constraint(equalTo: centerXAnchor),
 			picture.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -60)
-		])
+			])
 		// Title
 		addSubview(title)
 		title.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +111,7 @@ class WelcomeSlide: UIView {
 			title.bottomAnchor.constraint(equalTo: picture.topAnchor, constant: -20),
 			title.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
 			title.centerXAnchor.constraint(equalTo: centerXAnchor)
-		])
+			])
 		//Details Label
 		addSubview(details)
 		details.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +120,6 @@ class WelcomeSlide: UIView {
 			details.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
 			details.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
 			details.centerXAnchor.constraint(equalTo: centerXAnchor)
-		])
+			])
 	}
 }
-

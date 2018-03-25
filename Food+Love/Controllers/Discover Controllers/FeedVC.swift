@@ -29,7 +29,7 @@ class FeedVC: UIViewController {
 			pagingViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
 			pagingViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 			pagingViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-			])
+		])
 
 		pagingViewController.menuBackgroundColor = UIColor.black
 		pagingViewController.backgroundColor = UIColor.black

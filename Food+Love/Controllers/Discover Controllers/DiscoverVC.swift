@@ -12,6 +12,7 @@ import VegaScrollFlowLayout
 
 class DiscoverVC: UIViewController {
 
+
 	// Outlets
 	@IBOutlet weak var discoverCV: UICollectionView!
 	@IBOutlet var foodTagCV: UICollectionView!
@@ -20,7 +21,7 @@ class DiscoverVC: UIViewController {
 	let cellSpacing: CGFloat = 0.6
 	//Dummy Data
 	var lover1 = Lover(id: "0001", name: "Susan", email: "susan@gmail.com", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/foodnlove-84523.appspot.com/o/images%2FSAh0Op05UXWT9nUybEfDw3bzmlc2?alt=media&token=64b165c5-b299-4194-967a-93a498a26f86", profileVideoUrl: nil, dateOfBirth: nil, zipcode: nil, city: nil, bio: nil, gender: "Male", genderPreference: "Female", smoke: "Yes", drink: "Yes", drugs: "No", favRestaurants: nil, likedUsers: nil, usersThatLikeYou: nil)
-	var lovers = [Lover]() {
+	var lovers = [Lover](){
 		didSet{
 			discoverCV.reloadData()
 		}
@@ -53,8 +54,6 @@ class DiscoverVC: UIViewController {
 	}
 
 
-
-
 	private func setUpDiscoverCV() {
 		discoverCV.dataSource = self
 		discoverCV.delegate = self
@@ -81,7 +80,6 @@ class DiscoverVC: UIViewController {
 	}
 
 	private func setUpBackground() {
-
 		let backgroundImage = UIImageView()
 		backgroundImage.image = #imageLiteral(resourceName: "bg_desert")
 		backgroundImage.contentMode = .scaleToFill
@@ -94,11 +92,7 @@ class DiscoverVC: UIViewController {
 		backgroundImage.addSubview(blurView)
 	}
 
-
-
 	private func loadLovers() {
-		//Load data here
-		lovers = [lover1]
 		getAllLoversExceptCurrent()
 	}
 
@@ -117,24 +111,18 @@ class DiscoverVC: UIViewController {
 			}
 		}, withCancel: nil)
 	}
-
-
 }
 
-//MARK - UICollectionView Extension
+
+//MARK - UICollectionView Datasource
 extension DiscoverVC: UICollectionViewDataSource {
-
-
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-		if collectionView == foodTagCV {
-			return foodTags.isEmpty ? 1 : foodTags.count
-		}
-		return lovers.isEmpty ? 1 : lovers.count
+		if collectionView == foodTagCV { return foodTags.isEmpty ? 1 : foodTags.count }
+		return lovers.isEmpty ? 0 : lovers.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -146,6 +134,7 @@ extension DiscoverVC: UICollectionViewDataSource {
 		}
 
 		let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as! DiscoverCollectionViewCell
+//		if lovers.isEmpty {return UICollectionViewCell()}
 		let lover = lovers[indexPath.row]
 		cell.userNameAgeLabel.text = lover.name
 		if let image = lover.profileImageUrl {
@@ -155,25 +144,26 @@ extension DiscoverVC: UICollectionViewDataSource {
 		}
 		return cell
 	}
+}
 
+
+//MARK - UICollectionView Delegate
+extension DiscoverVC: UICollectionViewDelegate {
 
 }
 
+
+//MARK - UICollectionView Flow Layout
 extension DiscoverVC: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
 		if collectionView == foodTagCV {
 			//perform filter of discover CV here
 		}
-		//perform segue to profile here
-		//        let selectedLover = lovers[indexPath.row]
-		let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+		let selectedLover = lovers[indexPath.row]
+		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
+		profileVC.lover = selectedLover
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}
 }
-
-extension DiscoverVC: UICollectionViewDelegate {
-
-}
-

@@ -47,7 +47,7 @@ class AuthUserService: NSObject {
 						print("changeRequest was successful for username: \(name)")
 						DBService.manager.addLover(name: name, email: email, profileImage: profileImage)
 					}
-					self.delegate?.didCreateUser?(self, user: user)
+//					self.delegate?.didCreateUser?(self, user: user)
 				})
 			}
 		}
@@ -81,17 +81,25 @@ class AuthUserService: NSObject {
 	public func signOut() {
 		do{
 			try Auth.auth().signOut()
-			delegate?.didSignOut?(self) //inform delegate of successful sign out
+			delegate?.didSignOut?(self)
 		} catch {
-			delegate?.didFailSigningOut!(self, error: error) //inform delegate of error
+			delegate?.didFailSigningOut!(self, error: error)
 		}
 	}
 
 	//Sign In
 	public func signIn(email: String, password: String) {
 		Auth.auth().signIn(withEmail: email, password: password) {(user, error) in
-			if let error = error { self.delegate?.didFailSignIn?(self, error: error) } //inform delegate of signin error
-			else if let user = user { self.delegate?.didSignIn?(self, user: user) } //inform delegate of signin success
+			if let error = error {
+				print(error)
+
+			}
+			else if let user = user {
+				let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+				if let window = UIApplication.shared.delegate?.window {
+					window?.rootViewController = mainVC
+				}
+			}
 		}
 	}
 

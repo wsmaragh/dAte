@@ -47,8 +47,8 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	///Slides
 	func createSlides() -> [UIView] {
 		let slide1 = WelcomeLogoSlide()
-		let slide2 = WelcomeSlide(title: "Bond over food", details: "St...", picture: #imageLiteral(resourceName: "bg_coffee"))
-		let slide3 = WelcomeSlide(title: "Companionship", details: "Why eat alone, when you can also meet your soulmate.", picture: #imageLiteral(resourceName: "bg_plandate"))
+		let slide2 = WelcomeSlide(title: "Bond over food", details: "Start with a simple meal and build from there. Food has played an integral part in shaping culture and communication", picture: #imageLiteral(resourceName: "bg_coffee"))
+		let slide3 = WelcomeSlide(title: "Companionship", details: "Why eat alone, when you can also meet your soulmate", picture: #imageLiteral(resourceName: "bg_plandate"))
 		let slide4 = WelcomeSlide(title: "Plan date in app", details: "Spend quality time exploring each other...", picture: #imageLiteral(resourceName: "bg_love1"))
 		return [slide1, slide2, slide3, slide4]
 	}

@@ -124,6 +124,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" name="Bg"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="eaX-q4-TGO" secondAttribute="trailing" constant="5" id="4VL-1R-djd"/>
                                                 <constraint firstItem="Knx-iF-ivx" firstAttribute="leading" secondItem="0jJ-v0-LQD" secondAttribute="trailing" constant="5" id="7pY-fq-dBD"/>
@@ -183,7 +184,7 @@
         <!--Chat-->
         <scene sceneID="fRM-GL-Va5">
             <objects>
-                <viewController storyboardIdentifier="ConversationVC" title="Chat" id="kaQ-eT-jEc" customClass="ChatVC" customModule="Food_Love" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatVC" title="Chat" id="kaQ-eT-jEc" customClass="ChatVC" customModule="Food_Love" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8j1-bo-mfv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -296,9 +297,8 @@
                                     <constraint firstItem="Oha-an-j3s" firstAttribute="top" secondItem="BRY-8J-u2y" secondAttribute="top" constant="5" id="mfu-G2-QCM"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G95-BA-uE9">
-                                <rect key="frame" x="0.0" y="93" width="375" height="415.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" directionalLockEnabled="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G95-BA-uE9">
+                                <rect key="frame" x="0.0" y="120" width="375" height="493.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yX0-1V-r3K">
                                     <size key="itemSize" width="369" height="126"/>
@@ -368,6 +368,7 @@
                                                 </view>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" name="Bg"/>
                                         <constraints>
                                             <constraint firstItem="oSl-As-4sE" firstAttribute="leading" secondItem="UI0-7O-Ctm" secondAttribute="leadingMargin" constant="5" id="Gu2-Qh-PJ9"/>
                                             <constraint firstItem="pPQ-Bn-nwq" firstAttribute="top" secondItem="UI0-7O-Ctm" secondAttribute="topMargin" constant="5" id="Mdi-S8-XpG"/>
@@ -376,6 +377,7 @@
                                             <constraint firstAttribute="bottomMargin" secondItem="pPQ-Bn-nwq" secondAttribute="bottom" constant="5" id="oLA-ya-7eZ"/>
                                             <constraint firstItem="oSl-As-4sE" firstAttribute="centerY" secondItem="UI0-7O-Ctm" secondAttribute="centerY" id="tdt-PT-NI2"/>
                                         </constraints>
+                                        <size key="customSize" width="369" height="126"/>
                                         <connections>
                                             <outlet property="activityIndicatorView" destination="fJs-fo-flQ" id="QoU-uo-i6f"/>
                                             <outlet property="bubbleView" destination="pPQ-Bn-nwq" id="AKg-2V-OmM"/>
@@ -392,21 +394,27 @@
                         <constraints>
                             <constraint firstItem="aZ2-T6-F0I" firstAttribute="height" secondItem="8j1-bo-mfv" secondAttribute="height" multiplier="0.08" id="0h9-Zz-bNF"/>
                             <constraint firstItem="aZ2-T6-F0I" firstAttribute="trailing" secondItem="jaG-QU-53a" secondAttribute="trailing" id="2gr-xZ-IW2"/>
+                            <constraint firstItem="G95-BA-uE9" firstAttribute="leading" secondItem="jaG-QU-53a" secondAttribute="leading" id="9It-zf-5y4"/>
                             <constraint firstItem="BRY-8J-u2y" firstAttribute="trailing" secondItem="jaG-QU-53a" secondAttribute="trailing" id="CuX-vm-DRq"/>
                             <constraint firstItem="aZ2-T6-F0I" firstAttribute="leading" secondItem="jaG-QU-53a" secondAttribute="leading" id="DgW-E5-W4c"/>
                             <constraint firstItem="BRY-8J-u2y" firstAttribute="height" secondItem="8j1-bo-mfv" secondAttribute="height" multiplier="0.15" id="Hlk-BO-FPh"/>
                             <constraint firstItem="BRY-8J-u2y" firstAttribute="leading" secondItem="jaG-QU-53a" secondAttribute="leading" id="WMI-il-4Ng"/>
+                            <constraint firstItem="G95-BA-uE9" firstAttribute="top" secondItem="BRY-8J-u2y" secondAttribute="bottom" id="bXL-Ze-RRn"/>
                             <constraint firstItem="BRY-8J-u2y" firstAttribute="top" secondItem="jaG-QU-53a" secondAttribute="top" id="iLa-VY-lFY"/>
+                            <constraint firstItem="aZ2-T6-F0I" firstAttribute="top" secondItem="G95-BA-uE9" secondAttribute="bottom" id="teh-8W-ppm"/>
+                            <constraint firstItem="G95-BA-uE9" firstAttribute="trailing" secondItem="jaG-QU-53a" secondAttribute="trailing" id="wsq-cR-BdE"/>
                             <constraint firstItem="aZ2-T6-F0I" firstAttribute="bottom" secondItem="jaG-QU-53a" secondAttribute="bottom" id="xIK-kw-JaS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jaG-QU-53a"/>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="G95-BA-uE9" id="3mz-27-ee0"/>
-                        <outlet property="loverFoodPreference" destination="AEb-qa-LTH" id="MKu-e6-qnK"/>
-                        <outlet property="loverImageView" destination="nT1-qR-CGk" id="TTQ-o2-nSP"/>
+                        <outlet property="collectionView" destination="G95-BA-uE9" id="QpI-tx-3Uv"/>
+                        <outlet property="loverFoodPreference" destination="AEb-qa-LTH" id="xtM-PF-XeZ"/>
+                        <outlet property="loverImageView" destination="nT1-qR-CGk" id="VKX-1L-b9k"/>
                         <outlet property="loverInfo" destination="2Tx-Vp-t52" id="lzY-Ro-JfQ"/>
+                        <outlet property="loverInfoLabel" destination="2Tx-Vp-t52" id="EEk-YR-LJS"/>
                         <outlet property="loverName" destination="Oha-an-j3s" id="11b-r6-rrd"/>
+                        <outlet property="loverNameLabel" destination="Oha-an-j3s" id="SAJ-ke-BKe"/>
                         <outlet property="messageTF" destination="uev-WH-36X" id="QUj-We-PCD"/>
                         <outlet property="photoButton" destination="Gzm-YR-z2d" id="k04-tI-3np"/>
                         <outlet property="sendButton" destination="mmI-Pb-5PJ" id="Rqs-it-vjA"/>
@@ -420,7 +428,7 @@
         <!--Video Chat-->
         <scene sceneID="sQh-vc-2mw">
             <objects>
-                <viewController storyboardIdentifier="VideoVC" title="Video Chat" id="VJd-ur-eLP" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoVC" title="Video Chat" id="VJd-ur-eLP" customClass="VideoVC" customModule="Food_Love" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gfY-qP-VOC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -459,6 +467,12 @@
         <image name="takephotos" width="25" height="25"/>
         <image name="user2" width="128" height="128"/>
         <image name="user6" width="128" height="128"/>
+        <namedColor name="Bg">
+            <color red="0.85900002720000002" green="0.851000011" blue="0.70999997849999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Bg">
+            <color red="0.85900002720000002" green="0.851000011" blue="0.70999997849999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="appColorBlack">
             <color red="0.23499999939999999" green="0.23499999939999999" blue="0.23499999939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
