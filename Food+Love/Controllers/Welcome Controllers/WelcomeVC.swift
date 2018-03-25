@@ -31,7 +31,7 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 		welcomeSlides = createSlides()
 		addSlidesToScrollView(slides: welcomeSlides)
 		setupPageControl()
-		Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
+		Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
 	}
 
 
@@ -88,6 +88,7 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let currentPage = scrollView.contentOffset.x / scrollView.frame.size.width
 		welcomePageControl.currentPage = Int(currentPage)
+		slideIndex = welcomePageControl.currentPage
 	}
 
 	//////////////////////////////////
