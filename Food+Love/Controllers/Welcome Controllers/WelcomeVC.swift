@@ -16,19 +16,34 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	@IBOutlet weak var loginButton: UIButton!
 	@IBOutlet weak var signupButton: UIButton!
 
+
 	// MARK: Properties
 	private var welcomeSlides = [UIView]()
+	private var slideIndex = 0
 
 
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		AuthUserService.manager.signOut()
 		view.backgroundColor = .white
 		welcomeSlideScrollView.delegate = self
 		welcomeSlides = createSlides()
 		addSlidesToScrollView(slides: welcomeSlides)
 		setupPageControl()
-		AuthUserService.manager.signOut()
+		Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
+	}
+
+
+	@objc func changeSlide() {
+		slideIndex += 1
+		if slideIndex < self.welcomeSlides.count {
+			welcomeSlideScrollView.scrollRectToVisible(welcomeSlides[slideIndex].frame, animated: true)
+		}
+		else {
+			slideIndex = 0
+			welcomeSlideScrollView.scrollRectToVisible(welcomeSlides[slideIndex].frame, animated: true)
+		}
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +83,7 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 			welcomeSlideScrollView.addSubview(slides[i])
 		}
 	}
+
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let currentPage = scrollView.contentOffset.x / scrollView.frame.size.width
