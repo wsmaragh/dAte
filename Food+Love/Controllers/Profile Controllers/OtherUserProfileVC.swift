@@ -100,7 +100,7 @@ extension OtherUserProfileVC: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = favoriteFoodsCV.dequeueReusableCell(withReuseIdentifier: "FaveFoodsCell", for: indexPath) as! FaveFoodCollectionViewCell
         let favFood = foodLabel[indexPath.row]
-        //        cell.faveFoodLab.text = favFood
+//        cell.faveFoodLab.text = favFood
         return cell
     }
     

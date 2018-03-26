@@ -249,28 +249,28 @@
                                         <rect key="frame" x="0.0" y="581.5" width="375" height="29.5"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AP-vs-MqF">
-                                        <rect key="frame" x="0.0" y="631" width="375" height="44.5"/>
+                                        <rect key="frame" x="0.0" y="631" width="375" height="59"/>
                                         <fontDescription key="fontDescription" name="GujaratiSangamMN-Bold" family="Gujarati Sangam MN" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ZJe-ex-WBI">
-                                        <rect key="frame" x="0.0" y="725.5" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="740" width="375" height="30"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsd-xZ-lal">
-                                                <rect key="frame" x="0.0" y="0.0" width="125" height="30"/>
-                                                <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsd-xZ-lal">
+                                                <rect key="frame" x="0.0" y="0.0" width="134" height="30"/>
+                                                <fontDescription key="fontDescription" name="GujaratiSangamMN-Bold" family="Gujarati Sangam MN" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSm-Ue-KcK">
-                                                <rect key="frame" x="125" y="0.0" width="125.5" height="30"/>
-                                                <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="20"/>
+                                                <rect key="frame" x="134" y="0.0" width="134" height="30"/>
+                                                <fontDescription key="fontDescription" name="GujaratiSangamMN-Bold" family="Gujarati Sangam MN" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t82-5d-Osf">
-                                                <rect key="frame" x="250.5" y="0.0" width="124.5" height="30"/>
+                                                <rect key="frame" x="268" y="0.0" width="107" height="30"/>
                                                 <color key="backgroundColor" name="appColorRed"/>
                                                 <state key="normal" title="Like">
                                                     <color key="titleColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -278,15 +278,14 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="t82-5d-Osf" firstAttribute="trailing" secondItem="ZJe-ex-WBI" secondAttribute="trailing" id="Oj4-5j-Sf3"/>
                                             <constraint firstItem="t82-5d-Osf" firstAttribute="height" secondItem="Xsd-xZ-lal" secondAttribute="height" id="cpQ-FA-GZG"/>
-                                            <constraint firstItem="t82-5d-Osf" firstAttribute="width" secondItem="GSm-Ue-KcK" secondAttribute="width" id="eA8-k4-pKj"/>
+                                            <constraint firstItem="t82-5d-Osf" firstAttribute="width" secondItem="GSm-Ue-KcK" secondAttribute="width" multiplier="0.8" id="eA8-k4-pKj"/>
                                             <constraint firstItem="GSm-Ue-KcK" firstAttribute="width" secondItem="Xsd-xZ-lal" secondAttribute="width" id="gJT-1o-LKw"/>
                                             <constraint firstItem="GSm-Ue-KcK" firstAttribute="height" secondItem="Xsd-xZ-lal" secondAttribute="height" id="pgr-pL-x1W"/>
                                         </constraints>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gXs-fT-pI1" userLabel="Favorite Restaurant">
-                                        <rect key="frame" x="0.0" y="880" width="375" height="148"/>
+                                        <rect key="frame" x="0.0" y="894.5" width="375" height="148"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FavoriteRestaurantCell" id="knD-iW-LFO" customClass="FavoriteRestaurantTableViewCell" customModule="Food_Love" customModuleProvider="target">
@@ -299,14 +298,14 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Years Old" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWE-SD-4ak">
-                                        <rect key="frame" x="5" y="760.5" width="1875" height="44.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Years Old" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWE-SD-4ak">
+                                        <rect key="frame" x="5" y="775" width="112.5" height="44.5"/>
                                         <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="15"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-0l-He8" userLabel="Favorite Foods">
-                                        <rect key="frame" x="0.0" y="1078" width="375" height="148"/>
+                                        <rect key="frame" x="0.0" y="1092.5" width="375" height="148"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7be-0e-R5K">
                                             <size key="itemSize" width="108" height="69"/>
@@ -326,7 +325,7 @@
                                         </cells>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sT4-OK-hYd" userLabel="I am">
-                                        <rect key="frame" x="0.0" y="1276" width="375" height="148"/>
+                                        <rect key="frame" x="0.0" y="1290.5" width="375" height="148"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserBioCell" id="1Gq-XW-G30" customClass="AnswerTableViewCell" customModule="Food_Love" customModuleProvider="target">
@@ -340,7 +339,7 @@
                                         </prototypes>
                                     </tableView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HDO-1i-Mgp" userLabel="Searching For">
-                                        <rect key="frame" x="0.0" y="1474" width="375" height="148"/>
+                                        <rect key="frame" x="0.0" y="1488.5" width="375" height="148"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchForCell" id="UWv-1M-N2Y" customClass="AnswerTableViewCell" customModule="Food_Love" customModuleProvider="target">
@@ -381,10 +380,10 @@
                                     <constraint firstItem="HKa-GV-5NF" firstAttribute="leading" secondItem="C2q-OK-hsD" secondAttribute="leading" id="WVI-8D-geR"/>
                                     <constraint firstItem="6AP-vs-MqF" firstAttribute="trailing" secondItem="C2q-OK-hsD" secondAttribute="trailing" id="WjZ-Ff-Xur"/>
                                     <constraint firstItem="HKa-GV-5NF" firstAttribute="trailing" secondItem="C2q-OK-hsD" secondAttribute="trailing" id="Y0C-jb-4UU"/>
-                                    <constraint firstItem="6AP-vs-MqF" firstAttribute="height" secondItem="C2q-OK-hsD" secondAttribute="height" multiplier="0.03" id="dOm-D6-V3N"/>
+                                    <constraint firstItem="6AP-vs-MqF" firstAttribute="height" secondItem="C2q-OK-hsD" secondAttribute="height" multiplier="0.04" id="dOm-D6-V3N"/>
                                     <constraint firstItem="HKa-GV-5NF" firstAttribute="width" secondItem="C2q-OK-hsD" secondAttribute="width" id="f9a-dD-Vng"/>
                                     <constraint firstItem="nY5-ma-tFa" firstAttribute="width" secondItem="C2q-OK-hsD" secondAttribute="width" id="hmw-k1-nEw"/>
-                                    <constraint firstItem="DWE-SD-4ak" firstAttribute="width" secondItem="C2q-OK-hsD" secondAttribute="width" multiplier="5" id="j3E-Vf-epG"/>
+                                    <constraint firstItem="DWE-SD-4ak" firstAttribute="width" secondItem="6AP-vs-MqF" secondAttribute="width" multiplier="0.3" id="j3E-Vf-epG"/>
                                     <constraint firstItem="6AP-vs-MqF" firstAttribute="top" secondItem="nY5-ma-tFa" secondAttribute="bottom" constant="20" id="m92-oY-YCV"/>
                                     <constraint firstItem="HDO-1i-Mgp" firstAttribute="leading" secondItem="C2q-OK-hsD" secondAttribute="leading" id="p8Q-md-3lG"/>
                                     <constraint firstItem="DWE-SD-4ak" firstAttribute="top" secondItem="ZJe-ex-WBI" secondAttribute="bottom" constant="5" id="som-nG-mHy"/>
@@ -392,7 +391,7 @@
                                     <constraint firstItem="gXs-fT-pI1" firstAttribute="width" secondItem="C2q-OK-hsD" secondAttribute="width" id="uku-wv-PFp"/>
                                     <constraint firstItem="HDO-1i-Mgp" firstAttribute="height" secondItem="C2q-OK-hsD" secondAttribute="height" multiplier="0.1" id="wgm-mV-KdC"/>
                                     <constraint firstItem="nhf-0l-He8" firstAttribute="top" secondItem="gXs-fT-pI1" secondAttribute="bottom" constant="50" id="x74-yY-eIp"/>
-                                    <constraint firstAttribute="bottom" secondItem="HDO-1i-Mgp" secondAttribute="bottom" constant="50" id="xvV-dD-w5r"/>
+                                    <constraint firstItem="HDO-1i-Mgp" firstAttribute="bottom" secondItem="C2q-OK-hsD" secondAttribute="bottom" constant="-50" id="xvV-dD-w5r"/>
                                     <constraint firstItem="nhf-0l-He8" firstAttribute="leading" secondItem="C2q-OK-hsD" secondAttribute="leading" id="znJ-20-HnX"/>
                                     <constraint firstItem="nY5-ma-tFa" firstAttribute="height" secondItem="C2q-OK-hsD" secondAttribute="height" multiplier="0.02" id="zsE-Fc-i0o"/>
                                 </constraints>
@@ -429,9 +428,6 @@
     <resources>
         <namedColor name="appColorRed">
             <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="appColorRed">
-            <color red="0.82700002189999999" green="0.35299998519999998" blue="0.21600000559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
