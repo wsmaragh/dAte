@@ -86,7 +86,10 @@ class ChatVC: UIViewController {
 	private func configureNavBar() {
 //		navigationItem.title = lover?.name
 		let videoChatBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camcorder"), style: .plain, target: self, action: #selector(startVideoChat))
-		navigationItem.rightBarButtonItem = videoChatBarItem
+        let planDateBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "calendar"), style: .plain, target: self, action: #selector(planDate))
+//        navigationItem.rightBarButtonItem = videoChatBarItem
+//        navigationItem.rightBarButtonItem = planDateBarItem
+        navigationItem.rightBarButtonItems = [videoChatBarItem, planDateBarItem]
 	}
 
 	@objc private func startVideoChat(lover: Lover) {
@@ -100,6 +103,11 @@ class ChatVC: UIViewController {
 		alertView.addAction(noOption)
 		present(alertView, animated: true, completion: nil)
 	}
+    
+    @objc private func planDate() {
+        let planDateVC = MakeDateVC()
+        navigationController?.pushViewController(planDateVC, animated: true)
+    }
 
 
 	// Height for Text

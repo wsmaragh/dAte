@@ -86,7 +86,6 @@ extension DiscoverVC: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if collectionView == foodTagCV { return foodTags.isEmpty ? 1 : foodTags.count }
 		return lovers.isEmpty ? 0 : lovers.count
 	}
 
@@ -119,7 +118,7 @@ extension DiscoverVC: UICollectionViewDelegateFlowLayout {
 		 let selectedLover = lovers[indexPath.row]
 		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
-        profileVC.visitedUser = selectedLover
+        profileVC.lover = selectedLover
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}
 }
