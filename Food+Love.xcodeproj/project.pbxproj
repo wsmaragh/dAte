@@ -83,6 +83,13 @@
 		81E954C3205E3289004036D5 /* flowers.gif in Resources */ = {isa = PBXBuildFile; fileRef = 81E954C2205E3288004036D5 /* flowers.gif */; };
 		81EB93F12065B2F0006CD0AA /* AdmirersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB93F02065B2F0006CD0AA /* AdmirersVC.swift */; };
 		81EB94082065B984006CD0AA /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB94072065B984006CD0AA /* FeedVC.swift */; };
+		81EFF7F820697BE3005EA1A4 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFF7F320697BE2005EA1A4 /* CalenderView.swift */; };
+		81EFF7F920697BE3005EA1A4 /* SearchRestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFF7F420697BE2005EA1A4 /* SearchRestView.swift */; };
+		81EFF7FA20697BE3005EA1A4 /* SelectRestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFF7F520697BE2005EA1A4 /* SelectRestaurantView.swift */; };
+		81EFF7FB20697BE3005EA1A4 /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFF7F620697BE2005EA1A4 /* WeekdaysView.swift */; };
+		81EFF7FC20697BE3005EA1A4 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFF7F720697BE3005EA1A4 /* MonthView.swift */; };
+		81EFF80020697CA0005EA1A4 /* MakeDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFF7FF20697CA0005EA1A4 /* MakeDateVC.swift */; };
+		81EFF803206980D5005EA1A4 /* RestaurantTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFF802206980D5005EA1A4 /* RestaurantTVCell.swift */; };
 		81F633FD206026A3003E2A82 /* couple.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 81F633FC206026A3003E2A82 /* couple.mp4 */; };
 		81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC382065E5B100FB2174 /* MatchesVC.swift */; };
 		81F8DC3B2065E5BA00FB2174 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC3A2065E5B900FB2174 /* ChatVC.swift */; };
@@ -170,6 +177,13 @@
 		81E954C2205E3288004036D5 /* flowers.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = flowers.gif; sourceTree = "<group>"; };
 		81EB93F02065B2F0006CD0AA /* AdmirersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmirersVC.swift; sourceTree = "<group>"; };
 		81EB94072065B984006CD0AA /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		81EFF7F320697BE2005EA1A4 /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		81EFF7F420697BE2005EA1A4 /* SearchRestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestView.swift; sourceTree = "<group>"; };
+		81EFF7F520697BE2005EA1A4 /* SelectRestaurantView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRestaurantView.swift; sourceTree = "<group>"; };
+		81EFF7F620697BE2005EA1A4 /* WeekdaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
+		81EFF7F720697BE3005EA1A4 /* MonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		81EFF7FF20697CA0005EA1A4 /* MakeDateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MakeDateVC.swift; path = "../../../../../../../Downloads/calenderAppiOS-master/myCalender2/Controllers/MakeDateVC.swift"; sourceTree = "<group>"; };
+		81EFF802206980D5005EA1A4 /* RestaurantTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTVCell.swift; sourceTree = "<group>"; };
 		81F633FC206026A3003E2A82 /* couple.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = couple.mp4; sourceTree = "<group>"; };
 		81F8DC382065E5B100FB2174 /* MatchesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesVC.swift; sourceTree = "<group>"; };
 		81F8DC3A2065E5B900FB2174 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
@@ -462,6 +476,14 @@
 			path = "Profile Views";
 			sourceTree = "<group>";
 		};
+		81EFF801206980CB005EA1A4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				81EFF802206980D5005EA1A4 /* RestaurantTVCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		81F4F8E42063A78C008D716B /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,6 +532,7 @@
 			children = (
 				817F9B742058B8F70061E1B6 /* DatesVC.swift */,
 				81729CD42066297300FD5737 /* SearchRestaurant.swift */,
+				81EFF7FF20697CA0005EA1A4 /* MakeDateVC.swift */,
 			);
 			path = "Dates Controllers";
 			sourceTree = "<group>";
@@ -538,7 +561,13 @@
 		81F8DC372065E51D00FB2174 /* Dates Views */ = {
 			isa = PBXGroup;
 			children = (
+				81EFF801206980CB005EA1A4 /* Cells */,
 				81F8DC3C2065E5E100FB2174 /* DatesCell.swift */,
+				81EFF7F320697BE2005EA1A4 /* CalenderView.swift */,
+				81EFF7F720697BE3005EA1A4 /* MonthView.swift */,
+				81EFF7F420697BE2005EA1A4 /* SearchRestView.swift */,
+				81EFF7F520697BE2005EA1A4 /* SelectRestaurantView.swift */,
+				81EFF7F620697BE2005EA1A4 /* WeekdaysView.swift */,
 			);
 			path = "Dates Views";
 			sourceTree = "<group>";
@@ -745,6 +774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81EFF80020697CA0005EA1A4 /* MakeDateVC.swift in Sources */,
 				81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */,
 				81E615F32060C3AA00347CDA /* UIViewX.swift in Sources */,
 				8195758A2066B009001F86F0 /* FaveFoodCollectionViewCell.swift in Sources */,
@@ -755,6 +785,7 @@
 				811E24CB20634BDF00E7CAF5 /* ConversationCell.swift in Sources */,
 				819934B2206308D30075696F /* Conversation.swift in Sources */,
 				81E615F12060C35C00347CDA /* UIImageViewX.swift in Sources */,
+				81EFF7F920697BE3005EA1A4 /* SearchRestView.swift in Sources */,
 				81D26F1F20598DAD00BEBC47 /* NetworkHelper.swift in Sources */,
 				81729CD52066297300FD5737 /* SearchRestaurant.swift in Sources */,
 				81F8DC3B2065E5BA00FB2174 /* ChatVC.swift in Sources */,
@@ -774,12 +805,17 @@
 				8195758F2066C8B9001F86F0 /* RestaurantDetailViewController.swift in Sources */,
 				818BEE7A2066067100D9C62F /* UserProfile.swift in Sources */,
 				81D26F0A20598B7000BEBC47 /* FSSearch.swift in Sources */,
+				81EFF7F820697BE3005EA1A4 /* CalenderView.swift in Sources */,
 				81D26F1220598C9700BEBC47 /* FileManager.swift in Sources */,
+				81EB94002065B80A006CD0AA /* FoodTagCollectionViewCell.swift in Sources */,
+				81EFF7FB20697BE3005EA1A4 /* WeekdaysView.swift in Sources */,
 				817F9B752058B8F70061E1B6 /* DatesVC.swift in Sources */,
 				81AAF7F820684BAB0077AAC2 /* DiscoverUserCollectionViewCell.swift in Sources */,
 				8106D84F205D665B00F6EB3E /* WelcomeSlide.swift in Sources */,
 				81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */,
+				81EFF803206980D5005EA1A4 /* RestaurantTVCell.swift in Sources */,
 				815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */,
+				81EFF7FA20697BE3005EA1A4 /* SelectRestaurantView.swift in Sources */,
 				818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */,
 				819575922066CAAE001F86F0 /* RestaurantTableViewCell.swift in Sources */,
 				81EB94082065B984006CD0AA /* FeedVC.swift in Sources */,
@@ -795,6 +831,7 @@
 				81E954BD205E1CEA004036D5 /* AuthUserService.swift in Sources */,
 				817F9B47205863B10061E1B6 /* AppDelegate.swift in Sources */,
 				81D26F0E20598C3300BEBC47 /* YelpSearch.swift in Sources */,
+				81EFF7FC20697BE3005EA1A4 /* MonthView.swift in Sources */,
 				817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */,
 				81E615F82060E1C400347CDA /* WelcomeLogoSlide.swift in Sources */,
 				816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */,
