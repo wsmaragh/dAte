@@ -141,7 +141,7 @@ class MatchesVC: UIViewController {
 	// Matches
 	func getNewMessages() {
 		guard let uid = Auth.auth().currentUser?.uid else { return }
-		let userMessageRef = DBService.manager.getUserMessagesRef().child(uid)
+		let userMessageRef = DBService.manager.getLoverMessagesRef().child(uid)
 
 		// Observe for New Messages
 		userMessageRef.observe(.childAdded, with: { (snapshot) in
@@ -226,14 +226,6 @@ extension MatchesVC: UICollectionViewDataSource {
 
 //MARK: CollectionView Delegate
 extension MatchesVC: UICollectionViewDelegate {
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		print("pressed did Select in CollectionView Matches VC")
-		let selectedMatch = matches[indexPath.row]
-//		showChat(selectedMatch)
-		showChatControllerForUser(selectedMatch)
-//		showChat()
-	}
-
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		return 1
 	}
@@ -305,21 +297,20 @@ extension MatchesVC: UITableViewDelegate {
 		return 72
 	}
 
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		print("pressed did Select in TableView Matches VC")
-
-		let conversation = conversations[indexPath.row]
-		let chartPartnerId = conversation.chatPartnerId()
-		let loverRef = DBService.manager.getLoversRef().child(chartPartnerId)
-		loverRef.observeSingleEvent(of: .value, with: { (snapshot) in
-			guard let dictionary = snapshot.value as? [String: AnyObject] else {return}
-			let lover = Lover(dictionary: dictionary)
-			if lover.id == chartPartnerId {
-				print("go to chat")
-//				self.showChat(lover)
-			}
-		}, withCancel: nil)
-	}
+//	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//		print("pressed did Select in TableView Matches VC")
+//		let conversation = conversations[indexPath.row]
+//		let chartPartnerId = conversation.chatPartnerId()
+//		let loverRef = DBService.manager.getLoversRef().child(chartPartnerId)
+//		loverRef.observeSingleEvent(of: .value, with: { (snapshot) in
+//			guard let dictionary = snapshot.value as? [String: AnyObject] else {return}
+//			let lover = Lover(dictionary: dictionary)
+//			if lover.id == chartPartnerId {
+//				print("go to chat")
+////				self.showChat(lover)
+//			}
+//		}, withCancel: nil)
+//	}
 
 	//Can Edit row
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -330,7 +321,7 @@ extension MatchesVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		guard let uid = Auth.auth().currentUser?.uid else { return }
 		let conversations = self.conversations[indexPath.row]
-		DBService.manager.getUserMessagesRef().child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
+		DBService.manager.getLoverMessagesRef().child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
 
 //		Database.database().reference().child("user-messages").child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
 			if error != nil { print(error!) ; return}
@@ -345,9 +336,14 @@ extension MatchesVC: UITableViewDelegate {
 extension MatchesVC {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let chatVC = segue.destination as! ChatVC
-		let cell = sender as! UICollectionViewCell
-		guard let indexPath = conversationsCollectionView.indexPath(for: cell) else {return}
-		chatVC.lover = matches[indexPath.row]
+		if sender is UICollectionViewCell {
+			guard let indexPath = conversationsCollectionView.indexPath(for: sender as! UICollectionViewCell) else {return}
+			chatVC.lover = matches[indexPath.row]
+		}
+		if sender is UITableViewCell {
+			guard let indexPath = matchesTableView.indexPath(for: sender as! UITableViewCell) else {return}
+			chatVC.lover = matches[indexPath.row]
+		}
 	}
 }
 

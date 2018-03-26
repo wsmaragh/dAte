@@ -115,7 +115,8 @@ class LoginVC: UIViewController {
 		GIDSignIn.sharedInstance().signIn()
 	}
 
-	@IBAction func forgotPassword(){
+	
+	private func forgotPassword() {
 		guard let email = emailTF.text else {return}
 		Auth.auth().sendPasswordReset(withEmail: email) {(error) in
 			if let error = error {print("Error sending password reset: \(error)")}

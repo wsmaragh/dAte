@@ -16,7 +16,19 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	
 
 	// MARK: Properties
-	private var profileSlides = [UIView]() 
+	let preferenceSlide = PreferenceProfile()
+	let aboutSlide = AboutProfile()
+	let habitsSlide = HabitsProfile()
+	let videoSlide = VideoProfile()
+//	private var profileSlides = [UIView]()
+	private var profileSlides: [UIView] = []
+//	private var profileSlides: [UIView] = {
+//		let preferenceSlide = PreferenceProfile()
+//		let aboutSlide = AboutProfile()
+//		let habitsSlide = HabitsProfile()
+//		let videoSlide = VideoProfile()
+//		return [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
+//	}()
 	var currentUser: User?
 
 	
@@ -25,10 +37,11 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		super.viewDidLoad()
 		navigationController?.title = "Setup Profile"
 		currentUser = Auth.auth().currentUser
+		profileSlides = [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
 		profileScrollView.delegate = self
-		profileSlides = createSlides()
+//		profileSlides = createSlides()
 		addSlidesToScrollView(slides: profileSlides)
-		setupPageControl()
+//		setupPageControl()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -47,14 +60,11 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	}
 
 	func createSlides() -> [UIView] {
-		//TODO: setup actual Views for each
-		let foodPreferenceSlide = UIView() //3 food categories, 1 favorite dish, favorite restaurant
-		let backgroundSlide = UIView()  //gender, age, kids, gender preference
-		let habitsSlide = UIView()  //drink, smoke, drugs
-		let locationSlide = UIView()
-		let photosSlide = UIView()
-		let shortVideo = UIView()
-		return [foodPreferenceSlide, backgroundSlide, habitsSlide, locationSlide, photosSlide, shortVideo]
+		let preferenceSlide = PreferenceProfile()
+		let aboutSlide = AboutProfile()
+		let habitsSlide = HabitsProfile()
+		let videoSlide = VideoProfile()
+		return [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
 	}
 
 //	func createSlides() -> [UIView] {
@@ -66,11 +76,13 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 //	}
 
 	func setupPageControl(){
-		pageControl.numberOfPages = profileSlides.count
-		pageControl.currentPage = 0
-		pageControl.currentPageIndicatorTintColor = UIColor.red
-		pageControl.pageIndicatorTintColor = UIColor.white
-		view.bringSubview(toFront: pageControl)
+		if !profileSlides.isEmpty {
+			pageControl.numberOfPages = profileSlides.count
+			pageControl.currentPage = 0
+			pageControl.currentPageIndicatorTintColor = UIColor.red
+			pageControl.pageIndicatorTintColor = UIColor.white
+			view.bringSubview(toFront: pageControl)
+		}
 	}
 
 	func addSlidesToScrollView(slides: [UIView]) {

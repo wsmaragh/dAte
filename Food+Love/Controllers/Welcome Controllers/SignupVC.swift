@@ -113,7 +113,7 @@ class SignupVC: UIViewController {
 
 	fileprivate func addShadeView(){
 		let shade = UIView(frame: self.view.frame)
-		shade.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9)
+		shade.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
 		view.addSubview(shade)
 		view.sendSubview(toBack: shade)
 	}

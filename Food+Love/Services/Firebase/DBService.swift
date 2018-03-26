@@ -17,23 +17,24 @@ class DBService {
 		dbRef = Database.database().reference()
 		loversRef = dbRef.child("lovers")
 		messagesRef = dbRef.child("messages")
-		userMessagesRef = dbRef.child("user-messages")
-		//		imagesRef = dbRef.child("images")
+		loverMessagesRef = dbRef.child("loverMessages")
 	}
+
 
 	// MARK: Properties
 	private var dbRef: DatabaseReference!
 	private var loversRef: DatabaseReference!
 	private var messagesRef: DatabaseReference!
-	private var userMessagesRef: DatabaseReference!
-//	private var imagesRef: DatabaseReference!
+	private var loverMessagesRef: DatabaseReference!
+	private var categoriesRef: DatabaseReference!
 
 	// MARK: Helper Methods
 	public func getDBRef()-> DatabaseReference { return dbRef }
 	public func getLoversRef()-> DatabaseReference { return loversRef }
 	public func getMessagesRef()-> DatabaseReference { return messagesRef }
-	public func getUserMessagesRef()-> DatabaseReference { return userMessagesRef }
-	//	public func getImages()-> DatabaseReference { return imagesRef }
+	public func getLoverMessagesRef()-> DatabaseReference { return loverMessagesRef }
+	public func getCategoriesRef()-> DatabaseReference {return categoriesRef}
+
 
 	// Format date
 	public func formatDate(with date: Date) -> String {
@@ -64,8 +65,8 @@ class DBService {
 															smoke: String?,
 															drink: String?,
 															drugs: String?) {
-		let user = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
-		user.setValue(["dateOfBirth": dateOfBirth,
+		let lover = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
+		lover.setValue(["dateOfBirth": dateOfBirth,
 									 "zipcode": zipcode,
 									 "city": city,
 									 "bio": bio,
@@ -98,8 +99,8 @@ class DBService {
 	func getLover(uid: String) -> Lover {
 		var lover: Lover!
 		Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
-			if let userInfoDict = snapshot.value as? [String : AnyObject] {
-				lover = Lover(dictionary: userInfoDict)
+			if let loverInfoDict = snapshot.value as? [String : AnyObject] {
+				lover = Lover(dictionary: loverInfoDict)
 			}
 		}, withCancel: nil)
 		return lover
@@ -109,8 +110,8 @@ class DBService {
 		var lovers = [Lover]()
 		for uid in uids {
 			Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
-				if let userInfoDict = snapshot.value as? [String : AnyObject] {
-					let lover = Lover(dictionary: userInfoDict)
+				if let loverInfoDict = snapshot.value as? [String : AnyObject] {
+					let lover = Lover(dictionary: loverInfoDict)
 					lovers.append(lover)
 				}
 			}, withCancel: nil)
@@ -222,12 +223,6 @@ class DBService {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 	}
-
-//	public func updatePhoto(profileImageUrl: String) {
-//		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-//		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
-//	}
-
 
 
 }

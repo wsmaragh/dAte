@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		//Google Sign-in
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-		GIDSignIn.sharedInstance().delegate = self //tels us when the user is signed-in
+		GIDSignIn.sharedInstance().delegate = self 
 
 		//FaceBook Login
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -41,32 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UITabBar.appearance().alpha = 1.0
 			UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 
-
-
-//		//Window setup
-//		window = UIWindow(frame: UIScreen.main.bounds)
-//		window?.makeKeyAndVisible()
-//
-//		//Check if user is authenticated
-//		if Auth.auth().currentUser == nil {
-//			//welcome
-//			window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
-//
-//			let startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
-//		} else {
-//			//main
-//			window?.rootViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
-//		}
-
-
 		let startingVC: UIViewController?
 
 		//Check if user is authenticated
 		if Auth.auth().currentUser == nil {
-			//welcome
 			startingVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
 		} else {
-			//main
 			startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
 		}
 
@@ -74,8 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow(frame: UIScreen.main.bounds)
 		window?.makeKeyAndVisible()
 		window?.rootViewController = startingVC
-
-
 
 		return true
 	}

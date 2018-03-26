@@ -14,56 +14,50 @@ class ChatVC: UIViewController {
 
 
 	// MARK: Outlets
+	@IBOutlet weak var chatCollectionView: UICollectionView!
 
-	@IBOutlet weak var collectionView: UICollectionView!
-	@IBOutlet weak var messageTF: UITextField!
-	@IBOutlet weak var photoButton: UIButton!
-	@IBOutlet weak var smileyButton: UIButton!
-	@IBOutlet weak var sendButton: UIButton!
-	@IBOutlet weak var loverImageView: UIImageViewX!
-	@IBOutlet weak var loverNameLabel: UILabel!
-	@IBOutlet weak var loverInfoLabel: UILabel!
-	@IBOutlet weak var loverFoodPreference: UILabel!
-	let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+	//Profile
+	@IBOutlet weak var profileImage: UIImageViewX!
+	@IBOutlet weak var name: UILabel!
+
+	//Send
+	@IBOutlet weak var inputText: UITextField!
+
+
+
 
 
 	// MARK: Properties
-	var lover: Lover? {
-		didSet {
-			getMessages()
-//			loverNameLabel.text = lover?.name
-//			loverInfoLabel.text = "No Info yet"
-//			loverFoodPreference.text = "No Food preference yet"
-		}
-	}
-	var messages = [Message]() {
-		didSet {
-
-		}
-	}
-
-
-
-
-
-//	init(lover: Lover) {
-//		super.init(nibName: nil, bundle: nil)
-//		self.lover = lover
-//	}
-//	required init?(coder aDecoder: NSCoder) {
-//		super.init(coder: aDecoder)
-//	}
-
+	var lover: Lover?
+	var messages = [Message]()
 
 	
 	// MARK: View Lifecycle
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(false)
+		tabBarController?.tabBar.isHidden = true
+		getMessages()
+	}
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(false)
+		tabBarController?.tabBar.isHidden = false
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		collectionView.delegate = self
-		collectionView.dataSource = self
+		view.backgroundColor = #colorLiteral(red: 0.8270000219, green: 0.3529999852, blue: 0.2160000056, alpha: 1)
+		view.alpha = 1.0
 		configureNavBar()
+		chatCollectionView.delegate = self
+		chatCollectionView.dataSource = self
+		inputText.delegate = self
 		tabBarController?.tabBar.isHidden = true
-		messageTF.delegate = self
+		if let lover = lover {
+			name.text = lover.name
+			if let image = lover.profileImageUrl{
+				profileImage.loadImageUsingCacheWithUrlString(image)
+			}
+		}
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
@@ -74,9 +68,9 @@ class ChatVC: UIViewController {
 
 	// MARK: Actions
 	@IBAction func sendButtonPressed(){
-		if messageTF.text == "" {return}
+		if inputText.text == "" {return}
 		else {
-			sendMessage(["text":messageTF.text! as AnyObject])
+			sendMessage(["text": inputText.text! as AnyObject])
 		}
 	}
 
@@ -94,6 +88,7 @@ class ChatVC: UIViewController {
 
 
 	private func configureNavBar() {
+		navigationItem.title = lover?.name
 		let videoChatBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camcorder"), style: .plain, target: self, action: #selector(startVideoChat))
 		navigationItem.rightBarButtonItem = videoChatBarItem
 	}
@@ -122,8 +117,8 @@ class ChatVC: UIViewController {
 	///////////////////// MESSAGES  //////////////////////
 	func getMessages() {
 		guard let uid = Auth.auth().currentUser?.uid, let toId = lover?.id else {return}
-		let userMessageRef = DBService.manager.getUserMessagesRef().child(uid).child(toId)
-		userMessageRef.observe(.childAdded, with: { (snapshot) in
+		let loverMessageRef = DBService.manager.getLoverMessagesRef().child(uid).child(toId)
+		loverMessageRef.observe(.childAdded, with: { (snapshot) in
 			let messageId = snapshot.key
 			let messagesRef = DBService.manager.getMessagesRef().child(messageId)
 			messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -131,7 +126,7 @@ class ChatVC: UIViewController {
 				let message = Message(dictionary: dict)
 				self.messages.append(message)
 				DispatchQueue.main.async {
-					if let collectionView = self.collectionView {
+					if let collectionView = self.chatCollectionView {
 						collectionView.reloadData()
 						let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
 						collectionView.scrollToItem(at: indexpath as IndexPath, at: .bottom, animated: true)
@@ -154,23 +149,24 @@ class ChatVC: UIViewController {
 		childRef.updateChildValues(values)
 		childRef.updateChildValues(values) { (error, ref) in
 			if error != nil { print(error!); return}
-			self.messageTF.text = "" //nil
-			let userMessageRef = DBService.manager.getUserMessagesRef().child(fromId).child(toId)
+			self.inputText.text = "" //nil
+			let loverMessageRef = DBService.manager.getLoverMessagesRef().child(fromId).child(toId)
 			let messageId = childRef.key
-			userMessageRef.updateChildValues([messageId: 1])
-			let recipentUserMessageRef = DBService.manager.getUserMessagesRef().child(toId).child(fromId)
+			loverMessageRef.updateChildValues([messageId: 1])
+			let recipentUserMessageRef = DBService.manager.getLoverMessagesRef().child(toId).child(fromId)
 			recipentUserMessageRef.updateChildValues([messageId: 1])
 		}
 	}
 
 	// add Image to Message
 	private func addImageToMessage(_ imageUrl: String , _ image: UIImage){
-		sendMessage(["imageUrl":imageUrl,"imageWidth":image.size.width , "imageHeight":image.size.height] as [String: AnyObject])
+		sendMessage(["imageUrl": imageUrl,"imageWidth": image.size.width , "imageHeight":image.size.height] as [String: AnyObject])
 	}
 
 	// Select Video
 	fileprivate func selectedVideoForUrl(videoURL: URL) {
 		let fileName = NSUUID().uuidString+".mov"
+		
 		// UPLOAD
 		let uploadTask = Storage.storage().reference().child("message_videos").child(fileName).putFile(from: videoURL, metadata: nil, completion: { (metadata, error) in
 			if error != nil { print("Failed to upload the video:", error!)}
@@ -225,7 +221,7 @@ class ChatVC: UIViewController {
 		present(imagePickerController, animated: true, completion: nil)
 	}
 
-	// UPLOAD Image  to Firebase
+	// UPLOAD Image to Firebase
 	private func uploadToFirebaseStorage(_ image: UIImage, completion:@escaping (_ imageUrl: String) -> ()) {
 		let imageName = NSUUID().uuidString
 		let ref = Storage.storage().reference().child("message_images").child(imageName)
@@ -246,9 +242,8 @@ class ChatVC: UIViewController {
 // MARK: TextField Delegate
 extension ChatVC: UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		if messageTF.text == "" {return false}
-		else {
-			sendMessage(["text":messageTF.text! as AnyObject])
+		if inputText.text != "" {
+			sendMessage(["text": inputText.text! as AnyObject])
 		}
 		textField.resignFirstResponder()
 		return true
@@ -307,10 +302,6 @@ extension ChatVC: UICollectionViewDelegate {
 extension ChatVC: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//		let numCells: CGFloat = 3.5
-//		let numSpaces: CGFloat = numCells + 1
-//		let screenWidth = UIScreen.main.bounds.width
-//		let screenHeight = UIScreen.main.bounds.height
 		var height: CGFloat = 80
 		let message = messages[indexPath.row]
 		if let text = message.text {
@@ -321,16 +312,6 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 		return CGSize(width: view.frame.width, height: height)
 	}
 
-//	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//		var height: CGFloat = 80
-//		let message = messages[indexPath.row]
-//		if let text = message.text {
-//			height = estimatedHeightBasedOnText(text: text).height + 20
-//		}else if let imageWidth = message.imageWidth?.floatValue , let imageHeight = message.imageHeight?.floatValue {
-//			height = CGFloat(imageHeight / imageWidth * 200)
-//		}
-//		return CGSize.init(width: view.frame.width, height: height)
-//	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 		return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0, right: 5.0)
@@ -349,7 +330,7 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 
 //////////////////////////////
 // MARK: Zoom for Video
-extension ChatVC {
+//extension ChatVC {
 	/*
 	// Zoom In
 	func zoomInForStartingImageView(startingImageView: UIImageView) {
@@ -396,12 +377,12 @@ extension ChatVC {
 	}
 	*/
 
-}
+//}
 
 
 //////////////////////////////
 // MARK: KEYBOARD Handling
-extension ChatVC {
+//extension ChatVC {
 	/*
 	func setUpKeyboardObservers() {
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -433,4 +414,5 @@ extension ChatVC {
 		}
 	}
 */
-}
+//}
+
