@@ -187,15 +187,19 @@ extension SearchRestaurantVC: UISearchBarDelegate {
 		let encodedNearSearch = ""
 
 		//API Call to get venues
-			FSSearchAPIClient.manager.getVenues(from: encodedVenueSearch, coordinate: "\(searchMap.userLocation.coordinate.latitude),\(searchMap.userLocation.coordinate.longitude)", near:  encodedNearSearch, completion: { (error, OnlineVenues) in
-				if let error = error {print(error); return}
-				self.venues.removeAll()
-				self.searchMap.removeAnnotations(self.annotationsForVenues)
-				self.annotationsForVenues.removeAll()
-				if let onlineVenues = OnlineVenues {
-					self.venues = onlineVenues
-				}
-			})
+//            FSSearchAPIClient.manager.getVenues(from: encodedVenueSearch, coordinate: "\(searchMap.userLocation.coordinate.latitude),\(searchMap.userLocation.coordinate.longitude)", near:  encodedNearSearch, completion: { (error, OnlineVenues) in
+//                if let error = error {print(error); return}
+//                self.venues.removeAll()
+//                self.searchMap.removeAnnotations(self.annotationsForVenues)
+//                self.annotationsForVenues.removeAll()
+//                if let onlineVenues = OnlineVenues {
+//                    self.venues = onlineVenues
+//                }
+//            }, errorHandler: {error in
+//                if let error = error {
+//                    print(error)
+//                }
+//            })
 	}
 
 	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
