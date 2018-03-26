@@ -9,23 +9,38 @@ import Firebase
 
 
 class StorageService {
+	static let manager = StorageService()
+
 	private init(){
 		storage = Storage.storage()
 		storageRef = storage.reference()
 		imagesRef = storageRef.child("images")
+		profileImagesRef = storageRef.child("loverImages")
+		profileVideoRef = storageRef.child("loverImages")
+		chatImagesRef = storageRef.child("userImages")
 	}
-	static let manager = StorageService()
 
+	//Properties
 	private var storage: Storage!
 	private var storageRef: StorageReference!
 	private var imagesRef: StorageReference!
+	private var profileImagesRef: StorageReference!
+	private var profileVideoRef: StorageReference!
+	private var chatImagesRef: StorageReference!
+	private var chatVideoRef: StorageReference!
 
+	// Helper Methods
 	public func getStorageRef() -> StorageReference { return storageRef }
 	public func getImagesRef() -> StorageReference { return imagesRef }
+	public func getProfileImagesRef() -> StorageReference { return profileImagesRef }
+	public func getProfileVideoRef() -> StorageReference { return profileVideoRef }
+	public func getChatImagesRef() -> StorageReference { return chatImagesRef }
+	public func getChatVideoRef() -> StorageReference { return chatVideoRef }
+    
 }
 
 
-//Store User Image
+//Store Image
 extension StorageService {
 	public func storeUserImage(image: UIImage) {
 		let user = AuthUserService.getCurrentUser()
@@ -49,4 +64,8 @@ extension StorageService {
 
 	}
 }
+
+
+
+
 
