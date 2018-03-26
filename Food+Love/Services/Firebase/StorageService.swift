@@ -9,55 +9,62 @@ import Firebase
 
 
 class StorageService {
+	static let manager = StorageService()
+
 	private init(){
 		storage = Storage.storage()
 		storageRef = storage.reference()
-        profileImagesRef = storageRef.child("profile images")
+		imagesRef = storageRef.child("images")
+		profileImagesRef = storageRef.child("loverImages")
+		profileVideoRef = storageRef.child("loverImages")
+		chatImagesRef = storageRef.child("userImages")
 	}
-	static let manager = StorageService()
 
+	//Properties
 	private var storage: Storage!
 	private var storageRef: StorageReference!
-    private var profileImagesRef: StorageReference!
-    private var profileVideoRef: StorageReference!
-    private var chatImagesRef: StorageReference!
-    private var chatVideoRef: StorageReference!
+	private var imagesRef: StorageReference!
+	private var profileImagesRef: StorageReference!
+	private var profileVideoRef: StorageReference!
+	private var chatImagesRef: StorageReference!
+	private var chatVideoRef: StorageReference!
 
+	// Helper Methods
 	public func getStorageRef() -> StorageReference { return storageRef }
-    public func getProfileImagesRef() -> StorageReference { return profileImagesRef }
-    public func getProfileVideoRef() -> StorageReference { return profileVideoRef }
-    public func getChatImagesRef() -> StorageReference { return chatImagesRef }
-    public func getChatVideoRef() -> StorageReference { return chatVideoRef }
+	public func getImagesRef() -> StorageReference { return imagesRef }
+	public func getProfileImagesRef() -> StorageReference { return profileImagesRef }
+	public func getProfileVideoRef() -> StorageReference { return profileVideoRef }
+	public func getChatImagesRef() -> StorageReference { return chatImagesRef }
+	public func getChatVideoRef() -> StorageReference { return chatVideoRef }
     
 }
 
 
-//Store User Image
+//Store Image
+extension StorageService {
+	public func storeUserImage(image: UIImage) {
+		let user = AuthUserService.getCurrentUser()
+		guard let id = user?.uid else {return}
+		guard let data = UIImageJPEGRepresentation(image, 0.1) else { print("image is nil"); return }
+		let metadata = StorageMetadata()
+		metadata.contentType = "image/jpeg"
 
-//extension StorageService {
-//    public func storeUserImage(image: UIImage) {
-//        let user = AuthUserService.getCurrentUser()
-//        guard let id = user?.uid else {return}
-//
-//        guard let data = UIImageJPEGRepresentation(image, 1.0) else { print("image is nil"); return }
-//        let metadata = StorageMetadata()
-//        metadata.contentType = "image/jpeg"
-//
-//        //create UploadTask
-//        let uploadTask = StorageService.manager.getImagesRef().child((user?.uid)!).putData(data, metadata: metadata) { (storageMetadata, error) in
-//            if let error = error { print("uploadTask error: \(error)") }
-//            else if let storageMetadata = storageMetadata { print("storageMetadata: \(storageMetadata)") }
-//        }
-//
-//        uploadTask.observe(.success) { snapshot in
-//            guard let imageURL = snapshot.metadata?.downloadURL() else { return }
-//            let imageStr = String(describing: imageURL)
-//            DBService.manager.updateUserImage(profileImageUrl: imageStr)
-//            AuthUserService.manager.changeAuthProfilePhoto(urlString: imageStr)
-//        }
-//
-//    }
-//}
+		//create UploadTask
+		let uploadTask = StorageService.manager.getImagesRef().child(id).putData(data, metadata: metadata) { (storageMetadata, error) in
+			if let error = error { print("uploadTask error: \(error)") }
+			else if let storageMetadata = storageMetadata { print("storageMetadata: \(storageMetadata)") }
+		}
+
+		uploadTask.observe(.success) { snapshot in
+			guard let imageURL = snapshot.metadata?.downloadURL() else { return }
+			let imageStr = String(describing: imageURL)
+			DBService.manager.updatePhoto(profileImageUrl: imageStr)
+			AuthUserService.manager.updatePhoto(urlString: imageStr)
+		}
+
+	}
+}
+
 
 
 

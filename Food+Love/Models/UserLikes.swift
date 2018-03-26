@@ -6,14 +6,15 @@
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 //
 
-import Foundation
+//import Foundation
+//
+//struct UserLike: Codable {
+//    let uid: [String: String]
+//    
+//    init(dictionary: [String: String]) {
+//        self.uid = dictionary
+//    }
+//    
+//    
+//}
 
-struct UserLike: Codable {
-    let uid: [String: String]
-    
-    init(dictionary: [String: String]) {
-        self.uid = dictionary
-    }
-    
-    
-}

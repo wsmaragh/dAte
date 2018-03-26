@@ -93,7 +93,7 @@ class LoginVC: UIViewController {
 		facebookButton.readPermissions = ["email", "public_profile"]
 	}
 
-	
+
 	// MARK: Actions for buttons
 	@IBAction func loginInUser(){
 		guard let email = emailTF.text, let password = passwordTF.text else {return}
@@ -115,7 +115,7 @@ class LoginVC: UIViewController {
 		GIDSignIn.sharedInstance().signIn()
 	}
 
-	
+
 	private func forgotPassword() {
 		guard let email = emailTF.text else {return}
 		Auth.auth().sendPasswordReset(withEmail: email) {(error) in
@@ -175,7 +175,7 @@ extension LoginVC: FBSDKLoginButtonDelegate {
 		Auth.auth().signIn(with: credential) { (user, error) in
 			if let error = error {
 				print("Error signing into Firebase with Facebook:", error); return }
-				print("User signed into Firebase with Facebook")
+			print("User signed into Firebase with Facebook")
 			//transition to main
 			let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
 			if let window = UIApplication.shared.delegate?.window {

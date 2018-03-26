@@ -15,23 +15,16 @@ class ChatVC: UIViewController {
 
 	// MARK: Outlets
 	@IBOutlet weak var chatCollectionView: UICollectionView!
-
-	//Profile
 	@IBOutlet weak var profileImage: UIImageViewX!
 	@IBOutlet weak var name: UILabel!
-
-	//Send
 	@IBOutlet weak var inputText: UITextField!
 
 
-
-
-
 	// MARK: Properties
-	var lover: Lover?
+	var loverId: String!
 	var messages = [Message]()
 
-	
+
 	// MARK: View Lifecycle
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(false)
@@ -52,12 +45,15 @@ class ChatVC: UIViewController {
 		chatCollectionView.dataSource = self
 		inputText.delegate = self
 		tabBarController?.tabBar.isHidden = true
-		if let lover = lover {
-			name.text = lover.name
-			if let image = lover.profileImageUrl{
-				profileImage.loadImageUsingCacheWithUrlString(image)
+		//setup Lover
+		DBService.manager.retrieveLover(loverId: loverId, completionHandler: { (onlineLover) in
+			if let myLover = onlineLover {
+				self.name.text = myLover.name
+				if let image = myLover.profileImageUrl{
+					self.profileImage.loadImageUsingCacheWithUrlString(image)
+				}
 			}
-		}
+		})
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
@@ -88,7 +84,7 @@ class ChatVC: UIViewController {
 
 
 	private func configureNavBar() {
-		navigationItem.title = lover?.name
+//		navigationItem.title = lover?.name
 		let videoChatBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camcorder"), style: .plain, target: self, action: #selector(startVideoChat))
 		navigationItem.rightBarButtonItem = videoChatBarItem
 	}
@@ -116,7 +112,7 @@ class ChatVC: UIViewController {
 
 	///////////////////// MESSAGES  //////////////////////
 	func getMessages() {
-		guard let uid = Auth.auth().currentUser?.uid, let toId = lover?.id else {return}
+		guard let uid = Auth.auth().currentUser?.uid, let toId = loverId else {return}
 		let loverMessageRef = DBService.manager.getLoverMessagesRef().child(uid).child(toId)
 		loverMessageRef.observe(.childAdded, with: { (snapshot) in
 			let messageId = snapshot.key
@@ -141,7 +137,7 @@ class ChatVC: UIViewController {
 	fileprivate func sendMessage(_ property: [String: AnyObject]){
 		let messagesRef = DBService.manager.getMessagesRef()
 		let childRef = messagesRef.childByAutoId()
-		guard let toId = lover?.id else {return}
+		let toId = loverId
 		let fromId = Auth.auth().currentUser!.uid
 		let timeStamp = NSNumber.init(value: Date().timeIntervalSince1970)
 		var values: [String : AnyObject] = ["toId": toId as AnyObject, "fromId": fromId as AnyObject, "timeStamp":timeStamp]
@@ -150,10 +146,10 @@ class ChatVC: UIViewController {
 		childRef.updateChildValues(values) { (error, ref) in
 			if error != nil { print(error!); return}
 			self.inputText.text = "" //nil
-			let loverMessageRef = DBService.manager.getLoverMessagesRef().child(fromId).child(toId)
+			let loverMessageRef = DBService.manager.getLoverMessagesRef().child(fromId).child(toId!)
 			let messageId = childRef.key
 			loverMessageRef.updateChildValues([messageId: 1])
-			let recipentUserMessageRef = DBService.manager.getLoverMessagesRef().child(toId).child(fromId)
+			let recipentUserMessageRef = DBService.manager.getLoverMessagesRef().child(toId!).child(fromId)
 			recipentUserMessageRef.updateChildValues([messageId: 1])
 		}
 	}
@@ -166,7 +162,7 @@ class ChatVC: UIViewController {
 	// Select Video
 	fileprivate func selectedVideoForUrl(videoURL: URL) {
 		let fileName = NSUUID().uuidString+".mov"
-		
+
 		// UPLOAD
 		let uploadTask = Storage.storage().reference().child("message_videos").child(fileName).putFile(from: videoURL, metadata: nil, completion: { (metadata, error) in
 			if error != nil { print("Failed to upload the video:", error!)}
@@ -302,7 +298,7 @@ extension ChatVC: UICollectionViewDelegate {
 extension ChatVC: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		var height: CGFloat = 80
+		var height: CGFloat = 100
 		let message = messages[indexPath.row]
 		if let text = message.text {
 			height = estimatedHeightBasedOnText(text: text).height + 20
@@ -331,51 +327,51 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 //////////////////////////////
 // MARK: Zoom for Video
 //extension ChatVC {
-	/*
-	// Zoom In
-	func zoomInForStartingImageView(startingImageView: UIImageView) {
-	//		self.startingImageView = startingImageView
-	//		self.startingImageView?.isHidden = true
-	//		startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
-	let zoomingImageView = UIImageView.init(frame: startingFrame!)
-	zoomingImageView.image = startingImageView.image
-	zoomingImageView.backgroundColor = UIColor.red
-	zoomingImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(zoomOut)))
-	zoomingImageView.isUserInteractionEnabled = true
-	if let keyWindow =  UIApplication.shared.keyWindow {
-	//			backBackgroundView = UIView.init(frame: keyWindow.frame)
-	//			if let backBackgroundView = backBackgroundView {
-	//				backBackgroundView.backgroundColor = UIColor.black
-	//				backBackgroundView.alpha = 0
-	keyWindow.addSubview(backBackgroundView)
-	}
-	keyWindow.addSubview(zoomingImageView)
-	UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-	self.backBackgroundView!.alpha = 1
-	self.inputAccessoryView?.alpha = 0
-	let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
-	zoomingImageView.frame = CGRect.init(x: 0, y: 0, width: keyWindow.frame.width, height: height)
-	zoomingImageView.center = keyWindow.center
-	}, completion: nil)
-	}
-	}
+/*
+// Zoom In
+func zoomInForStartingImageView(startingImageView: UIImageView) {
+//		self.startingImageView = startingImageView
+//		self.startingImageView?.isHidden = true
+//		startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
+let zoomingImageView = UIImageView.init(frame: startingFrame!)
+zoomingImageView.image = startingImageView.image
+zoomingImageView.backgroundColor = UIColor.red
+zoomingImageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(zoomOut)))
+zoomingImageView.isUserInteractionEnabled = true
+if let keyWindow =  UIApplication.shared.keyWindow {
+//			backBackgroundView = UIView.init(frame: keyWindow.frame)
+//			if let backBackgroundView = backBackgroundView {
+//				backBackgroundView.backgroundColor = UIColor.black
+//				backBackgroundView.alpha = 0
+keyWindow.addSubview(backBackgroundView)
+}
+keyWindow.addSubview(zoomingImageView)
+UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+self.backBackgroundView!.alpha = 1
+self.inputAccessoryView?.alpha = 0
+let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
+zoomingImageView.frame = CGRect.init(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+zoomingImageView.center = keyWindow.center
+}, completion: nil)
+}
+}
 
-	// Zoom Out
-	@objc func zoomOut(tapGesture: UITapGestureRecognizer){
-	if let zoomOutImageView = tapGesture.view {
-	zoomOutImageView.layer.cornerRadius = 16
-	zoomOutImageView.clipsToBounds = true
-	UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-	//				zoomOutImageView.frame = self.startingFrame!
-	self.backBackgroundView?.alpha = 0
-	self.inputAccessoryView?.alpha = 1
-	}, completion: { (completed) in
-	zoomOutImageView.removeFromSuperview()
-	//				self.startingImageView?.isHidden = false
-	})
-	}
-	}
-	*/
+// Zoom Out
+@objc func zoomOut(tapGesture: UITapGestureRecognizer){
+if let zoomOutImageView = tapGesture.view {
+zoomOutImageView.layer.cornerRadius = 16
+zoomOutImageView.clipsToBounds = true
+UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//				zoomOutImageView.frame = self.startingFrame!
+self.backBackgroundView?.alpha = 0
+self.inputAccessoryView?.alpha = 1
+}, completion: { (completed) in
+zoomOutImageView.removeFromSuperview()
+//				self.startingImageView?.isHidden = false
+})
+}
+}
+*/
 
 //}
 
@@ -383,36 +379,36 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 //////////////////////////////
 // MARK: KEYBOARD Handling
 //extension ChatVC {
-	/*
-	func setUpKeyboardObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-	}
+/*
+func setUpKeyboardObservers() {
+NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+}
 
-	@objc func keyboardDidShow() {
-		if messages.count > 0 {
-			let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
-			//			self.collectionView?.scrollToItem(at: indexpath as IndexPath, at: .top, animated: true)
-		}
-	}
+@objc func keyboardDidShow() {
+if messages.count > 0 {
+let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
+//			self.collectionView?.scrollToItem(at: indexpath as IndexPath, at: .top, animated: true)
+}
+}
 
-	@objc func keyboardWillShow(notification: NSNotification) {
-		let keyboardFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue
-		let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
-		//		containerViewBottomAncher?.constant = -keyboardFrame!.height
-		UIView.animate(withDuration: keyboardDuration!) {
-			self.view.layoutIfNeeded()
-		}
-	}
+@objc func keyboardWillShow(notification: NSNotification) {
+let keyboardFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue
+let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
+//		containerViewBottomAncher?.constant = -keyboardFrame!.height
+UIView.animate(withDuration: keyboardDuration!) {
+self.view.layoutIfNeeded()
+}
+}
 
-	@objc func keyboardWillHide(notification: NSNotification){
-		//		containerViewBottomAncher?.constant = 0
-		let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
-		UIView.animate(withDuration: keyboardDuration!) {
-			self.view.layoutIfNeeded()
-		}
-	}
+@objc func keyboardWillHide(notification: NSNotification){
+//		containerViewBottomAncher?.constant = 0
+let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
+UIView.animate(withDuration: keyboardDuration!) {
+self.view.layoutIfNeeded()
+}
+}
 */
 //}
 

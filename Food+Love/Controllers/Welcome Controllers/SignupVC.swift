@@ -107,7 +107,7 @@ class SignupVC: UIViewController {
 			showAlert(title: "No spaces allowed in password!", message: nil); return
 		}
 		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
-		
+
 	}
 
 

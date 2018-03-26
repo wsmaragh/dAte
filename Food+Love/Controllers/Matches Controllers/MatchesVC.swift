@@ -11,25 +11,51 @@ import Firebase
 class MatchesVC: UIViewController {
 
 	// MARK: Outlet Properties
-	@IBOutlet var matchesTableView: UITableView!
-	@IBOutlet weak var conversationsCollectionView: UICollectionView!
+	@IBOutlet weak var matchesCollectionView: UICollectionView!
+	@IBOutlet weak var conversationsTableView: UITableView!
 
-	
+
 	// MARK: Properties
 	var timer: Timer!
 	var matches = [Lover]() {
 		didSet {
-			DispatchQueue.main.async { self.conversationsCollectionView.reloadData() }
+			DispatchQueue.main.async { self.matchesCollectionView.reloadData() }
 		}
 	}
-	var conversations = [Message](){
+
+	var conversations = [Message]()
+	{
 		didSet {
-			DispatchQueue.main.async { self.matchesTableView.reloadData() }
+			DispatchQueue.main.async {
+				self.conversationsTableView.reloadData()
+			}
 		}
 	}
+
 	var conversationsDict = [String: Message](){
 		didSet {
-			DispatchQueue.main.async { self.matchesTableView.reloadData() }
+			DispatchQueue.main.async {
+//				print()
+//				print(self.conversationsDict)
+//				print()
+//				self.conversationsTableView.reloadData()
+//				for conversation in self.conversationsDict {
+//					let partnerId = conversation.chatPartnerId()
+//					DBService.manager.retrieveLover(loverId: partnerId, completionHandler: { (onlineLover) in
+//						print(onlineLover)
+//						print(onlineLover?.name)
+//					})
+//				}
+
+//				for conversation in self.conversations {
+//					let partnerId = conversation.chatPartnerId()
+//					DBService.manager.retrieveLover(loverId: partnerId, completionHandler: { (onlineLover) in
+//						print(onlineLover)
+//						print(onlineLover?.name)
+//					})
+//				}
+
+			}
 		}
 	}
 
@@ -41,7 +67,7 @@ class MatchesVC: UIViewController {
 		setupCollectionView()
 		getAllLoversExceptCurrent()
 		getNewMessages()
-//		getLover()
+		//		getLover()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -50,14 +76,14 @@ class MatchesVC: UIViewController {
 
 	//Setup Tableview
 	func setupTableview(){
-		matchesTableView.dataSource = self
-		matchesTableView.delegate = self
-		matchesTableView.allowsMultipleSelectionDuringEditing = true
+		conversationsTableView.dataSource = self
+		conversationsTableView.delegate = self
+		conversationsTableView.allowsMultipleSelectionDuringEditing = true
 	}
 
 	func setupCollectionView(){
-		conversationsCollectionView.dataSource = self
-		conversationsCollectionView.delegate = self
+		matchesCollectionView.dataSource = self
+		matchesCollectionView.delegate = self
 	}
 
 
@@ -66,21 +92,6 @@ class MatchesVC: UIViewController {
 
 
 	// MARK: Helper Methods
-	// Chat for User
-//	func showChat(_ lover: Lover) {
-//		let chatVC = ChatVC(lover: lover)
-//		self.navigationController?.pushViewController(chatVC, animated: true)
-//	}
-//	func showChat() {
-//		let chatVC = ChatVC()
-//		self.navigationController?.pushViewController(chatVC, animated: true)
-//	}
-
-	func showChatControllerForUser(_ lover: Lover) {
-		let chatVC = ChatVC()
-		chatVC.lover = lover
-		navigationController?.pushViewController(chatVC, animated: true)
-	}
 
 	func getLover() -> Lover {
 		var lover: Lover?
@@ -95,16 +106,16 @@ class MatchesVC: UIViewController {
 	}
 
 
-		func getCurrentUser() -> Lover {
-			let uid = Auth.auth().currentUser?.uid
-			var lover: Lover!
-			DBService.manager.getLoversRef().child(uid!).observe(.value, with: { (snapshot) in
-				if let userInfoDict = snapshot.value as? [String : AnyObject] {
-					lover = Lover(dictionary: userInfoDict)
-				}
-			}, withCancel: nil)
-			return lover
-		}
+	func getCurrentUser() -> Lover {
+		let uid = Auth.auth().currentUser?.uid
+		var lover: Lover!
+		DBService.manager.getLoversRef().child(uid!).observe(.value, with: { (snapshot) in
+			if let userInfoDict = snapshot.value as? [String : AnyObject] {
+				lover = Lover(dictionary: userInfoDict)
+			}
+		}, withCancel: nil)
+		return lover
+	}
 
 	func getLover(uid: String) -> Lover {
 		var lover: Lover!
@@ -121,7 +132,7 @@ class MatchesVC: UIViewController {
 	func addUserInfoToNavBar(_ user: Lover){
 		conversations.removeAll()
 		conversationsDict.removeAll()
-		matchesTableView.reloadData()
+		conversationsTableView.reloadData()
 		getNewMessages()
 	}
 
@@ -196,10 +207,9 @@ class MatchesVC: UIViewController {
 	@objc func reloadTable() {
 		self.conversations = Array(self.conversationsDict.values)
 		self.conversations.sort(by: { (conversation1, conversation2) -> Bool in
-			// return message1.timestamp?.int32Value > message2.timestamp?.int32Value
 			return Int(conversation1.timeStamp!) > Int(conversation2.timeStamp!)
 		})
-		DispatchQueue.main.async(execute: {self.matchesTableView.reloadData()})
+		DispatchQueue.main.async(execute: {self.conversationsTableView.reloadData()})
 	}
 
 }
@@ -297,20 +307,20 @@ extension MatchesVC: UITableViewDelegate {
 		return 72
 	}
 
-//	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//		print("pressed did Select in TableView Matches VC")
-//		let conversation = conversations[indexPath.row]
-//		let chartPartnerId = conversation.chatPartnerId()
-//		let loverRef = DBService.manager.getLoversRef().child(chartPartnerId)
-//		loverRef.observeSingleEvent(of: .value, with: { (snapshot) in
-//			guard let dictionary = snapshot.value as? [String: AnyObject] else {return}
-//			let lover = Lover(dictionary: dictionary)
-//			if lover.id == chartPartnerId {
-//				print("go to chat")
-////				self.showChat(lover)
-//			}
-//		}, withCancel: nil)
-//	}
+	//	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	//		print("pressed did Select in TableView Matches VC")
+	//		let conversation = conversations[indexPath.row]
+	//		let chartPartnerId = conversation.chatPartnerId()
+	//		let loverRef = DBService.manager.getLoversRef().child(chartPartnerId)
+	//		loverRef.observeSingleEvent(of: .value, with: { (snapshot) in
+	//			guard let dictionary = snapshot.value as? [String: AnyObject] else {return}
+	//			let lover = Lover(dictionary: dictionary)
+	//			if lover.id == chartPartnerId {
+	//				print("go to chat")
+	////				self.showChat(lover)
+	//			}
+	//		}, withCancel: nil)
+	//	}
 
 	//Can Edit row
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -323,10 +333,10 @@ extension MatchesVC: UITableViewDelegate {
 		let conversations = self.conversations[indexPath.row]
 		DBService.manager.getLoverMessagesRef().child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
 
-//		Database.database().reference().child("user-messages").child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
+			//		Database.database().reference().child("user-messages").child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
 			if error != nil { print(error!) ; return}
 			self.conversations.remove(at: indexPath.row)
-			self.matchesTableView.deleteRows(at: [indexPath], with: .automatic)
+			self.conversationsTableView.deleteRows(at: [indexPath], with: .automatic)
 		}
 	}
 
@@ -336,13 +346,16 @@ extension MatchesVC: UITableViewDelegate {
 extension MatchesVC {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		let chatVC = segue.destination as! ChatVC
+		//Matches
 		if sender is UICollectionViewCell {
-			guard let indexPath = conversationsCollectionView.indexPath(for: sender as! UICollectionViewCell) else {return}
-			chatVC.lover = matches[indexPath.row]
+			guard let indexPath1 = matchesCollectionView.indexPath(for: sender as! UICollectionViewCell) else {return}
+			chatVC.loverId = matches[indexPath1.row].id
 		}
+		//Conversations
 		if sender is UITableViewCell {
-			guard let indexPath = matchesTableView.indexPath(for: sender as! UITableViewCell) else {return}
-			chatVC.lover = matches[indexPath.row]
+			guard let indexPath2 = conversationsTableView.indexPath(for: sender as! UITableViewCell) else {return}
+			let selectedLover: Lover?
+			chatVC.loverId =	conversations[indexPath2.row].chatPartnerId()
 		}
 	}
 }

@@ -15,7 +15,6 @@ class Conversation: NSObject {
 //	lastMessage
 //	timestamp
 
-
 	var fromId: String?
 	var text: String?
 	var timeStamp: NSNumber?

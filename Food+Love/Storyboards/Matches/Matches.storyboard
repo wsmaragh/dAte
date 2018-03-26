@@ -172,8 +172,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Matches" id="WzC-5b-yTT"/>
                     <connections>
-                        <outlet property="conversationsCollectionView" destination="HEJ-Td-ltM" id="Ydb-Uu-er0"/>
-                        <outlet property="matchesTableView" destination="SiH-3M-8d5" id="C5I-4D-Jot"/>
+                        <outlet property="conversationsTableView" destination="SiH-3M-8d5" id="C5I-4D-Jot"/>
+                        <outlet property="matchesCollectionView" destination="HEJ-Td-ltM" id="Ydb-Uu-er0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS1-fl-AeF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -264,11 +264,10 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="5k3-hY-8Xo"/>
                                                         <constraint firstAttribute="width" constant="60" id="YXj-Y9-bqe"/>
-                                                        <constraint firstAttribute="width" secondItem="oSl-As-4sE" secondAttribute="height" multiplier="1:1" id="d2N-Y5-bAb"/>
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPQ-Bn-nwq" userLabel="BubbleView">
-                                                    <rect key="frame" x="78" y="13" width="311" height="181"/>
+                                                    <rect key="frame" x="78" y="87" width="531" height="33"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gu7-L8-961" userLabel="messageImage">
                                                             <rect key="frame" x="0.0" y="0.0" width="311" height="181"/>
@@ -289,25 +288,25 @@
                                                             </constraints>
                                                         </activityIndicatorView>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dr5-6k-ADu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="311" height="181"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="531" height="33"/>
+                                                            <color key="backgroundColor" name="appColorBlue"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="appColorRed"/>
                                                     <constraints>
                                                         <constraint firstItem="gu7-L8-961" firstAttribute="centerY" secondItem="pPQ-Bn-nwq" secondAttribute="centerY" id="14x-0R-nzY"/>
-                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="centerY" secondItem="pPQ-Bn-nwq" secondAttribute="centerY" id="8ct-v0-wr3"/>
                                                         <constraint firstItem="fJs-fo-flQ" firstAttribute="centerX" secondItem="gu7-L8-961" secondAttribute="centerX" id="9KJ-J7-Lde"/>
+                                                        <constraint firstAttribute="width" secondItem="Dr5-6k-ADu" secondAttribute="width" id="Apm-Cp-Y6d"/>
                                                         <constraint firstItem="Tsl-yS-7rz" firstAttribute="centerY" secondItem="gu7-L8-961" secondAttribute="centerY" id="Ey8-bu-8sm"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Dr5-6k-ADu" secondAttribute="trailing" id="G1k-z5-GUL"/>
+                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="centerY" secondItem="pPQ-Bn-nwq" secondAttribute="centerY" id="OiI-hc-RLM"/>
                                                         <constraint firstItem="gu7-L8-961" firstAttribute="centerX" secondItem="pPQ-Bn-nwq" secondAttribute="centerX" id="Xth-d8-pdK"/>
+                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="leading" secondItem="pPQ-Bn-nwq" secondAttribute="leading" id="Xwj-yf-ZKe"/>
+                                                        <constraint firstAttribute="height" secondItem="Dr5-6k-ADu" secondAttribute="height" id="b2D-Wf-5dm"/>
                                                         <constraint firstItem="fJs-fo-flQ" firstAttribute="centerY" secondItem="gu7-L8-961" secondAttribute="centerY" id="eA9-pz-cMj"/>
-                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="width" secondItem="pPQ-Bn-nwq" secondAttribute="width" id="hOa-g1-dXH"/>
-                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="height" secondItem="pPQ-Bn-nwq" secondAttribute="height" id="iVi-Rb-8iW"/>
                                                         <constraint firstItem="gu7-L8-961" firstAttribute="height" secondItem="pPQ-Bn-nwq" secondAttribute="height" id="j8M-Fr-Hpy"/>
-                                                        <constraint firstItem="gu7-L8-961" firstAttribute="width" secondItem="pPQ-Bn-nwq" secondAttribute="width" id="odL-09-4QA"/>
-                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="centerX" secondItem="pPQ-Bn-nwq" secondAttribute="centerX" id="rV2-7r-xxb"/>
                                                         <constraint firstItem="Tsl-yS-7rz" firstAttribute="centerX" secondItem="gu7-L8-961" secondAttribute="centerX" id="sD7-VC-gUe"/>
                                                     </constraints>
                                                     <variation key="default">
@@ -320,13 +319,11 @@
                                                 </view>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" name="appColorBlue"/>
+                                        <color key="backgroundColor" name="appColorGray"/>
                                         <constraints>
                                             <constraint firstItem="oSl-As-4sE" firstAttribute="leading" secondItem="UI0-7O-Ctm" secondAttribute="leadingMargin" constant="5" id="Gu2-Qh-PJ9"/>
-                                            <constraint firstItem="pPQ-Bn-nwq" firstAttribute="top" secondItem="UI0-7O-Ctm" secondAttribute="topMargin" constant="5" id="Mdi-S8-XpG"/>
-                                            <constraint firstAttribute="trailing" secondItem="pPQ-Bn-nwq" secondAttribute="trailing" constant="-20" id="Ofm-QT-B1H"/>
-                                            <constraint firstItem="pPQ-Bn-nwq" firstAttribute="leading" secondItem="oSl-As-4sE" secondAttribute="trailing" constant="5" id="VYF-lt-Qgv"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="pPQ-Bn-nwq" secondAttribute="bottom" constant="5" id="oLA-ya-7eZ"/>
+                                            <constraint firstItem="pPQ-Bn-nwq" firstAttribute="leading" secondItem="oSl-As-4sE" secondAttribute="trailing" constant="5" id="dQG-wO-mV2"/>
+                                            <constraint firstItem="pPQ-Bn-nwq" firstAttribute="centerY" secondItem="UI0-7O-Ctm" secondAttribute="centerY" id="eMb-Zv-iok"/>
                                             <constraint firstItem="oSl-As-4sE" firstAttribute="centerY" secondItem="UI0-7O-Ctm" secondAttribute="centerY" id="tdt-PT-NI2"/>
                                         </constraints>
                                         <size key="customSize" width="369" height="207"/>
@@ -506,14 +503,17 @@
         <namedColor name="appColorBlack">
             <color red="0.23499999940395355" green="0.23499999940395355" blue="0.23499999940395355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="appColorBlack">
-            <color red="0.23499999939999999" green="0.23499999939999999" blue="0.23499999939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="appColorBlue">
             <color red="0.4779999852180481" green="0.46700000762939453" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="appColorGray">
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appColorGray">
+            <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appColorRed">
+            <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="appColorRed">
             <color red="0.82700002189999999" green="0.35299998519999998" blue="0.21600000559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

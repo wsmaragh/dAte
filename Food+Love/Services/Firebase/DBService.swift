@@ -18,6 +18,7 @@ class DBService {
 		loversRef = dbRef.child("lovers")
 		messagesRef = dbRef.child("messages")
 		loverMessagesRef = dbRef.child("loverMessages")
+		categoriesRef = dbRef.child("categories")
 	}
 
 
@@ -28,6 +29,7 @@ class DBService {
 	private var loverMessagesRef: DatabaseReference!
 	private var categoriesRef: DatabaseReference!
 
+
 	// MARK: Helper Methods
 	public func getDBRef()-> DatabaseReference { return dbRef }
 	public func getLoversRef()-> DatabaseReference { return loversRef }
@@ -35,6 +37,7 @@ class DBService {
 	public func getLoverMessagesRef()-> DatabaseReference { return loverMessagesRef }
 	public func getCategoriesRef()-> DatabaseReference {return categoriesRef}
 
+	
 
 	// Format date
 	public func formatDate(with date: Date) -> String {
@@ -45,8 +48,8 @@ class DBService {
 
 	// Add User main
 	public func addLover(name: String, email: String, profileImage: UIImage) {
-		let user = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
-		user.setValue(["name"     : name,
+		let lover = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
+		lover.setValue(["name"     : name,
 									 "email"		: email])
 		{ (error, dbRef) in
 			if let error = error { print("addUser error: \(error.localizedDescription)")}
@@ -96,15 +99,19 @@ class DBService {
 	}
 
 
-	func getLover(uid: String) -> Lover {
-		var lover: Lover!
-		Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
-			if let loverInfoDict = snapshot.value as? [String : AnyObject] {
-				lover = Lover(dictionary: loverInfoDict)
-			}
-		}, withCancel: nil)
-		return lover
-	}
+//	func getLover(uid: String) -> Lover {
+//		var lover: Lover?
+//		Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
+//			if let loverInfoDict = snapshot.value as? [String : AnyObject] {
+//				lover = Lover(dictionary: loverInfoDict)
+////				print(lover.name)
+////				return lover
+//			}
+//		}, withCancel: nil)
+//		if let lover = lover {
+//			return lover
+//		}
+//	}
 
 	func getMultipleLovers(uids: [String]) -> [Lover] {
 		var lovers = [Lover]()
@@ -133,6 +140,27 @@ class DBService {
 		}
 		return lovers
 	}
+
+	func retrieveLover(loverId: String, completionHandler: @escaping (Lover?) -> Void) {
+		let loversRef = DBService.manager.getLoversRef().child(loverId)
+		loversRef.observe(.value) { (snapshot) in
+			if let dict = snapshot.value as? [String: AnyObject] {
+				let lover = Lover(dictionary: dict)
+				completionHandler(lover)
+			}
+		}
+	}
+
+
+//	func getLover(uid: String) -> Lover {
+//		var lover: Lover!
+//		Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
+//			if let loverInfoDict = snapshot.value as? [String : AnyObject] {
+//				lover = Lover(dictionary: loverInfoDict)
+//			}
+//		}, withCancel: nil)
+//		return lover
+//	}
 
 	func retrieveAllLovers(completionHandler: @escaping ([Lover]?) -> Void) {
 		let loversRef = DBService.manager.getLoversRef()
