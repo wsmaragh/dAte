@@ -37,6 +37,7 @@
 		8195758C2066C023001F86F0 /* Restaurant.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8195758B2066C023001F86F0 /* Restaurant.storyboard */; };
 		8195758F2066C8B9001F86F0 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195758E2066C8B9001F86F0 /* RestaurantDetailViewController.swift */; };
 		819575922066CAAE001F86F0 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819575912066CAAE001F86F0 /* RestaurantTableViewCell.swift */; };
+		818BEE9620688B1600D9C62F /* DBService+Likes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818BEE9520688B1600D9C62F /* DBService+Likes.swift */; };
 		819934AE2061CD440075696F /* MatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934AD2061CD440075696F /* MatchesCell.swift */; };
 		819934B2206308D30075696F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934B1206308D30075696F /* Conversation.swift */; };
 		81A7B0752063368200566323 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A7B0742063368200566323 /* ChatCell.swift */; };
@@ -124,6 +125,7 @@
 		8195758B2066C023001F86F0 /* Restaurant.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Restaurant.storyboard; sourceTree = "<group>"; };
 		8195758E2066C8B9001F86F0 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		819575912066CAAE001F86F0 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
+		818BEE9520688B1600D9C62F /* DBService+Likes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Likes.swift"; sourceTree = "<group>"; };
 		819934AD2061CD440075696F /* MatchesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesCell.swift; sourceTree = "<group>"; };
 		819934B1206308D30075696F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		81A7B0742063368200566323 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				81E954B8205E1CEA004036D5 /* AuthUserService.swift */,
 				81E954B9205E1CEA004036D5 /* DBService.swift */,
 				818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */,
+				818BEE9520688B1600D9C62F /* DBService+Likes.swift */,
 				81E954B6205E1CE9004036D5 /* StorageService.swift */,
 				818BEE7F206609C200D9C62F /* StorageService+Images.swift */,
 			);
@@ -778,6 +781,7 @@
 				817F9B752058B8F70061E1B6 /* DatesVC.swift in Sources */,
 				81AAF7F820684BAB0077AAC2 /* DiscoverUserCollectionViewCell.swift in Sources */,
 				8106D84F205D665B00F6EB3E /* WelcomeSlide.swift in Sources */,
+				818BEE9620688B1600D9C62F /* DBService+Likes.swift in Sources */,
 				81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */,
 				815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */,
 				818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */,
