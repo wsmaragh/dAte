@@ -23,8 +23,10 @@ class AdmirersVC: UIViewController {
         }
     }
     
-    var lover1 = Lover(id: "0001", name: "Susan", email: "susan@gmail.com", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/foodnlove-84523.appspot.com/o/images%2FSAh0Op05UXWT9nUybEfDw3bzmlc2?alt=media&token=64b165c5-b299-4194-967a-93a498a26f86", profileVideoUrl: nil, dateOfBirth: nil, zipcode: nil, city: nil, bio: nil, gender: "Male", genderPreference: "Female", smoke: "Yes", drink: "Yes", drugs: "No", favRestaurants: nil, likedUsers: nil, usersThatLikeYou: nil)
+    //DummyData
+    var lover1 = Lover(id: "0001", name: "Susan testing testing", email: "susan@gmail.com", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/foodnlove-84523.appspot.com/o/images%2FSAh0Op05UXWT9nUybEfDw3bzmlc2?alt=media&token=64b165c5-b299-4194-967a-93a498a26f86", profileVideoUrl: nil, dateOfBirth: nil, zipcode: nil, city: nil, bio: nil, gender: "Male", genderPreference: "Female", smoke: "Yes", drink: "Yes", drugs: "No", favRestaurants: nil, likedUsers: nil, usersThatLikeYou: nil)
     
+
     override func viewWillAppear(_ animated: Bool) {
         loadData()
     }
@@ -39,6 +41,7 @@ class AdmirersVC: UIViewController {
         getAllLoversExceptCurrent()
     }
     
+    //Maybe move this? - G.W.
     func getAllLoversExceptCurrent() {
         Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject]{
@@ -50,52 +53,65 @@ class AdmirersVC: UIViewController {
             }
         }, withCancel: nil)
     }
+
     func setUpCollectionViewLayout() {
         admirerCV.dataSource = self
         admirerCV.delegate = self
         admirerCV.register(UINib(nibName: "AdmirerCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AdmirerCell")
 
+
+        let layout = admirerCV.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        layout.itemSize = CGSize(width: (layout.collectionView?.frame.width)! * 0.8 , height: (layout.collectionView?.frame.height)! * 0.7)
         
-        
+        //let layout = admirerCV.collectionViewLayout as! UICollectionViewFlowLayout
+        //layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        //layout.minimumInteritemSpacing = 0
+        //layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: admirerCV.frame.size.height * 0.4)
+
     }
+
+
     
 }
 
 
 extension AdmirersVC: UICollectionViewDataSource, UICollectionViewDelegate {
-    
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: 100, height: 100)
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return admirers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = admirerCV.dequeueReusableCell(withReuseIdentifier: "AdmirerCell", for: indexPath) as! AdmirerCollectionViewCell
+//        let cell = admirerCV.dequeueReusableCell(withReuseIdentifier: "TestingCell", for: indexPath) as! AdmirerCollectionViewCellTesting
+        
+//        let button : UIButton = UIButton(type: UIButtonType.custom) as UIButton
+//        button.frame = CGRect(x: 40, y: 60, width: 100, height: 24)
+//        button.addTarget(self, action: #selector(deleteAdmirer), for: UIControlEvents.touchUpInside)
+//        button.setTitle("Like", for: UIControlState.normal)
+//        button.backgroundColor = .red
+
         
         let admirer = admirers[indexPath.row]
         cell.nameLabel.text = admirer.name
         if let image = admirer.profileImageUrl {
             cell.imageView.loadImageUsingCacheWithUrlString(image)
+
         } else {
             cell.imageView.image = #imageLiteral(resourceName: "user2")
         }
         cell.layoutSubviews()
+//        cell.contentView.addSubview(button)
         return cell
     }
-    
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenHeight: CGFloat = UIScreen.main.bounds.height
-        let screenWidth: CGFloat = UIScreen.main.bounds.width
-          let cellSpacing: CGFloat = 10
-        let numberOfCells: CGFloat = 1.0
-        let layout = admirerCV.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: (screenWidth * 0.8) - (cellSpacing * 2) , height:  (screenHeight / numberOfCells) - (cellSpacing * numberOfCells) + 1)
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        layout.minimumLineSpacing = cellSpacing
-        layout.minimumInteritemSpacing = cellSpacing
-        layout.itemSize = CGSize(width: (layout.collectionView?.frame.width)! * 0.8, height: (layout.collectionView?.frame.height)! * 0.2)
-        return CGSize(width: 400, height: 250)
-    }
+
+
 }
 
 extension AdmirersVC: UICollectionViewDelegateFlowLayout {
@@ -106,5 +122,7 @@ extension AdmirersVC: UICollectionViewDelegateFlowLayout {
         profileVC.visitedUser = admirer
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 350, height: 150)
+    }
 }

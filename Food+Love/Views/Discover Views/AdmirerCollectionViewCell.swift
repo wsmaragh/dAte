@@ -11,8 +11,7 @@ import UIKit
 class AdmirerCollectionViewCell: UICollectionViewCell {
 
 
-    @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var likeButton: UIButton!
+
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
 
@@ -23,14 +22,14 @@ class AdmirerCollectionViewCell: UICollectionViewCell {
     }
 
     override func layoutSubviews() {
-        backView.layer.cornerRadius = 10
-        backView.layer.masksToBounds = true
-        backView.layer.shadowRadius = 4.0
-        backView.layer.shadowColor = UIColor.lightGray.cgColor
-        backView.layer.shadowOpacity = 2
-        backView.layer.shadowOffset = CGSize(width: 0, height: 3)
-        backView.layer.borderColor = UIColor.black.cgColor
-        backView.layer.borderWidth = 0.5
+        self.layer.cornerRadius = 10
+        //backView.layer.masksToBounds = true
+        self.layer.shadowRadius = 4.0
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOpacity = 2
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 0.5
     }
 
 }

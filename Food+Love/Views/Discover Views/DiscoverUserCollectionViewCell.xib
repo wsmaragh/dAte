@@ -29,28 +29,12 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fdh-w4-edj">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="212"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaU-2d-jha" userLabel="Collection View Background">
-                        <rect key="frame" x="0.0" y="212" width="200" height="91"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rVQ-hE-qb2" userLabel="Food Tag Collection View">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="91"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ia5-i3-QSS">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="rVQ-hE-qb2" firstAttribute="trailing" secondItem="xaU-2d-jha" secondAttribute="trailing" id="Jro-Ze-hZN"/>
-                            <constraint firstItem="rVQ-hE-qb2" firstAttribute="top" secondItem="xaU-2d-jha" secondAttribute="top" id="W7K-Vj-Kfm"/>
-                            <constraint firstItem="rVQ-hE-qb2" firstAttribute="bottom" secondItem="xaU-2d-jha" secondAttribute="bottom" id="eD8-gV-Hi9"/>
-                            <constraint firstItem="rVQ-hE-qb2" firstAttribute="leading" secondItem="xaU-2d-jha" secondAttribute="leading" id="no4-d1-TIi"/>
-                        </constraints>
-                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6W-Ww-drg" userLabel="Shared Foods">
+                        <rect key="frame" x="5" y="273" width="190" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5j-EW-fHx" userLabel="Name View">
                         <rect key="frame" x="40" y="190.5" width="120" height="43"/>
                         <subviews>
@@ -70,18 +54,26 @@
                             <constraint firstItem="cAK-C6-0dx" firstAttribute="trailing" secondItem="m5j-EW-fHx" secondAttribute="trailing" id="jL3-Le-9lF"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="You Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZG-Y2-Kid">
+                        <rect key="frame" x="0.0" y="243.5" width="200" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.88305330910000002" green="0.88305330910000002" blue="0.88305330910000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fdh-w4-edj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0Ie-6f-Wtf"/>
                 <constraint firstItem="m5j-EW-fHx" firstAttribute="centerY" secondItem="fdh-w4-edj" secondAttribute="bottom" id="2aF-R4-bl5"/>
-                <constraint firstItem="xaU-2d-jha" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" id="2mw-FZ-iaP"/>
                 <constraint firstItem="m5j-EW-fHx" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="9ON-gO-hHr"/>
-                <constraint firstItem="xaU-2d-jha" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="DTe-d2-vvf"/>
+                <constraint firstItem="yZG-Y2-Kid" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CSA-Bp-TTo"/>
                 <constraint firstItem="fdh-w4-edj" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.7" id="Ehr-Bk-6qq"/>
-                <constraint firstItem="xaU-2d-jha" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="OfA-r3-2HP"/>
-                <constraint firstItem="xaU-2d-jha" firstAttribute="top" secondItem="fdh-w4-edj" secondAttribute="bottom" id="R2J-KQ-Frf"/>
+                <constraint firstItem="n6W-Ww-drg" firstAttribute="bottom" secondItem="gTV-IL-0wX" secondAttribute="bottom" constant="-10" id="Ezu-Yy-1tH"/>
+                <constraint firstItem="n6W-Ww-drg" firstAttribute="top" secondItem="yZG-Y2-Kid" secondAttribute="bottom" constant="5" id="MaC-8w-LAk"/>
                 <constraint firstItem="fdh-w4-edj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SYF-k6-4UO"/>
+                <constraint firstItem="yZG-Y2-Kid" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="T5C-wk-JaZ"/>
+                <constraint firstItem="yZG-Y2-Kid" firstAttribute="top" secondItem="m5j-EW-fHx" secondAttribute="bottom" constant="10" id="cXq-X8-tdg"/>
                 <constraint firstItem="fdh-w4-edj" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" id="d1p-Xy-kyP"/>
                 <constraint firstItem="m5j-EW-fHx" firstAttribute="height" secondItem="fdh-w4-edj" secondAttribute="height" multiplier="0.2" id="ftV-at-DjA"/>
                 <constraint firstItem="m5j-EW-fHx" firstAttribute="width" secondItem="fdh-w4-edj" secondAttribute="width" multiplier="0.6" id="nuy-Kf-nV5"/>
@@ -89,7 +81,6 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="200" height="303"/>
             <connections>
-                <outlet property="foodTagCollectionView" destination="rVQ-hE-qb2" id="xnM-bX-A1h"/>
                 <outlet property="nameBackgroundView" destination="m5j-EW-fHx" id="S9v-YY-y4c"/>
                 <outlet property="nameLabel" destination="cAK-C6-0dx" id="eZa-kR-0fe"/>
                 <outlet property="userImageView" destination="fdh-w4-edj" id="eTk-Ot-fgb"/>

@@ -93,13 +93,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ye5-xB-yiZ">
                                     <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AdmirerCell" id="GV4-3V-45S">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="50" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -107,14 +107,18 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eAT-NI-h0s">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ayr-DK-aiu" firstAttribute="top" secondItem="33S-vR-TQn" secondAttribute="top" id="Dux-dd-05e"/>
                             <constraint firstItem="ayr-DK-aiu" firstAttribute="leading" secondItem="33S-vR-TQn" secondAttribute="leading" id="aix-Kb-dRj"/>
-                            <constraint firstItem="33S-vR-TQn" firstAttribute="trailing" secondItem="ayr-DK-aiu" secondAttribute="trailing" id="nof-sL-WrB"/>
-                            <constraint firstItem="33S-vR-TQn" firstAttribute="bottom" secondItem="ayr-DK-aiu" secondAttribute="bottom" id="oqy-wN-hOV"/>
+                            <constraint firstItem="ayr-DK-aiu" firstAttribute="trailing" secondItem="33S-vR-TQn" secondAttribute="trailing" id="nof-sL-WrB"/>
+                            <constraint firstItem="ayr-DK-aiu" firstAttribute="bottom" secondItem="33S-vR-TQn" secondAttribute="bottom" id="oqy-wN-hOV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="33S-vR-TQn"/>
                     </view>
