@@ -75,29 +75,82 @@ struct Delivery: Codable {
 //////////////////////////////////////////
 // MARK: - FourSquare Search API Client
 struct FSSearchAPIClient {
-	private init(){}
-	static let manager = FSSearchAPIClient()
-
-	func getVenues(from search: String, coordinate: String?, near: String?, completion: @escaping (Error?, [Venue]?) -> Void) {
-
-		var endpoint = ""
-		if let near = near, near != "" {endpoint = "https://api.foursquare.com/v2/venues/search?near=\(near)&query=\(search)\(FourSquareAPIKeys.fourSquareAuthorization)"}
-		else if let coordinate = coordinate {endpoint = "https://api.foursquare.com/v2/venues/search?ll=\(coordinate)&query=\(search)\(FourSquareAPIKeys.fourSquareAuthorization)"}
-
-		guard let url = URL(string: endpoint) else {return}
-
-		let task =  URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-			if let error = error {completion(error, nil)}
-			else if let data = data {
-				do {
-					let JSON = try JSONDecoder().decode(FSSearchJSON.self, from: data)
-					let venues = JSON.response.venues
-					completion(nil, venues)
-				}
-				catch { print("Error processing data: \(error)") }
-			}
-		})
-		task.resume()
-	}
+    private init(){}
+    static let manager = FSSearchAPIClient()
+    
+    func getVenues(lat: String,
+                   long: String,
+                   distance: String,
+                   completion: @escaping ([Venue]?) -> Void,
+                   errorHandler: @escaping (Error?) -> Void) {
+        
+        let baseURL = "https://api.foursquare.com/v2/venues/search?"
+        let endpoint = "\(baseURL)ll=\(lat),\(long)&radius=\(distance)\(FourSquareAPIKeys.fourSquareAuthorization)"
+        //let endpoint = "\(baseURL)ll=\(coordinate)&query=\(search)&radius=\(distance)\(FourSquareAPIKeys.fourSquareAuth)"
+        guard let url = URL(string: endpoint) else {return}
+        
+        let parseData = {(data: Data?) in
+            if let data = data {
+                do {
+                    let JSON = try JSONDecoder().decode(FSSearchJSON.self, from: data)
+                    let venues = JSON.response.venues
+                    completion(venues)
+                } catch let error {
+                    errorHandler(error)
+                }
+            }
+        }
+        NetworkHelper.manager.performDataTask(withURL: url, completionHandler: parseData, errorHandler: errorHandler)
+    }
+    
+    func searchVenues(search: String,
+                      lat: String,
+                      long: String,
+                      distance: String,
+                      completion: @escaping ([Venue]?) -> Void,
+                      errorHandler: @escaping (Error?) -> Void) {
+        
+        let baseURL = "https://api.foursquare.com/v2/venues/search?"
+        let endpoint = "\(baseURL)ll=\(lat),\(long)&query=\(search)&radius=\(distance)\(FourSquareAPIKeys.fourSquareAuthorization)"
+        //let endpoint = "\(baseURL)ll=\(coordinate)&query=\(search)&radius=\(distance)\(FourSquareAPIKeys.fourSquareAuth)"
+        guard let url = URL(string: endpoint) else {return}
+        
+        let parseData = {(data: Data?) in
+            if let data = data {
+                do {
+                    let JSON = try JSONDecoder().decode(FSSearchJSON.self, from: data)
+                    let venues = JSON.response.venues
+                    completion(venues)
+                } catch let error {
+                    errorHandler(error)
+                }
+            }
+        }
+        NetworkHelper.manager.performDataTask(withURL: url, completionHandler: parseData, errorHandler: errorHandler)
+    }
+//    private init(){}
+//    static let manager = FSSearchAPIClient()
+//
+//    func getVenues(from search: String, coordinate: String?, near: String?, completion: @escaping (Error?, [Venue]?) -> Void) {
+//
+//        var endpoint = ""
+//        if let near = near, near != "" {endpoint = "https://api.foursquare.com/v2/venues/search?near=\(near)&query=\(search)\(FourSquareAPIKeys.fourSquareAuthorization)"}
+//        else if let coordinate = coordinate {endpoint = "https://api.foursquare.com/v2/venues/search?ll=\(coordinate)&query=\(search)\(FourSquareAPIKeys.fourSquareAuthorization)"}
+//
+//        guard let url = URL(string: endpoint) else {return}
+//
+//        let task =  URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+//            if let error = error {completion(error, nil)}
+//            else if let data = data {
+//                do {
+//                    let JSON = try JSONDecoder().decode(FSSearchJSON.self, from: data)
+//                    let venues = JSON.response.venues
+//                    completion(nil, venues)
+//                }
+//                catch { print("Error processing data: \(error)") }
+//            }
+//        })
+//        task.resume()
+//    }
 }
 
