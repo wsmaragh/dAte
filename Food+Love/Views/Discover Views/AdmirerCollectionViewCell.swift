@@ -2,51 +2,35 @@
 //  AdmirerCollectionViewCell.swift
 //  Food+Love
 //
-//  Created by Gloria Washington on 3/21/18.
-//  Copyright © 2018 Gloria Washington. All rights reserved.
+//  Created by C4Q on 3/25/18.
+//  Copyright © 2018 Winston Maragh. All rights reserved.
 //
 
 import UIKit
 
 class AdmirerCollectionViewCell: UICollectionViewCell {
 
-//    @IBOutlet weak var admirerImageView: UIImageView!
-//    @IBOutlet weak var admirerFoodsLabel: UILabel!
-//    @IBOutlet weak var admirerNameLabel: UILabel!
-//    @IBOutlet weak var admirerShareLabel: UILabel!
-    @IBOutlet weak var colorSplashView: UIView!
-    @IBOutlet weak var admirerImageView: UIImageView!
-    
-    @IBOutlet weak var admirerNameLabel: UILabel!
-    @IBOutlet weak var admirerShareLabel: UILabel!
-    @IBOutlet weak var admirerFoodsLabel: UILabel!
+
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        fixImageView()
-//        admirerNameLabel.textColor = UIColor.black
-//        layer.cornerRadius = 14
-//        layer.shadowColor = UIColor.black.cgColor
-//        layer.shadowOpacity = 0.3
-//        layer.shadowOffset = CGSize(width: 0, height: 5)
-//        layer.masksToBounds = false
+        // Initialization code
     }
 
-    func fixImageView() {
-        admirerImageView.layer.masksToBounds = true
-        admirerImageView.clipsToBounds = true
+    override func layoutSubviews() {
+        backView.layer.cornerRadius = 10
+        backView.layer.masksToBounds = true
+        backView.layer.shadowRadius = 4.0
+        backView.layer.shadowColor = UIColor.lightGray.cgColor
+        backView.layer.shadowOpacity = 2
+        backView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        backView.layer.borderColor = UIColor.black.cgColor
+        backView.layer.borderWidth = 0.5
     }
-      override func layoutSubviews() {
-        admirerNameLabel.textColor = UIColor.black
-        layer.cornerRadius = 14
-        layer.masksToBounds = false
-        layer.borderColor = UIColor.lightGray.cgColor
-        layer.borderWidth = 0.5
-    }
-    
-    
-    
-    func configureCell(cellImage: UIImage, name: String) {
-        self.admirerImageView.image = cellImage
-        self.admirerNameLabel.text = "\(name) liked you!"
-    }
+
 }

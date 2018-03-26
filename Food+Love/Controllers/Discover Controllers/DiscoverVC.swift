@@ -52,6 +52,8 @@ class DiscoverVC: UIViewController {
 	private func setUpDiscoverCV() {
 		discoverCV.dataSource = self
 		discoverCV.delegate = self
+        discoverCV.register(UINib(nibName: "DiscoverUserCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DiscoverCell")
+
 
         let layout = discoverCV.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13)
@@ -114,14 +116,16 @@ extension DiscoverVC: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as! DiscoverCollectionViewCell
+    let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as! DiscoverUserCollectionViewCell
+//        let cell = Bundle.main.loadNibNamed("DiscoverUserCollectionViewCell", owner: self, options: nil)?.first as! DiscoverUserCollectionViewCell
 		let lover = lovers[indexPath.row]
-      cell.configCell(lover: lover)
 		if let image = lover.profileImageUrl {
-			cell.userPictureImageView.loadImageUsingCacheWithUrlString(image)
+			cell.userImageView.loadImageUsingCacheWithUrlString(image)
 		} else {
-			cell.userPictureImageView.image = #imageLiteral(resourceName: "user2")
+			cell.userImageView.image = #imageLiteral(resourceName: "user2")
 		}
+        cell.nameLabel.text = lover.name
+        cell.layoutSubviews()
 		return cell
 	}
 

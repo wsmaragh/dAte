@@ -13,7 +13,7 @@ class FaveFoodCollectionViewCell: UICollectionViewCell {
     
 
     override func layoutSubviews() {
-       faveFoodLab.textColor = UIColor.black
+//       faveFoodLab.textColor = UIColor.black
         layer.cornerRadius = 14
         layer.masksToBounds = false
         layer.borderColor = UIColor.lightGray.cgColor
