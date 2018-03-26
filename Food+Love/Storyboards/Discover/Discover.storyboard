@@ -125,7 +125,6 @@
                                             <outlet property="labelView" destination="VQo-iy-kic" id="8pI-96-amO"/>
                                             <outlet property="userNameAgeLabel" destination="Q6q-AH-IfU" id="c6s-y2-XyB"/>
                                             <outlet property="userPictureImageView" destination="PYB-Bn-HmR" id="ijN-ZH-ndE"/>
-                                            <segue destination="2dG-1w-nVf" kind="show" id="8Re-OG-UMg"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -272,7 +271,6 @@
                                             <outlet property="admirerImageView" destination="U74-fa-bF3" id="25J-2o-Mg4"/>
                                             <outlet property="admirerNameLabel" destination="ELr-1f-rMv" id="6jl-w0-vZV"/>
                                             <outlet property="admirerShareLabel" destination="iY6-9P-O9q" id="SvZ-NW-RdE"/>
-                                            <segue destination="2dG-1w-nVf" kind="show" id="Ek1-tC-MG2"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -295,14 +293,6 @@
             </objects>
             <point key="canvasLocation" x="6857" y="-888"/>
         </scene>
-        <!--OtherUserProfileVC-->
-        <scene sceneID="Woa-IY-9Pc">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="OtherUserProfileVC" id="2dG-1w-nVf" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jon-au-FfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7678" y="-891"/>
-        </scene>
     </scenes>
     <resources>
         <image name="bg_dinner3" width="3024" height="4032"/>
@@ -311,7 +301,4 @@
             <color red="0.23499999940395355" green="0.23499999940395355" blue="0.23499999940395355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="8Re-OG-UMg"/>
-    </inferredMetricsTieBreakers>
 </document>

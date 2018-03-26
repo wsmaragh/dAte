@@ -22,8 +22,6 @@ class AdmirersVC: UIViewController {
 		}
 	}
 
-	var lover1 = Lover(id: "0001", name: "Susan", email: "susan@gmail.com", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/foodnlove-84523.appspot.com/o/images%2FSAh0Op05UXWT9nUybEfDw3bzmlc2?alt=media&token=64b165c5-b299-4194-967a-93a498a26f86", profileVideoUrl: nil, dateOfBirth: nil, zipcode: nil, city: nil, bio: nil, gender: "Male", genderPreference: "Female", smoke: "Yes", drink: "Yes", drugs: "No", favRestaurants: nil, likedUsers: nil, usersThatLikeYou: nil)
-
 	override func viewWillAppear(_ animated: Bool) {
 		loadData()
 	}
@@ -34,7 +32,6 @@ class AdmirersVC: UIViewController {
 	}
 
 	private func loadData() {
-		admirers = [lover1]
 		getAllLoversExceptCurrent()
 	}
 
@@ -68,7 +65,7 @@ class AdmirersVC: UIViewController {
 extension AdmirersVC: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return admirers.count
+		return admirers.isEmpty ? 0 : admirers.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,8 +86,10 @@ extension AdmirersVC: UICollectionViewDataSource {
 
 extension AdmirersVC: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let storyboard = UIStoryboard(name: "Feed", bundle: nil)
+		let selectedLover = admirers[indexPath.row]
+		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
+		profileVC.lover = selectedLover
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}
 }

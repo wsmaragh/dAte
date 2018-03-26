@@ -11,11 +11,21 @@ import FSPagerView
 
 class OtherUserProfileVC: UIViewController {
 
-	var visitedUser: Lover! {
-		didSet{
-			print(visitedUser.name!)
-		}
+	init(lover: Lover) {
+		super.init(nibName: nil, bundle: nil)
+		self.lover = lover
 	}
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+
+	var lover: Lover?
+	
+//	var visitedUser: Lover! {
+//		didSet{
+//			print(visitedUser.name!)
+//		}
+//	}
 	var photos = [#imageLiteral(resourceName: "bg_cook"), #imageLiteral(resourceName: "bg_love1"), #imageLiteral(resourceName: "bg_date2"), #imageLiteral(resourceName: "bg_desert")]
 
 	@IBOutlet weak var otherUserPagerView: FSPagerView! {
@@ -46,7 +56,7 @@ class OtherUserProfileVC: UIViewController {
 	}
 
 	private func configureNavBar() {
-		self.navigationItem.title = "User Name"
+		self.navigationItem.title = lover?.name ?? "NO NAME"
 		let likeButton = UIBarButtonItem(title: "Like", style: .plain, target: self, action: #selector(likeButtonTapped))
 		self.navigationItem.rightBarButtonItem = likeButton
 
@@ -82,16 +92,6 @@ class OtherUserProfileVC: UIViewController {
 		}
 	}
 
-
-	/*
-	// MARK: - Navigation
-
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	// Get the new view controller using segue.destinationViewController.
-	// Pass the selected object to the new view controller.
-	}
-	*/
 
 }
 

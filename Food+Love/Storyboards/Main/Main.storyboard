@@ -38,8 +38,10 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wjK-MN-a1s">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.82695510790000004" green="0.35423344400000001" blue="0.2158213745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="8xe-Au-xpW" kind="relationship" relationship="viewControllers" id="nN2-oF-Wpv"/>
@@ -55,7 +57,7 @@
         <!--Discover-->
         <scene sceneID="yHL-GD-Qlh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8xe-Au-xpW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DiscoverController" automaticallyAdjustsScrollViewInsets="NO" id="8xe-Au-xpW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" image="findPerson" id="k5z-0j-GxX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="u2s-TI-WqJ">
@@ -75,7 +77,7 @@
         <!--Matches-->
         <scene sceneID="z32-x3-s5W">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2bH-ZH-h9G" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MatchesController" automaticallyAdjustsScrollViewInsets="NO" id="2bH-ZH-h9G" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Matches" image="chat" selectedImage="chat_filled" id="xCf-RQ-rve"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="2qh-OD-UAJ">
@@ -105,7 +107,7 @@
         <!--Dates-->
         <scene sceneID="SZH-Nm-Gb9">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GOt-es-PWk" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DatesController" automaticallyAdjustsScrollViewInsets="NO" id="GOt-es-PWk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Dates" image="meal" selectedImage="meal_filled" id="4ae-1T-C7M"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="ijG-O2-E89">
@@ -120,12 +122,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Uf-ku-HeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4806" y="462"/>
+            <point key="canvasLocation" x="4782" y="461"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Qqk-em-1v8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qd8-Le-cFH" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileController" automaticallyAdjustsScrollViewInsets="NO" id="qd8-Le-cFH" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" selectedImage="profile_filled" id="bc9-Qu-2bE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="w7t-78-CPy">
