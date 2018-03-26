@@ -41,7 +41,7 @@ class DBService {
     }
 
 	public func getDBRef()-> DatabaseReference { return dbRef }
-	public func getLovers()-> DatabaseReference { return loversRef }
+	public func getLoversRef()-> DatabaseReference { return loversRef }
 
 // added
     public func getImagesRef()-> DatabaseReference { return imagesRef }
@@ -52,7 +52,7 @@ class DBService {
 
 	// Add
 	public func addLover(name: String, email: String, profileImage: UIImage) {
-		let user = DBService.manager.getLovers().child((Auth.auth().currentUser?.uid)!)
+		let user = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
 		user.setValue(["name"     : name,
 									 "email"		: email])
 		{ (error, dbRef) in
@@ -71,7 +71,7 @@ class DBService {
 															smoke: String?,
 															drink: String?,
 															drugs: String?) {
-		let user = DBService.manager.getLovers().child((Auth.auth().currentUser?.uid)!)
+		let user = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
 		user.setValue(["dateOfBirth": dateOfBirth,
 									 "zipcode": zipcode,
 									 "city": city,
@@ -125,7 +125,7 @@ class DBService {
 	}
 
 	func getAllLovers() -> [Lover] {
-		let loversRef = DBService.manager.getLovers()
+		let loversRef = DBService.manager.getLoversRef()
 		var lovers = [Lover]()
 		loversRef.observe(.value) { (snapshot) in
 			for child in snapshot.children {
@@ -142,7 +142,7 @@ class DBService {
 	}
 
 	func retrieveAllLovers(completionHandler: @escaping ([Lover]?) -> Void) {
-		let loversRef = DBService.manager.getLovers()
+		let loversRef = DBService.manager.getLoversRef()
 		loversRef.observe(.value) { (snapshot) in
 				var allLovers = [Lover]()
 				for child in snapshot.children {
@@ -172,17 +172,17 @@ class DBService {
 
 	public func updateName(name: String) {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["name": name])
+		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["name": name])
 	}
 
 	public func updateEmail(email: String) {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["email": email])
+		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["email": email])
 	}
 
 	public func updatePhoto(profileImageUrl: String) {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-		DBService.manager.getLovers().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
+		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 	}
 
 
