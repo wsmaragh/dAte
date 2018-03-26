@@ -5,65 +5,93 @@
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import UIKit
+import Firebase
 
 
 class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 
 	// MARK: Outlets/Properties
-	@IBOutlet weak var setupProfileScrollView: UIScrollView!
+	@IBOutlet weak var profileScrollView: UIScrollView!
 	@IBOutlet weak var pageControl: UIPageControl!
-
+	
 
 	// MARK: Properties
-	private var profileSlides = [UIView]() {
-		didSet {
-			addSlidesToScrollView(slides: profileSlides)
-		}
-	}
+	let preferenceSlide = PreferenceProfile()
+	let aboutSlide = AboutProfile()
+	let habitsSlide = HabitsProfile()
+	let videoSlide = VideoProfile()
+//	private var profileSlides = [UIView]()
+	private var profileSlides: [UIView] = []
+//	private var profileSlides: [UIView] = {
+//		let preferenceSlide = PreferenceProfile()
+//		let aboutSlide = AboutProfile()
+//		let habitsSlide = HabitsProfile()
+//		let videoSlide = VideoProfile()
+//		return [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
+//	}()
+	var currentUser: User?
 
 	
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = .red
 		navigationController?.title = "Setup Profile"
-		setupProfileScrollView.delegate = self
-		profileSlides = createSlides()
-		setupPageControl()
+		currentUser = Auth.auth().currentUser
+		profileSlides = [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
+		profileScrollView.delegate = self
+//		profileSlides = createSlides()
+		addSlidesToScrollView(slides: profileSlides)
+//		setupPageControl()
 	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(false)
 		self.navigationController?.setNavigationBarHidden(true, animated: animated)
 	}
 
 
+
 	// MARK: Helper Methods
-	func createSlides() -> [UIView] {
-		//TODO: setup actual Views for each
-		let foodPreferenceSlide = UIView() //3 food categories, 1 favorite dish, favorite restaurant
-		let backgroundSlide = UIView()  //gender, age, kids, gender preference
-		let habitsSlide = UIView()  //drink, smoke, drugs
-		let locationSlide = UIView()
-		let photosSlide = UIView()
-		let shortVideo = UIView()
-		return [foodPreferenceSlide, backgroundSlide, habitsSlide, locationSlide, photosSlide, shortVideo]
+	@IBAction func completeProfile(_ sender: UIButton) {
+		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		if let window = UIApplication.shared.delegate?.window {
+			window?.rootViewController = mainVC
+		}
 	}
 
+	func createSlides() -> [UIView] {
+		let preferenceSlide = PreferenceProfile()
+		let aboutSlide = AboutProfile()
+		let habitsSlide = HabitsProfile()
+		let videoSlide = VideoProfile()
+		return [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
+	}
+
+//	func createSlides() -> [UIView] {
+//		let slide1 = WelcomeLogoSlide()
+//		let slide2 = WelcomeSlide(title: "Bond over food", details: "Start with a simple meal and build from there. Food has played an integral part in shaping culture and communication", picture: #imageLiteral(resourceName: "bg_coffee"))
+//		let slide3 = WelcomeSlide(title: "Companionship", details: "Why eat alone, when you can also meet your soulmate", picture: #imageLiteral(resourceName: "bg_plandate"))
+//		let slide4 = WelcomeSlide(title: "Plan date in app", details: "Spend quality time exploring each other...", picture: #imageLiteral(resourceName: "bg_love1"))
+//		return [slide1, slide2, slide3, slide4]
+//	}
+
 	func setupPageControl(){
-		pageControl.numberOfPages = profileSlides.count
-		pageControl.currentPage = 0
-		pageControl.currentPageIndicatorTintColor = UIColor.red
-		pageControl.pageIndicatorTintColor = UIColor.white
-		view.bringSubview(toFront: pageControl)
+		if !profileSlides.isEmpty {
+			pageControl.numberOfPages = profileSlides.count
+			pageControl.currentPage = 0
+			pageControl.currentPageIndicatorTintColor = UIColor.red
+			pageControl.pageIndicatorTintColor = UIColor.white
+			view.bringSubview(toFront: pageControl)
+		}
 	}
 
 	func addSlidesToScrollView(slides: [UIView]) {
-		setupProfileScrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: setupProfileScrollView.bounds.height)
-		setupProfileScrollView.isPagingEnabled = true
-		setupProfileScrollView.isDirectionalLockEnabled = true
+		profileScrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: profileScrollView.bounds.height)
+		profileScrollView.isPagingEnabled = true
+		profileScrollView.isDirectionalLockEnabled = true
 		for i in 0..<profileSlides.count {
 			profileSlides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
-			setupProfileScrollView.addSubview(profileSlides[i])
+			profileScrollView.addSubview(profileSlides[i])
 		}
 	}
 

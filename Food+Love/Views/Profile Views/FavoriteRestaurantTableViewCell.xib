@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="GujaratiSangamMN.ttc">
+            <string>GujaratiSangamMN</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="125" id="KGk-i7-Jjw" customClass="FavoriteRestaurantTableViewCell" customModule="Food_Love" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="125"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="335" height="124.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKz-Nf-5hD">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="124.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfH-ys-atx">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="124.5"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJ2-AC-t1b" userLabel="Favorite Restaurant TV">
+                                <rect key="frame" x="0.0" y="0.0" width="335" height="124.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="LJ2-AC-t1b" secondAttribute="bottom" id="GFI-X2-3mO"/>
+                            <constraint firstItem="LJ2-AC-t1b" firstAttribute="leading" secondItem="WfH-ys-atx" secondAttribute="leading" id="X96-0g-vdk"/>
+                            <constraint firstItem="LJ2-AC-t1b" firstAttribute="top" secondItem="WfH-ys-atx" secondAttribute="top" id="sec-Q7-uWR"/>
+                            <constraint firstAttribute="trailing" secondItem="LJ2-AC-t1b" secondAttribute="trailing" id="tAm-0c-6u9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="UKz-Nf-5hD" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" id="3Xd-wE-hun"/>
+                    <constraint firstItem="WfH-ys-atx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="CKG-Pb-jBw"/>
+                    <constraint firstItem="UKz-Nf-5hD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FX8-UY-RTU"/>
+                    <constraint firstItem="UKz-Nf-5hD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HEO-Sk-ZfY"/>
+                    <constraint firstAttribute="trailing" secondItem="WfH-ys-atx" secondAttribute="trailing" id="JjX-FJ-yaS"/>
+                    <constraint firstItem="UKz-Nf-5hD" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="QRR-7I-R70"/>
+                    <constraint firstItem="WfH-ys-atx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Sh6-dT-Djf"/>
+                    <constraint firstAttribute="bottom" secondItem="WfH-ys-atx" secondAttribute="bottom" id="UFi-fu-UE8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="favoriteRestaurantTV" destination="LJ2-AC-t1b" id="RFe-4K-DVu"/>
+                <outlet property="mainBackground" destination="WfH-ys-atx" id="sx8-vA-DlX"/>
+                <outlet property="shadowView" destination="UKz-Nf-5hD" id="i7U-Cc-wOw"/>
+            </connections>
+            <point key="canvasLocation" x="123.5" y="136.5"/>
+        </tableViewCell>
+    </objects>
+</document>

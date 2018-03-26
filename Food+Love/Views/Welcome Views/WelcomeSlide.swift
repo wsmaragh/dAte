@@ -59,7 +59,6 @@ class WelcomeSlide: UIView {
 		addSubview(picture)
 		picture.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
-//			picture.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 20),
 			picture.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
 			picture.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.30),
 			picture.centerXAnchor.constraint(equalTo: centerXAnchor),

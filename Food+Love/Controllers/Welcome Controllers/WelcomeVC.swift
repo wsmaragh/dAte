@@ -16,19 +16,34 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	@IBOutlet weak var loginButton: UIButton!
 	@IBOutlet weak var signupButton: UIButton!
 
+
 	// MARK: Properties
 	private var welcomeSlides = [UIView]()
+	private var slideIndex = 0
 
 
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		AuthUserService.manager.signOut()
 		view.backgroundColor = .white
 		welcomeSlideScrollView.delegate = self
 		welcomeSlides = createSlides()
 		addSlidesToScrollView(slides: welcomeSlides)
 		setupPageControl()
-		AuthUserService.manager.signOut()
+		Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
+	}
+
+
+	@objc func changeSlide() {
+		slideIndex += 1
+		if slideIndex < self.welcomeSlides.count {
+			welcomeSlideScrollView.scrollRectToVisible(welcomeSlides[slideIndex].frame, animated: true)
+		}
+		else {
+			slideIndex = 0
+			welcomeSlideScrollView.scrollRectToVisible(welcomeSlides[slideIndex].frame, animated: true)
+		}
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +62,8 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	///Slides
 	func createSlides() -> [UIView] {
 		let slide1 = WelcomeLogoSlide()
-		let slide2 = WelcomeSlide(title: "Bond over food", details: "St...", picture: #imageLiteral(resourceName: "bg_coffee"))
-		let slide3 = WelcomeSlide(title: "Companionship", details: "Why eat alone, when you can also meet your soulmate.", picture: #imageLiteral(resourceName: "bg_plandate"))
+		let slide2 = WelcomeSlide(title: "Bond over food", details: "Start with a simple meal and build from there. Food has played an integral part in shaping culture and communication", picture: #imageLiteral(resourceName: "bg_coffee"))
+		let slide3 = WelcomeSlide(title: "Companionship", details: "Why eat alone, when you can also meet your soulmate", picture: #imageLiteral(resourceName: "bg_plandate"))
 		let slide4 = WelcomeSlide(title: "Plan date in app", details: "Spend quality time exploring each other...", picture: #imageLiteral(resourceName: "bg_love1"))
 		return [slide1, slide2, slide3, slide4]
 	}
@@ -69,9 +84,11 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 		}
 	}
 
+
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let currentPage = scrollView.contentOffset.x / scrollView.frame.size.width
 		welcomePageControl.currentPage = Int(currentPage)
+		slideIndex = welcomePageControl.currentPage
 	}
 
 	//////////////////////////////////
@@ -116,3 +133,4 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 	}
 
 }
+
