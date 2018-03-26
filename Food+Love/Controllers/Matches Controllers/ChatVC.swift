@@ -93,10 +93,10 @@ class ChatVC: UIViewController {
 		navigationItem.rightBarButtonItem = videoChatBarItem
 	}
 
-	@objc private func startVideoChat() {
+	@objc private func startVideoChat(lover: Lover) {
 		let alertView = UIAlertController(title: "Are you sure you on Wifi?", message: nil, preferredStyle: .alert)
 		let yesOption = UIAlertAction(title: "Yes", style: .destructive) { (alertAction) in
-			let videoVC = VideoVC()
+			let videoVC = VideoVC(lover: lover)
 			self.navigationController?.pushViewController(videoVC, animated: true)
 		}
 		let noOption = UIAlertAction(title: "No", style: .cancel, handler: nil)
@@ -144,7 +144,7 @@ class ChatVC: UIViewController {
 		guard let toId = lover?.id else {return}
 		let fromId = Auth.auth().currentUser!.uid
 		let timeStamp = NSNumber.init(value: Date().timeIntervalSince1970)
-		var values: [String : AnyObject] = ["toId":toId as AnyObject, "fromId":fromId as AnyObject, "timeStamp":timeStamp]
+		var values: [String : AnyObject] = ["toId": toId as AnyObject, "fromId": fromId as AnyObject, "timeStamp":timeStamp]
 		values = values.merged(with: property)
 		childRef.updateChildValues(values)
 		childRef.updateChildValues(values) { (error, ref) in
