@@ -21,6 +21,7 @@ enum HTTPVerb: String {
 enum AppError: Error {
 	case badData
 	case badURL
+    case badChildren
 	case unauthenticated
 	case codingError(rawError: Error)
 	case invalidJSONResponse
