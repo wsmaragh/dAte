@@ -8,7 +8,6 @@
 
 
 import UIKit
-import VegaScrollFlowLayout
 import Firebase
 
 
@@ -114,7 +113,7 @@ extension AdmirersVC: UICollectionViewDelegateFlowLayout {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
         let admirer = admirers[indexPath.row]
-        profileVC.visitedUser = admirer
+        profileVC.lover = admirer
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
