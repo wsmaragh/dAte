@@ -1,5 +1,5 @@
 //
-//  AdmirerCollectionViewCell.swift
+//  DiscoverUserCollectionViewCell.swift
 //  Food+Love
 //
 //  Created by C4Q on 3/25/18.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-class AdmirerCollectionViewCell: UICollectionViewCell {
+class DiscoverUserCollectionViewCell: UICollectionViewCell {
 
-
-
+    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-
+    @IBOutlet weak var nameBackgroundView: UIView!
+    @IBOutlet weak var foodTagCollectionView: UICollectionView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,8 +21,10 @@ class AdmirerCollectionViewCell: UICollectionViewCell {
     }
 
     override func layoutSubviews() {
-        self.layer.cornerRadius = 10
-        //backView.layer.masksToBounds = true
+        nameBackgroundView.layer.borderColor = UIColor.white.cgColor
+        nameBackgroundView.layer.borderWidth = 1
+        layer.cornerRadius = 10
+        self.layer.masksToBounds = true
         self.layer.shadowRadius = 4.0
         self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowOpacity = 2

@@ -87,6 +87,7 @@ class SignupVC: UIViewController {
 	}
 
 	@IBAction func signup(_ sender: UIButtonX) {
+// 		createNewAccount() 
 		guard let name = self.firstNameTF.text, name != "" else {
 			showAlert(title: "Please enter a name", message: ""); return
 		}
@@ -107,7 +108,6 @@ class SignupVC: UIViewController {
 			showAlert(title: "No spaces allowed in password!", message: nil); return
 		}
 		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
-
 	}
 
 
@@ -143,6 +143,36 @@ class SignupVC: UIViewController {
 		alertController.addAction(okAction)
 		present(alertController, animated: true, completion: nil)
 	}
+
+
+	@objc private func createNewAccount() {
+		guard let name = self.firstNameTF.text, name != "" else {
+			showAlert(title: "Please enter a name", message: ""); return
+		}
+		guard let email = self.firstNameTF.text, email != "" else {
+			showAlert(title: "Please enter an email", message: ""); return
+		}
+		guard let password = self.passwordTF.text, password != "" else {
+			showAlert(title: "Please enter a valid password", message: ""); return
+		}
+		if profileImageButton.image(for: UIControlState.normal) == #imageLiteral(resourceName: "selfieCamera") {
+			showAlert(title: "Please add a profile image", message: ""); return
+		}
+		guard let image = self.profileImageButton.image(for: .normal) else {
+			showAlert(title: "Please add a profile image", message: ""); return
+		}
+		if email.contains(" ") {
+			showAlert(title: "No spaces allowed in email!", message: nil); return
+		}
+		if password.contains(" ") {
+			showAlert(title: "No spaces allowed in password!", message: nil); return
+		}
+		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
+		if AuthUserService.getCurrentUser() != nil {
+			transitionToMain()
+		}
+	}
+
 
 	private func transitionToMain(){
 		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
