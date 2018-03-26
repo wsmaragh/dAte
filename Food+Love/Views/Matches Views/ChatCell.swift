@@ -62,6 +62,8 @@ class ChatCell: UICollectionViewCell {
 //		player?.pause()
 //		activityIndicatorView.stopAnimating()
 //	}
+
+	
 	// Height for Text
 	fileprivate func estimatedHeightBasedOnText(text: String) -> CGRect{
 		let size = CGSize.init(width: 200, height: 1000)

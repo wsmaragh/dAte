@@ -14,7 +14,6 @@ import Firebase
 
 class AdmirersVC: UIViewController {
     
-    //    @IBOutlet weak var admirerCV: UICollectionView!
     @IBOutlet weak var admirerCV: UICollectionView!
     
     var admirers = [Lover](){
@@ -22,9 +21,6 @@ class AdmirersVC: UIViewController {
             admirerCV.reloadData()
         }
     }
-    
-    //DummyData
-    var lover1 = Lover(id: "0001", name: "Susan testing testing", email: "susan@gmail.com", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/foodnlove-84523.appspot.com/o/images%2FSAh0Op05UXWT9nUybEfDw3bzmlc2?alt=media&token=64b165c5-b299-4194-967a-93a498a26f86", profileVideoUrl: nil, dateOfBirth: nil, zipcode: nil, city: nil, bio: nil, gender: "Male", genderPreference: "Female", smoke: "Yes", drink: "Yes", drugs: "No", favRestaurants: nil, likedUsers: nil, usersThatLikeYou: nil)
     
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +33,6 @@ class AdmirersVC: UIViewController {
     }
     
     private func loadData() {
-        admirers = [lover1]
         getAllLoversExceptCurrent()
     }
     
@@ -81,10 +76,6 @@ extension AdmirersVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return admirers.count
-    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = admirerCV.dequeueReusableCell(withReuseIdentifier: "AdmirerCell", for: indexPath) as! AdmirerCollectionViewCell
@@ -110,6 +101,10 @@ extension AdmirersVC: UICollectionViewDataSource, UICollectionViewDelegate {
         return cell
     }
 
+
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return admirers.isEmpty ? 0 : admirers.count
+	}
 
 
 }

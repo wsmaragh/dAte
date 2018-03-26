@@ -6,7 +6,8 @@
 
 import UIKit
 import Firebase
-
+import GoogleSignIn
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 //		FirebaseApp.configure()
 
+		//Google Sign-in
+		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+		GIDSignIn.sharedInstance().delegate = self 
+
+		//FaceBook Login
+		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
 		//Navigation Bar
 			UINavigationBar.appearance().tintColor = UIColor.white
@@ -34,32 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UITabBar.appearance().alpha = 1.0
 			UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 
-
-
-//		//Window setup
-//		window = UIWindow(frame: UIScreen.main.bounds)
-//		window?.makeKeyAndVisible()
-//
-//		//Check if user is authenticated
-//		if Auth.auth().currentUser == nil {
-//			//welcome
-//			window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
-//
-//			let startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
-//		} else {
-//			//main
-//			window?.rootViewController  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
-//		}
-
-
 		let startingVC: UIViewController?
 
 		//Check if user is authenticated
 		if Auth.auth().currentUser == nil {
-			//welcome
 			startingVC = UIStoryboard(name: "Welcome", bundle: nil).instantiateViewController(withIdentifier: "WelcomeController")
 		} else {
-			//main
 			startingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
 		}
 
@@ -67,8 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow(frame: UIScreen.main.bounds)
 		window?.makeKeyAndVisible()
 		window?.rootViewController = startingVC
-
-
 
 		return true
 	}
@@ -93,6 +78,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	}
+
+}
+
+
+// MARK: Google Sign-in Delegate
+extension AppDelegate: GIDSignInDelegate {
+
+	//Google Sign In
+	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+		if let error = error {print("Failed to log into Google. Error: \(error)"); return}
+		print("Successfully logged into Google")
+
+		guard let authentication = user.authentication else { return }
+		let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+																									 accessToken: authentication.accessToken)
+		Auth.auth().signIn(with: credential) {(user, error) in
+			if let error = error {
+				print("Failed to create a Firebase user with Google Account: ", error)
+				return
+			}
+			guard let uid = user?.uid else {return}
+			print("Successfully logged into Firebase with Google. User: \(user), with ID: \(uid)")
+		}
+	}
+
+	//Google disconnect
+	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+		// Perform any operations when the user disconnects from app here.
+		// ...
+	}
+
+//		@available(iOS 9.0, *)
+//		func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+//			-> Bool {
+//				return self.application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: "")
+//		}
+
+	
+	//	For Google Sign-in
+	@available(iOS 9.0, *)
+	func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+		-> Bool {
+
+			////FaceBook Sign-in
+			let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+
+			//Google Sign-in
+			//			GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+			GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+			return handled
+	}
+
+	//for Google-Sign in to run on iOS 8 and older,
+	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+		let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+		//			return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+		return handled
 	}
 
 

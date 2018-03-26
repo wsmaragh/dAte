@@ -10,19 +10,26 @@ import UIKit
 import FSPagerView
 
 class OtherUserProfileVC: UIViewController {
-
-    var visitedUser: Lover! {
-        didSet{
-            print(visitedUser.name!)
-        }
-    }
-    var photos = [#imageLiteral(resourceName: "bg_cook"), #imageLiteral(resourceName: "bg_love1"), #imageLiteral(resourceName: "bg_date2"), #imageLiteral(resourceName: "bg_desert")]
     
-    @IBOutlet weak var pagerView: FSPagerView! {
-        didSet {
+  init(lover: Lover) {
+		super.init(nibName: nil, bundle: nil)
+		self.lover = lover
+	}
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+
+	var lover: Lover?
+	var photos = [#imageLiteral(resourceName: "bg_cook"), #imageLiteral(resourceName: "bg_love1"), #imageLiteral(resourceName: "bg_date2"), #imageLiteral(resourceName: "bg_desert")]
+  
+  
+   @IBOutlet weak var pagerView: FSPagerView! {
+      didSet {
             self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
         }
     }
+
+  
     @IBOutlet weak var pageControl: FSPageControl!
     @IBOutlet weak var favoriteRestaurantTV: UITableView!
     @IBOutlet weak var favoriteFoodsCV: UICollectionView!
@@ -32,10 +39,10 @@ class OtherUserProfileVC: UIViewController {
     @IBOutlet weak var LocationLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "User Nme"
-
+        configureNavBar()
         setUpTableViews()
         setUpPagerView()
         setUpPageControl()
@@ -43,9 +50,18 @@ class OtherUserProfileVC: UIViewController {
         setUpTableViews()
         setUpButton()
     }
+  
+   
+
 
     private var foodLabel = ["Thai", "Japanese", "Tacoes", "Estonian", "Welsh"]
 
+  	private func configureNavBar() {
+      self.navigationItem.title = lover?.name ?? "NO NAME"
+      let likeButton = UIBarButtonItem(title: "Like", style: .plain, target: self, action: #selector(likeButtonTapped))
+      self.navigationItem.rightBarButtonItem = likeButton
+    }
+  
     private func setUpTableViews() {
         favoriteRestaurantTV.dataSource = self
         bioTV.dataSource = self
@@ -63,7 +79,7 @@ class OtherUserProfileVC: UIViewController {
         pagerView.delegate = self
         pagerView.transformer = FSPagerViewTransformer(type: .depth)
     }
-    
+  
     private func setUpFoodCollectionView() {
         favoriteFoodsCV.delegate = self
         favoriteFoodsCV.dataSource = self
@@ -75,20 +91,15 @@ class OtherUserProfileVC: UIViewController {
 
     private func setUpButton() {
         likeButton.layer.cornerRadius = 10
-        likeButton.layer.masksToBounds = true
-        
+        likeButton.layer.masksToBounds = true      
     }
 
+ 
 
-    /*
-     // MARK: - Navigation
+	@objc private func likeButtonTapped() {
+		//Function sends like to Firebase Storage
+	}
 
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
 
 }
 
