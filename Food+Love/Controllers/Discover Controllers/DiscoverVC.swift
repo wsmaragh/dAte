@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import VegaScrollFlowLayout
 
 
 class DiscoverVC: UIViewController {
@@ -55,7 +54,7 @@ class DiscoverVC: UIViewController {
         let layout = discoverCV.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13)
         layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: discoverCV.frame.size.width * 0.5, height: discoverCV.frame.size.height * 0.45)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.45)
 	}
 
 

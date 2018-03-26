@@ -415,6 +415,7 @@
                         <outlet property="favoriteFoodsCV" destination="nhf-0l-He8" id="ybL-EQ-9cF"/>
                         <outlet property="favoriteRestaurantTV" destination="gXs-fT-pI1" id="5Te-PI-FcJ"/>
                         <outlet property="likeButton" destination="t82-5d-Osf" id="FnO-rT-Iah"/>
+                        <outlet property="nameLabel" destination="6AP-vs-MqF" id="FYX-bl-apU"/>
                         <outlet property="pageControl" destination="nY5-ma-tFa" id="dgF-X0-ppP"/>
                         <outlet property="pagerView" destination="HKa-GV-5NF" id="ia3-Mx-2Qv"/>
                         <outlet property="searchingForTV" destination="HDO-1i-Mgp" id="aSR-mE-4u7"/>

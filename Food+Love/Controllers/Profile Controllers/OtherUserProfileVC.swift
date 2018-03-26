@@ -30,6 +30,7 @@ class OtherUserProfileVC: UIViewController {
     }
 
   
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var pageControl: FSPageControl!
     @IBOutlet weak var favoriteRestaurantTV: UITableView!
     @IBOutlet weak var favoriteFoodsCV: UICollectionView!
@@ -49,6 +50,7 @@ class OtherUserProfileVC: UIViewController {
         setUpFoodCollectionView()
         setUpTableViews()
         setUpButton()
+        setUpInformation()
     }
   
    
@@ -93,6 +95,11 @@ class OtherUserProfileVC: UIViewController {
         likeButton.layer.cornerRadius = 10
         likeButton.layer.masksToBounds = true      
     }
+    
+    private func setUpInformation(){
+//        ageLabel.text = "\(String.calcAge((lover?.dateOfBirth)!))"
+        nameLabel.text = lover?.name
+    }
 
  
 
@@ -110,8 +117,6 @@ extension OtherUserProfileVC: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = favoriteFoodsCV.dequeueReusableCell(withReuseIdentifier: "FaveFoodsCell", for: indexPath) as! FaveFoodCollectionViewCell
-        let favFood = foodLabel[indexPath.row]
-//        cell.faveFoodLab.text = favFood
         return cell
     }
     

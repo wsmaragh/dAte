@@ -12,7 +12,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="GujaratiSangamMN.ttc">
-            <string>GujaratiSangamMN</string>
+            <string>GujaratiSangamMN-Bold</string>
         </array>
     </customFonts>
     <objects>
@@ -43,24 +43,24 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4K-kF-HrV">
                                 <rect key="frame" x="140" y="15" width="210" height="34"/>
-                                <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="GujaratiSangamMN-Bold" family="Gujarati Sangam MN" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQb-Yn-zw6">
-                                <rect key="frame" x="140" y="54" width="210" height="47"/>
+                                <rect key="frame" x="140" y="54" width="210" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="755" text="You Both Love:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZ6-cb-Zxe">
-                                <rect key="frame" x="140" y="111" width="210" height="18"/>
+                                <rect key="frame" x="140" y="95" width="210" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Japanese, Chinese, Tacos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvg-MP-3Kl">
-                                <rect key="frame" x="140" y="129" width="210" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Japanese, Chinese, Tacos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvg-MP-3Kl">
+                                <rect key="frame" x="140" y="120" width="210" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -77,16 +77,15 @@
                             <constraint firstItem="Dvg-MP-3Kl" firstAttribute="leading" secondItem="dHN-ej-P0Z" secondAttribute="trailing" id="Grp-36-1QQ"/>
                             <constraint firstItem="CZ6-cb-Zxe" firstAttribute="trailing" secondItem="Tmf-Ld-Qee" secondAttribute="trailing" id="Hvq-vI-Q6o"/>
                             <constraint firstItem="G4K-kF-HrV" firstAttribute="top" secondItem="rxc-9O-Bqo" secondAttribute="bottom" constant="5" id="I0J-6e-smi"/>
-                            <constraint firstItem="CZ6-cb-Zxe" firstAttribute="top" secondItem="LQb-Yn-zw6" secondAttribute="bottom" constant="10" id="QHB-ZU-c8I"/>
                             <constraint firstItem="rxc-9O-Bqo" firstAttribute="top" secondItem="Tmf-Ld-Qee" secondAttribute="top" id="Qyg-Ti-08G"/>
                             <constraint firstItem="G4K-kF-HrV" firstAttribute="leading" secondItem="dHN-ej-P0Z" secondAttribute="trailing" id="UkL-w9-sRz"/>
                             <constraint firstItem="G4K-kF-HrV" firstAttribute="trailing" secondItem="Tmf-Ld-Qee" secondAttribute="trailing" id="WKc-LU-hBl"/>
                             <constraint firstAttribute="trailing" secondItem="Dvg-MP-3Kl" secondAttribute="trailing" id="dmd-oo-mZ4"/>
                             <constraint firstItem="LQb-Yn-zw6" firstAttribute="top" secondItem="G4K-kF-HrV" secondAttribute="bottom" constant="5" id="gYe-Rn-eEu"/>
-                            <constraint firstAttribute="bottom" secondItem="Dvg-MP-3Kl" secondAttribute="bottom" id="k4B-8x-Mde"/>
+                            <constraint firstAttribute="bottom" secondItem="Dvg-MP-3Kl" secondAttribute="bottom" constant="9" id="k4B-8x-Mde"/>
                             <constraint firstItem="dHN-ej-P0Z" firstAttribute="leading" secondItem="Tmf-Ld-Qee" secondAttribute="leading" id="lzP-i8-qKn"/>
                             <constraint firstAttribute="bottom" secondItem="dHN-ej-P0Z" secondAttribute="bottom" id="qu1-x7-XvE"/>
-                            <constraint firstItem="Dvg-MP-3Kl" firstAttribute="top" secondItem="CZ6-cb-Zxe" secondAttribute="bottom" id="rfP-15-98l"/>
+                            <constraint firstItem="Dvg-MP-3Kl" firstAttribute="top" secondItem="CZ6-cb-Zxe" secondAttribute="bottom" constant="7" id="rfP-15-98l"/>
                         </constraints>
                     </view>
                 </subviews>
