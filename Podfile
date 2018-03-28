@@ -14,8 +14,6 @@ target 'Food+Love' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKShareKit'
     pod 'FBSDKLoginKit'
-    pod 'VegaScrollFlowLayout'
     pod 'Parchment'
-    pod 'FSPagerView'
     pod 'Eureka'
 end
