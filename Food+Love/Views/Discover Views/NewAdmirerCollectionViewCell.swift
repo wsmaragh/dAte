@@ -1,5 +1,5 @@
 //
-//  NewDiscoverCollectionViewCell.swift
+//  NewAdmirerCollectionViewCell.swift
 //  Food+Love
 //
 //  Created by C4Q on 3/27/18.
@@ -8,22 +8,20 @@
 
 import UIKit
 
-class NewDiscoverCollectionViewCell: UICollectionViewCell {
+class NewAdmirerCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var favoriteCuisinesLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageViewX!
     @IBOutlet weak var favoriteFoodImageView: UIImageViewX!
-    @IBOutlet weak var favoriteFoodLabel: UILabel!
-    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var faveFoodLabel: UILabel!
+    @IBOutlet weak var faveCuisinesLabel: UILabel!
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        backgroundColor = .white
-    }
 
     override func prepareForReuse() {
         super.prepareForReuse()

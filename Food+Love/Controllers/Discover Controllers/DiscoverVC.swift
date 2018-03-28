@@ -95,6 +95,10 @@ extension DiscoverVC: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "NewDiscoverCell", for: indexPath) as! NewDiscoverCollectionViewCell
 		let lover = lovers[indexPath.row]
+        cell.userNameLabel.text = lover.name ?? "N/A"
+        cell.favoriteFoodLabel.text = "Mac and Cheese"
+        cell.favoriteCuisinesLabel.text = "Thai, Tacos, Nigerian"
+        cell.userImageView.image = #imageLiteral(resourceName: "user2")
 		if let image = lover.profileImageUrl {
 			cell.userImageView.loadImageUsingCacheWithUrlString(image)
 		} else {
@@ -118,7 +122,7 @@ extension DiscoverVC: UICollectionViewDelegateFlowLayout {
 		//perform segue to profile here
 		 let selectedLover = lovers[indexPath.row]
 		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
+		let profileVC = storyboard.instantiateViewController(withIdentifier: "UserProfileVC") as! UserProfileTableViewController
         profileVC.lover = selectedLover
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}
