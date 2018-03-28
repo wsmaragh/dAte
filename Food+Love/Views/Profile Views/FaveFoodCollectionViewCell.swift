@@ -13,11 +13,12 @@ class FaveFoodCollectionViewCell: UICollectionViewCell {
     
 
     override func layoutSubviews() {
+        super.layoutSubviews()
 //       faveFoodLab.textColor = UIColor.black
-        layer.cornerRadius = 14
-        layer.masksToBounds = false
-        layer.borderColor = UIColor.lightGray.cgColor
-        layer.borderWidth = 0.5
+        self.layer.cornerRadius = 14
+        self.layer.masksToBounds = false
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.5
     }
 
     public func configureCell(food: String) {

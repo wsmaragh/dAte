@@ -8,6 +8,8 @@
 
 import UIKit
 import Eureka
+import Firebase
+
 class EditProfileFormViewController: FormViewController {
 
     override func viewDidLoad() {
@@ -113,8 +115,9 @@ class EditProfileFormViewController: FormViewController {
         }
 
         tableView.layoutIfNeeded()
+
     }
-    
+
 
     /*
     // MARK: - Navigation
