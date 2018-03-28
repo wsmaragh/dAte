@@ -84,3 +84,17 @@ class ShadowView: UIView {
         self.layer.rasterizationScale = UIScreen.main.scale
     }
 }
+
+extension String {
+    //Get date
+    func calcAge(birthday: String) -> Int {
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "MM/dd/yyyy"
+        let birthdayDate = dateFormater.date(from: birthday)
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
+        let now = Date()
+        let calcAge = calendar.components(.year, from: birthdayDate!, to: now, options: [])
+        let age = calcAge.year
+        return age!
+    }
+}
