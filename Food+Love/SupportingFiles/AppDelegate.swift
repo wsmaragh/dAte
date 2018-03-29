@@ -20,10 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 	var window: UIWindow?
 
-	override init() {
-		super.init()
-		FirebaseApp.configure()
-	}
+    override init() {
+        super.init()
+        FirebaseApp.configure()
+    }
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -48,13 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		// Set the messaging delegate in applicationDidFinishLaunchingWithOptions
 		Messaging.messaging().delegate = self
 
+//        FirebaseApp.configure()
 
 		//Google Sign-in
-		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-		GIDSignIn.sharedInstance().delegate = self 
+//        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+//        GIDSignIn.sharedInstance().delegate = self
 
 		//FaceBook Login
-		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+		//FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
 //		FirebaseApp.configure()
 
