@@ -214,7 +214,7 @@
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chinese, Mediterranean, Italian" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEb-qa-LTH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite foods" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEb-qa-LTH">
                                         <rect key="frame" x="141" y="57" width="229" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -253,21 +253,21 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChatCell" id="UI0-7O-Ctm" customClass="ChatCell" customModule="Food_Love" customModuleProvider="target">
-                                        <rect key="frame" x="3" y="0.0" width="369" height="207"/>
+                                        <rect key="frame" x="3" y="0.0" width="369" height="159"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="369" height="207"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="369" height="159"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="oSl-As-4sE" userLabel="loverImage">
-                                                    <rect key="frame" x="13" y="73.5" width="60" height="60"/>
+                                                    <rect key="frame" x="13" y="49.5" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="5k3-hY-8Xo"/>
                                                         <constraint firstAttribute="width" constant="60" id="YXj-Y9-bqe"/>
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPQ-Bn-nwq" userLabel="BubbleView">
-                                                    <rect key="frame" x="78" y="87" width="531" height="33"/>
+                                                    <rect key="frame" x="78" y="81" width="221.5" height="33"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gu7-L8-961" userLabel="messageImage">
                                                             <rect key="frame" x="0.0" y="0.0" width="311" height="181"/>
@@ -287,11 +287,12 @@
                                                                 <constraint firstAttribute="height" constant="50" id="eHq-nq-N5i"/>
                                                             </constraints>
                                                         </activityIndicatorView>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dr5-6k-ADu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="531" height="33"/>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dr5-6k-ADu">
+                                                            <rect key="frame" x="0.0" y="0.0" width="221.5" height="33"/>
                                                             <color key="backgroundColor" name="appColorBlue"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                            <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                                         </textView>
                                                     </subviews>
                                                     <color key="backgroundColor" name="appColorRed"/>
@@ -301,10 +302,12 @@
                                                         <constraint firstAttribute="width" secondItem="Dr5-6k-ADu" secondAttribute="width" id="Apm-Cp-Y6d"/>
                                                         <constraint firstItem="Tsl-yS-7rz" firstAttribute="centerY" secondItem="gu7-L8-961" secondAttribute="centerY" id="Ey8-bu-8sm"/>
                                                         <constraint firstAttribute="trailing" secondItem="Dr5-6k-ADu" secondAttribute="trailing" id="G1k-z5-GUL"/>
+                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="centerY" secondItem="pPQ-Bn-nwq" secondAttribute="centerY" id="Kvu-r9-EJI"/>
                                                         <constraint firstItem="Dr5-6k-ADu" firstAttribute="centerY" secondItem="pPQ-Bn-nwq" secondAttribute="centerY" id="OiI-hc-RLM"/>
                                                         <constraint firstItem="gu7-L8-961" firstAttribute="centerX" secondItem="pPQ-Bn-nwq" secondAttribute="centerX" id="Xth-d8-pdK"/>
                                                         <constraint firstItem="Dr5-6k-ADu" firstAttribute="leading" secondItem="pPQ-Bn-nwq" secondAttribute="leading" id="Xwj-yf-ZKe"/>
                                                         <constraint firstAttribute="height" secondItem="Dr5-6k-ADu" secondAttribute="height" id="b2D-Wf-5dm"/>
+                                                        <constraint firstItem="Dr5-6k-ADu" firstAttribute="centerX" secondItem="pPQ-Bn-nwq" secondAttribute="centerX" id="e4s-qX-gqX"/>
                                                         <constraint firstItem="fJs-fo-flQ" firstAttribute="centerY" secondItem="gu7-L8-961" secondAttribute="centerY" id="eA9-pz-cMj"/>
                                                         <constraint firstItem="gu7-L8-961" firstAttribute="height" secondItem="pPQ-Bn-nwq" secondAttribute="height" id="j8M-Fr-Hpy"/>
                                                         <constraint firstItem="Tsl-yS-7rz" firstAttribute="centerX" secondItem="gu7-L8-961" secondAttribute="centerX" id="sD7-VC-gUe"/>
@@ -322,11 +325,12 @@
                                         <color key="backgroundColor" name="appColorGray"/>
                                         <constraints>
                                             <constraint firstItem="oSl-As-4sE" firstAttribute="leading" secondItem="UI0-7O-Ctm" secondAttribute="leadingMargin" constant="5" id="Gu2-Qh-PJ9"/>
+                                            <constraint firstItem="pPQ-Bn-nwq" firstAttribute="width" secondItem="UI0-7O-Ctm" secondAttribute="width" multiplier="0.6" id="IPi-jo-65w"/>
                                             <constraint firstItem="pPQ-Bn-nwq" firstAttribute="leading" secondItem="oSl-As-4sE" secondAttribute="trailing" constant="5" id="dQG-wO-mV2"/>
-                                            <constraint firstItem="pPQ-Bn-nwq" firstAttribute="centerY" secondItem="UI0-7O-Ctm" secondAttribute="centerY" id="eMb-Zv-iok"/>
+                                            <constraint firstItem="pPQ-Bn-nwq" firstAttribute="centerY" secondItem="UI0-7O-Ctm" secondAttribute="centerY" constant="17.5" id="eMb-Zv-iok"/>
                                             <constraint firstItem="oSl-As-4sE" firstAttribute="centerY" secondItem="UI0-7O-Ctm" secondAttribute="centerY" id="tdt-PT-NI2"/>
                                         </constraints>
-                                        <size key="customSize" width="369" height="207"/>
+                                        <size key="customSize" width="369" height="159"/>
                                         <connections>
                                             <outlet property="activityIndicatorView" destination="fJs-fo-flQ" id="QoU-uo-i6f"/>
                                             <outlet property="bubbleView" destination="pPQ-Bn-nwq" id="AKg-2V-OmM"/>
@@ -334,6 +338,81 @@
                                             <outlet property="playButton" destination="Tsl-yS-7rz" id="GBd-Qc-fsI"/>
                                             <outlet property="profileImageView" destination="oSl-As-4sE" id="IBC-AJ-FyA"/>
                                             <outlet property="textView" destination="Dr5-6k-ADu" id="8wZ-gw-q0S"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChatCellSend" id="bwx-If-KaO" customClass="ChatCell" customModule="Food_Love" customModuleProvider="target">
+                                        <rect key="frame" x="3" y="169" width="369" height="144"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="369" height="144"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbt-bt-bdX" userLabel="BubbleView">
+                                                    <rect key="frame" x="61" y="41" width="221.5" height="61"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Nu-YD5" userLabel="messageImage">
+                                                            <rect key="frame" x="0.0" y="0.0" width="311" height="181"/>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I0b-Fo-Gha">
+                                                            <rect key="frame" x="130.5" y="66" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="NgO-RT-pXJ"/>
+                                                                <constraint firstAttribute="height" constant="50" id="Ykt-Ia-1VA"/>
+                                                            </constraints>
+                                                            <state key="normal" image="play"/>
+                                                        </button>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vka-Uc-aMl">
+                                                            <rect key="frame" x="130.5" y="66" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="6xx-0D-940"/>
+                                                                <constraint firstAttribute="width" constant="50" id="Omj-cs-ybO"/>
+                                                            </constraints>
+                                                        </activityIndicatorView>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FJe-EC-vwq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="222" height="61"/>
+                                                            <color key="backgroundColor" name="appColorGray"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="appColorRed"/>
+                                                    <constraints>
+                                                        <constraint firstItem="bMc-Nu-YD5" firstAttribute="centerX" secondItem="bbt-bt-bdX" secondAttribute="centerX" id="1vV-XC-coe"/>
+                                                        <constraint firstItem="bMc-Nu-YD5" firstAttribute="centerY" secondItem="bbt-bt-bdX" secondAttribute="centerY" id="76b-Xp-xIA"/>
+                                                        <constraint firstItem="vka-Uc-aMl" firstAttribute="centerX" secondItem="bMc-Nu-YD5" secondAttribute="centerX" id="Fxv-LJ-X8F"/>
+                                                        <constraint firstItem="vka-Uc-aMl" firstAttribute="centerY" secondItem="bMc-Nu-YD5" secondAttribute="centerY" id="G13-pm-B43"/>
+                                                        <constraint firstItem="bMc-Nu-YD5" firstAttribute="height" secondItem="bbt-bt-bdX" secondAttribute="height" id="K5W-eu-vzE"/>
+                                                        <constraint firstAttribute="width" secondItem="FJe-EC-vwq" secondAttribute="width" constant="-0.5" id="LiG-K9-bhS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="FJe-EC-vwq" secondAttribute="trailing" constant="-0.5" id="TQ5-P9-Fru"/>
+                                                        <constraint firstItem="FJe-EC-vwq" firstAttribute="leading" secondItem="bbt-bt-bdX" secondAttribute="leading" id="dJi-Ip-gl5"/>
+                                                        <constraint firstItem="I0b-Fo-Gha" firstAttribute="centerX" secondItem="bMc-Nu-YD5" secondAttribute="centerX" id="iPa-NW-7nq"/>
+                                                        <constraint firstItem="FJe-EC-vwq" firstAttribute="centerY" secondItem="bbt-bt-bdX" secondAttribute="centerY" id="m0d-9z-RhW"/>
+                                                        <constraint firstItem="I0b-Fo-Gha" firstAttribute="centerY" secondItem="bMc-Nu-YD5" secondAttribute="centerY" id="mwS-CC-q5H"/>
+                                                        <constraint firstAttribute="height" secondItem="FJe-EC-vwq" secondAttribute="height" id="tJ0-2b-if5"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="subviews">
+                                                            <exclude reference="bMc-Nu-YD5"/>
+                                                            <exclude reference="I0b-Fo-Gha"/>
+                                                            <exclude reference="vka-Uc-aMl"/>
+                                                        </mask>
+                                                    </variation>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" name="appColorGray"/>
+                                        <constraints>
+                                            <constraint firstItem="bbt-bt-bdX" firstAttribute="centerY" secondItem="bwx-If-KaO" secondAttribute="centerY" id="C55-1D-YqB"/>
+                                            <constraint firstItem="bbt-bt-bdX" firstAttribute="centerX" secondItem="bwx-If-KaO" secondAttribute="centerX" id="WkI-GN-eue"/>
+                                            <constraint firstItem="bbt-bt-bdX" firstAttribute="width" secondItem="bwx-If-KaO" secondAttribute="width" multiplier="0.6" id="obd-Pq-Yt2"/>
+                                        </constraints>
+                                        <size key="customSize" width="369" height="144"/>
+                                        <connections>
+                                            <outlet property="activityIndicatorView" destination="vka-Uc-aMl" id="eX1-iO-mg0"/>
+                                            <outlet property="bubbleView" destination="bbt-bt-bdX" id="j8v-V7-EtY"/>
+                                            <outlet property="messageImageView" destination="bMc-Nu-YD5" id="qkz-yW-aeT"/>
+                                            <outlet property="playButton" destination="I0b-Fo-Gha" id="f4F-g4-IR5"/>
+                                            <outlet property="textView" destination="FJe-EC-vwq" id="zN1-Zk-W1f"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -505,6 +584,9 @@
         </namedColor>
         <namedColor name="appColorBlue">
             <color red="0.4779999852180481" green="0.46700000762939453" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appColorGray">
+            <color red="0.92199999089999995" green="0.92199999089999995" blue="0.92199999089999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="appColorGray">
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
