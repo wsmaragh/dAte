@@ -47,7 +47,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="315"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addImage" translatesAutoresizingMaskIntoConstraints="NO" id="jgB-lM-qrI">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="jgB-lM-qrI">
                                                             <rect key="frame" x="8" y="8" width="359" height="299"/>
                                                         </imageView>
                                                     </subviews>
@@ -635,6 +635,7 @@
     <resources>
         <image name="bg_coffee" width="5997" height="4000"/>
         <image name="like" width="25" height="25"/>
+        <image name="profile" width="25" height="25"/>
         <namedColor name="appColorRed">
             <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
