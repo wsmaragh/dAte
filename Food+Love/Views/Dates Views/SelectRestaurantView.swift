@@ -112,7 +112,6 @@ class SelectRestaurantView: UIView {
         return stView
     }()
     
-    
     lazy var dateStackView: UIStackView = {
         let stView = UIStackView()
         stView.axis  = UILayoutConstraintAxis.horizontal
