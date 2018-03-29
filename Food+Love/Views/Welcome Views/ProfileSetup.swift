@@ -12,11 +12,17 @@ import UIKit
 
 
 class PreferenceProfile: UIView {
-	@IBOutlet weak var foodPref1: UITextField!
-	@IBOutlet weak var foodPref2: UITextField!
-	@IBOutlet weak var foodPref3: UITextField!
-	@IBOutlet weak var restaurant1: UITextField!
-	@IBOutlet weak var restaurant2: UITextField!
+
+	// MARK: Setup
+	override init(frame: CGRect) {
+		super.init(frame: UIScreen.main.bounds)
+	}
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	override func layoutSubviews() {
+		super.layoutSubviews()
+	}
 }
 
 class AboutProfile: UIView {
@@ -25,20 +31,24 @@ class AboutProfile: UIView {
 	@IBOutlet weak var dateOfBirthPicker: UIDatePicker!
 }
 
-class HabitsProfile: UIView {
-	@IBOutlet weak var drinkSC: UISegmentedControl!
-	@IBOutlet weak var cigarettesSC: UISegmentedControl!
-	@IBOutlet weak var weedSC: UISegmentedControl!
-	@IBOutlet weak var drugsSC: UISegmentedControl!
-	@IBOutlet weak var continueButton: UIButton!
-}
 
 class BioProfile: UIView {
-
+	@IBOutlet weak var boroughSC: UISegmentedControl!
+	@IBOutlet weak var zipcodeTF: UITextField!
 }
 
 class VideoProfile: UIView {
 
+	// MARK: Setup
+	override init(frame: CGRect) {
+		super.init(frame: UIScreen.main.bounds)
+	}
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	override func layoutSubviews() {
+		super.layoutSubviews()
+	}
 }
 
 

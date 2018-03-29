@@ -40,9 +40,15 @@ class DBService {
 	
 
 	// Format date
-	public func formatDate(with date: Date) -> String {
+	public func formatDateforMessages(with date: Date) -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "MMM d, YYYY h:mm a"
+		return dateFormatter.string(from: date)
+	}
+
+	public func formatDateforDOB(with date: Date) -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "MMM d, YYYY"
 		return dateFormatter.string(from: date)
 	}
 
@@ -59,25 +65,26 @@ class DBService {
 	}
 
 	// Add Details
-	public func addLoverDetails(dateOfBirth: String?,
-															zipcode: String?,
-															city: String?,
-															bio: String?,
-															gender: String?,
-															genderPreference: String?,
-															smoke: String?,
-															drink: String?,
-															drugs: String?) {
+	public func addLoverDetails(favCat1: String,
+															favCat2: String,
+															favCat3: String,
+															favRestaurant: String,
+															zipcode: String,
+															gender: String,
+															genderPreference: String,
+															dateOfBirth: String,
+															bio: String?) {
 		let lover = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
-		lover.setValue(["dateOfBirth": dateOfBirth,
-									 "zipcode": zipcode,
-									 "city": city,
-									 "bio": bio,
-									 "gender" : gender,
-									 "genderPreference"	: genderPreference,
-									 "smoke" : smoke,
-									 "drink": drink,
-									 "drugs" : drugs])
+		lover.setValue(["favCat1": favCat1,
+										"favCat2": favCat2,
+										"favCat3": favCat3,
+										"favRestaurant": favRestaurant,
+										"zipcode": zipcode,
+										"gender" : gender,
+										"genderPreference": genderPreference,
+										"dateOfBirth": dateOfBirth,
+										"bio": bio
+			])
 		{ (error, dbRef) in
 			if let error = error { print("addUser error: \(error.localizedDescription)")}
 			else { print("user successfully added to database reference: \(dbRef)")}

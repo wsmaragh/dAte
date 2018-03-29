@@ -8,9 +8,15 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
+import UserNotifications
+import FirebaseInstanceID
+import FirebaseMessaging
+
+
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate
+ {
 
 	var window: UIWindow?
 
@@ -20,9 +26,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
 
-//		FirebaseApp.configure()
+		//Notifications
+		if #available(iOS 10.0, *) {
+				// For iOS 10 display notification (sent via APNS)
+				UNUserNotificationCenter.current().delegate = self
+
+				let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+				UNUserNotificationCenter.current().requestAuthorization(
+						options: authOptions,
+						completionHandler: {_, _ in })
+		} else {
+				let settings: UIUserNotificationSettings =
+						UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+				application.registerUserNotificationSettings(settings)
+		}
+
+		// registering for push notifications
+		application.registerForRemoteNotifications()
+
+		// Set the messaging delegate in applicationDidFinishLaunchingWithOptions
+		Messaging.messaging().delegate = self
+
 
 		//Google Sign-in
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -30,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		//FaceBook Login
 		FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
+//		FirebaseApp.configure()
 
 		//Navigation Bar
 			UINavigationBar.appearance().tintColor = UIColor.white
@@ -41,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UITabBar.appearance().alpha = 1.0
 			UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
 
+
+		// choose starting View Controller based on if user is already logged in
 		let startingVC: UIViewController?
 
 		//Check if user is authenticated
@@ -57,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		return true
 	}
+
 
 	func applicationWillResignActive(_ application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -81,6 +111,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 }
+
+
+// MARK: Messaging
+extension AppDelegate: MessagingDelegate {
+	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+		Messaging.messaging().apnsToken = deviceToken
+		print("deviceToken: \(deviceToken)")
+		if let instanceIdToken = InstanceID.instanceID().token() {
+			print("Device token which is good to use with FCM \(instanceIdToken)")
+		}
+	}
+
+	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+		print("didFailToRegisterForRemoteNotificationsWithError: \(error)")
+	}
+
+	func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+		let token = Messaging.messaging().fcmToken
+		print("FCM token: \(token ?? "")")
+		// TODO: If necessary send token to application server.
+		// Note: This callback is fired at each app startup and whenever a new token is generated.
+	}
+
+}
+
 
 
 // MARK: Google Sign-in Delegate
@@ -110,13 +165,6 @@ extension AppDelegate: GIDSignInDelegate {
 		// ...
 	}
 
-//		@available(iOS 9.0, *)
-//		func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
-//			-> Bool {
-//				return self.application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: "")
-//		}
-
-	
 	//	For Google Sign-in
 	@available(iOS 9.0, *)
 	func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
@@ -140,4 +188,7 @@ extension AppDelegate: GIDSignInDelegate {
 
 
 }
+
+
+
 
