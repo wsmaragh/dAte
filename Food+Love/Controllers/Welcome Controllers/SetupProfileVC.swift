@@ -22,6 +22,7 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	@IBOutlet var signupSlide: UIView!
 	@IBOutlet var videoSlide: UIView!
 
+	@IBOutlet weak var actionButton: UIButton!
 
 	//Properties Fields
 	@IBOutlet weak var favoriteFoodCategory1TF: UITextField!
@@ -71,7 +72,7 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	}
 
 	func setupPageControl(){
-		scrollViewDidScroll(profileScrollView)
+
 
 	}
 
@@ -108,25 +109,28 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 //		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
 //	}
 
-//	@IBAction func nextPage(_ sender: UIButton) {
-//			let scroll : UIScrollView? = profileScrollView(self.view)
-//			let scrollPoint = CGPointMake(0.0, 0.0)
-//			println("Button Tapped")
-//CGPoint(x: <#T##CGFloat#>, y: profileScrollView.)
-//		profileScrollView.setContentOffset(, animated: <#T##Bool#>)
-//			if scroll {
-//				scroll!.setContentOffset(scrollPoint, animated: true)
-//			}
-//
-////		profileScrollView.contentOffset.x + profileScrollView.bounds.width
-////		let currentPage = profileScrollView.contentOffset.x / profileScrollView.frame.size.width
-////		pageControl.currentPage = Int(currentPage)
-////		slideIndex = pageControl.currentPage
-//	}
-//
-//	setContentOffset:animated:
+	@IBAction func nextPage(_ sender: UIButton) {
+		let count = profileSlides.count
+		if slideIndex < count {
+			let x = profileScrollView.contentOffset.x * 2
+			let currentPage = profileScrollView.contentOffset.x / profileScrollView.frame.size.width
+			let point = CGPoint(x: view.bounds.width * (currentPage + 1), y: 0)
+			profileScrollView.setContentOffset(point, animated: true)
+			pageControl.currentPage = Int(currentPage)
+			slideIndex = pageControl.currentPage
+		}
 
-	@IBAction func completeProfile(_ sender: UIButton) {
+		if slideIndex == count {
+			actionButton.titleLabel?.text = "Complete"
+			
+		}
+
+
+
+
+}
+
+	func completeProfile(){
 		//add user details to database
 		guard let favCat1 = favoriteFoodCategory1TF.text else {return}
 		guard let favCat2 = favoriteFoodCategory2TF.text else {return}
@@ -142,12 +146,13 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		DBService.manager.addLoverDetails(favCat1: favCat1, favCat2: favCat2, favCat3: favCat3, favRestaurant: favRest, zipcode: zipcode, gender: gender, genderPreference: genderPreference, dateOfBirth: dob, bio: bio)
 
 		//transition to mainVC
-//		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
-//		if let window = UIApplication.shared.delegate?.window {
-//			window?.rootViewController = mainVC
-//		}
+		//		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		//		if let window = UIApplication.shared.delegate?.window {
+		//			window?.rootViewController = mainVC
+		//		}
 		print("user details added")
 	}
+
 	
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -155,6 +160,6 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		pageControl.currentPage = Int(currentPage)
 		slideIndex = pageControl.currentPage
 	}
-	
+
 
 }

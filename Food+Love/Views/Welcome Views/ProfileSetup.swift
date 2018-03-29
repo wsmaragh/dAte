@@ -13,16 +13,7 @@ import UIKit
 
 class PreferenceProfile: UIView {
 
-	// MARK: Setup
-	override init(frame: CGRect) {
-		super.init(frame: UIScreen.main.bounds)
-	}
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	override func layoutSubviews() {
-		super.layoutSubviews()
-	}
+
 }
 
 class AboutProfile: UIView {
@@ -39,16 +30,7 @@ class BioProfile: UIView {
 
 class VideoProfile: UIView {
 
-	// MARK: Setup
-	override init(frame: CGRect) {
-		super.init(frame: UIScreen.main.bounds)
-	}
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	override func layoutSubviews() {
-		super.layoutSubviews()
-	}
+
 }
 
 
