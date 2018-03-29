@@ -53,6 +53,8 @@ class MakeDateVC: UIViewController {
         self.title = "Plan date"
         self.navigationController?.navigationBar.isTranslucent=false
         self.view.backgroundColor=Style.bgColor
+			tabBarController?.tabBar.isHidden = true
+
         
         calenderView.delegate = self
         searchRestview.delegate = self
