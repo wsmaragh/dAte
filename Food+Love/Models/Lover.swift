@@ -25,6 +25,7 @@ class Lover: NSObject {
     var firstFoodPrefer: String?
     var secondFoodPrefer: String?
     var thirdFoodPrefer: String?
+    var favRestaurants: [String]?
     var likedUsers: [String]?
 	var morePhotos: [String]?
 	var usersThatLikeYou: [String]?
@@ -46,9 +47,9 @@ class Lover: NSObject {
 	    self.favDish = dictionary["favDish"] as? String
         self.favDishImageUrl = dictionary["favDishImageUrl"] as? String
         self.firstFoodPrefer = dictionary["firstFoodPrefer"] as? String
-         self.secondFoodPrefer = dictionary["secondFoodPrefer"] as? String
-         self.thirdFoodPrefer = dictionary["thirdFoodPrefer"] as? String
-		//self.favRestaurants = dictionary["favRestaurants"]  as? [String]
+        self.secondFoodPrefer = dictionary["secondFoodPrefer"] as? String
+        self.thirdFoodPrefer = dictionary["thirdFoodPrefer"] as? String
+		self.favRestaurants = dictionary["favRestaurants"]  as? [String]
 		self.likedUsers = dictionary["likedUsers"]  as? [String]
 		self.usersThatLikeYou = dictionary["usersThatLikeYou"]  as? [String]
 	}
@@ -94,7 +95,7 @@ class Lover: NSObject {
         self.firstFoodPrefer = firstFoodPrefer
         self.secondFoodPrefer = secondFoodPrefer
         self.thirdFoodPrefer = thirdFoodPrefer
-	//	self.favRestaurants = favRestaurants
+		self.favRestaurants = favRestaurants
 		self.likedUsers = likedUsers
 		self.usersThatLikeYou = usersThatLikeYou
 	}
