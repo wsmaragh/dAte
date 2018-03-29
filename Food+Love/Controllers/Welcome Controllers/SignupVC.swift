@@ -87,7 +87,6 @@ class SignupVC: UIViewController {
 	}
 
 	@IBAction func signup(_ sender: UIButtonX) {
-// 		createNewAccount() 
 		guard let name = self.firstNameTF.text, name != "" else {
 			showAlert(title: "Please enter a name", message: ""); return
 		}

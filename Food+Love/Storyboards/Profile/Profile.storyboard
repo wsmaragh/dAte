@@ -33,21 +33,21 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mmD-wu-OmO" userLabel="User Pictures Collection View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="526"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xz1-NE-Ud4">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xz1-NE-Ud4">
                                             <size key="itemSize" width="375" height="315"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserPictureCell" id="kvS-MF-RrQ" customClass="UserPicturesCollectionViewCell" customModule="Food_Love" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="315"/>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="UserPictureCell" id="kvS-MF-RrQ" customClass="UserPicturesCollectionViewCell" customModule="Food_Love" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="105.5" width="375" height="315"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="315"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jgB-lM-qrI">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="jgB-lM-qrI">
                                                             <rect key="frame" x="8" y="8" width="359" height="299"/>
                                                         </imageView>
                                                     </subviews>
@@ -635,6 +635,7 @@
     <resources>
         <image name="bg_coffee" width="5997" height="4000"/>
         <image name="like" width="25" height="25"/>
+        <image name="profile" width="25" height="25"/>
         <namedColor name="appColorRed">
             <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
