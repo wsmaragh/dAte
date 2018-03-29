@@ -108,6 +108,7 @@ extension UIImageView {
 
 // Extend IMAGE
 extension UIImage {
+
 	public class func gifImageWithData(_ data: Data) -> UIImage? {
 		guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
 			print("image doesn't exist")
