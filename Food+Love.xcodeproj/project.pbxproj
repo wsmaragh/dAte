@@ -22,6 +22,9 @@
 		816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */; };
 		816511F2206714F200F27F34 /* UserPicturesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */; };
 		81729CD52066297300FD5737 /* SearchRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81729CD42066297300FD5737 /* SearchRestaurant.swift */; };
+		817AE42F206C825D006C2CA4 /* MessageFCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE42E206C825D006C2CA4 /* MessageFCM.swift */; };
+		817AE431206C846E006C2CA4 /* FCMKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE430206C846E006C2CA4 /* FCMKeys.swift */; };
+		817AE433206C869A006C2CA4 /* FCMAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE432206C869A006C2CA4 /* FCMAPIClient.swift */; };
 		817F9B47205863B10061E1B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B46205863B10061E1B6 /* AppDelegate.swift */; };
 		817F9B4E205863B10061E1B6 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4D205863B10061E1B6 /* Icons.xcassets */; };
 		817F9B51205863B10061E1B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4F205863B10061E1B6 /* LaunchScreen.storyboard */; };
@@ -113,6 +116,9 @@
 		816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormViewController.swift; sourceTree = "<group>"; };
 		816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPicturesCollectionViewCell.swift; sourceTree = "<group>"; };
 		81729CD42066297300FD5737 /* SearchRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurant.swift; sourceTree = "<group>"; };
+		817AE42E206C825D006C2CA4 /* MessageFCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFCM.swift; sourceTree = "<group>"; };
+		817AE430206C846E006C2CA4 /* FCMKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMKeys.swift; sourceTree = "<group>"; };
+		817AE432206C869A006C2CA4 /* FCMAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMAPIClient.swift; sourceTree = "<group>"; };
 		817F9B43205863B10061E1B6 /* Food+Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food+Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		817F9B46205863B10061E1B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		817F9B4D205863B10061E1B6 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -293,6 +299,7 @@
 				818BEE7B2066068E00D9C62F /* UserLikes.swift */,
 				81BE0A02205DF8B80099215D /* Message.swift */,
 				819934B1206308D30075696F /* Conversation.swift */,
+				817AE42E206C825D006C2CA4 /* MessageFCM.swift */,
 				81E615E82060C1A800347CDA /* Restaurant Search */,
 			);
 			path = Models;
@@ -490,6 +497,8 @@
 				818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */,
 				81E954B6205E1CE9004036D5 /* StorageService.swift */,
 				818BEE7F206609C200D9C62F /* StorageService+Images.swift */,
+				817AE430206C846E006C2CA4 /* FCMKeys.swift */,
+				817AE432206C869A006C2CA4 /* FCMAPIClient.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -737,7 +746,6 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -753,7 +761,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -782,6 +789,7 @@
 				811E24CB20634BDF00E7CAF5 /* ConversationCell.swift in Sources */,
 				819934B2206308D30075696F /* Conversation.swift in Sources */,
 				81E615F12060C35C00347CDA /* UIImageViewX.swift in Sources */,
+				817AE42F206C825D006C2CA4 /* MessageFCM.swift in Sources */,
 				81EFF7F920697BE3005EA1A4 /* SearchRestView.swift in Sources */,
 				81D26F1F20598DAD00BEBC47 /* NetworkHelper.swift in Sources */,
 				81729CD52066297300FD5737 /* SearchRestaurant.swift in Sources */,
@@ -815,6 +823,7 @@
 				81EFF803206980D5005EA1A4 /* RestaurantTVCell.swift in Sources */,
 				815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */,
 				81EFF7FA20697BE3005EA1A4 /* SelectRestaurantView.swift in Sources */,
+				817AE433206C869A006C2CA4 /* FCMAPIClient.swift in Sources */,
 				818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */,
 				819575922066CAAE001F86F0 /* RestaurantTableViewCell.swift in Sources */,
 				81EB94082065B984006CD0AA /* FeedVC.swift in Sources */,
@@ -829,6 +838,7 @@
 				81BE0A04205DF8B90099215D /* Message.swift in Sources */,
 				81E954BD205E1CEA004036D5 /* AuthUserService.swift in Sources */,
 				817F9B47205863B10061E1B6 /* AppDelegate.swift in Sources */,
+				817AE431206C846E006C2CA4 /* FCMKeys.swift in Sources */,
 				81D26F0E20598C3300BEBC47 /* YelpSearch.swift in Sources */,
 				81EFF7FC20697BE3005EA1A4 /* MonthView.swift in Sources */,
 				817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */,
@@ -969,7 +979,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -989,7 +1000,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

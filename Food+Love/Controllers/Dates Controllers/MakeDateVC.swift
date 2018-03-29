@@ -1,5 +1,8 @@
 
 import UIKit
+import FirebaseAuth
+import FirebaseInstanceID
+import FirebaseMessaging
 
 enum MyTheme {
     case light
@@ -57,10 +60,28 @@ class MakeDateVC: UIViewController {
         searchRestview.delegate = self
         
         let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(rightBarBtnAction))
-        self.navigationItem.rightBarButtonItem = rightBarBtn
+        //let rightSignOutBtn = UIBarButtonItem(title: "SignOut", style: .plain, target: self, action: #selector(signOutApp))
+        self.navigationItem.rightBarButtonItems = [rightBarBtn]
         self.selectRestaurantView.restaurantButton.addTarget(self, action: #selector(displayRestaurants), for: .touchUpInside)
         self.saveHourButton.addTarget(self, action: #selector(setupHour), for: .touchUpInside)
         setupViews()
+        sendMessagingFCM()
+    }
+    
+    private func sendMessagingFCM() {
+        Messaging.messaging().sendMessage(["body" : "great match!",
+                                           "title" : "Portugal vs. Denmark"],
+                                          to: "cBY7Bsw5Ktk:APA91bFtNkbAonfDlanh4YA0A9p3y5LZCkFOQ5FCES14pMineg-T6tOdXH44Lc_3t7tQzisTfVIZJxYdk9KOhbbUMeSbnkcqrpBrQwJ9iIu3XArs3tYYr3uFPHOyEtqZ7vYxCCsbKSq_", withMessageID: "qwerty-5", timeToLive: 1000)
+        print("---- Message sent -----")
+    }
+    
+    @objc private func signOutApp() {
+        do {
+            try Auth.auth().signOut()
+            print("SignOut")
+        } catch {
+            print("Error signout:", error)
+        }
     }
     
     @objc private func displayRestaurants() {
