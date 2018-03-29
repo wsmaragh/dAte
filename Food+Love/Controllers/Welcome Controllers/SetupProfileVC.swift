@@ -4,6 +4,7 @@
 //  Created by C4Q on 3/13/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
+
 import UIKit
 import Firebase
 
@@ -13,94 +14,152 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	// MARK: Outlets/Properties
 	@IBOutlet weak var profileScrollView: UIScrollView!
 	@IBOutlet weak var pageControl: UIPageControl!
-	
+
+
+	//Scenedock Views
+	@IBOutlet var preferenceSlide: PreferenceProfile!
+	@IBOutlet var aboutSlide: AboutProfile!
+	@IBOutlet var signupSlide: UIView!
+	@IBOutlet var videoSlide: UIView!
+
+	@IBOutlet weak var actionButton: UIButton!
+
+	//Properties Fields
+	@IBOutlet weak var favoriteFoodCategory1TF: UITextField!
+	@IBOutlet weak var favoriteFoodCategory2TF: UITextField!
+	@IBOutlet weak var favoriteFoodCategory3TF: UITextField!
+	@IBOutlet weak var favoriteRestaurant: UITextField!
+	@IBOutlet weak var genderSC: UISegmentedControl!
+	@IBOutlet weak var genderPreferenceSC: UISegmentedControl!
+	@IBOutlet weak var dobPicker: UIDatePicker!
+	@IBOutlet weak var zipcodeTF: UITextField!
+
 
 	// MARK: Properties
-	let preferenceSlide = PreferenceProfile()
-	let aboutSlide = AboutProfile()
-	let habitsSlide = HabitsProfile()
-	let videoSlide = VideoProfile()
-//	private var profileSlides = [UIView]()
-	private var profileSlides: [UIView] = []
-//	private var profileSlides: [UIView] = {
-//		let preferenceSlide = PreferenceProfile()
-//		let aboutSlide = AboutProfile()
-//		let habitsSlide = HabitsProfile()
-//		let videoSlide = VideoProfile()
-//		return [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
-//	}()
 	var currentUser: User?
+	private var profileSlides = [UIView]()
+	private var slideIndex = 0
 
-	
+
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		navigationController?.title = "Setup Profile"
+		view.backgroundColor = .white
 		currentUser = Auth.auth().currentUser
-		profileSlides = [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
 		profileScrollView.delegate = self
-//		profileSlides = createSlides()
+		profileSlides = [preferenceSlide, aboutSlide, signupSlide]
 		addSlidesToScrollView(slides: profileSlides)
-//		setupPageControl()
+		setupPageControl()
+		navigationController?.title = "Setup Profile"
 	}
-	
+
+
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(false)
 		self.navigationController?.setNavigationBarHidden(true, animated: animated)
 	}
 
 
-
 	// MARK: Helper Methods
-	@IBAction func completeProfile(_ sender: UIButton) {
-		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
-		if let window = UIApplication.shared.delegate?.window {
-			window?.rootViewController = mainVC
-		}
-	}
-
-	func createSlides() -> [UIView] {
-		let preferenceSlide = PreferenceProfile()
-		let aboutSlide = AboutProfile()
-		let habitsSlide = HabitsProfile()
-		let videoSlide = VideoProfile()
-		return [preferenceSlide, aboutSlide, habitsSlide, videoSlide]
-	}
-
-//	func createSlides() -> [UIView] {
-//		let slide1 = WelcomeLogoSlide()
-//		let slide2 = WelcomeSlide(title: "Bond over food", details: "Start with a simple meal and build from there. Food has played an integral part in shaping culture and communication", picture: #imageLiteral(resourceName: "bg_coffee"))
-//		let slide3 = WelcomeSlide(title: "Companionship", details: "Why eat alone, when you can also meet your soulmate", picture: #imageLiteral(resourceName: "bg_plandate"))
-//		let slide4 = WelcomeSlide(title: "Plan date in app", details: "Spend quality time exploring each other...", picture: #imageLiteral(resourceName: "bg_love1"))
-//		return [slide1, slide2, slide3, slide4]
-//	}
-
-	func setupPageControl(){
-		if !profileSlides.isEmpty {
-			pageControl.numberOfPages = profileSlides.count
-			pageControl.currentPage = 0
-			pageControl.currentPageIndicatorTintColor = UIColor.red
-			pageControl.pageIndicatorTintColor = UIColor.white
-			view.bringSubview(toFront: pageControl)
-		}
-	}
-
 	func addSlidesToScrollView(slides: [UIView]) {
 		profileScrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: profileScrollView.bounds.height)
 		profileScrollView.isPagingEnabled = true
 		profileScrollView.isDirectionalLockEnabled = true
-		for i in 0..<profileSlides.count {
-			profileSlides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: view.frame.height)
-			profileScrollView.addSubview(profileSlides[i])
+		for i in 0..<slides.count {
+			slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: profileScrollView.frame.height)
+			profileScrollView.addSubview(slides[i])
 		}
 	}
+
+	func setupPageControl(){
+
+
+	}
+
+
+
+	// MARK: Action
+	@IBAction func addVideoButton(_ sender: UIButton) {
+
+
+	}
+
+
+//	@IBAction func signup(_ sender: UIButtonX) {
+//		guard let name = self.firstNameTF.text, name != "" else {
+//			showAlert(title: "Please enter a name", message: ""); return
+//		}
+//		guard let email = self.emailTF.text, email != "" else {
+//			showAlert(title: "Please enter an email", message: ""); return
+//		}
+//		guard let password = self.passwordTF.text, password != "" else {
+//			showAlert(title: "Please enter a valid password", message: ""); return
+//		}
+//		if profileImageButton.image(for: UIControlState.normal) == #imageLiteral(resourceName: "selfieCamera") {
+//			showAlert(title: "Please add a profile image", message: ""); return
+//		}
+//		guard let image = self.profileImageButton.image(for: .normal) else {return}
+//		if email.contains(" ") {
+//			showAlert(title: "No spaces allowed in email!", message: nil); return
+//		}
+//		if password.contains(" ") {
+//			showAlert(title: "No spaces allowed in password!", message: nil); return
+//		}
+//
+//		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
+//	}
+
+	@IBAction func nextPage(_ sender: UIButton) {
+		let count = profileSlides.count
+		if slideIndex < count {
+			let x = profileScrollView.contentOffset.x * 2
+			let currentPage = profileScrollView.contentOffset.x / profileScrollView.frame.size.width
+			let point = CGPoint(x: view.bounds.width * (currentPage + 1), y: 0)
+			profileScrollView.setContentOffset(point, animated: true)
+			pageControl.currentPage = Int(currentPage)
+			slideIndex = pageControl.currentPage
+		}
+
+		if slideIndex == count {
+			actionButton.titleLabel?.text = "Complete"
+			
+		}
+
+
+
+
+}
+
+	func completeProfile(){
+		//add user details to database
+		guard let favCat1 = favoriteFoodCategory1TF.text else {return}
+		guard let favCat2 = favoriteFoodCategory2TF.text else {return}
+		guard let favCat3 = favoriteFoodCategory3TF.text else {return}
+		guard let favRest = favoriteRestaurant.text else {return}
+		guard let zipcode = 	zipcodeTF.text else {return}
+		let gender = genderSC.selectedSegmentIndex == 0 ? "Male" : "Female"
+		let genderPreference =  genderPreferenceSC.selectedSegmentIndex == 0 ? "Male" : "Female"
+		let dobDate = dobPicker.date
+		let dob = DBService.manager.formatDateforDOB(with: dobDate)
+		let bio = ""
+
+		DBService.manager.addLoverDetails(favCat1: favCat1, favCat2: favCat2, favCat3: favCat3, favRestaurant: favRest, zipcode: zipcode, gender: gender, genderPreference: genderPreference, dateOfBirth: dob, bio: bio)
+
+		//transition to mainVC
+		//		let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+		//		if let window = UIApplication.shared.delegate?.window {
+		//			window?.rootViewController = mainVC
+		//		}
+		print("user details added")
+	}
+
+	
 
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let currentPage = scrollView.contentOffset.x / scrollView.frame.size.width
 		pageControl.currentPage = Int(currentPage)
+		slideIndex = pageControl.currentPage
 	}
-	
-	//let flowersGif = UIImage.gifImageWithName("flowers")
-	//let slide2 = Slide(title: "Bond over food", details: "Food plays an vital part in fostering conversations", picture: flowersGif!)
+
 
 }
