@@ -60,11 +60,6 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <connections>
-                <outlet property="favoriteRestaurantTV" destination="LJ2-AC-t1b" id="RFe-4K-DVu"/>
-                <outlet property="mainBackground" destination="WfH-ys-atx" id="sx8-vA-DlX"/>
-                <outlet property="shadowView" destination="UKz-Nf-5hD" id="i7U-Cc-wOw"/>
-            </connections>
             <point key="canvasLocation" x="123.5" y="136.5"/>
         </tableViewCell>
     </objects>

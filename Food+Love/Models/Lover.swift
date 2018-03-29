@@ -4,6 +4,7 @@
 //  Created by Winston Maragh on 3/16/18.
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
+
 import UIKit
 
 class Lover: NSObject {
@@ -25,8 +26,8 @@ class Lover: NSObject {
     var secondFoodPrefer: String?
     var thirdFoodPrefer: String?
     var likedUsers: [String]?
+	var morePhotos: [String]?
 	var usersThatLikeYou: [String]?
-
 
 	init(dictionary: [String: AnyObject]) {
 		self.id = dictionary["id"] as? String
@@ -35,6 +36,7 @@ class Lover: NSObject {
 		self.profileImageUrl = dictionary["profileImageUrl"]  as? String
         self.profileImageUrl1 = dictionary["profileImageUrl1"]  as? String
         self.profileImageUrl2 = dictionary["profileImageUrl2"]  as? String
+		self.morePhotos = dictionary["morePhotos"] as? [String]
 		self.dateOfBirth = dictionary["dateOfBirth"]  as? String
 		self.zipcode = dictionary["zipcode"]  as? String
 		self.city = dictionary["city"]  as? String
@@ -46,6 +48,7 @@ class Lover: NSObject {
         self.firstFoodPrefer = dictionary["firstFoodPrefer"] as? String
          self.secondFoodPrefer = dictionary["secondFoodPrefer"] as? String
          self.thirdFoodPrefer = dictionary["thirdFoodPrefer"] as? String
+		self.favRestaurants = dictionary["favRestaurants"]  as? [String]
 		self.likedUsers = dictionary["likedUsers"]  as? [String]
 		self.usersThatLikeYou = dictionary["usersThatLikeYou"]  as? [String]
 	}
@@ -53,9 +56,11 @@ class Lover: NSObject {
 	init(id: String,
 			 name: String,
 			 email: String,
-             profileImageUrl: String?,
+       profileImageUrl: String?,
 			 profileImageUrl1: String,
-             profileImageUrl2: String,
+       profileImageUrl2: String,
+			 morePhotos: [String]?,
+			 profileVideoUrl: String?,
 			 dateOfBirth: String?,
 			 zipcode: String?,
 			 city: String?,
@@ -67,6 +72,7 @@ class Lover: NSObject {
             firstFoodPrefer: String?,
             secondFoodPrefer: String?,
              thirdFoodPrefer: String?,
+			 favRestaurants: [String]?,
 			 likedUsers: [String]?,
 			 usersThatLikeYou: [String]?
 		){
@@ -76,6 +82,7 @@ class Lover: NSObject {
 		self.profileImageUrl = profileImageUrl
        self.profileImageUrl1 = profileImageUrl1
         self.profileImageUrl2 = profileImageUrl2
+		self.morePhotos = morePhotos
 		self.dateOfBirth = dateOfBirth
 		self.zipcode = zipcode
 		self.city = city
@@ -87,9 +94,18 @@ class Lover: NSObject {
         self.firstFoodPrefer = firstFoodPrefer
         self.secondFoodPrefer = secondFoodPrefer
         self.thirdFoodPrefer = thirdFoodPrefer
+		self.favRestaurants = favRestaurants
 		self.likedUsers = likedUsers
 		self.usersThatLikeYou = usersThatLikeYou
 	}
+
+	public func changeStringToDate(dateString: String) -> Date {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		let date = dateFormatter.date(from: dateString)
+		return date!
+	}
+
 }
 
 

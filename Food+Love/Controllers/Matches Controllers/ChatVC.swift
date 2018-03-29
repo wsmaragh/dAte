@@ -40,7 +40,7 @@ class ChatVC: UIViewController {
 		view.backgroundColor = #colorLiteral(red: 0.8270000219, green: 0.3529999852, blue: 0.2160000056, alpha: 1)
 		view.alpha = 1.0
 		configureNavBar()
-        getMessages()
+		getMessages()
 		chatCollectionView.delegate = self
 		chatCollectionView.dataSource = self
 		inputText.delegate = self
@@ -84,11 +84,8 @@ class ChatVC: UIViewController {
 
 
 	private func configureNavBar() {
-//		navigationItem.title = lover?.name
 		let videoChatBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camcorder"), style: .plain, target: self, action: #selector(startVideoChat))
         let planDateBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "calendar"), style: .plain, target: self, action: #selector(planDate))
-//        navigationItem.rightBarButtonItem = videoChatBarItem
-//        navigationItem.rightBarButtonItem = planDateBarItem
         navigationItem.rightBarButtonItems = [videoChatBarItem, planDateBarItem]
 	}
 
@@ -292,6 +289,8 @@ extension ChatVC: UICollectionViewDataSource  {
 		cell.chatVC = self
 		cell.configureCell(message: message)
 		return cell
+
+		
 	}
 }
 

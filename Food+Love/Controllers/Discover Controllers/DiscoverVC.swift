@@ -48,13 +48,16 @@ class DiscoverVC: UIViewController {
 	private func setUpDiscoverCV() {
 		discoverCV.dataSource = self
 		discoverCV.delegate = self
-        discoverCV.register(UINib(nibName: "DiscoverUserCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DiscoverCell")
+        discoverCV.register(UINib(nibName: "NewDiscoverCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NewDiscoverCell")
 
 
         let layout = discoverCV.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13)
-        layout.minimumInteritemSpacing = 1
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width * 0.5, height: UIScreen.main.bounds.height * 0.45)
+        let padding: CGFloat = 5.0
+        layout.sectionInset = UIEdgeInsetsMake(0, padding, 0, padding)
+        layout.minimumInteritemSpacing = padding
+        layout.minimumLineSpacing = padding
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - (padding * 3)) / 2,
+                                 height: UIScreen.main.bounds.height * 0.6)
 	}
 
 
@@ -90,14 +93,17 @@ extension DiscoverVC: UICollectionViewDataSource {
 
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "DiscoverCell", for: indexPath) as! DiscoverUserCollectionViewCell
+    let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "NewDiscoverCell", for: indexPath) as! NewDiscoverCollectionViewCell
 		let lover = lovers[indexPath.row]
+        cell.userNameLabel.text = lover.name ?? "N/A"
+        cell.favoriteFoodLabel.text = "Mac and Cheese"
+        cell.favoriteCuisinesLabel.text = "Thai, Tacos, Nigerian"
+        cell.userImageView.image = #imageLiteral(resourceName: "user2")
 		if let image = lover.profileImageUrl {
 			cell.userImageView.loadImageUsingCacheWithUrlString(image)
 		} else {
 			cell.userImageView.image = #imageLiteral(resourceName: "user2")
 		}
-        cell.nameLabel.text = lover.name
         cell.layoutSubviews()
 		return cell
 	}
@@ -116,7 +122,7 @@ extension DiscoverVC: UICollectionViewDelegateFlowLayout {
 		//perform segue to profile here
 		 let selectedLover = lovers[indexPath.row]
 		let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-		let profileVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileVC
+		let profileVC = storyboard.instantiateViewController(withIdentifier: "UserProfileVC") as! UserProfileTableViewController
         profileVC.lover = selectedLover
 		self.navigationController?.pushViewController(profileVC, animated: true)
 	}

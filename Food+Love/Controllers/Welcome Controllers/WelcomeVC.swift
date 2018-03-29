@@ -34,6 +34,18 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 		Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(changeSlide), userInfo: nil, repeats: true)
 	}
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(false)
+		setupAndPlayVideoBackground()
+		self.navigationController?.setNavigationBarHidden(true, animated: animated)
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		self.navigationController?.isNavigationBarHidden = false
+	}
+
+
 
 	@objc func changeSlide() {
 		slideIndex += 1
@@ -46,16 +58,6 @@ class WelcomeVC: UIViewController, UIScrollViewDelegate {
 		}
 	}
 
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(false)
-		setupAndPlayVideoBackground()
-		self.navigationController?.setNavigationBarHidden(true, animated: animated)
-	}
-
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-		self.navigationController?.isNavigationBarHidden = false
-	}
 
 
 	// MARK: Helper Methods

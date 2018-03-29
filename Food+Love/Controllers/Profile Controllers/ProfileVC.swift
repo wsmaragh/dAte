@@ -10,7 +10,6 @@
 import UIKit
 import Firebase
 import ImageIO
-import FSPagerView
 import Eureka
 import AVFoundation
 import Toucan

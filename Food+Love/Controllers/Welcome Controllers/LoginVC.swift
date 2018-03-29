@@ -62,7 +62,10 @@ class LoginVC: UIViewController {
 		self.passwordTF.underlined(color: .white)
 		self.emailTF.leftViewMode = .always
 		self.passwordTF.leftViewMode = .always
-		emailTF.text = "winstonmaragh@ac.c4q.nyc"
+//		emailTF.text = "winstonmaragh@ac.c4q.nyc"
+//		emailTF.text = "marlonrugama@ac.c4q.nyc"
+//		emailTF.text = "xianxianchen@ac.c4q.nyc"
+
 		passwordTF.text = "123456"
 		//Text Color
 		emailTF.textColor = .white
