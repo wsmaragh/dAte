@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-
+import Toucan
 
 class DiscoverVC: UIViewController {
 

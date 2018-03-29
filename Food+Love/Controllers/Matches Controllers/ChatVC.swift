@@ -29,7 +29,6 @@ class ChatVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(false)
 		tabBarController?.tabBar.isHidden = true
-		getMessages()
 	}
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(false)
@@ -41,6 +40,7 @@ class ChatVC: UIViewController {
 		view.backgroundColor = #colorLiteral(red: 0.8270000219, green: 0.3529999852, blue: 0.2160000056, alpha: 1)
 		view.alpha = 1.0
 		configureNavBar()
+        getMessages()
 		chatCollectionView.delegate = self
 		chatCollectionView.dataSource = self
 		inputText.delegate = self

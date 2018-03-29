@@ -17,4 +17,5 @@ target 'Food+Love' do
     pod 'Parchment'
     pod 'FSPagerView'
     pod 'Eureka'
+    pod ‘Toucan’
 end
