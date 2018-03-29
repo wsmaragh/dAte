@@ -94,16 +94,25 @@ class DBService {
 
 
 	// Get
-	func getCurrentLover() -> Lover {
-		let uid = Auth.auth().currentUser?.uid
-		var lover: Lover!
-		Database.database().reference().child("lovers").child(uid!).observe(.value, with: { (snapshot) in
-			if let userInfoDict = snapshot.value as? [String : AnyObject] {
-				lover = Lover(dictionary: userInfoDict)
-			}
-		}, withCancel: nil)
-		return lover
-	}
+    func getCurrentLover(completionHandler: @escaping (Lover?, Error?) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("No current user exist")
+           completionHandler(nil, AppError.noUserExist)
+            return
+        }
+        Database.database().reference().child("lovers").child(uid).observe(.value) { (snapshot) in
+            var lover: Lover?
+            
+         //   let snap = snapshot.value as! DataSnapshot
+            if let infoDict = snapshot.value as? [String: AnyObject] {
+                lover = Lover(dictionary: infoDict)
+                completionHandler(lover, nil)
+            
+            }
+        }
+
+        }
+		
 
 
 //	func getLover(uid: String) -> Lover {
@@ -258,7 +267,17 @@ class DBService {
 		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 	}
-
+    public func updateProfileImages(profileImageUrl: String, imageNum: Int) {
+        guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
+        if imageNum == 0 {DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
+        } else { DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl\(imageNum)": profileImageUrl])
+        }
+    }
+    public func updateEditedProfileInfo(ediedDict: [String: Any?]) {
+        guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
+        for (key, value) in ediedDict { DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues([key: value])
+        }
+    }
 
 }
 

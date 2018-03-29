@@ -5,7 +5,7 @@
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import Foundation
-
+import UIKit
 
 //Image Helper - get images from online
 //struct ImageService {
@@ -37,3 +37,4 @@ import Foundation
 //	}
 //}
 //
+
