@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class UserProfileTableViewController: UITableViewController {
     
@@ -70,6 +71,9 @@ class UserProfileTableViewController: UITableViewController {
         }
         else {
             likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
+            guard let loverName = lover?.name else {return}
+            guard let currentUserName = Auth.auth().currentUser?.displayName else {return}
+            FCMAPIClient.manager.sendPushNotification(device: "cBY7Bsw5Ktk:APA91bFtNkbAonfDlanh4YA0A9p3y5LZCkFOQ5FCES14pMineg-T6tOdXH44Lc_3t7tQzisTfVIZJxYdk9KOhbbUMeSbnkcqrpBrQwJ9iIu3XArs3tYYr3uFPHOyEtqZ7vYxCCsbKSq_", title: "dAte", message: "Hey \(loverName), \(currentUserName) likes YOU!")
         }
     }
 //    private func setUpPagerView() {
