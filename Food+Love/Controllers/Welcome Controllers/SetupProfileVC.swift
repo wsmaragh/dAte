@@ -226,7 +226,6 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		let genderPreference =  genderPreferenceSC.selectedSegmentIndex == 0 ? "Male" : "Female"
 		let dobDate = dobPicker.date
 		let dob = DBService.manager.formatDateforDOB(with: dobDate)
-
 		DBService.manager.addLoverDetails(favCat1: favCat1, favCat2: favCat2, favCat3: favCat3, favRestaurant: favRest, zipcode: zipcode, gender: gender, genderPreference: genderPreference, dateOfBirth: dob, bio: bio)
 
 
