@@ -51,23 +51,19 @@ class ProfileVC: UIViewController {
 
     }
     func loadImages() {
-//        var image1 = #imageLiteral(resourceName: "profile")
-//        var image2 = #imageLiteral(resourceName: "profile")
-//        var image3 = #imageLiteral(resourceName: "profile")
         guard self.currentLover != nil else {return}
         let url0 = currentLover!.profileImageUrl ?? ""
-        let url1 = currentLover!.profileImageUrl1 ?? ""
-        let url2 = currentLover!.profileImageUrl2 ?? ""
+//        let url1 = currentLover!.profileImageUrl1 ?? ""
+//        let url2 = currentLover!.profileImageUrl2 ?? ""
         ImageHelper.manager.getImage(from: url0, completionHandler: {
           self.profileImages[0] = $0
         }, errorHandler: {_ in })
-        ImageHelper.manager.getImage(from: url1, completionHandler: {
-             self.profileImages[1] = $0
-        }, errorHandler: {_ in })
-        ImageHelper.manager.getImage(from: url2, completionHandler: {
-             self.profileImages[2] = $0
-        }, errorHandler: {_ in })
-      //  self.profileImages = [image1, image2, image3]
+//        ImageHelper.manager.getImage(from: url1, completionHandler: {
+//             self.profileImages[1] = $0
+//        }, errorHandler: {_ in })
+//        ImageHelper.manager.getImage(from: url2, completionHandler: {
+//             self.profileImages[2] = $0
+//        }, errorHandler: {_ in })
         }
     
     // MARK: View Lifecycle
