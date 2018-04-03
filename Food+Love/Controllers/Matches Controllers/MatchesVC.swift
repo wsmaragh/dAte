@@ -23,41 +23,15 @@ class MatchesVC: UIViewController {
 		}
 	}
 
-	var conversations = [Message]()
-	{
+	var conversations = [Message](){
 		didSet {
 			DispatchQueue.main.async {
 				self.conversationsTableView.reloadData()
 			}
 		}
 	}
+	var conversationsDict = [String: Message]()
 
-	var conversationsDict = [String: Message](){
-		didSet {
-			DispatchQueue.main.async {
-//				print()
-//				print(self.conversationsDict)
-//				print()
-//				self.conversationsTableView.reloadData()
-//				for conversation in self.conversationsDict {
-//					let partnerId = conversation.chatPartnerId()
-//					DBService.manager.retrieveLover(loverId: partnerId, completionHandler: { (onlineLover) in
-//						print(onlineLover)
-//						print(onlineLover?.name)
-//					})
-//				}
-
-//				for conversation in self.conversations {
-//					let partnerId = conversation.chatPartnerId()
-//					DBService.manager.retrieveLover(loverId: partnerId, completionHandler: { (onlineLover) in
-//						print(onlineLover)
-//						print(onlineLover?.name)
-//					})
-//				}
-
-			}
-		}
-	}
 
 
 	// MARK: View Lifecycle
@@ -67,7 +41,11 @@ class MatchesVC: UIViewController {
 		setupCollectionView()
 		getAllLoversExceptCurrent()
 		getNewMessages()
-		//		getLover()
+		let image : UIImage = #imageLiteral(resourceName: "Logo3")
+		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+		imageView.contentMode = .scaleAspectFit
+		imageView.image = image
+		self.navigationItem.titleView = imageView
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -152,7 +130,7 @@ class MatchesVC: UIViewController {
 	// Matches
 	func getNewMessages() {
 		guard let uid = Auth.auth().currentUser?.uid else { return }
-		let userMessageRef = DBService.manager.getLoverMessagesRef().child(uid)
+		let userMessageRef = DBService.manager.getConversationsRef().child(uid)
 
 		// Observe for New Messages
 		userMessageRef.observe(.childAdded, with: { (snapshot) in
@@ -331,7 +309,7 @@ extension MatchesVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		guard let uid = Auth.auth().currentUser?.uid else { return }
 		let conversations = self.conversations[indexPath.row]
-		DBService.manager.getLoverMessagesRef().child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
+		DBService.manager.getConversationsRef().child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
 
 			//		Database.database().reference().child("user-messages").child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
 			if error != nil { print(error!) ; return}

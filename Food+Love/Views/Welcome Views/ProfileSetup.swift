@@ -13,23 +13,17 @@ import UIKit
 
 class PreferenceProfile: UIView {
 
-
 }
 
 class AboutProfile: UIView {
-	@IBOutlet weak var genderSC: UISegmentedControl!
-	@IBOutlet weak var generPreferenceSC: UISegmentedControl!
-	@IBOutlet weak var dateOfBirthPicker: UIDatePicker!
+
 }
 
+class SignupProfile: UIView {
 
-class BioProfile: UIView {
-	@IBOutlet weak var boroughSC: UISegmentedControl!
-	@IBOutlet weak var zipcodeTF: UITextField!
 }
 
 class VideoProfile: UIView {
-
 
 }
 

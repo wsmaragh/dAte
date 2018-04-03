@@ -6,8 +6,12 @@
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
+
+
 extension DBService {
 //    func getAllFoodCategories(completionHandler: @escaping ([String]?) -> Void) {
 //        let ref = DBService.manager.getCategoriesRef()

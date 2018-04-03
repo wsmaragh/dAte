@@ -10,11 +10,6 @@ import Firebase
 
 class Conversation: NSObject {
 
-//	PartnerID
-//	PartnerPhoto
-//	lastMessage
-//	timestamp
-
 	var fromId: String?
 	var text: String?
 	var timeStamp: NSNumber?
