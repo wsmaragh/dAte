@@ -9,8 +9,8 @@ import FirebaseAuth
 
 
 class Message: NSObject {
-	var fromId: String?
-	var toId: String?
+	var fromId: String
+	var toId: String
 	var text: String?
 	var imageUrl: String?
 	var imageWidth: NSNumber?
@@ -19,12 +19,12 @@ class Message: NSObject {
 	var timeStamp: NSNumber?
 
 	func chatPartnerId() -> String {
-		return (fromId == Auth.auth().currentUser?.uid ? toId : fromId)!
+		return (fromId == Auth.auth().currentUser?.uid ? toId : fromId)
 	}
 
 	init(dictionary: [String: AnyObject]) {
-		self.fromId = dictionary["fromId"] as? String
-		self.toId = dictionary["toId"] as? String
+		self.fromId = dictionary["fromId"] as! String
+		self.toId = dictionary["toId"] as! String
 		self.text = dictionary["text"] as? String
 		self.imageUrl = dictionary["imageUrl"] as? String
 		self.imageWidth = dictionary["imageWidth"] as? NSNumber
@@ -33,7 +33,7 @@ class Message: NSObject {
 		self.timeStamp = dictionary["timeStamp"] as? NSNumber
 	}
 
-	init(fromId: String?, toId: String?, text: String?, imageUrl: String?, imageWidth: NSNumber?, imageHeight: NSNumber?, videoUrl: String?, timeStamp: NSNumber?){
+	init(fromId: String, toId: String, text: String?, imageUrl: String?, imageWidth: NSNumber?, imageHeight: NSNumber?, videoUrl: String?, timeStamp: NSNumber?){
 		self.fromId = fromId
 		self.toId = toId
 		self.text = text
