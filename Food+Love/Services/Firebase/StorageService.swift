@@ -6,7 +6,10 @@
 
 import UIKit
 import Firebase
-
+import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 
 class StorageService {
 	static let manager = StorageService()
@@ -16,7 +19,7 @@ class StorageService {
 		storageRef = storage.reference()
 		imagesRef = storageRef.child("images")
 		profileImagesRef = storageRef.child("loverImages")
-		profileVideoRef = storageRef.child("loverImages")
+		profileVideoRef = storageRef.child("loverVideos")
 		chatImagesRef = storageRef.child("userImages")
 	}
 
@@ -43,7 +46,7 @@ class StorageService {
 //Store Image
 extension StorageService {
 	public func storeUserImage(image: UIImage) {
-		let user = AuthUserService.getCurrentUser()
+		let user = AuthService.getCurrentUser()
 		guard let id = user?.uid else {return}
 		guard let data = UIImageJPEGRepresentation(image, 0.1) else { print("image is nil"); return }
 		let metadata = StorageMetadata()
@@ -59,7 +62,7 @@ extension StorageService {
 			guard let imageURL = snapshot.metadata?.downloadURL() else { return }
 			let imageStr = String(describing: imageURL)
 			DBService.manager.updatePhoto(profileImageUrl: imageStr)
-			AuthUserService.manager.updatePhoto(urlString: imageStr)
+			AuthService.manager.updatePhoto(urlString: imageStr)
 		}
 
 	}

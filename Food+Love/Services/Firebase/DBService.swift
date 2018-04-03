@@ -16,28 +16,25 @@ class DBService {
 	private init(){
 		dbRef = Database.database().reference()
 		loversRef = dbRef.child("lovers")
+		conversationsRef = dbRef.child("conversations")
 		messagesRef = dbRef.child("messages")
-		loverMessagesRef = dbRef.child("loverMessages")
 		categoriesRef = dbRef.child("categories")
 	}
-
 
 	// MARK: Properties
 	private var dbRef: DatabaseReference!
 	private var loversRef: DatabaseReference!
+	private var conversationsRef: DatabaseReference!
 	private var messagesRef: DatabaseReference!
-	private var loverMessagesRef: DatabaseReference!
 	private var categoriesRef: DatabaseReference!
-
 
 	// MARK: Helper Methods
 	public func getDBRef()-> DatabaseReference { return dbRef }
 	public func getLoversRef()-> DatabaseReference { return loversRef }
+	public func getConversationsRef()-> DatabaseReference { return conversationsRef }
 	public func getMessagesRef()-> DatabaseReference { return messagesRef }
-	public func getLoverMessagesRef()-> DatabaseReference { return loverMessagesRef }
 	public func getCategoriesRef()-> DatabaseReference {return categoriesRef}
 
-	
 
 	// Format date
 	public func formatDateforMessages(with date: Date) -> String {
@@ -51,6 +48,7 @@ class DBService {
 		dateFormatter.dateFormat = "MMM d, YYYY"
 		return dateFormatter.string(from: date)
 	}
+
 
 	// Add User main
 	public func addLover(name: String, email: String, profileImage: UIImage) {
@@ -251,34 +249,8 @@ class DBService {
 //			}
 //		}, withCancel: nil)
 //	}
+
 	
-
-	public func updateName(name: String) {
-		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["name": name])
-	}
-
-	public func updateEmail(email: String) {
-		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["email": email])
-	}
-
-	public func updatePhoto(profileImageUrl: String) {
-		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
-	}
-    public func updateProfileImages(profileImageUrl: String, imageNum: Int) {
-        guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-        if imageNum == 0 {DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
-        } else { DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl\(imageNum)": profileImageUrl])
-        }
-    }
-    public func updateEditedProfileInfo(ediedDict: [String: Any?]) {
-        guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
-        for (key, value) in ediedDict { DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues([key: value])
-        }
-    }
-
 }
 
 

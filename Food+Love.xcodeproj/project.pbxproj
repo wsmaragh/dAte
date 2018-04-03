@@ -16,6 +16,10 @@
 		8106FFB7206AB75E00B02722 /* NewAdmirerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8106FFB5206AB75E00B02722 /* NewAdmirerCollectionViewCell.xib */; };
 		8106FFB9206AF03E00B02722 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8106FFB8206AF03E00B02722 /* UserProfileTableViewController.swift */; };
 		811E24CB20634BDF00E7CAF5 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E24CA20634BDF00E7CAF5 /* ConversationCell.swift */; };
+		811E4109207429E0000F0198 /* DBService+Conversations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E4105207429DF000F0198 /* DBService+Conversations.swift */; };
+		811E410A207429E0000F0198 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E4106207429DF000F0198 /* AuthService.swift */; };
+		811E410B207429E0000F0198 /* DBService+Lovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E4107207429E0000F0198 /* DBService+Lovers.swift */; };
+		811E410C207429E0000F0198 /* DBService+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E4108207429E0000F0198 /* DBService+Messages.swift */; };
 		813E323A2058F0A80076A98F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813E32392058F0A80076A98F /* MapKit.framework */; };
 		815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B2B3E205C2F91005C1C32 /* Extensions.swift */; };
 		815B2B41205C2FD6005C1C32 /* Theme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B2B40205C2FD6005C1C32 /* Theme.xcassets */; };
@@ -113,6 +117,10 @@
 		8106FFB5206AB75E00B02722 /* NewAdmirerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewAdmirerCollectionViewCell.xib; sourceTree = "<group>"; };
 		8106FFB8206AF03E00B02722 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		811E24CA20634BDF00E7CAF5 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		811E4105207429DF000F0198 /* DBService+Conversations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBService+Conversations.swift"; sourceTree = "<group>"; };
+		811E4106207429DF000F0198 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		811E4107207429E0000F0198 /* DBService+Lovers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBService+Lovers.swift"; sourceTree = "<group>"; };
+		811E4108207429E0000F0198 /* DBService+Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBService+Messages.swift"; sourceTree = "<group>"; };
 		813E32382058F09F0076A98F /* Food+Love.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Food+Love.entitlements"; sourceTree = "<group>"; };
 		813E32392058F0A80076A98F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		815B2B3E205C2F91005C1C32 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -502,8 +510,12 @@
 		81F4F8E42063A78C008D716B /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				811E4106207429DF000F0198 /* AuthService.swift */,
 				81E954B8205E1CEA004036D5 /* AuthUserService.swift */,
 				81E954B9205E1CEA004036D5 /* DBService.swift */,
+				811E4107207429E0000F0198 /* DBService+Lovers.swift */,
+				811E4105207429DF000F0198 /* DBService+Conversations.swift */,
+				811E4108207429E0000F0198 /* DBService+Messages.swift */,
 				818BEE7D206606C400D9C62F /* DBService+UserProfile.swift */,
 				818BEE9520688B1600D9C62F /* DBService+Likes.swift */,
 				81D082D4206ABCEC00B44E6D /* DBService+Category.swift */,
@@ -798,6 +810,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */,
+				811E410C207429E0000F0198 /* DBService+Messages.swift in Sources */,
 				81E615F32060C3AA00347CDA /* UIViewX.swift in Sources */,
 				8195758A2066B009001F86F0 /* FaveFoodCollectionViewCell.swift in Sources */,
 				818BEE7C2066068E00D9C62F /* UserLikes.swift in Sources */,
@@ -836,11 +849,13 @@
 				81D26F1220598C9700BEBC47 /* FileManager.swift in Sources */,
 				81EFF7FB20697BE3005EA1A4 /* WeekdaysView.swift in Sources */,
 				817F9B752058B8F70061E1B6 /* DatesVC.swift in Sources */,
+				811E410A207429E0000F0198 /* AuthService.swift in Sources */,
 				8106D84F205D665B00F6EB3E /* WelcomeSlide.swift in Sources */,
 				818BEE9620688B1600D9C62F /* DBService+Likes.swift in Sources */,
 				81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */,
 				81EFF803206980D5005EA1A4 /* RestaurantTVCell.swift in Sources */,
 				815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */,
+				811E4109207429E0000F0198 /* DBService+Conversations.swift in Sources */,
 				81EFF7FA20697BE3005EA1A4 /* SelectRestaurantView.swift in Sources */,
 				817AE433206C869A006C2CA4 /* FCMAPIClient.swift in Sources */,
 				818BEE7E206606C400D9C62F /* DBService+UserProfile.swift in Sources */,
@@ -848,6 +863,7 @@
 				81EB94082065B984006CD0AA /* FeedVC.swift in Sources */,
 				81E615E52060B9D800347CDA /* UIButtonX.swift in Sources */,
 				818BEE80206609C200D9C62F /* StorageService+Images.swift in Sources */,
+				811E410B207429E0000F0198 /* DBService+Lovers.swift in Sources */,
 				81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */,
 				81BE0A03205DF8B90099215D /* Lover.swift in Sources */,
 				817F9B672058B8060061E1B6 /* SetupProfileVC.swift in Sources */,
