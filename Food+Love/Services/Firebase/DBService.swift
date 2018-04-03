@@ -129,7 +129,7 @@ class DBService {
 //		}
 //	}
 
-	func getMultipleLovers(uids: [String]) -> [Lover] {
+    func getMultipleLovers(uids: [String], completionHandler: @escaping ([Lover]) -> Void) {
 		var lovers = [Lover]()
 		for uid in uids {
 			Database.database().reference().child("lovers").child(uid).observe(.value, with: { (snapshot) in
@@ -139,7 +139,7 @@ class DBService {
 				}
 			}, withCancel: nil)
 		}
-		return lovers
+        completionHandler(lovers)
 	}
 
 	func getAllLovers() -> [Lover] {

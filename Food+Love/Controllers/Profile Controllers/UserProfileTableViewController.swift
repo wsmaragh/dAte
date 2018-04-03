@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class UserProfileTableViewController: UITableViewController {
     
@@ -21,6 +22,27 @@ class UserProfileTableViewController: UITableViewController {
     }
     
     var lover: Lover?
+    private var profileImages: [UIImage] = [#imageLiteral(resourceName: "profile"), #imageLiteral(resourceName: "profile"), #imageLiteral(resourceName: "profile")] {
+        didSet {
+            DispatchQueue.main.async {
+                self.userPhotosCollectionView.reloadData()
+            }
+        }
+    }
+    var currentLover: Lover? {
+        didSet {
+            guard let following = currentLover?.following else {
+                self.likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
+                return
+            }
+            for (_, value) in following {
+                if value == lover!.id! {
+                    self.likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
+                }
+            }
+        }
+    }
+    
     var photos = [#imageLiteral(resourceName: "bg_cook"), #imageLiteral(resourceName: "bg_love1"), #imageLiteral(resourceName: "bg_date2"), #imageLiteral(resourceName: "bg_desert")]
     var cuisines = ["Thai", "Japanese", "Nigerian", "Coffee", "Tacoes"]
     
@@ -43,38 +65,96 @@ class UserProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-//        setUpPagerView()
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        loadData()
-    }
-    
-    
-    private func loadData() {
-        userNameLabel.text = lover?.name ?? "N/A"
-        ageLabel.text = "N/A"
-        userLocationLabel.text = lover?.city ?? "Somewhere in NYC"
-        favoriteFoodLabel.text = "Coffee"
-        aboutMeTextView.text = "This is where you write anything about yourself. Keep it short and sweet!"
-        lookingForTextView.text = "This is where you tell people what kind of relationship you are searching on here for. Keep it short and simple stupid!"
-        faveRestaurantTextView.text = "Katz Delicatessan"
         favoriteCuisinesCollectionView.dataSource = self
         favoriteCuisinesCollectionView.delegate = self
+//        setUpPagerView()
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        loadCurrentUser()
+        loadData()
+    }
+    func loadCurrentUser() {
+        DBService.manager.getCurrentLover { (onlineLover, error) in
+            if let lover = onlineLover {
+                self.currentLover = lover
+            }
+            if let error = error {
+                print("loading current user error: \(error)")
+            }
+        }
+    }
+    func loadImages() {
         
+        guard self.lover != nil else {return}
+        let url0 = currentLover!.profileImageUrl ?? ""
+        let url1 = currentLover!.profileImageUrl1 ?? ""
+        let url2 = currentLover!.profileImageUrl2 ?? ""
         
+        ImageHelper.manager.getImage(from: url0, completionHandler: {
+            self.profileImages[0] = $0
+        }, errorHandler: {_ in })
+        ImageHelper.manager.getImage(from: url1, completionHandler: {
+            self.profileImages[1] = $0
+        }, errorHandler: {_ in })
+        ImageHelper.manager.getImage(from: url2, completionHandler: {
+            self.profileImages[2] = $0
+        }, errorHandler: {_ in })
+        // self.profileImages = [image1, image2, image3]
+    }
+
+    private func loadData() {
+        userNameLabel.text = lover?.name ?? "N/A"
+        if let age = convertBirthDayToAge() {
+        ageLabel.text = "Age: \(age)"
+        } else {
+            ageLabel.text = "Age: N/A"
+        }
+        userLocationLabel.text = lover?.city ?? "USA"
+        favoriteFoodLabel.text = lover?.favDish ?? "N/A"
+        aboutMeTextView.text = lover?.bio ?? "User hasn't say anything yet, start a dialoge to find out more."
+        faveRestaurantTextView.text = lover?.favRestaurants?[0] ?? "N/A"
+    
     }
     
     @IBAction func likeButton(_ sender: Any) {
         //Add like functionality here
         let button = sender as! UIButton
+        guard self.currentLover != nil, self.lover != nil else {return}
+        let uid = Auth.auth().currentUser!.uid
+        let ref = Database.database().reference()
+        let key = ref.child("lovers").childByAutoId().key // autoId key
+        
+        // if following, remove value from lover, remove from currentLover's following
         if button.imageView?.image == #imageLiteral(resourceName: "like_filled") {
-            likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
+          ref.child("lovers").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+                if let following = snapshot.value as? [String: AnyObject] {
+                    for (ke, value) in following {
+                        if value as! String == self.lover!.id {
+                            self.likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
+                            
+                            ref.child("lovers").child(uid).child("following/\(ke)").removeValue()
+                            ref.child("lovers").child(self.lover!.id!).child("followers/\(ke)").removeValue()
+                        }
+                    }
+                }
+            
+            })
+          //  ref.removeAllObservers()
+            
         }
         else {
+            // if not following, add to currentLover's following, lover's followers
+            let following = ["following/\(key)": self.lover!.id!]
+            let followers = ["followers/\(key)": uid]
+            ref.child("lovers").child(uid).updateChildValues(following)
+            ref.child("lovers").child(self.lover!.id!).updateChildValues(followers)
+            
             likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
             guard let loverName = lover?.name else {return}
             guard let currentUserName = Auth.auth().currentUser?.displayName else {return}
             FCMAPIClient.manager.sendPushNotification(device: "cBY7Bsw5Ktk:APA91bFtNkbAonfDlanh4YA0A9p3y5LZCkFOQ5FCES14pMineg-T6tOdXH44Lc_3t7tQzisTfVIZJxYdk9KOhbbUMeSbnkcqrpBrQwJ9iIu3XArs3tYYr3uFPHOyEtqZ7vYxCCsbKSq_", title: "dAte", message: "Hey \(loverName), \(currentUserName) likes YOU!")
+          
         }
+        ref.removeAllObservers()
     }
 //    private func setUpPagerView() {
 //                userPhotosView.dataSource = self
@@ -82,7 +162,7 @@ class UserProfileTableViewController: UITableViewController {
 //                userPhotosView.transformer = FSPagerViewTransformer(type: .depth)
 //    }
     
-    
+ 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         let views = [favoriteRestaurantBackgroundView, lookingForBackgroundView, aboutMeBackgroundView] as [UIView]
@@ -98,6 +178,18 @@ class UserProfileTableViewController: UITableViewController {
     }
     // MARK: - Table view data source
 
+    func convertBirthDayToAge() -> Int? {
+        var myAge: Int?
+       // let myDOB = Calendar.current.date(from: DateComponents(year: 1970, month: 9, day: 10))!
+        if let ageArr = self.lover?.dateOfBirth?.components(separatedBy: "-") {
+            guard let year =  Int(ageArr[0]), let month = Int(ageArr[1]), let day = Int(ageArr[2]) else {
+                return nil
+            }
+            let myDOB = Calendar.current.date(from: DateComponents(year: year, month: month, day: day))!
+           myAge = myDOB.age
+        }
+      return myAge
+    }
     
 
     
@@ -141,11 +233,17 @@ extension UserProfileTableViewController: UICollectionViewDataSource, UICollecti
         if collectionView == favoriteCuisinesCollectionView {
         return cuisines.count
         }
-        return photos.count
+        return profileImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if collectionView == userPhotosCollectionView {
+            let cell = userPhotosCollectionView.dequeueReusableCell(withReuseIdentifier: "OtherUserProfileCell", for: indexPath) as! OtherUserProfileCollectionCell
+            cell.otherUserImageView.image  = self.profileImages[indexPath.row]
+            return cell
+            
+        }
         if collectionView == favoriteCuisinesCollectionView {
         let cell = favoriteCuisinesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCuisineCell", for: indexPath) as! FaveFoodCollectionViewCell
         let cuisine = cuisines[indexPath.row]

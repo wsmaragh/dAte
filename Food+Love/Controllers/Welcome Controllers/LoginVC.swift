@@ -37,6 +37,17 @@ class LoginVC: UIViewController {
 		setupShade()
 		setupGoogleButton()
 		setupFacebookButton()
+        // hard code in log in users
+//        AuthUserService.manager.createUser(name: "Ben Stone", email: "ben@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//          AuthUserService.manager.createUser(name: "Cam", email: "cam@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//        AuthUserService.manager.createUser(name: "Jukay Hsu", email: "jukayhsu@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//         AuthUserService.manager.createUser(name: "David Yang", email: "davidyang@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//         AuthUserService.manager.createUser(name: "Yaseen", email: "yaseen@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//            AuthUserService.manager.createUser(name: "Gabriel", email: "gabriel@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//            AuthUserService.manager.createUser(name: "Tom", email: "tom@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//            AuthUserService.manager.createUser(name: "Vikash", email: "vikash@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//            AuthUserService.manager.createUser(name: "Will Kenney", email: "willkenney@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
+//            AuthUserService.manager.createUser(name: "Joanne Yun", email: "joanneyun@ac.c4q.nyc", password: "123456", profileImage: #imageLiteral(resourceName: "profile"))
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {

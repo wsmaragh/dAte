@@ -21,6 +21,7 @@
 		815B2B41205C2FD6005C1C32 /* Theme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B2B40205C2FD6005C1C32 /* Theme.xcassets */; };
 		816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */; };
 		816511F2206714F200F27F34 /* UserPicturesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */; };
+		8166964C20733E3500179C38 /* OtherUserProfileCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8166964B20733E3500179C38 /* OtherUserProfileCollectionCell.swift */; };
 		81729CD52066297300FD5737 /* SearchRestaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81729CD42066297300FD5737 /* SearchRestaurant.swift */; };
 		817AE42F206C825D006C2CA4 /* MessageFCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE42E206C825D006C2CA4 /* MessageFCM.swift */; };
 		817AE431206C846E006C2CA4 /* FCMKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE430206C846E006C2CA4 /* FCMKeys.swift */; };
@@ -118,6 +119,7 @@
 		815B2B40205C2FD6005C1C32 /* Theme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Theme.xcassets; sourceTree = "<group>"; };
 		816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormViewController.swift; sourceTree = "<group>"; };
 		816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPicturesCollectionViewCell.swift; sourceTree = "<group>"; };
+		8166964B20733E3500179C38 /* OtherUserProfileCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileCollectionCell.swift; sourceTree = "<group>"; };
 		81729CD42066297300FD5737 /* SearchRestaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRestaurant.swift; sourceTree = "<group>"; };
 		817AE42E206C825D006C2CA4 /* MessageFCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFCM.swift; sourceTree = "<group>"; };
 		817AE430206C846E006C2CA4 /* FCMKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMKeys.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 			children = (
 				819575892066B009001F86F0 /* FaveFoodCollectionViewCell.swift */,
 				816511F1206714F200F27F34 /* UserPicturesCollectionViewCell.swift */,
+				8166964B20733E3500179C38 /* OtherUserProfileCollectionCell.swift */,
 				81AAF7EA206815C30077AAC2 /* FavoriteRestaurantTableViewCell.swift */,
 				81AAF7EB206815C30077AAC2 /* FavoriteRestaurantTableViewCell.xib */,
 				81AAF7F2206844C00077AAC2 /* AnswerTableViewCell.swift */,
@@ -640,7 +643,7 @@
 				TargetAttributes = {
 					817F9B42205863B10061E1B6 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -859,6 +862,7 @@
 				81EFF7FC20697BE3005EA1A4 /* MonthView.swift in Sources */,
 				817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */,
 				81E615F82060E1C400347CDA /* WelcomeLogoSlide.swift in Sources */,
+				8166964C20733E3500179C38 /* OtherUserProfileCollectionCell.swift in Sources */,
 				816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */,
 				81BE0A00205DDD5E0099215D /* UITextFieldX.swift in Sources */,
 				817F9B732058B8E40061E1B6 /* VideoVC.swift in Sources */,

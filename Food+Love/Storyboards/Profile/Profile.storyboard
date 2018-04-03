@@ -252,15 +252,15 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YWJ-ln-AIa">
                                                     <rect key="frame" x="16" y="11" width="343" height="185"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WMP-Ii-7hB">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WMP-Ii-7hB">
                                                         <size key="itemSize" width="147" height="171"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Kgi-xD-v36">
-                                                            <rect key="frame" x="0.0" y="0.0" width="147" height="171"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OtherUserProfileCell" id="Kgi-xD-v36" customClass="OtherUserProfileCollectionCell" customModule="Food_Love" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="7" width="147" height="171"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="147" height="171"/>
@@ -277,6 +277,9 @@
                                                                 <constraint firstItem="siA-y5-JeE" firstAttribute="leading" secondItem="Kgi-xD-v36" secondAttribute="leading" id="hxr-fo-s3a"/>
                                                                 <constraint firstItem="siA-y5-JeE" firstAttribute="top" secondItem="Kgi-xD-v36" secondAttribute="top" id="xnZ-Hg-ovU"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="otherUserImageView" destination="siA-y5-JeE" id="cAz-T9-7Aj"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -629,7 +632,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTf-NW-Sym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7312.8000000000002" y="715.14242878560731"/>
+            <point key="canvasLocation" x="7167" y="655"/>
         </scene>
     </scenes>
     <resources>

@@ -26,9 +26,9 @@ class Lover: NSObject {
     var secondFoodPrefer: String?
     var thirdFoodPrefer: String?
     var favRestaurants: [String]?
-    var likedUsers: [String]?
+    var following: [String: String]?
 	var morePhotos: [String]?
-	var usersThatLikeYou: [String]?
+    var followers: [String: String]?
 
 	init(dictionary: [String: AnyObject]) {
 		self.id = dictionary["id"] as? String
@@ -50,8 +50,8 @@ class Lover: NSObject {
         self.secondFoodPrefer = dictionary["secondFoodPrefer"] as? String
         self.thirdFoodPrefer = dictionary["thirdFoodPrefer"] as? String
 		self.favRestaurants = dictionary["favRestaurants"]  as? [String]
-		self.likedUsers = dictionary["likedUsers"]  as? [String]
-		self.usersThatLikeYou = dictionary["usersThatLikeYou"]  as? [String]
+        self.following = dictionary["following"]  as? [String: String]
+        self.followers = dictionary["followers"]  as? [String: String]
 	}
 
 	init(id: String,
@@ -74,8 +74,8 @@ class Lover: NSObject {
             secondFoodPrefer: String?,
              thirdFoodPrefer: String?,
 			 favRestaurants: [String]?,
-			 likedUsers: [String]?,
-			 usersThatLikeYou: [String]?
+             following: [String: String]?,
+             followers: [String: String]?
 		){
 		self.id = id
 		self.name = name
@@ -96,8 +96,8 @@ class Lover: NSObject {
         self.secondFoodPrefer = secondFoodPrefer
         self.thirdFoodPrefer = thirdFoodPrefer
 		self.favRestaurants = favRestaurants
-		self.likedUsers = likedUsers
-		self.usersThatLikeYou = usersThatLikeYou
+		self.following = following
+		self.followers = followers
 	}
 
 	public func changeStringToDate(dateString: String) -> Date {
