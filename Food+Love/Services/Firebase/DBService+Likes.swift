@@ -6,8 +6,10 @@
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 extension DBService {
     func getUsersYouLikes(fromLover lover: Lover, completionHandler: @escaping ([Lover]?) -> Void) {
@@ -21,12 +23,12 @@ extension DBService {
     // current user likes someone
     func addToCurrentUserLikes(fromCurrentUser currentUser: Lover, toLover: Lover) {
         let ref = DBService.manager.getLoversRef()
-        guard let uid = currentUser.id else {return}
+        let uid = currentUser.id
         var likedUsers = [String]()
         ref.child(uid).child("likedUsers").observe(.value) { (snapshot) in
             if let dict = snapshot.value as? [String: String] {
              likedUsers = Array(dict.values)
-            likedUsers.append(toLover.id!)
+							likedUsers.append(toLover.id)
             }
         }
         ref.child(uid).child("likedUsers").setValue(likedUsers)
@@ -43,12 +45,12 @@ extension DBService {
     // current user dislike someone
     func removeFromCurrentUserLikes(fromCurrentUser currentUser: Lover, toLover: Lover) {
         let ref = DBService.manager.getLoversRef()
-        guard let uid = currentUser.id else {return}
+        let uid = currentUser.id
         var likedUsers = [String]()
         ref.child(uid).child("likedUsers").observe(.value) { (snapshot) in
             if let dict = snapshot.value as? [String: String] {
                 likedUsers = Array(dict.values)
-                let index = likedUsers.index(where: {toLover.id! == $0})
+							let index = likedUsers.index(where: {toLover.id == $0})
                 if index != nil {
                     likedUsers.remove(at: index!)
                 }
