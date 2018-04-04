@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R5Z-1D-Oiw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R5Z-1D-Oiw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,15 +25,17 @@
                                 <segments>
                                     <segment title="Confirmed"/>
                                     <segment title="Pending"/>
-                                    <segment title="Available"/>
                                 </segments>
                                 <color key="tintColor" name="appColorRed"/>
+                                <connections>
+                                    <action selector="segmentedControl:" destination="R5Z-1D-Oiw" eventType="valueChanged" id="dfi-43-kGX"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oc8-FQ-xDw" userLabel="PendingDates">
                                 <rect key="frame" x="0.0" y="48" width="375" height="619"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PendingDatesCell" id="6EG-dq-FJx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PendingDatesCell" id="6EG-dq-FJx" customClass="DatesCell" customModule="Food_Love" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6EG-dq-FJx" id="WEV-2r-SPT">
@@ -48,7 +49,7 @@
                                 <rect key="frame" x="0.0" y="48" width="375" height="619"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConfirmedDatesCell" id="uNB-aZ-wem">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ConfirmedDatesCell" id="uNB-aZ-wem" customClass="DatesCell" customModule="Food_Love" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uNB-aZ-wem" id="5LY-Ye-nL9">
@@ -76,13 +77,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kzj-ZZ-mLY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Dates" id="e8S-B0-mgv">
-                        <leftBarButtonItems>
-                            <barButtonItem id="ifU-YD-ALy"/>
-                            <barButtonItem image="mixer" style="done" id="Jq5-pB-835"/>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" image="calendar_Add" id="GJz-yh-QUY"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Dates" id="e8S-B0-mgv"/>
+                    <connections>
+                        <outlet property="confirmedTableView" destination="wWC-4Z-uMR" id="tqp-6L-zgn"/>
+                        <outlet property="pendingTableView" destination="Oc8-FQ-xDw" id="Yvb-7o-vyu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MIE-cN-UfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -90,8 +89,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="calendar_Add" width="25" height="25"/>
-        <image name="mixer" width="25" height="25"/>
         <namedColor name="Bg">
             <color red="0.85900002720000002" green="0.851000011" blue="0.70999997849999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
