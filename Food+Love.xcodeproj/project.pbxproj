@@ -25,6 +25,7 @@
 		817AE42F206C825D006C2CA4 /* MessageFCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE42E206C825D006C2CA4 /* MessageFCM.swift */; };
 		817AE431206C846E006C2CA4 /* FCMKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE430206C846E006C2CA4 /* FCMKeys.swift */; };
 		817AE433206C869A006C2CA4 /* FCMAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE432206C869A006C2CA4 /* FCMAPIClient.swift */; };
+		817AE435206D679E006C2CA4 /* PlanDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817AE434206D679E006C2CA4 /* PlanDate.swift */; };
 		817F9B47205863B10061E1B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F9B46205863B10061E1B6 /* AppDelegate.swift */; };
 		817F9B4E205863B10061E1B6 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4D205863B10061E1B6 /* Icons.xcassets */; };
 		817F9B51205863B10061E1B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 817F9B4F205863B10061E1B6 /* LaunchScreen.storyboard */; };
@@ -122,6 +123,7 @@
 		817AE42E206C825D006C2CA4 /* MessageFCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFCM.swift; sourceTree = "<group>"; };
 		817AE430206C846E006C2CA4 /* FCMKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMKeys.swift; sourceTree = "<group>"; };
 		817AE432206C869A006C2CA4 /* FCMAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMAPIClient.swift; sourceTree = "<group>"; };
+		817AE434206D679E006C2CA4 /* PlanDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDate.swift; sourceTree = "<group>"; };
 		817F9B43205863B10061E1B6 /* Food+Love.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food+Love.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		817F9B46205863B10061E1B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		817F9B4D205863B10061E1B6 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				81D26F0520598AF800BEBC47 /* FSPhoto.swift */,
 				81D26F0920598B7000BEBC47 /* FSSearch.swift */,
 				81D26F0F20598C5E00BEBC47 /* MapAnnotation.swift */,
+				817AE434206D679E006C2CA4 /* PlanDate.swift */,
 			);
 			path = "Restaurant Search";
 			sourceTree = "<group>";
@@ -580,9 +583,9 @@
 				81F8DC3C2065E5E100FB2174 /* DatesCell.swift */,
 				81EFF7F320697BE2005EA1A4 /* CalenderView.swift */,
 				81EFF7F720697BE3005EA1A4 /* MonthView.swift */,
-				81EFF7F420697BE2005EA1A4 /* SearchRestView.swift */,
-				81EFF7F520697BE2005EA1A4 /* SelectRestaurantView.swift */,
 				81EFF7F620697BE2005EA1A4 /* WeekdaysView.swift */,
+				81EFF7F520697BE2005EA1A4 /* SelectRestaurantView.swift */,
+				81EFF7F420697BE2005EA1A4 /* SearchRestView.swift */,
 			);
 			path = "Dates Views";
 			sourceTree = "<group>";
@@ -640,7 +643,7 @@
 				TargetAttributes = {
 					817F9B42205863B10061E1B6 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -755,7 +758,6 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -772,7 +774,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -861,6 +862,7 @@
 				81E615F82060E1C400347CDA /* WelcomeLogoSlide.swift in Sources */,
 				816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */,
 				81BE0A00205DDD5E0099215D /* UITextFieldX.swift in Sources */,
+				817AE435206D679E006C2CA4 /* PlanDate.swift in Sources */,
 				817F9B732058B8E40061E1B6 /* VideoVC.swift in Sources */,
 				81AAF7F4206844C00077AAC2 /* AnswerTableViewCell.swift in Sources */,
 				81AAF7EC206815C30077AAC2 /* FavoriteRestaurantTableViewCell.swift in Sources */,
@@ -995,6 +997,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
@@ -1002,8 +1005,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8604a09-e785-46ce-8243-8d0cf7bb5161";
-				PROVISIONING_PROFILE_SPECIFIER = FoodNLove;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1016,6 +1019,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
@@ -1023,8 +1027,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8604a09-e785-46ce-8243-8d0cf7bb5161";
-				PROVISIONING_PROFILE_SPECIFIER = FoodNLove;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

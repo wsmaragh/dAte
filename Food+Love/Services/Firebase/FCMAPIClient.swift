@@ -18,8 +18,9 @@ class FCMAPIClient {
         urlRMCRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRMCRequest.httpMethod = "POST"
         
-        let notification = NotificationFCM(body: message, title: title, content_available: true, priority: "high")
-        let messageFCM = MessageFCM(to: device, notification: notification, data: notification)
+        let notification = NotificationFCM(body: message, title: title, content_available: true, priority: "high", sound: "default")
+        let body = BodyFCM(body: message, title: title)
+        let messageFCM = MessageFCM(to: device, notification: notification, data: body)
         let jsonMessage = messageFCM.toAny()
         urlRMCRequest.httpBody = jsonMessage
         
