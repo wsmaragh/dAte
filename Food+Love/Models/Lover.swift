@@ -8,35 +8,31 @@
 import UIKit
 
 class Lover: NSObject {
-	var id: String?
-	var name: String?
-	var email: String?
-    var profileImageUrl: String?
-    var profileImageUrl1: String?
-    var profileImageUrl2: String?
+	var id: String
+	var name: String
+	var email: String
+	var profileImageUrl: String?
+	var morePhotos: [String]?
 	var dateOfBirth: String?
 	var zipcode: String?
 	var city: String?
 	var bio: String?
 	var gender: String?
 	var genderPreference: String?
-    var favDish: String?
-    var favDishImageUrl: String?
-    var firstFoodPrefer: String?
-    var secondFoodPrefer: String?
-    var thirdFoodPrefer: String?
-    var favRestaurants: [String]?
-    var likedUsers: [String]?
-	var morePhotos: [String]?
+	var favDish: String?
+	var favDishImageUrl: String?
+	var firstFoodPrefer: String?
+	var secondFoodPrefer: String?
+	var thirdFoodPrefer: String?
+	var favRestaurants: [String]?
+	var likedUsers: [String]?
 	var usersThatLikeYou: [String]?
 
 	init(dictionary: [String: AnyObject]) {
-		self.id = dictionary["id"] as? String
-		self.name = dictionary["name"]  as? String
-		self.email = dictionary["email"] as? String
-		self.profileImageUrl = dictionary["profileImageUrl"]  as? String
-        self.profileImageUrl1 = dictionary["profileImageUrl1"]  as? String
-        self.profileImageUrl2 = dictionary["profileImageUrl2"]  as? String
+		self.id = dictionary["id"] as? String ?? ""
+		self.name = dictionary["name"] as? String ?? ""
+		self.email = dictionary["email"] as? String ?? ""
+		self.profileImageUrl = (dictionary["profileImageUrl"]  as? String)!
 		self.morePhotos = dictionary["morePhotos"] as? [String]
 		self.dateOfBirth = dictionary["dateOfBirth"]  as? String
 		self.zipcode = dictionary["zipcode"]  as? String
@@ -44,11 +40,11 @@ class Lover: NSObject {
 		self.bio = dictionary["bio"]  as? String
 		self.gender = dictionary["gender"]  as? String
 		self.genderPreference = dictionary["genderPreference"]  as? String
-	    self.favDish = dictionary["favDish"] as? String
-        self.favDishImageUrl = dictionary["favDishImageUrl"] as? String
-        self.firstFoodPrefer = dictionary["firstFoodPrefer"] as? String
-        self.secondFoodPrefer = dictionary["secondFoodPrefer"] as? String
-        self.thirdFoodPrefer = dictionary["thirdFoodPrefer"] as? String
+		self.favDish = dictionary["favDish"] as? String
+		self.favDishImageUrl = dictionary["favDishImageUrl"] as? String
+		self.firstFoodPrefer = dictionary["firstFoodPrefer"] as? String
+		self.secondFoodPrefer = dictionary["secondFoodPrefer"] as? String
+		self.thirdFoodPrefer = dictionary["thirdFoodPrefer"] as? String
 		self.favRestaurants = dictionary["favRestaurants"]  as? [String]
 		self.likedUsers = dictionary["likedUsers"]  as? [String]
 		self.usersThatLikeYou = dictionary["usersThatLikeYou"]  as? [String]
@@ -58,8 +54,6 @@ class Lover: NSObject {
 			 name: String,
 			 email: String,
        profileImageUrl: String?,
-			 profileImageUrl1: String,
-       profileImageUrl2: String,
 			 morePhotos: [String]?,
 			 profileVideoUrl: String?,
 			 dateOfBirth: String?,
@@ -68,11 +62,11 @@ class Lover: NSObject {
 			 bio: String?,
 			 gender: String?,
 			 genderPreference: String?,
-             favDish: String?,
-            favDishImageUrl: String?,
-            firstFoodPrefer: String?,
-            secondFoodPrefer: String?,
-             thirdFoodPrefer: String?,
+			 favDish: String?,
+			favDishImageUrl: String?,
+			firstFoodPrefer: String?,
+			secondFoodPrefer: String?,
+			 thirdFoodPrefer: String?,
 			 favRestaurants: [String]?,
 			 likedUsers: [String]?,
 			 usersThatLikeYou: [String]?
@@ -81,8 +75,6 @@ class Lover: NSObject {
 		self.name = name
 		self.email = email
 		self.profileImageUrl = profileImageUrl
-       self.profileImageUrl1 = profileImageUrl1
-        self.profileImageUrl2 = profileImageUrl2
 		self.morePhotos = morePhotos
 		self.dateOfBirth = dateOfBirth
 		self.zipcode = zipcode

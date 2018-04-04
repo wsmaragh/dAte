@@ -12,7 +12,6 @@ import AVFoundation
 
 class ChatVC: UIViewController {
 
-
 	// MARK: Outlets
 	@IBOutlet weak var chatCollectionView: UICollectionView!
 	@IBOutlet weak var profileImage: UIImageViewX!
@@ -34,6 +33,12 @@ class ChatVC: UIViewController {
 		super.viewWillDisappear(false)
 		tabBarController?.tabBar.isHidden = false
 	}
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		self.view.layoutIfNeeded()
+		NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -44,7 +49,7 @@ class ChatVC: UIViewController {
 		chatCollectionView.delegate = self
 		chatCollectionView.dataSource = self
 		inputText.delegate = self
-		tabBarController?.tabBar.isHidden = true
+//		tabBarController?.tabBar.isHidden = true
 		//setup Lover
 		DBService.manager.retrieveLover(loverId: loverId, completionHandler: { (onlineLover) in
 			if let myLover = onlineLover {
@@ -78,9 +83,17 @@ class ChatVC: UIViewController {
 
 	@IBAction func smileyButtonPressed(_ sender: UIButton) {
 		//add smiley photo
-		print("smileyButton pressed")
 	}
 
+//	@IBAction func selectLocation(_ sender: Any) {
+//		print("location pressed")
+//		canSendLocation = true
+//		if checkLocationPermission() {
+//			locationManager.startUpdatingLocation()
+//		} else {
+//			locationManager.requestWhenInUseAuthorization()
+//		}
+//	}
 
 
 	private func configureNavBar() {
@@ -122,8 +135,8 @@ class ChatVC: UIViewController {
 	///////////////////// MESSAGES  //////////////////////
 	func getMessages() {
 		guard let uid = Auth.auth().currentUser?.uid, let toId = loverId else {return}
-		let loverMessageRef = DBService.manager.getLoverMessagesRef().child(uid).child(toId)
-		loverMessageRef.observe(.childAdded, with: { (snapshot) in
+		let conversationsRef = DBService.manager.getConversationsRef().child(uid).child(toId)
+		conversationsRef.observe(.childAdded, with: { (snapshot) in
 			let messageId = snapshot.key
 			let messagesRef = DBService.manager.getMessagesRef().child(messageId)
 			messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -155,10 +168,10 @@ class ChatVC: UIViewController {
 		childRef.updateChildValues(values) { (error, ref) in
 			if error != nil { print(error!); return}
 			self.inputText.text = "" //nil
-			let loverMessageRef = DBService.manager.getLoverMessagesRef().child(fromId).child(toId!)
+			let conversationsRef = DBService.manager.getConversationsRef().child(fromId).child(toId!)
 			let messageId = childRef.key
-			loverMessageRef.updateChildValues([messageId: 1])
-			let recipentUserMessageRef = DBService.manager.getLoverMessagesRef().child(toId!).child(fromId)
+			conversationsRef.updateChildValues([messageId: 1])
+			let recipentUserMessageRef = DBService.manager.getConversationsRef().child(toId!).child(fromId)
 			recipentUserMessageRef.updateChildValues([messageId: 1])
 		}
 	}
@@ -240,6 +253,18 @@ class ChatVC: UIViewController {
 		}
 	}
 
+	@objc func showKeyboard(notification: Notification) {
+		if let keyboardFrame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
+			let height = keyboardFrame.cgRectValue.height
+
+//			tableView.contentInset.bottom = height
+//			tableView.scrollIndicatorInsets.bottom = height
+//			if messages.count > 0 {
+//				tableView.scrollToRow(at: IndexPath.init(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
+//			}
+		}
+	}
+
 }
 
 
@@ -289,12 +314,17 @@ extension ChatVC: UICollectionViewDataSource  {
 	// Cell for item at
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let message = self.messages[indexPath.item]
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChatCell", for: indexPath) as! ChatCell
-		cell.chatVC = self
-		cell.configureCell(message: message)
-		return cell
-
-		
+		if message.fromId == Auth.auth().currentUser?.uid {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserChatCell", for: indexPath) as! UserChatCell
+			cell.chatVC = self
+			cell.configureCell(message: message)
+			return cell
+		} else {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartnerChatCell", for: indexPath) as! PartnerChatCell
+			cell.chatVC = self
+			cell.configureCell(message: message)
+			return cell
+		}
 	}
 }
 
@@ -321,11 +351,11 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-		return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0, right: 5.0)
+		return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return 2.0
+		return 10.0
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
