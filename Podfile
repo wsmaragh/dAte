@@ -16,8 +16,7 @@ target 'Food+Love' do
     pod 'FBSDKShareKit'
     pod 'FBSDKLoginKit'
     pod 'Parchment'
-    pod 'FSPagerView'
     pod 'Eureka'
-    pod ‘Toucan’
+    pod 'Toucan'
 
 end

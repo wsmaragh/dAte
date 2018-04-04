@@ -116,6 +116,10 @@ class ChatVC: UIViewController {
     
     @objc private func planDate() {
         let planDateVC = MakeDateVC()
+        guard let fromUser = Auth.auth().currentUser?.uid else {return}
+        guard let toUser = loverId else {return}
+        planDateVC.fromUser = fromUser
+        planDateVC.toUser = toUser
         navigationController?.pushViewController(planDateVC, animated: true)
     }
 
