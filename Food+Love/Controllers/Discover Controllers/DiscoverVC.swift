@@ -14,10 +14,10 @@ class DiscoverVC: UIViewController {
 
 	// Outlets
     @IBOutlet weak var discoverCV: UICollectionView!
-    
 
 	//Properties
 	let cellSpacing: CGFloat = 0.6
+    var currentLover: Lover!
 	var lovers = [Lover](){
 		didSet{
 			discoverCV.reloadData()
@@ -35,15 +35,27 @@ class DiscoverVC: UIViewController {
 				window?.rootViewController = welcomeVC
 			}
 		}
+
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadCurrentUser()
+
         loadLovers()
-
-	}
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
 		setUpDiscoverCV()
 	}
-
+ 
+    func loadCurrentUser() {
+        DBService.manager.getCurrentLover { (onlineLover, error) in
+            if let lover = onlineLover {
+                self.currentLover = lover
+            }
+            if let error = error {
+                print("loading current user error: \(error)")
+            }
+        }
+    }
 
 	private func setUpDiscoverCV() {
 		discoverCV.dataSource = self
@@ -73,6 +85,7 @@ class DiscoverVC: UIViewController {
 				let lover = Lover(dictionary: dict)
 				lover.id = snapshot.key
 				if lover.id != Auth.auth().currentUser?.uid {
+                    
 					self.lovers.append(lover)
 				}
 			}
@@ -96,13 +109,24 @@ extension DiscoverVC: UICollectionViewDataSource {
     let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "NewDiscoverCell", for: indexPath) as! NewDiscoverCollectionViewCell
 		let lover = lovers[indexPath.row]
         cell.userNameLabel.text = lover.name ?? "N/A"
-        cell.favoriteFoodLabel.text = "Mac and Cheese"
-        cell.favoriteCuisinesLabel.text = "Thai, Tacos, Nigerian"
-        cell.userImageView.image = #imageLiteral(resourceName: "user2")
+        cell.favoriteFoodLabel.text = lover.favDish ?? "N/A"
+        
+        let currentLoverFoods = [currentLover.firstFoodPrefer, currentLover.secondFoodPrefer, currentLover.thirdFoodPrefer]
+        let loverFoods = [lover.firstFoodPrefer, lover.secondFoodPrefer, lover.thirdFoodPrefer]
+        var common = [String]()
+        for option in currentLoverFoods where option != nil {
+            if loverFoods.contains(where: {$0 == option}) {
+                common.append(option!)
+            }
+        }
+        
+        cell.favoriteCuisinesLabel.text = common.joined(separator: ", ")
+        cell.userImageView.image = nil
+        cell.layoutIfNeeded()
 		if let image = lover.profileImageUrl {
 			cell.userImageView.loadImageUsingCacheWithUrlString(image)
 		} else {
-			cell.userImageView.image = #imageLiteral(resourceName: "user2")
+			cell.userImageView.image = #imageLiteral(resourceName: "profile")
 		}
         cell.layoutSubviews()
 		return cell
