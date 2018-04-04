@@ -8,7 +8,7 @@ import UIKit
 import Firebase
 import MobileCoreServices
 import AVFoundation
-
+import CoreLocation
 
 class ChatVC: UIViewController {
 
@@ -17,11 +17,18 @@ class ChatVC: UIViewController {
 	@IBOutlet weak var profileImage: UIImageViewX!
 	@IBOutlet weak var name: UILabel!
 	@IBOutlet weak var inputText: UITextField!
-
+	@IBOutlet weak var chatSendView: ChatSendView!
 
 	// MARK: Properties
+	var partner: Lover?
 	var loverId: String!
+	var loverImage: UIImage = #imageLiteral(resourceName: "user2")
 	var messages = [Message]()
+	var canSendLocation = true
+	var currentUser = Auth.auth().currentUser!
+//	let locationManager = CLLocationManager()
+	let barHeight: CGFloat = 50
+
 
 
 	// MARK: View Lifecycle
@@ -36,26 +43,47 @@ class ChatVC: UIViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		self.view.layoutIfNeeded()
-		NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
+
+	@objc func keyboardWillShow(sender: NSNotification) {
+		guard let userInfo = sender.userInfo else {return}
+		guard let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect else {return}
+		let height = keyboardFrame.size.height
+		self.chatSendView.frame.origin.y -= height
+	}
+
+	@objc func keyboardWillHide(sender: NSNotification) {
+		guard let userInfo = sender.userInfo else {return}
+		guard let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect else {return}
+		let height = keyboardFrame.size.height
+		self.chatSendView.frame.origin.y += height
+	}
+
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = #colorLiteral(red: 0.8270000219, green: 0.3529999852, blue: 0.2160000056, alpha: 1)
 		view.alpha = 1.0
+//		self.locationManager.delegate = self
 		configureNavBar()
 		getMessages()
 		chatCollectionView.delegate = self
 		chatCollectionView.dataSource = self
 		inputText.delegate = self
-//		tabBarController?.tabBar.isHidden = true
 		//setup Lover
 		DBService.manager.retrieveLover(loverId: loverId, completionHandler: { (onlineLover) in
 			if let myLover = onlineLover {
 				self.name.text = myLover.name
-				if let image = myLover.profileImageUrl{
-					self.profileImage.loadImageUsingCacheWithUrlString(image)
+				if let imageStr = myLover.profileImageUrl{
+//					self.profileImage.loadImageUsingCacheWithUrlString(imageStr)
+					ImageService.manager.getImage(from: imageStr, completionHandler: { (onlineImage) in
+						self.loverImage = onlineImage
+						self.profileImage.image = onlineImage
+					}, errorHandler: { (error) in
+						print(error)
+					})
 				}
 			}
 		})
@@ -81,19 +109,15 @@ class ChatVC: UIViewController {
 
 	}
 
-	@IBAction func smileyButtonPressed(_ sender: UIButton) {
-		//add smiley photo
-	}
-
-//	@IBAction func selectLocation(_ sender: Any) {
-//		print("location pressed")
+	@IBAction func selectLocation(_ sender: Any) {
+		print("location pressed")
 //		canSendLocation = true
 //		if checkLocationPermission() {
 //			locationManager.startUpdatingLocation()
 //		} else {
 //			locationManager.requestWhenInUseAuthorization()
 //		}
-//	}
+	}
 
 
 	private func configureNavBar() {
@@ -193,10 +217,6 @@ class ChatVC: UIViewController {
 				}
 			}
 		})
-		// UPLOAD PROGRESS
-		uploadTask.observe(.progress) { (snapshot) in
-			print(snapshot.progress?.completedUnitCount ?? " ")
-		}
 	}
 
 	// Thumbnail of Video
@@ -249,17 +269,12 @@ class ChatVC: UIViewController {
 		}
 	}
 
-	@objc func showKeyboard(notification: Notification) {
-		if let keyboardFrame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
-			let height = keyboardFrame.cgRectValue.height
-
-//			tableView.contentInset.bottom = height
-//			tableView.scrollIndicatorInsets.bottom = height
-//			if messages.count > 0 {
-//				tableView.scrollToRow(at: IndexPath.init(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
-//			}
-		}
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		self.inputText.resignFirstResponder()
+		self.chatSendView.resignFirstResponder()
 	}
+
+
 
 }
 
@@ -319,6 +334,7 @@ extension ChatVC: UICollectionViewDataSource  {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartnerChatCell", for: indexPath) as! PartnerChatCell
 			cell.chatVC = self
 			cell.configureCell(message: message)
+			cell.profileImageView.image = loverImage
 			return cell
 		}
 	}
@@ -411,41 +427,3 @@ zoomOutImageView.removeFromSuperview()
 */
 
 //}
-
-
-//////////////////////////////
-// MARK: KEYBOARD Handling
-//extension ChatVC {
-/*
-func setUpKeyboardObservers() {
-NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-}
-
-@objc func keyboardDidShow() {
-if messages.count > 0 {
-let indexpath = NSIndexPath.init(item: self.messages.count-1, section: 0)
-//			self.collectionView?.scrollToItem(at: indexpath as IndexPath, at: .top, animated: true)
-}
-}
-
-@objc func keyboardWillShow(notification: NSNotification) {
-let keyboardFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey]! as AnyObject).cgRectValue
-let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
-//		containerViewBottomAncher?.constant = -keyboardFrame!.height
-UIView.animate(withDuration: keyboardDuration!) {
-self.view.layoutIfNeeded()
-}
-}
-
-@objc func keyboardWillHide(notification: NSNotification){
-//		containerViewBottomAncher?.constant = 0
-let keyboardDuration = (notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]! as AnyObject).doubleValue
-UIView.animate(withDuration: keyboardDuration!) {
-self.view.layoutIfNeeded()
-}
-}
-*/
-//}
-

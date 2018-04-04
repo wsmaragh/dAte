@@ -242,7 +242,7 @@
                                     <outlet property="loverNameLabel" destination="Oha-an-j3s" id="8Jn-kJ-2GO"/>
                                 </connections>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" directionalLockEnabled="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G95-BA-uE9">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" directionalLockEnabled="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G95-BA-uE9">
                                 <rect key="frame" x="0.0" y="153.5" width="375" height="463.5"/>
                                 <color key="backgroundColor" name="appColorWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yX0-1V-r3K">
@@ -455,16 +455,19 @@
                                         </constraints>
                                         <color key="tintColor" name="appColorWhite"/>
                                         <state key="normal" image="location"/>
+                                        <connections>
+                                            <action selector="selectLocation:" destination="kaQ-eT-jEc" eventType="touchUpInside" id="PXY-Nx-vAb"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Message ........" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uev-WH-36X" userLabel="messageTextField">
-                                        <rect key="frame" x="79" y="5" width="261" height="40"/>
+                                        <rect key="frame" x="79" y="5" width="266" height="40"/>
                                         <color key="backgroundColor" name="appColorWhite"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmI-Pb-5PJ">
-                                        <rect key="frame" x="345" y="5" width="25" height="40"/>
+                                        <rect key="frame" x="350" y="5" width="20" height="40"/>
                                         <state key="normal" image="sent">
                                             <color key="titleColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -514,6 +517,7 @@
                     </view>
                     <connections>
                         <outlet property="chatCollectionView" destination="G95-BA-uE9" id="QpI-tx-3Uv"/>
+                        <outlet property="chatSendView" destination="aZ2-T6-F0I" id="Pl6-GK-9xB"/>
                         <outlet property="inputText" destination="uev-WH-36X" id="KQH-JV-hko"/>
                         <outlet property="name" destination="Oha-an-j3s" id="XCn-na-rxV"/>
                         <outlet property="profileImage" destination="nT1-qR-CGk" id="vJw-6W-e7E"/>
@@ -839,7 +843,7 @@ AAAAAAAAAAAAPvk
         </image>
         <image name="location" width="25" height="25"/>
         <image name="play" width="47" height="47"/>
-        <image name="sent" width="25" height="25"/>
+        <image name="sent" width="20" height="20"/>
         <image name="takephotos" width="25" height="25"/>
         <image name="user2" width="128" height="128"/>
         <image name="user6" width="128" height="128"/>

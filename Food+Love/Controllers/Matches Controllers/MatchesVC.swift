@@ -327,6 +327,7 @@ extension MatchesVC {
 		//Matches
 		if sender is UICollectionViewCell {
 			guard let indexPath1 = matchesCollectionView.indexPath(for: sender as! UICollectionViewCell) else {return}
+			chatVC.partner = matches[indexPath1.row]
 			chatVC.loverId = matches[indexPath1.row].id
 		}
 		//Conversations
@@ -334,6 +335,8 @@ extension MatchesVC {
 			guard let indexPath2 = conversationsTableView.indexPath(for: sender as! UITableViewCell) else {return}
 			let selectedLover: Lover?
 			chatVC.loverId =	conversations[indexPath2.row].chatPartnerId()
+			chatVC.partner = matches[indexPath2.row]
+
 		}
 	}
 }
