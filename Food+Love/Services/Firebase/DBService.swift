@@ -49,7 +49,7 @@ class DBService {
 		return dateFormatter.string(from: date)
 	}
 
-
+/*
 	// Add User main
 	public func addLover(name: String, email: String, profileImage: UIImage) {
 		let lover = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
@@ -191,19 +191,19 @@ class DBService {
 		}
 	}
 
-	func getAllLoversExceptCurrent() -> [Lover]{
-		var lovers = [Lover]()
-		Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
-			if let dict = snapshot.value as? [String: AnyObject]{
-				let lover = Lover(dictionary: dict)
-				lover.id = snapshot.key
-				if lover.id != Auth.auth().currentUser?.uid {
-					lovers.append(lover)
-				}
-			}
-		}, withCancel: nil)
-		return lovers
-	}
+//    func getAllLoversExceptCurrent() -> [Lover]{
+//        var lovers = [Lover]()
+//        Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
+//            if let dict = snapshot.value as? [String: AnyObject]{
+//                let lover = Lover(dictionary: dict)
+//                lover.id = snapshot.key
+//                if lover.id != Auth.auth().currentUser?.uid {
+//                    lovers.append(lover)
+//                }
+//            }
+//        }, withCancel: nil)
+//        return lovers
+//    }
 
 //	func getNewMessages() {
 //		guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -250,7 +250,7 @@ class DBService {
 //		}, withCancel: nil)
 //	}
 
-	
+     */
+    
 }
-
 

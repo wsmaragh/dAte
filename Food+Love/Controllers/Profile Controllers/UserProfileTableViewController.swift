@@ -36,7 +36,7 @@ class UserProfileTableViewController: UITableViewController {
                 return
             }
             for (_, value) in following {
-                if value == lover!.id! {
+                if value == lover!.id {
                     self.likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
                 }
             }
@@ -132,7 +132,7 @@ class UserProfileTableViewController: UITableViewController {
                             self.likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
                             
                             ref.child("lovers").child(uid).child("following/\(ke)").removeValue()
-                            ref.child("lovers").child(self.lover!.id!).child("followers/\(ke)").removeValue()
+                            ref.child("lovers").child(self.lover!.id).child("followers/\(ke)").removeValue()
                         }
                     }
                 }
@@ -143,10 +143,10 @@ class UserProfileTableViewController: UITableViewController {
         }
         else {
             // if not following, add to currentLover's following, lover's followers
-            let following = ["following/\(key)": self.lover!.id!]
+            let following = ["following/\(key)": self.lover!.id]
             let followers = ["followers/\(key)": uid]
             ref.child("lovers").child(uid).updateChildValues(following)
-            ref.child("lovers").child(self.lover!.id!).updateChildValues(followers)
+            ref.child("lovers").child(self.lover!.id).updateChildValues(followers)
             
             likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
             guard let loverName = lover?.name else {return}
