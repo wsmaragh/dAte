@@ -36,7 +36,7 @@ extension DBService {
         ref.child(uid).child("likedUsers").observe(.value) { (snapshot) in
             if let dict = snapshot.value as? [String: String] {
              likedUsers = Array(dict.values)
-            likedUsers.append(toLover.id!)
+            likedUsers.append(toLover.id)
                 ref.child(uid).child("likedUsers").setValue(likedUsers)
                 completionHandler(nil)
 

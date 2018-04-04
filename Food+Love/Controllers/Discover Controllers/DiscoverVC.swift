@@ -101,14 +101,17 @@ extension DiscoverVC: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return lovers.isEmpty ? 0 : lovers.count
+		return lovers.count
 	}
 
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = discoverCV.dequeueReusableCell(withReuseIdentifier: "NewDiscoverCell", for: indexPath) as! NewDiscoverCollectionViewCell
-		let lover = lovers[indexPath.row]
-        cell.userNameLabel.text = lover.name ?? "N/A"
+        let lover = lovers[indexPath.row]
+        cell.layoutIfNeeded()
+        cell.userImageView.image = nil
+        cell.layoutSubviews()
+        cell.userNameLabel.text = lover.name
         cell.favoriteFoodLabel.text = lover.favDish ?? "N/A"
         
         let currentLoverFoods = [currentLover.firstFoodPrefer, currentLover.secondFoodPrefer, currentLover.thirdFoodPrefer]
@@ -121,14 +124,11 @@ extension DiscoverVC: UICollectionViewDataSource {
         }
         
         cell.favoriteCuisinesLabel.text = common.joined(separator: ", ")
-        cell.userImageView.image = nil
-        cell.layoutIfNeeded()
-		if let image = lover.profileImageUrl {
-			cell.userImageView.loadImageUsingCacheWithUrlString(image)
-		} else {
-			cell.userImageView.image = #imageLiteral(resourceName: "profile")
-		}
-        cell.layoutSubviews()
+        if let image = lover.profileImageUrl {
+            cell.userImageView.loadImageUsingCacheWithUrlString(image)
+        } else {
+            cell.userImageView.image = #imageLiteral(resourceName: "profile")
+        }
 		return cell
 	}
 }
