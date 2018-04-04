@@ -12,7 +12,7 @@ class SelectRestaurantView: UIView {
     
     lazy var restaurantButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+        //button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "icoRest_32x32"), for: .normal)
         button.titleLabel?.textColor = UIColor.white
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
@@ -112,7 +112,6 @@ class SelectRestaurantView: UIView {
         return stView
     }()
     
-    
     lazy var dateStackView: UIStackView = {
         let stView = UIStackView()
         stView.axis  = UILayoutConstraintAxis.horizontal
@@ -169,14 +168,14 @@ class SelectRestaurantView: UIView {
     }
     
     private func setupViews() {
-        addSubview(restaurantButton)
-        restaurantButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        restaurantButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
-        restaurantButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        restaurantButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        addSubview(restaurantButton)
+//        restaurantButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        restaurantButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
+//        restaurantButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+//        restaurantButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         addSubview(mainStackView)
-        mainStackView.topAnchor.constraint(equalTo: restaurantButton.bottomAnchor, constant: 16).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 32).isActive = true
         mainStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         mainStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9).isActive = true
         

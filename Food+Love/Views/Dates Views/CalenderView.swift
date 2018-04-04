@@ -271,11 +271,16 @@ class dateCVCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.lbl.backgroundColor = .red
+                self.lbl.backgroundColor = Colors.red
                 self.lbl.textColor = .white
+                self.lbl.layer.cornerRadius = self.layer.frame.width / 2
+                self.lbl.layer.borderWidth = 2
+                self.lbl.layer.borderColor = Colors.white.cgColor
             } else {
                 self.lbl.backgroundColor = .clear
                 self.lbl.textColor = Style.activeCellLblColor
+                self.lbl.layer.borderWidth = 0
+                self.lbl.layer.borderColor = Style.activeCellLblColor.cgColor
             }
         }
     }

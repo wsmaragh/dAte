@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		//FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
 		//Navigation Bar
+        UIApplication.shared.statusBarStyle = .lightContent
 		UINavigationBar.appearance().tintColor = UIColor.white
 		UINavigationBar.appearance().alpha = 1.0
 		UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
