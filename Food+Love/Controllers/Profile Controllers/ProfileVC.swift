@@ -27,7 +27,9 @@ class ProfileVC: UIViewController {
     private var currentSelectedIndex: Int!
     private var profileImages: [UIImage] = [#imageLiteral(resourceName: "profile"), #imageLiteral(resourceName: "profile"), #imageLiteral(resourceName: "profile")] {
         didSet {
-            self.userPictureCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.userPictureCollectionView.reloadData()
+            }
         }
     }
    
@@ -51,6 +53,24 @@ class ProfileVC: UIViewController {
 
     }
     func loadImages() {
+<<<<<<< HEAD
+
+        guard self.currentLover != nil else {return}
+        let url0 = currentLover!.profileImageUrl ?? ""
+        let url1 = currentLover!.profileImageUrl1 ?? ""
+        let url2 = currentLover!.profileImageUrl2 ?? ""
+      
+        ImageHelper.manager.getImage(from: url0, completionHandler: {
+          self.profileImages[0] = $0
+        }, errorHandler: {_ in })
+        ImageHelper.manager.getImage(from: url1, completionHandler: {
+            self.profileImages[1] = $0
+        }, errorHandler: {_ in })
+        ImageHelper.manager.getImage(from: url2, completionHandler: {
+             self.profileImages[2] = $0
+        }, errorHandler: {_ in })
+       // self.profileImages = [image1, image2, image3]
+=======
         guard self.currentLover != nil else {return}
         let url0 = currentLover!.profileImageUrl ?? ""
 //        let url1 = currentLover!.profileImageUrl1 ?? ""
@@ -64,6 +84,7 @@ class ProfileVC: UIViewController {
 //        ImageHelper.manager.getImage(from: url2, completionHandler: {
 //             self.profileImages[2] = $0
 //        }, errorHandler: {_ in })
+>>>>>>> 4167d6b1a2f8d957e068bdaa0eb0085ff2053dec
         }
     
     // MARK: View Lifecycle

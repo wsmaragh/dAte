@@ -25,14 +25,21 @@ class NewAdmirerCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        userImageView.image = #imageLiteral(resourceName: "user2")
+        userImageView.image = nil
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.layoutIfNeeded()
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 0.5
         self.layer.cornerRadius = 10
+      self.userImageView.layer.cornerRadius = userImageView.frame.width / 2
+        self.favoriteFoodImageView.layer.cornerRadius = favoriteFoodImageView.frame.width / 2
+        self.userImageView.layer.masksToBounds = true
+        self.favoriteFoodImageView.layer.masksToBounds = true
+        
     }
+    
 
 }
