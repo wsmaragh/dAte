@@ -151,23 +151,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_food1" translatesAutoresizingMaskIntoConstraints="NO" id="q75-KY-GOk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="wKM-Gr-BwY">
-                                <rect key="frame" x="0.0" y="186" width="375" height="467"/>
-                                <subviews>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="l69-MO-f65">
-                                        <rect key="frame" x="160" y="-10" width="55" height="37"/>
-                                        <color key="pageIndicatorTintColor" name="appColorRed"/>
-                                        <color key="currentPageIndicatorTintColor" name="appColorGray"/>
-                                    </pageControl>
-                                </subviews>
-                                <color key="backgroundColor" name="appColorRed"/>
-                                <constraints>
-                                    <constraint firstItem="l69-MO-f65" firstAttribute="centerX" secondItem="wKM-Gr-BwY" secondAttribute="centerX" id="c0D-2s-UyA"/>
-                                    <constraint firstItem="l69-MO-f65" firstAttribute="top" secondItem="wKM-Gr-BwY" secondAttribute="top" constant="-10" id="mBp-QM-tP6"/>
-                                    <constraint firstAttribute="bottom" secondItem="l69-MO-f65" secondAttribute="bottom" constant="409" id="o6R-wC-6bT"/>
-                                    <constraint firstAttribute="trailing" secondItem="l69-MO-f65" secondAttribute="trailing" constant="160" id="zQf-XU-Eeq"/>
-                                </constraints>
-                            </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo3" translatesAutoresizingMaskIntoConstraints="NO" id="uKv-0K-A89">
                                 <rect key="frame" x="140" y="84" width="94" height="94"/>
                                 <constraints>
@@ -184,21 +167,100 @@
                                     <action selector="nextPage:" destination="AT3-ir-1gE" eventType="touchUpInside" id="Efp-sV-czG"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wQa-Ey-dTa">
+                                <rect key="frame" x="0.0" y="186" width="375" height="428"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3wU-HX-KJu">
+                                        <rect key="frame" x="118" y="150" width="249" height="117"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="543704962.130651">
+                                            <!--2018-03-25 21:09:22 +0000-->
+                                        </date>
+                                        <date key="maximumDate" timeIntervalSinceReferenceDate="-24238800">
+                                            <!--2000-03-26 11:00:00 +0000-->
+                                        </date>
+                                        <locale key="locale" localeIdentifier="en"/>
+                                    </datePicker>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tell us about yourself:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agv-SN-NXn">
+                                        <rect key="frame" x="112" y="8" width="150" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date of Birth:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eQ-5D-Hfz">
+                                        <rect key="frame" x="8" y="150" width="102" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gender:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zds-tT-nbz">
+                                        <rect key="frame" x="77" y="51" width="58.5" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S66-C3-min">
+                                        <rect key="frame" x="169" y="51" width="117" height="30"/>
+                                        <color key="backgroundColor" name="appColorGray"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="794-dc-xTj"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Male"/>
+                                            <segment title="Female"/>
+                                        </segments>
+                                        <color key="tintColor" name="appColorRed"/>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preference:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dH-SY-x8n">
+                                        <rect key="frame" x="52" y="96" width="83.5" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="zMH-T1-z26">
+                                        <rect key="frame" x="169" y="96" width="117" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" name="appColorGray"/>
+                                        <segments>
+                                            <segment title="Male"/>
+                                            <segment title="Female"/>
+                                        </segments>
+                                        <color key="tintColor" name="appColorRed"/>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What is your zipcode?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BB3-QR-Llj">
+                                        <rect key="frame" x="8" y="281" width="169" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="10003" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="62V-je-jun">
+                                        <rect key="frame" x="204" y="275" width="163" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="postal-code"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="3wU-HX-KJu" firstAttribute="top" secondItem="6eQ-5D-Hfz" secondAttribute="bottom" constant="20" id="FpJ-D7-15Y"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IQe-bb-Vkk" firstAttribute="bottom" secondItem="q75-KY-GOk" secondAttribute="bottom" id="4FI-Tg-22z"/>
-                            <constraint firstItem="wKM-Gr-BwY" firstAttribute="top" secondItem="uKv-0K-A89" secondAttribute="bottom" constant="8" id="8AL-MO-jX4"/>
-                            <constraint firstItem="wKM-Gr-BwY" firstAttribute="width" secondItem="seG-hh-a0F" secondAttribute="width" id="9HX-mE-JvI"/>
                             <constraint firstItem="q75-KY-GOk" firstAttribute="top" secondItem="IQe-bb-Vkk" secondAttribute="top" constant="-64" id="BFg-6k-WKW"/>
                             <constraint firstItem="uKv-0K-A89" firstAttribute="top" secondItem="IQe-bb-Vkk" secondAttribute="top" constant="20" id="G68-03-pjk"/>
                             <constraint firstItem="IQe-bb-Vkk" firstAttribute="bottom" secondItem="2gD-9q-i84" secondAttribute="bottom" id="HDV-6Z-uSt"/>
-                            <constraint firstItem="wKM-Gr-BwY" firstAttribute="height" secondItem="seG-hh-a0F" secondAttribute="height" multiplier="0.7" id="YzP-Kw-yTt"/>
                             <constraint firstItem="uKv-0K-A89" firstAttribute="width" secondItem="seG-hh-a0F" secondAttribute="width" multiplier="0.25" id="cWh-wJ-neY"/>
                             <constraint firstItem="2gD-9q-i84" firstAttribute="centerX" secondItem="seG-hh-a0F" secondAttribute="centerX" id="eKn-BI-CUp"/>
                             <constraint firstItem="IQe-bb-Vkk" firstAttribute="trailing" secondItem="q75-KY-GOk" secondAttribute="trailing" id="i9s-6h-Q3n"/>
                             <constraint firstItem="2gD-9q-i84" firstAttribute="width" secondItem="seG-hh-a0F" secondAttribute="width" multiplier="0.5" id="ltm-cM-Mcl"/>
-                            <constraint firstItem="wKM-Gr-BwY" firstAttribute="leading" secondItem="q75-KY-GOk" secondAttribute="leading" id="mEp-Mh-VJD"/>
                             <constraint firstItem="q75-KY-GOk" firstAttribute="leading" secondItem="IQe-bb-Vkk" secondAttribute="leading" id="r7K-6d-IA2"/>
                             <constraint firstItem="uKv-0K-A89" firstAttribute="centerX" secondItem="seG-hh-a0F" secondAttribute="centerX" id="rfZ-aZ-b2g"/>
                         </constraints>
@@ -207,21 +269,15 @@
                     <connections>
                         <outlet property="aboutSlide" destination="UEI-gn-Zox" id="yBc-3x-Hcc"/>
                         <outlet property="actionButton" destination="2gD-9q-i84" id="zTF-TA-Cto"/>
-                        <outlet property="bioTV" destination="t3M-Dh-l1L" id="mi5-xn-b3a"/>
-                        <outlet property="dobPicker" destination="DBH-rF-S6e" id="ccW-Ce-6by"/>
                         <outlet property="emailTF" destination="BgC-8i-8jf" id="44U-5W-3uZ"/>
                         <outlet property="favoriteFoodCategory1TF" destination="nCX-xT-VtH" id="gSL-3w-FRg"/>
                         <outlet property="favoriteFoodCategory2TF" destination="wQR-AV-qZG" id="BV6-jU-R3G"/>
                         <outlet property="favoriteFoodCategory3TF" destination="U67-U4-fw5" id="tSO-4A-zAB"/>
                         <outlet property="favoriteRestaurant" destination="oqh-K6-9X1" id="oa0-bF-MBQ"/>
                         <outlet property="firstNameTF" destination="Tj4-fD-NJ3" id="1S4-Cd-jYr"/>
-                        <outlet property="genderPreferenceSC" destination="bmU-pP-myM" id="M2E-2Z-qwG"/>
-                        <outlet property="genderSC" destination="CPB-a8-oka" id="BJD-a3-o6M"/>
-                        <outlet property="pageControl" destination="l69-MO-f65" id="ekb-eD-Fgb"/>
                         <outlet property="passwordTF" destination="FBF-10-LEd" id="4CM-c0-TAe"/>
                         <outlet property="preferenceSlide" destination="sv6-te-u9J" id="S83-ri-epb"/>
                         <outlet property="profileImageButton" destination="MIs-PX-7qb" id="p88-Dh-rwz"/>
-                        <outlet property="profileScrollView" destination="wKM-Gr-BwY" id="hTd-mC-RP4"/>
                         <outlet property="signupSlide" destination="NCK-5T-2GA" id="q7i-Bz-AKq"/>
                         <outlet property="videoSlide" destination="Bxz-P1-0Tl" id="txb-Td-Emt"/>
                         <outlet property="zipcodeTF" destination="6CE-Lh-r9g" id="pKt-zj-ZFq"/>
@@ -556,7 +612,7 @@
                     <viewLayoutGuide key="safeArea" id="rEZ-J1-apd"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2700" y="1208.5457271364319"/>
+            <point key="canvasLocation" x="2699.5" y="1208.5"/>
         </scene>
         <!--Welcome-->
         <scene sceneID="M6Z-O1-fXg">
@@ -865,7 +921,13 @@
             <color red="0.47799998519999998" green="0.46700000759999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="appColorGray">
+            <color red="0.92199999089999995" green="0.92199999089999995" blue="0.92199999089999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appColorGray">
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appColorRed">
+            <color red="0.82700002189999999" green="0.35299998519999998" blue="0.21600000559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="appColorRed">
             <color red="0.82700002189999999" green="0.35299998519999998" blue="0.21600000559999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

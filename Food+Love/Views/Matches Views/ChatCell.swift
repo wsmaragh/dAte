@@ -57,8 +57,8 @@ class PartnerChatCell: UICollectionViewCell {
 
 	func configureCell(message: Message){
 		self.message = message
-		bubbleView.backgroundColor = UIColor.blue
-		textView.textColor = UIColor.black
+//		bubbleView.backgroundColor =
+//		textView.textColor = UIColor.black
 		//profileImage
 		//		if let profileImageStr = self.lover?.profileImageUrl {
 		//			profileImageView.loadImageUsingCacheWithUrlString(profileImageStr)
@@ -135,8 +135,7 @@ class UserChatCell: UICollectionViewCell {
 	//User
 	func configureCell(message: Message){
 		self.message = message
-//		bubbleView.backgroundColor = UIColor.lightGray
-		textView.textColor = UIColor.black
+//		textView.textColor = UIColor.black
 
 		//text message
 		if let text = message.text {
@@ -151,7 +150,9 @@ class UserChatCell: UICollectionViewCell {
 			messageImageView.isHidden = false
 			messageImageView.loadImageUsingCacheWithUrlString(imageStr)
 			activityIndicatorView.isHidden = true
-		} else if let videoStr = message.videoUrl {
+		}
+			//video message
+		else if let videoStr = message.videoUrl {
 			textView.isHidden = true
 			messageImageView.isHidden = false
 			activityIndicatorView.isHidden = true

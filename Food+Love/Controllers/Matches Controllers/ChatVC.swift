@@ -7,77 +7,84 @@
 import UIKit
 import Firebase
 import MobileCoreServices
+import Photos
 import AVFoundation
 import CoreLocation
+
 
 class ChatVC: UIViewController {
 
 	// MARK: Outlets
-	@IBOutlet weak var chatCollectionView: UICollectionView!
 	@IBOutlet weak var profileImage: UIImageViewX!
 	@IBOutlet weak var name: UILabel!
-	@IBOutlet weak var inputText: UITextField!
+	@IBOutlet weak var chatCollectionView: UICollectionView!
 	@IBOutlet weak var chatSendView: ChatSendView!
 
+
+	@IBOutlet var inputBar: ChatSendView!
+	@IBOutlet weak var inputTextField: UITextField!
+	override var inputAccessoryView: UIView? {
+		get {
+			self.inputBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+			self.inputBar.clipsToBounds = true
+			return self.inputBar
+		}
+	}
+	override var canBecomeFirstResponder: Bool {
+		return true
+	}
+
+
 	// MARK: Properties
-	var partner: Lover?
+	var partner: Lover!
 	var loverId: String!
-	var loverImage: UIImage = #imageLiteral(resourceName: "user2")
-	var messages = [Message]()
+	var loverImage: UIImage!
+	
+	var messages = [Message](){
+		didSet{
+			chatCollectionView.reloadData()
+			chatCollectionView.layoutIfNeeded()
+		}
+	}
 	var canSendLocation = true
 	var currentUser = Auth.auth().currentUser!
 //	let locationManager = CLLocationManager()
-	let barHeight: CGFloat = 50
-
 
 
 	// MARK: View Lifecycle
 	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(false)
+		super.viewWillAppear(true)
 		tabBarController?.tabBar.isHidden = true
+		self.becomeFirstResponder()
 	}
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(false)
-		tabBarController?.tabBar.isHidden = false
-	}
+
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		self.view.layoutIfNeeded()
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//		self.view.layoutIfNeeded()
+		inputTextField.inputAccessoryView = inputBar
+		NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
 	}
-
-	@objc func keyboardWillShow(sender: NSNotification) {
-		guard let userInfo = sender.userInfo else {return}
-		guard let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect else {return}
-		let height = keyboardFrame.size.height
-		self.chatSendView.frame.origin.y -= height
-	}
-
-	@objc func keyboardWillHide(sender: NSNotification) {
-		guard let userInfo = sender.userInfo else {return}
-		guard let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect else {return}
-		let height = keyboardFrame.size.height
-		self.chatSendView.frame.origin.y += height
-	}
-
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = #colorLiteral(red: 0.8270000219, green: 0.3529999852, blue: 0.2160000056, alpha: 1)
 		view.alpha = 1.0
-//		self.locationManager.delegate = self
+
+		//Location
+		//		self.locationManager.delegate = self
+
+		//NavBar
 		configureNavBar()
+
+		//Message
 		getMessages()
-		chatCollectionView.delegate = self
-		chatCollectionView.dataSource = self
-		inputText.delegate = self
+
 		//setup Lover
 		DBService.manager.retrieveLover(loverId: loverId, completionHandler: { (onlineLover) in
 			if let myLover = onlineLover {
 				self.name.text = myLover.name
 				if let imageStr = myLover.profileImageUrl{
-//					self.profileImage.loadImageUsingCacheWithUrlString(imageStr)
+					//					self.profileImage.loadImageUsingCacheWithUrlString(imageStr)
 					ImageService.manager.getImage(from: imageStr, completionHandler: { (onlineImage) in
 						self.loverImage = onlineImage
 						self.profileImage.image = onlineImage
@@ -87,20 +94,67 @@ class ChatVC: UIViewController {
 				}
 			}
 		})
+
+		//CollectionView
+		chatCollectionView.delegate = self
+		chatCollectionView.dataSource = self
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector (collectionViewTapped))
+		chatCollectionView.addGestureRecognizer(tapGesture)
+
+		//TextField
+		inputTextField.inputAccessoryView = inputBar
+		inputTextField.delegate = self
+		//		inputText.delegate = self
+
+		//Accessory view
+		self.becomeFirstResponder()
+
+	}
+
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(false)
+		tabBarController?.tabBar.isHidden = false
+		self.inputTextField.resignFirstResponder()
+		self.resignFirstResponder()
+//		NotificationCenter.default.removeObserver(self)
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(true)
+//		NotificationCenter.default.removeObserver(self)
+	}
+
+	deinit {
 		NotificationCenter.default.removeObserver(self)
 	}
 
 
+
+
+	// Keyboar
+	@objc func showKeyboard(notification: Notification) {
+		if let frame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
+			let height = frame.cgRectValue.height
+			self.chatCollectionView.contentInset.bottom = height
+			self.chatCollectionView.scrollIndicatorInsets.bottom = height
+			if self.messages.count > 0 {
+				self.chatCollectionView.scrollToItem(at: IndexPath.init(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
+			}
+		}
+	}
+
+	@objc func collectionViewTapped() {
+//		inputTextField.endEditing(true)
+		self.becomeFirstResponder()
+	}
+
 	// MARK: Actions
 	@IBAction func sendButtonPressed(){
-		if inputText.text == "" {return}
+		if inputTextField.text == "" {return}
 		else {
-			sendMessage(["text": inputText.text! as AnyObject])
+			sendMessage(["text": inputTextField.text! as AnyObject])
 		}
+		self.becomeFirstResponder()
 	}
 
 	@IBAction func photoButtonPressed(_ sender: UIButton) {
@@ -187,7 +241,8 @@ class ChatVC: UIViewController {
 		childRef.updateChildValues(values)
 		childRef.updateChildValues(values) { (error, ref) in
 			if error != nil { print(error!); return}
-			self.inputText.text = "" //nil
+//			self.inputText.text = "" //nil
+			self.inputTextField.text = "" //nil
 			let conversationsRef = DBService.manager.getConversationsRef().child(fromId).child(toId!)
 			let messageId = childRef.key
 			conversationsRef.updateChildValues([messageId: 1])
@@ -269,13 +324,6 @@ class ChatVC: UIViewController {
 		}
 	}
 
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		self.inputText.resignFirstResponder()
-		self.chatSendView.resignFirstResponder()
-	}
-
-
-
 }
 
 
@@ -283,12 +331,18 @@ class ChatVC: UIViewController {
 // MARK: TextField Delegate
 extension ChatVC: UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		if inputText.text != "" {
-			sendMessage(["text": inputText.text! as AnyObject])
+		if textField == inputTextField {
+			if inputTextField.text != "" {
+				print(inputTextField.text)
+				sendMessage(["text": inputTextField.text! as AnyObject])
+				self.becomeFirstResponder()
+			}
 		}
-		textField.resignFirstResponder()
+//		textField.resignFirstResponder()
+		self.becomeFirstResponder()
 		return true
 	}
+
 }
 
 
@@ -343,7 +397,14 @@ extension ChatVC: UICollectionViewDataSource  {
 // MARK: CollectionView Delegate
 extension ChatVC: UICollectionViewDelegate {
 
-
+	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+		if collectionView.isDragging {
+			cell.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+			UIView.animate(withDuration: 0.3, animations: {
+				cell.transform = CGAffineTransform.identity
+			})
+		}
+	}
 }
 
 
@@ -367,7 +428,7 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return 10.0
+		return 5.0
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

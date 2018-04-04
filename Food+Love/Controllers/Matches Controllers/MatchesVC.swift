@@ -19,10 +19,11 @@ class MatchesVC: UIViewController {
 	var timer: Timer!
 	var matches = [Lover]() {
 		didSet {
-			DispatchQueue.main.async { self.matchesCollectionView.reloadData() }
+			DispatchQueue.main.async {
+				self.matchesCollectionView.reloadData()
+			}
 		}
 	}
-
 	var conversations = [Message](){
 		didSet {
 			DispatchQueue.main.async {
@@ -41,11 +42,7 @@ class MatchesVC: UIViewController {
 		setupCollectionView()
 		getAllLoversExceptCurrent()
 		getNewMessages()
-		let image : UIImage = #imageLiteral(resourceName: "Logo3")
-		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-		imageView.contentMode = .scaleAspectFit
-		imageView.image = image
-		self.navigationItem.titleView = imageView
+		setupNavBar()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -53,18 +50,24 @@ class MatchesVC: UIViewController {
 	}
 
 	//Setup Tableview
-	func setupTableview(){
+	private func setupTableview(){
 		conversationsTableView.dataSource = self
 		conversationsTableView.delegate = self
 		conversationsTableView.allowsMultipleSelectionDuringEditing = true
 	}
 
-	func setupCollectionView(){
+	private func setupCollectionView(){
 		matchesCollectionView.dataSource = self
 		matchesCollectionView.delegate = self
 	}
 
-
+	private func setupNavBar(){
+		let image : UIImage = #imageLiteral(resourceName: "Logo3")
+		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+		imageView.contentMode = .scaleAspectFit
+		imageView.image = image
+		self.navigationItem.titleView = imageView
+	}
 
 
 
@@ -333,10 +336,40 @@ extension MatchesVC {
 		//Conversations
 		if sender is UITableViewCell {
 			guard let indexPath2 = conversationsTableView.indexPath(for: sender as! UITableViewCell) else {return}
-			let selectedLover: Lover?
-			chatVC.loverId =	conversations[indexPath2.row].chatPartnerId()
-			chatVC.partner = matches[indexPath2.row]
+			var selectedLover: Lover?
+			var selectedLoverImage: UIImage?
+			let conversation = conversations[indexPath2.row]
 
+			//TODO: get partner - send partner info and uiimage
+			chatVC.loverId = conversations[indexPath2.row].chatPartnerId()
+
+			//get lover
+			DBService.manager.retrieveLover(loverId: chatVC.loverId, completionHandler: { (onlineLover) in
+					selectedLover = onlineLover
+			})
+//			guard let selectedLover = selectedLover else {return}
+//			guard let imageUrl = selectedLover.profileImageUrl else {return}
+//			ImageService.manager.getImage(from: imageUrl, completionHandler: { (onlineImage) in
+//				selectedLoverImage = onlineImage
+//			}, errorHandler: { (error) in
+//				print(error)
+//			})
+//
+
+			if let selectedLover = selectedLover {
+				//get image
+				guard let imageUrl = selectedLover.profileImageUrl else {return}
+				ImageService.manager.getImage(from: imageUrl, completionHandler: { (onlineImage) in
+					selectedLoverImage = onlineImage
+				}, errorHandler: { (error) in
+					print(error)
+					})
+				if let image = selectedLoverImage {
+					chatVC.loverImage = image
+					chatVC.partner = selectedLover
+				}
+			}
+			conversationsTableView.deselectRow(at: indexPath2, animated: true)
 		}
 	}
 }

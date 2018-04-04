@@ -8,6 +8,15 @@ import UIKit
 import ImageIO
 
 
+class RoundedImageView: UIImageView {
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		let radius: CGFloat = self.bounds.size.width / 2.0
+		self.layer.cornerRadius = radius
+		self.clipsToBounds = true
+	}
+}
+
 // Dictionary
 extension Dictionary {
 	mutating func merge(with dictionary: Dictionary) {

@@ -13,7 +13,9 @@ class ConversationCell: UITableViewCell {
 	@IBOutlet weak var loverName: UILabel!
 	@IBOutlet weak var lastMessage: UILabel!
 	@IBOutlet weak var timeStamp: UILabel!
-
+	@IBOutlet weak var respondLabel: UILabel!
+	@IBOutlet weak var onlineButton: UIButton!
+	
 	func configureCell(conversation: Message){
 		let id = conversation.chatPartnerId()
 		let ref = Database.database().reference().child("lovers").child(id)
@@ -24,6 +26,12 @@ class ConversationCell: UITableViewCell {
 					self.loverImage.loadImageUsingCacheWithUrlString(profileImageStr)
 				}
 				self.lastMessage.text = conversation.text
+				if conversation.fromId == Auth.auth().currentUser?.uid {
+					self.respondLabel.isHidden = true
+				} else {
+					self.respondLabel.isHidden = false
+				}
+
 				if let seconds = conversation.timeStamp?.doubleValue {
 					let timesnapDate = Date.init(timeIntervalSince1970: seconds)
 					let dateFormatter = DateFormatter()

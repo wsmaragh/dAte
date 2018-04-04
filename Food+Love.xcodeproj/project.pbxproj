@@ -54,6 +54,7 @@
 		819934AE2061CD440075696F /* MatchesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934AD2061CD440075696F /* MatchesCell.swift */; };
 		819934B2206308D30075696F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819934B1206308D30075696F /* Conversation.swift */; };
 		81A7B0752063368200566323 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A7B0742063368200566323 /* ChatCell.swift */; };
+		81A9976220758B830021F823 /* UILabelX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A9976120758B830021F823 /* UILabelX.swift */; };
 		81AAF7EC206815C30077AAC2 /* FavoriteRestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AAF7EA206815C30077AAC2 /* FavoriteRestaurantTableViewCell.swift */; };
 		81AAF7ED206815C30077AAC2 /* FavoriteRestaurantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81AAF7EB206815C30077AAC2 /* FavoriteRestaurantTableViewCell.xib */; };
 		81AAF7F4206844C00077AAC2 /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AAF7F2206844C00077AAC2 /* AnswerTableViewCell.swift */; };
@@ -157,6 +158,7 @@
 		819934AD2061CD440075696F /* MatchesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesCell.swift; sourceTree = "<group>"; };
 		819934B1206308D30075696F /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		81A7B0742063368200566323 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		81A9976120758B830021F823 /* UILabelX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelX.swift; sourceTree = "<group>"; };
 		81AAF7EA206815C30077AAC2 /* FavoriteRestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		81AAF7EB206815C30077AAC2 /* FavoriteRestaurantTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteRestaurantTableViewCell.xib; sourceTree = "<group>"; };
 		81AAF7F2206844C00077AAC2 /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTableViewCell.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 		81E954C5205E32CA004036D5 /* IBDesignables */ = {
 			isa = PBXGroup;
 			children = (
+				81A9976120758B830021F823 /* UILabelX.swift */,
 				81BE09FF205DDD5E0099215D /* UITextFieldX.swift */,
 				81E615E42060B9D800347CDA /* UIButtonX.swift */,
 				81E615F02060C35C00347CDA /* UIImageViewX.swift */,
@@ -652,7 +655,7 @@
 				TargetAttributes = {
 					817F9B42205863B10061E1B6 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -848,6 +851,7 @@
 				817F9B752058B8F70061E1B6 /* DatesVC.swift in Sources */,
 				811E410A207429E0000F0198 /* AuthService.swift in Sources */,
 				8106D84F205D665B00F6EB3E /* WelcomeSlide.swift in Sources */,
+				81A9976220758B830021F823 /* UILabelX.swift in Sources */,
 				818BEE9620688B1600D9C62F /* DBService+Likes.swift in Sources */,
 				81D26F1920598D3000BEBC47 /* YelpAPIKeys.swift in Sources */,
 				81EFF803206980D5005EA1A4 /* RestaurantTVCell.swift in Sources */,
@@ -1012,7 +1016,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1033,7 +1037,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
