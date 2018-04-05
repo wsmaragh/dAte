@@ -39,6 +39,7 @@ class AdmirersVC: UIViewController {
     private func loadData() {
         guard let followers = self.currentLover.followers else {return}
         let uids = Array(followers.values)
+				self.admirers.removeAll()
         for uid in uids {
             Database.database().reference().child("lovers").child(uid).queryOrderedByKey().observe(.value, with: { (snapshot) in
                 print("~~~~~~~~~~~~~~~")

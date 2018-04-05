@@ -11,23 +11,16 @@ import Firebase
 
 class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 
-	// MARK: Outlets/Properties
-	@IBOutlet weak var profileScrollView: UIScrollView!
-	@IBOutlet weak var pageControl: UIPageControl!
-
-
-	//Scenedock Views
-	@IBOutlet var preferenceSlide: PreferenceProfile!
-	@IBOutlet var aboutSlide: AboutProfile!
+	@IBOutlet var preferenceSlide: UIView!
+	@IBOutlet var aboutSlide: UIView!
 	@IBOutlet var signupSlide: UIView!
-	@IBOutlet var videoSlide: UIView!
 	@IBOutlet weak var actionButton: UIButton!
 
 	//Properties Fields
-	@IBOutlet weak var favoriteFoodCategory1TF: UITextField!
-	@IBOutlet weak var favoriteFoodCategory2TF: UITextField!
-	@IBOutlet weak var favoriteFoodCategory3TF: UITextField!
-	@IBOutlet weak var favoriteRestaurant: UITextField!
+	@IBOutlet weak var favoriteFoodCategory1TF: UITextFieldX!
+	@IBOutlet weak var favoriteFoodCategory2TF: UITextFieldX!
+	@IBOutlet weak var favoriteFoodCategory3TF: UITextFieldX!
+	@IBOutlet weak var favoriteRestaurant: UITextFieldX!
 	@IBOutlet weak var genderSC: UISegmentedControl!
 	@IBOutlet weak var genderPreferenceSC: UISegmentedControl!
 	@IBOutlet weak var dobPicker: UIDatePicker!
@@ -36,7 +29,12 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	@IBOutlet weak var emailTF: UITextFieldX!
 	@IBOutlet weak var passwordTF: UITextFieldX!
 	@IBOutlet weak var profileImageButton: UIButton!
-	@IBOutlet weak var bioTV: UITextView!
+	@IBOutlet weak var addVideoButton: UIButton!
+
+
+	@IBAction func addVideoPressed(_ sender: UIButton) {
+		print("Add video pressed")
+	}
 
 	// MARK: Properties
 	private var imagePicker = UIImagePickerController()
@@ -49,20 +47,18 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = .white
+		makeNavigationBarTransparent()
 		imagePicker.delegate = self
 		currentUser = Auth.auth().currentUser
-		profileScrollView.delegate = self
-		profileSlides = [preferenceSlide, aboutSlide, signupSlide, videoSlide]
-		addSlidesToScrollView(slides: profileSlides)
-		setupPageControl()
 		navigationController?.title = "Setup Profile"
-//		addShadeView()
+		addShadeView()
+		setupTextFields()
 	}
 
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(false)
-		self.navigationController?.setNavigationBarHidden(true, animated: animated)
+//		self.navigationController?.setNavigationBarHidden(true, animated: animated)
 	}
 
 
@@ -74,35 +70,33 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	}
 	
 	// MARK: Helper Methods
-	func addSlidesToScrollView(slides: [UIView]) {
-		profileScrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: profileScrollView.bounds.height)
-		profileScrollView.isPagingEnabled = true
-		profileScrollView.isDirectionalLockEnabled = true
-		for i in 0..<slides.count {
-			slides[i].frame = CGRect(x: view.frame.width * CGFloat(i), y: 0, width: view.frame.width, height: profileScrollView.frame.height)
-			profileScrollView.addSubview(slides[i])
-		}
+	private func makeNavigationBarTransparent(){
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+		self.navigationController?.navigationBar.shadowImage = UIImage()
+		self.navigationController?.navigationBar.isTranslucent = true
+		self.navigationController?.navigationBar.tintColor = UIColor.white
+		self.navigationController?.navigationBar.barTintColor = UIColor.white
+		self.navigationController?.navigationBar.titleTextAttributes = [
+			NSAttributedStringKey.foregroundColor : UIColor.white
+		]
 	}
-
-	func setupPageControl(){
-
-
-	}
-
-	// MARK: Helper Methods
+	
 	private func setupTextFields(){
 		//Underline
 		self.firstNameTF.underlined(color: .white)
 		self.emailTF.underlined(color: .white)
 		self.passwordTF.underlined(color: .white)
+
 		//LeftViewMode
 		self.firstNameTF.leftViewMode = .always
 		self.emailTF.leftViewMode = .always
 		self.passwordTF.leftViewMode = .always
+
 		//Text Color
 		firstNameTF.textColor = .white
 		emailTF.textColor = .white
 		passwordTF.textColor = .white
+		
 		//Placeholder Color
 		if let firstNamePlaceholder = firstNameTF.placeholder {
 			firstNameTF.attributedPlaceholder = NSAttributedString(string: firstNamePlaceholder, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightText])
@@ -123,56 +117,27 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 	}
 
 
-//	@IBAction func signup(_ sender: UIButtonX) {
-//		guard let name = self.firstNameTF.text, name != "" else {
-//			showAlert(title: "Please enter a name", message: ""); return
-//		}
-//		guard let email = self.emailTF.text, email != "" else {
-//			showAlert(title: "Please enter an email", message: ""); return
-//		}
-//		guard let password = self.passwordTF.text, password != "" else {
-//			showAlert(title: "Please enter a valid password", message: ""); return
-//		}
-//		if profileImageButton.image(for: UIControlState.normal) == #imageLiteral(resourceName: "selfieCamera") {
-//			showAlert(title: "Please add a profile image", message: ""); return
-//		}
-//		guard let image = self.profileImageButton.image(for: .normal) else {return}
-//		if email.contains(" ") {
-//			showAlert(title: "No spaces allowed in email!", message: nil); return
-//		}
-//		if password.contains(" ") {
-//			showAlert(title: "No spaces allowed in password!", message: nil); return
-//		}
-//
-//		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
-//	}
-
 	@IBAction func nextPage(_ sender: UIButton) {
-		let count = profileSlides.count
-		if slideIndex < count - 1 {
-			let currentPage = profileScrollView.contentOffset.x / profileScrollView.frame.size.width
-			let point = CGPoint(x: view.bounds.width * (currentPage + 1), y: 0)
-			profileScrollView.setContentOffset(point, animated: true)
-			pageControl.currentPage = Int(currentPage)
-			slideIndex = pageControl.currentPage + 1
-			print("Slide index:", slideIndex)
-			print("pageControl.currentPage:", pageControl.currentPage)
-		}
-
-		if slideIndex == count - 1 {
+		switch slideIndex {
+		case 0:
+			preferenceSlide.isHidden = true
+			aboutSlide.isHidden = false
+			signupSlide.isHidden = true
+		case 1:
+			preferenceSlide.isHidden = true
+			aboutSlide.isHidden = true
+			signupSlide.isHidden = false
 			actionButton.setTitle("Complete", for: .normal)
-			print(slideIndex)
-			print("complete profile now")
+		case 2:
+			if slideIndex == 2 && actionButton.title(for: .normal) == "Complete" {
+				createNewAccount()
+			}
+		default:
+			break
 		}
-
-		if actionButton.title(for: .normal) == "Complete" && pageControl.currentPage == 3{
-			print("create account")
-			//create auth account
-			//add lover details to database
-			//transition to main
-		}
-
+		slideIndex += 1
 	}
+
 
 	@IBAction func addProfileImage(_ sender: UIButton) {
 		let alertController = UIAlertController(title: "Add profile image", message: "", preferredStyle: UIAlertControllerStyle.alert)
@@ -192,7 +157,7 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		guard let name = self.firstNameTF.text, name != "" else {
 			showAlert(title: "Please enter a name", message: ""); return
 		}
-		guard let email = self.firstNameTF.text, email != "" else {
+		guard let email = self.emailTF.text, email != "" else {
 			showAlert(title: "Please enter an email", message: ""); return
 		}
 		guard let password = self.passwordTF.text, password != "" else {
@@ -220,27 +185,37 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		guard let favCat3 = favoriteFoodCategory3TF.text else {return}
 		guard let favRest = favoriteRestaurant.text else {return}
 		guard let zipcode = 	zipcodeTF.text else {return}
-		guard let bio = bioTV.text else {return}
-
 		let gender = genderSC.selectedSegmentIndex == 0 ? "Male" : "Female"
 		let genderPreference =  genderPreferenceSC.selectedSegmentIndex == 0 ? "Male" : "Female"
 		let dobDate = dobPicker.date
 		let dob = DBService.manager.formatDateforDOB(with: dobDate)
-		DBService.manager.addLoverDetails(favCat1: favCat1, favCat2: favCat2, favCat3: favCat3, favRestaurant: favRest, zipcode: zipcode, gender: gender, genderPreference: genderPreference, dateOfBirth: dob, bio: bio)
+		print(favCat1)
+		print(favCat2)
+		print(favCat3)
+		print(favRest)
+		print(zipcode)
+		print(gender)
+		print(genderPreference)
+		print(dob)
 
-
+//		DBService.manager.addLoverDetails(favCat1: favCat1, favCat2: favCat2, favCat3: favCat3, favRestaurant: favRest, zipcode: zipcode, gender: gender, genderPreference: genderPreference, dateOfBirth: dob)
 		print("user details added")
 	}
 
 	
 
-	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let currentPage = scrollView.contentOffset.x / scrollView.frame.size.width
-		pageControl.currentPage = Int(currentPage)
-		slideIndex = pageControl.currentPage
-	}
+//	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//		let currentPage = scrollView.contentOffset.x / scrollView.frame.size.width
+////		pageControl.currentPage = Int(currentPage)
+//		slideIndex = pageControl.currentPage
+//	}
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		self.favoriteFoodCategory1TF.resignFirstResponder()
+		self.favoriteFoodCategory2TF.resignFirstResponder()
+		self.favoriteFoodCategory3TF.resignFirstResponder()
+		self.favoriteRestaurant.resignFirstResponder()
+		self.zipcodeTF.resignFirstResponder()
 		self.emailTF.resignFirstResponder()
 		self.passwordTF.resignFirstResponder()
 		self.firstNameTF.resignFirstResponder()
