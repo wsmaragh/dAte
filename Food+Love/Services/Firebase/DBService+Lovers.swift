@@ -34,8 +34,7 @@ extension DBService {
 															zipcode: String,
 															gender: String,
 															genderPreference: String,
-															dateOfBirth: String,
-															bio: String?) {
+															dateOfBirth: String) {
 		let lover = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
 		lover.setValue(["favCat1": favCat1,
 										"favCat2": favCat2,
@@ -44,8 +43,7 @@ extension DBService {
 										"zipcode": zipcode,
 										"gender" : gender,
 										"genderPreference": genderPreference,
-										"dateOfBirth": dateOfBirth,
-										"bio": bio
+										"dateOfBirth": dateOfBirth
 			])
 		{ (error, dbRef) in
 			if let error = error { print("addUser error: \(error.localizedDescription)")}

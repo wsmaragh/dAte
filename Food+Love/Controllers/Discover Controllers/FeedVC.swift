@@ -37,9 +37,18 @@ class FeedVC: UIViewController {
 		pagingViewController.indicatorColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 		pagingViewController.selectedTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 		pagingViewController.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+
+		setupNavBar()
 	}
 
 
+	private func setupNavBar(){
+		let image : UIImage = #imageLiteral(resourceName: "Logo3")
+		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+		imageView.contentMode = .scaleAspectFit
+		imageView.image = image
+		self.navigationItem.titleView = imageView
+	}
 }
 
 

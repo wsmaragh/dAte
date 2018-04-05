@@ -29,8 +29,10 @@ class WelcomeSlide: UIView {
 		return tv
 	}()
 
-	lazy var picture: UIImageView = {
-		let iv = UIImageView()
+	lazy var picture: UIImageViewX = {
+		let iv = UIImageViewX()
+		iv.cornerRadius = 16
+		iv.clipsToBounds = true
 		iv.image = #imageLiteral(resourceName: "bg_coffee")
 		return iv
 	}()
