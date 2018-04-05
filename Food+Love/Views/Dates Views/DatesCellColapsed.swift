@@ -1,23 +1,15 @@
 //
-//  DatesView.swift
+//  DatesCellColapsed.swift
 //  Food+Love
 //
-//  Created by Marlon Rugama on 3/23/18.
-//  Copyright © 2018 Marlon Rugama. All rights reserved.
+//  Created by C4Q on 4/5/18.
+//  Copyright © 2018 Winston Maragh. All rights reserved.
 //
 
 import UIKit
 import FirebaseDatabase
 
-class DatesCell: UITableViewCell {
-
-    lazy var backgroundRestImageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        return image
-    }()
+class DatesCellColapsed: UITableViewCell {
     
     lazy var blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .light)
@@ -64,31 +56,6 @@ class DatesCell: UITableViewCell {
         return label
     }()
     
-    lazy var restaurantNameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    lazy var addressLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = .gray
-        label.textAlignment = .center
-        return label
-    }()
-    
-    lazy var hourLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        return label
-    }()
-    
     lazy var loverLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -97,35 +64,15 @@ class DatesCell: UITableViewCell {
         return label
     }()
     
-    lazy var infoStackView: UIStackView = {
-        let stView = UIStackView()
-        stView.translatesAutoresizingMaskIntoConstraints = false
-        stView.axis  = UILayoutConstraintAxis.vertical
-        stView.distribution  = .fillProportionally
-        stView.alignment = UIStackViewAlignment.center
-        stView.spacing   = 8.0
-        return stView
+    lazy var loverPhoto: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        return image
     }()
     
     func configureCell(planDate: PlanDate) {
         setupConstraints()
-        guard let venue = planDate.venueId else {print("No venue");return}
-        FSPhotoAPIClient.manager.getVenuePhotos(venueID: venue) { (error, photoArr) in
-            if let error = error {
-                print("Venue photo error:", error)
-                return
-            }
-            photoArr?.forEach{print($0)}
-            guard let prefix = photoArr?.first?.prefix else {print("No prefix");return}
-            guard let width = photoArr?.first?.width else {print("No width"); return}
-            guard let height = photoArr?.first?.height else {print("No height"); return}
-            guard let sufix = photoArr?.first?.suffix else {print("No sufix"); return}
-            let imageURL = (prefix + "\(width)" + "x" + "\(height)" + sufix)
-            self.backgroundRestImageView.loadImageUsingCacheWithUrlString(imageURL)
-        }
-        restaurantNameLabel.text = planDate.restaurant
-        addressLabel.text = planDate.address
-        hourLabel.text = planDate.hour
         monthLabel.text = planDate.monthStr
         dayCalendarLabel.text = planDate.dayId
         
@@ -135,16 +82,12 @@ class DatesCell: UITableViewCell {
             let value = snapshot.value as! [String: AnyObject]
             let lover = Lover(dictionary: value)
             self.loverLabel.text = "With: \(lover.name)"
+            guard let loverPhotoUrl = lover.profileImageUrl else {print("No picture of the user");return}
+            self.loverPhoto.loadImageUsingCacheWithUrlString(loverPhotoUrl)
         }
     }
-    
+
     private func setupConstraints() {
-        addSubview(backgroundRestImageView)
-        backgroundRestImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        backgroundRestImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        backgroundRestImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        backgroundRestImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        
         //--- BlurView ---//
         addSubview(blurEffectView)
         blurEffectView.frame = self.bounds
@@ -167,19 +110,15 @@ class DatesCell: UITableViewCell {
         monthLabel.bottomAnchor.constraint(equalTo: dayCalendarLabel.topAnchor, constant: 2).isActive = true
         monthLabel.centerXAnchor.constraint(equalTo: dayCalendarLabel.centerXAnchor).isActive = true
         
-        addSubview(hourLabel)
-        hourLabel.topAnchor.constraint(equalTo: calendarImageView.bottomAnchor, constant: 8).isActive = true
-        hourLabel.centerXAnchor.constraint(equalTo: calendarImageView.centerXAnchor, constant: 8).isActive = true
-        
-        // container: StackView
-        addSubview(infoStackView)
-        infoStackView.leftAnchor.constraint(equalTo: calendarImageView.rightAnchor, constant: 8).isActive = true
-        infoStackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
-        infoStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        infoStackView.addArrangedSubview(restaurantNameLabel)
-        infoStackView.addArrangedSubview(addressLabel)
-        infoStackView.addArrangedSubview(loverLabel)
+        addSubview(loverPhoto)
+        loverPhoto.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
+        loverPhoto.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
+        loverPhoto.widthAnchor.constraint(equalToConstant: 128).isActive = true
+        loverPhoto.heightAnchor.constraint(equalToConstant: 128).isActive = true
         
         
+        addSubview(loverLabel)
+        loverLabel.centerYAnchor.constraint(equalTo: loverPhoto.bottomAnchor).isActive = true
+        loverLabel.centerXAnchor.constraint(equalTo: loverPhoto.centerXAnchor).isActive = true
     }
 }

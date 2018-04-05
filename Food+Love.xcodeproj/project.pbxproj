@@ -105,6 +105,7 @@
 		81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC382065E5B100FB2174 /* MatchesVC.swift */; };
 		81F8DC3B2065E5BA00FB2174 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC3A2065E5B900FB2174 /* ChatVC.swift */; };
 		81F8DC3D2065E5E100FB2174 /* DatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC3C2065E5E100FB2174 /* DatesCell.swift */; };
+		81FB25BF2076BED700FE30B1 /* DatesCellColapsed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,6 +211,7 @@
 		81F8DC382065E5B100FB2174 /* MatchesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesVC.swift; sourceTree = "<group>"; };
 		81F8DC3A2065E5B900FB2174 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		81F8DC3C2065E5E100FB2174 /* DatesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesCell.swift; sourceTree = "<group>"; };
+		81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesCellColapsed.swift; sourceTree = "<group>"; };
 		F854EBC64664453D7ACE358A /* Pods-Food+Love.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food+Love.release.xcconfig"; path = "Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -596,6 +598,7 @@
 			children = (
 				81EFF801206980CB005EA1A4 /* Cells */,
 				81F8DC3C2065E5E100FB2174 /* DatesCell.swift */,
+				81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */,
 				81EFF7F320697BE2005EA1A4 /* CalenderView.swift */,
 				81EFF7F720697BE3005EA1A4 /* MonthView.swift */,
 				81EFF7F620697BE2005EA1A4 /* WeekdaysView.swift */,
@@ -868,6 +871,7 @@
 				81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */,
 				81BE0A03205DF8B90099215D /* Lover.swift in Sources */,
 				817F9B672058B8060061E1B6 /* SetupProfileVC.swift in Sources */,
+				81FB25BF2076BED700FE30B1 /* DatesCellColapsed.swift in Sources */,
 				81D26F1B20598D6300BEBC47 /* LocationServices.swift in Sources */,
 				81E954BB205E1CEA004036D5 /* StorageService.swift in Sources */,
 				81E954BE205E1CEA004036D5 /* DBService.swift in Sources */,

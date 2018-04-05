@@ -8,12 +8,17 @@
 import UIKit
 import FirebaseDatabase
 
+
+
 class DatesVC: UIViewController {
+    
+    let indetifier1 = "Cell1"
+    let indetifier2 = "cell2"
     
     
     @IBOutlet weak var pendingTableView: UITableView!
     @IBOutlet weak var confirmedTableView: UITableView!
-    
+    var indexPathSelectedRow: IndexPath?
     
     var pendingDates = [PlanDate]() {
         didSet {
@@ -30,6 +35,8 @@ class DatesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pendingTableView.register(DatesCell.self, forCellReuseIdentifier: indetifier1)
+        pendingTableView.register(DatesCellColapsed.self, forCellReuseIdentifier: indetifier2)
         pendingTableView.delegate = self
         confirmedTableView.delegate = self
         pendingTableView.dataSource = self
@@ -75,6 +82,21 @@ class DatesVC: UIViewController {
 
 // MARK:- TableView Delegates
 extension DatesVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let previousSelection = self.indexPathSelectedRow
+        
+        if self.indexPathSelectedRow == indexPath {
+            self.indexPathSelectedRow = nil
+        } else {
+            self.indexPathSelectedRow = indexPath
+        }
+        
+        let reloadlist = [indexPath, previousSelection].compactMap({$0})
+        
+        tableView.reloadRows(at: reloadlist, with: UITableViewRowAnimation.automatic)
+    }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.size.height * 0.25
     }
@@ -83,40 +105,55 @@ extension DatesVC: UITableViewDelegate {
         return true
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if tableView == self.pendingTableView {
-            let cancel = UITableViewRowAction(style: .destructive, title: "Cancel") { action, index in
-                print("cancel button tapped")
-                guard let refKey = self.pendingDates[indexPath.row].ref else {return}
-                let ref = Database.database().reference().child("planDate").child(refKey)
-                ref.removeValue()
-                self.loadData()
-            }
-            cancel.backgroundColor = .lightGray
-            
-            let confirm = UITableViewRowAction(style: .normal, title: "Confirm") { action, index in
-                print("confirm button tapped")
-                guard let refKey = self.pendingDates[indexPath.row].ref else {return}
-                let ref = Database.database().reference().child("planDate").child(refKey)
-                ref.updateChildValues(["confirmed": 1])
-                self.loadData()
-            }
-            confirm.backgroundColor = .orange
-            
-            return [confirm, cancel]
-        } else {
-            let cancel = UITableViewRowAction(style: .destructive, title: "Cancel") { action, index in
-                print("cancel button tapped")
-                guard let refKey = self.confirmedDates[indexPath.row].ref else {return}
-                let ref = Database.database().reference().child("planDate").child(refKey)
-                ref.removeValue()
-                self.loadData()
-            }
-            cancel.backgroundColor = .lightGray
-            
-            return [cancel]
-        }
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let confirm = UISwipeActionsConfiguration(actions: [UIContextualAction(style: .normal, title: "Confirm", handler: { (action, view, isConfirmed) in
+            print("Confirm button tapped")
+        })])
+        return confirm
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let cancel = UISwipeActionsConfiguration(actions: [UIContextualAction(style: .destructive, title: "Cancel", handler: { (action, view, isConfirmed) in
+            print("Cancel button tapped")
+        })])
+        return cancel
+    }
+    
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        if tableView == self.pendingTableView {
+//            let cancel = UITableViewRowAction(style: .destructive, title: "Cancel") { action, index in
+//                print("cancel button tapped")
+//                guard let refKey = self.pendingDates[indexPath.row].ref else {return}
+//                let ref = Database.database().reference().child("planDate").child(refKey)
+//                ref.removeValue()
+//                self.loadData()
+//            }
+//            cancel.backgroundColor = .lightGray
+//
+//            let confirm = UITableViewRowAction(style: .normal, title: "Confirm") { action, index in
+//                print("confirm button tapped")
+//                guard let refKey = self.pendingDates[indexPath.row].ref else {return}
+//                let ref = Database.database().reference().child("planDate").child(refKey)
+//                ref.updateChildValues(["confirmed": 1])
+//                self.loadData()
+//            }
+//            confirm.backgroundColor = .orange
+//
+//            return [confirm, cancel]
+//        } else {
+//            let cancel = UITableViewRowAction(style: .destructive, title: "Cancel") { action, index in
+//                print("cancel button tapped")
+//                guard let refKey = self.confirmedDates[indexPath.row].ref else {return}
+//                let ref = Database.database().reference().child("planDate").child(refKey)
+//                ref.removeValue()
+//                self.loadData()
+//            }
+//            cancel.backgroundColor = .lightGray
+//
+//            return [cancel]
+//        }
+//    }
 }
 
 // MARK:- TableView Datasource
@@ -132,10 +169,22 @@ extension DatesVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.pendingTableView, let pendingCell = tableView.dequeueReusableCell(withIdentifier: "PendingDatesCell", for: indexPath) as? DatesCell {
-            let planDate = pendingDates[indexPath.row]
-            pendingCell.configureCell(planDate: planDate)
-            return pendingCell
+        if tableView == self.pendingTableView {
+            if self.indexPathSelectedRow == indexPath {
+                if let pendingCell = tableView.dequeueReusableCell(withIdentifier: self.indetifier2, for: indexPath) as? DatesCellColapsed {
+                    let planDate = pendingDates[indexPath.row]
+                    pendingCell.configureCell(planDate: planDate)
+                    pendingCell.setNeedsLayout()
+                    return pendingCell
+                }
+            } else {
+                if let pendingCell = tableView.dequeueReusableCell(withIdentifier: self.indetifier1, for: indexPath) as? DatesCell {
+                    let planDate = pendingDates[indexPath.row]
+                    pendingCell.configureCell(planDate: planDate)
+                    pendingCell.setNeedsLayout()
+                    return pendingCell
+                }
+            }
         } else if let confirmedCell = tableView.dequeueReusableCell(withIdentifier: "ConfirmedDatesCell", for: indexPath) as? DatesCell {
             let planDate = confirmedDates[indexPath.row]
             confirmedCell.configureCell(planDate: planDate)
