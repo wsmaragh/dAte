@@ -2,8 +2,8 @@
 //  MessageFCM.swift
 //  Food+Love
 //
-//  Created by C4Q on 3/28/18.
-//  Copyright © 2018 Winston Maragh. All rights reserved.
+//  Created by Marlon Rugama on 3/28/18.
+//  Copyright © 2018 Marlon Rugama. All rights reserved.
 //
 
 import Foundation

@@ -46,6 +46,10 @@ class AuthUserService: NSObject {
 					else {
 						print("changeRequest was successful for username: \(name)")
 						DBService.manager.addLover(name: name, email: email, profileImage: profileImage)
+							let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainController")
+							if let window = UIApplication.shared.delegate?.window {
+								window?.rootViewController = mainVC
+							}
 					}
 //					self.delegate?.didCreateUser?(self, user: user)
 				})

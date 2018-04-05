@@ -50,46 +50,6 @@ class DBService {
 	}
 
 /*
-	// Add User main
-	public func addLover(name: String, email: String, profileImage: UIImage) {
-		let lover = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
-		lover.setValue(["name"     : name,
-									 "email"		: email])
-		{ (error, dbRef) in
-			if let error = error { print("addUser error: \(error.localizedDescription)")}
-			else { print("user successfully added to database reference: \(dbRef)")}
-		}
-		StorageService.manager.storeUserImage(image: profileImage)
-	}
-
-	// Add Details
-	public func addLoverDetails(favCat1: String,
-															favCat2: String,
-															favCat3: String,
-															favRestaurant: String,
-															zipcode: String,
-															gender: String,
-															genderPreference: String,
-															dateOfBirth: String,
-															bio: String?) {
-		let lover = DBService.manager.getLoversRef().child((Auth.auth().currentUser?.uid)!)
-		lover.setValue(["favCat1": favCat1,
-										"favCat2": favCat2,
-										"favCat3": favCat3,
-										"favRestaurant": favRestaurant,
-										"zipcode": zipcode,
-										"gender" : gender,
-										"genderPreference": genderPreference,
-										"dateOfBirth": dateOfBirth,
-										"bio": bio
-			])
-		{ (error, dbRef) in
-			if let error = error { print("addUser error: \(error.localizedDescription)")}
-			else { print("user successfully added to database reference: \(dbRef)")}
-		}
-	}
-
-
 
 	// Get
     func getCurrentLover(completionHandler: @escaping (Lover?, Error?) -> Void) {
