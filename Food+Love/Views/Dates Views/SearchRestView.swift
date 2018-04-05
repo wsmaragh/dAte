@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol SearchRestViewDelegate: class {
-    @objc optional func didItemSelect(rest: String, addres: String)
+    @objc optional func didItemSelect(venueId: String, rest: String, address: String)
 }
 
 class SearchRestView: UIView {
@@ -82,15 +82,19 @@ class SearchRestView: UIView {
 
 extension SearchRestView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        FSSearchAPIClient.manager.searchVenues(search: text, lat: "40.669998", long: "-73.978747", distance: "250", completion: { (venuesOnline) in
-            if let venues = venuesOnline {
-                self.venues = venues
-            }
-        }) { (error) in
-            if let error = error {
-                print(error)
+        // Manhattan: 40.762243, -73.982661
+        if let searchTerm = searchBar.text {
+            FSSearchAPIClient.manager.searchVenues(search: searchTerm, lat: "40.669998", long: "-73.978747", distance: "250", completion: { (venuesOnline) in
+                if let venues = venuesOnline {
+                    self.venues = venues
+                }
+            }) { (error) in
+                if let error = error {
+                    print(error)
+                }
             }
         }
+        
         return true
     }
 }
@@ -98,7 +102,7 @@ extension SearchRestView: UISearchBarDelegate {
 extension SearchRestView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let venue = self.venues[indexPath.row]
-        delegate?.didItemSelect!(rest: venue.name, addres: venue.location.address ?? "No address")
+        delegate?.didItemSelect!(venueId: venue.id,rest: venue.name, address: venue.location.address ?? "No address")
     }
 }
 
