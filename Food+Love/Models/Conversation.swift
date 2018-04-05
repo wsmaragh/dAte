@@ -19,7 +19,7 @@ class Conversation: NSObject {
 	var imageHeight: NSNumber?
 	var videoUrl: String?
 
-	func chatPartnerId() -> String {
+	func partnerId() -> String {
 		return (fromId == Auth.auth().currentUser?.uid ? toId : fromId)!
 	}
 
