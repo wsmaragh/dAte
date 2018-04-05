@@ -379,7 +379,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="369" height="144"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbt-bt-bdX" userLabel="BubbleView" customClass="UIViewX" customModule="Food_Love" customModuleProvider="target">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbt-bt-bdX" userLabel="BubbleView" customClass="UIViewX" customModule="Food_Love" customModuleProvider="target">
                                                     <rect key="frame" x="171.5" y="-0.5" width="189.5" height="144"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do." textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="FJe-EC-vwq">
@@ -387,7 +387,7 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Nu-YD5" userLabel="messageImage" customClass="UIImageViewX" customModule="Food_Love" customModuleProvider="target">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Nu-YD5" userLabel="messageImage" customClass="UIImageViewX" customModule="Food_Love" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="189.5" height="144"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1282,12 +1282,6 @@ riKzAAAAAAAAAgEAAAAAAAAAWQAAAAAAAAAAAAAAAAAAIrU
         </namedColor>
         <namedColor name="appColorRed">
             <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="appColorRed">
-            <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="appColorWhite">
-            <color red="0.98400002717971802" green="0.98400002717971802" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="appColorWhite">
             <color red="0.98400002717971802" green="0.98400002717971802" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

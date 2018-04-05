@@ -14,7 +14,6 @@ class MatchesVC: UIViewController {
 	@IBOutlet weak var matchesCollectionView: UICollectionView!
 	@IBOutlet weak var conversationsTableView: UITableView!
 
-
 	// MARK: Properties
 	var timer: Timer!
 	var matches = [Lover]() {
@@ -144,7 +143,7 @@ class MatchesVC: UIViewController {
 				messagesReference.observeSingleEvent(of:.value, with: { (snapshot) in
 					if let dict = snapshot.value as? [String: AnyObject] {
 						let message = Message(dictionary: dict)
-						let chatPartnerID = message.chatPartnerId()
+						let chatPartnerID = message.partnerId()
 						self.conversationsDict[chatPartnerID] = message
 						self.conversations = Array(self.conversationsDict.values)
 						self.conversations =  self.conversations.sorted(by: { (message1, message2) -> Bool in
@@ -169,7 +168,7 @@ class MatchesVC: UIViewController {
 		messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
 			if let dictionary = snapshot.value as? [String: AnyObject] {
 				let message = Message(dictionary: dictionary)
-				let chatPartnerId = message.chatPartnerId()
+				let chatPartnerId = message.partnerId()
 				self.conversationsDict[chatPartnerId] = message
 				self.attemptReloadOfTable()
 			}
@@ -312,7 +311,7 @@ extension MatchesVC: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		guard let uid = Auth.auth().currentUser?.uid else { return }
 		let conversations = self.conversations[indexPath.row]
-		DBService.manager.getConversationsRef().child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
+		DBService.manager.getConversationsRef().child(uid).child(conversations.partnerId()).removeValue { (error, ref) in
 
 			//		Database.database().reference().child("user-messages").child(uid).child(conversations.chatPartnerId()).removeValue { (error, ref) in
 			if error != nil { print(error!) ; return}
@@ -331,7 +330,7 @@ extension MatchesVC {
 		if sender is UICollectionViewCell {
 			guard let indexPath1 = matchesCollectionView.indexPath(for: sender as! UICollectionViewCell) else {return}
 			chatVC.partner = matches[indexPath1.row]
-			chatVC.loverId = matches[indexPath1.row].id
+			chatVC.partnerId = matches[indexPath1.row].id
 		}
 		//Conversations
 		if sender is UITableViewCell {
@@ -341,10 +340,10 @@ extension MatchesVC {
 			let conversation = conversations[indexPath2.row]
 
 			//TODO: get partner - send partner info and uiimage
-			chatVC.loverId = conversations[indexPath2.row].chatPartnerId()
+			chatVC.partnerId = conversations[indexPath2.row].partnerId()
 
 			//get lover
-			DBService.manager.retrieveLover(loverId: chatVC.loverId, completionHandler: { (onlineLover) in
+			DBService.manager.retrieveLover(loverId: chatVC.partnerId, completionHandler: { (onlineLover) in
 					selectedLover = onlineLover
 			})
 //			guard let selectedLover = selectedLover else {return}
@@ -355,7 +354,6 @@ extension MatchesVC {
 //				print(error)
 //			})
 //
-
 			if let selectedLover = selectedLover {
 				//get image
 				guard let imageUrl = selectedLover.profileImageUrl else {return}
@@ -365,7 +363,7 @@ extension MatchesVC {
 					print(error)
 					})
 				if let image = selectedLoverImage {
-					chatVC.loverImage = image
+					chatVC.partnerImage = image
 					chatVC.partner = selectedLover
 				}
 			}

@@ -21,13 +21,6 @@ class LoginVC: UIViewController {
 	@IBOutlet weak var googleButton: UIButton!
 	@IBOutlet weak var facebookButton: FBSDKLoginButton!
 
-	// MARK: Properties
-
-
-	//Facebook button
-	//Google button
-	//Twitter Button
-
 
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
@@ -62,11 +55,11 @@ class LoginVC: UIViewController {
 		self.passwordTF.underlined(color: .white)
 		self.emailTF.leftViewMode = .always
 		self.passwordTF.leftViewMode = .always
-//		emailTF.text = "winstonmaragh@ac.c4q.nyc"
+		emailTF.text = "winstonmaragh@ac.c4q.nyc"
 //		emailTF.text = "marlonrugama@ac.c4q.nyc"
 //		emailTF.text = "xianxianchen@ac.c4q.nyc"
-
 		passwordTF.text = "123456"
+		
 		//Text Color
 		emailTF.textColor = .white
 		passwordTF.textColor = .white

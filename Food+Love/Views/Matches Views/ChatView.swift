@@ -14,7 +14,6 @@ class ChatProfileView: UIView {
 	@IBOutlet weak var loverNameLabel: UILabel!
 	@IBOutlet weak var loverInfoLabel: UILabel!
 	@IBOutlet weak var loverFoodPreference: UILabel!
-
 }
 
 

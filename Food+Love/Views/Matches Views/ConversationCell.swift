@@ -17,7 +17,7 @@ class ConversationCell: UITableViewCell {
 	@IBOutlet weak var onlineButton: UIButton!
 	
 	func configureCell(conversation: Message){
-		let id = conversation.chatPartnerId()
+		let id = conversation.partnerId()
 		let ref = Database.database().reference().child("lovers").child(id)
 		ref.observeSingleEvent(of: .value, with: { (snapshot) in
 			if let dict = snapshot.value as? [String: AnyObject] {

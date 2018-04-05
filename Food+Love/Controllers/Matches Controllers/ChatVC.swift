@@ -19,10 +19,9 @@ class ChatVC: UIViewController {
 	@IBOutlet weak var name: UILabel!
 	@IBOutlet weak var chatCollectionView: UICollectionView!
 	@IBOutlet weak var chatSendView: ChatSendView!
-
+	@IBOutlet weak var inputTextField: UITextField!
 
 	@IBOutlet var inputBar: ChatSendView!
-	@IBOutlet weak var inputTextField: UITextField!
 	override var inputAccessoryView: UIView? {
 		get {
 			self.inputBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
@@ -33,13 +32,16 @@ class ChatVC: UIViewController {
 	override var canBecomeFirstResponder: Bool {
 		return true
 	}
-
+	override var canResignFirstResponder: Bool {
+		return true
+	}
 
 	// MARK: Properties
+	var currentUser = Auth.auth().currentUser!
 	var partner: Lover!
-	var loverId: String!
-	var loverImage: UIImage!
-	
+	var partnerId: String!
+	var partnerImage: UIImage!
+
 	var messages = [Message](){
 		didSet{
 			chatCollectionView.reloadData()
@@ -47,7 +49,6 @@ class ChatVC: UIViewController {
 		}
 	}
 	var canSendLocation = true
-	var currentUser = Auth.auth().currentUser!
 //	let locationManager = CLLocationManager()
 
 
@@ -55,20 +56,40 @@ class ChatVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
 		tabBarController?.tabBar.isHidden = true
-		self.becomeFirstResponder()
+		inputTextField.inputAccessoryView = inputBar
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-//		self.view.layoutIfNeeded()
-		inputTextField.inputAccessoryView = inputBar
+//		if !self.isFirstResponder {
+//			self.becomeFirstResponder()
+//		}
 		NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
 	}
 
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+//		inputTextField.inputAccessoryView = inputBar
+//		if !self.isFirstResponder {
+//			self.becomeFirstResponder()
+//		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = #colorLiteral(red: 0.8270000219, green: 0.3529999852, blue: 0.2160000056, alpha: 1)
 		view.alpha = 1.0
+
+		//TextField
+//		inputTextField.inputAccessoryView = inputBar
+		inputTextField.delegate = self
+		//		inputText.delegate = self
+
+		//CollectionView
+		chatCollectionView.delegate = self
+		chatCollectionView.dataSource = self
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector (collectionViewTapped))
+		chatCollectionView.addGestureRecognizer(tapGesture)
 
 		//Location
 		//		self.locationManager.delegate = self
@@ -80,13 +101,13 @@ class ChatVC: UIViewController {
 		getMessages()
 
 		//setup Lover
-		DBService.manager.retrieveLover(loverId: loverId, completionHandler: { (onlineLover) in
+		DBService.manager.retrieveLover(loverId: partnerId, completionHandler: { (onlineLover) in
 			if let myLover = onlineLover {
 				self.name.text = myLover.name
 				if let imageStr = myLover.profileImageUrl{
 					//					self.profileImage.loadImageUsingCacheWithUrlString(imageStr)
 					ImageService.manager.getImage(from: imageStr, completionHandler: { (onlineImage) in
-						self.loverImage = onlineImage
+						self.partnerImage = onlineImage
 						self.profileImage.image = onlineImage
 					}, errorHandler: { (error) in
 						print(error)
@@ -95,33 +116,13 @@ class ChatVC: UIViewController {
 			}
 		})
 
-		//CollectionView
-		chatCollectionView.delegate = self
-		chatCollectionView.dataSource = self
-		let tapGesture = UITapGestureRecognizer(target: self, action: #selector (collectionViewTapped))
-		chatCollectionView.addGestureRecognizer(tapGesture)
-
-		//TextField
-		inputTextField.inputAccessoryView = inputBar
-		inputTextField.delegate = self
-		//		inputText.delegate = self
-
-		//Accessory view
-		self.becomeFirstResponder()
-
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(false)
 		tabBarController?.tabBar.isHidden = false
-		self.inputTextField.resignFirstResponder()
-		self.resignFirstResponder()
-//		NotificationCenter.default.removeObserver(self)
-	}
-
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(true)
-//		NotificationCenter.default.removeObserver(self)
+//		self.inputTextField.resignFirstResponder()
+//		self.resignFirstResponder() //needs it to get rid of inputbar on matches
 	}
 
 	deinit {
@@ -131,7 +132,7 @@ class ChatVC: UIViewController {
 
 
 
-	// Keyboar
+	// Keyboard
 	@objc func showKeyboard(notification: Notification) {
 		if let frame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
 			let height = frame.cgRectValue.height
@@ -194,6 +195,10 @@ class ChatVC: UIViewController {
     
     @objc private func planDate() {
         let planDateVC = MakeDateVC()
+        guard let fromUser = Auth.auth().currentUser?.uid else {return}
+        guard let toUser = partnerId else {return}
+        planDateVC.fromUser = fromUser
+        planDateVC.toUser = toUser
         navigationController?.pushViewController(planDateVC, animated: true)
     }
 
@@ -208,7 +213,7 @@ class ChatVC: UIViewController {
 
 	///////////////////// MESSAGES  //////////////////////
 	func getMessages() {
-		guard let uid = Auth.auth().currentUser?.uid, let toId = loverId else {return}
+		guard let uid = Auth.auth().currentUser?.uid, let toId = partnerId else {return}
 		let conversationsRef = DBService.manager.getConversationsRef().child(uid).child(toId)
 		conversationsRef.observe(.childAdded, with: { (snapshot) in
 			let messageId = snapshot.key
@@ -233,7 +238,7 @@ class ChatVC: UIViewController {
 	fileprivate func sendMessage(_ property: [String: AnyObject]){
 		let messagesRef = DBService.manager.getMessagesRef()
 		let childRef = messagesRef.childByAutoId()
-		let toId = loverId
+		let toId = partnerId
 		let fromId = Auth.auth().currentUser!.uid
 		let timeStamp = NSNumber.init(value: Date().timeIntervalSince1970)
 		var values: [String : AnyObject] = ["toId": toId as AnyObject, "fromId": fromId as AnyObject, "timeStamp":timeStamp]
@@ -388,7 +393,7 @@ extension ChatVC: UICollectionViewDataSource  {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartnerChatCell", for: indexPath) as! PartnerChatCell
 			cell.chatVC = self
 			cell.configureCell(message: message)
-			cell.profileImageView.image = loverImage
+			cell.profileImageView.image = partnerImage
 			return cell
 		}
 	}

@@ -17,6 +17,13 @@ class RoundedImageView: UIImageView {
 	}
 }
 
+extension Date {
+    var age: Int {
+        return Calendar.current.dateComponents([.year], from: self, to: Date()).year!
+    }
+}
+
+
 // Dictionary
 extension Dictionary {
 	mutating func merge(with dictionary: Dictionary) {

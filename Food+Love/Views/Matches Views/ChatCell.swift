@@ -51,7 +51,7 @@ class PartnerChatCell: UICollectionViewCell {
 	@objc func zoom(tapGesture: UITapGestureRecognizer) {
 		if message?.videoUrl != nil { return}
 		if let imgVIew = tapGesture.view as? UIImageView {
-			//			self.chatVC?.zoomInForStartingImageView(startingImageView: imgVIew)
+//						self.chatVC?.zoomInForStartingImageView(startingImageView: imgVIew)
 		}
 	}
 

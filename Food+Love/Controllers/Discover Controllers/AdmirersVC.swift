@@ -15,41 +15,59 @@ class AdmirersVC: UIViewController {
     
     @IBOutlet weak var admirerCV: UICollectionView!
     
-    var admirers = [Lover](){
+    var admirers = [Lover]() {
         didSet{
             admirerCV.reloadData()
         }
     }
-    
-
-    override func viewWillAppear(_ animated: Bool) {
-        loadData()
+    var currentLover: Lover! {
+        didSet {
+            guard currentLover != nil else {return}
+            loadData()
+        }
     }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+//        loadData()
         setUpCollectionViewLayout()
+         loadCurrentUser()
         
     }
     
     private func loadData() {
-        getAllLoversExceptCurrent()
-    }
-    
-    //Maybe move this? - G.W.
-    func getAllLoversExceptCurrent() {
-        DispatchQueue.main.async {
-            Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
+        guard let followers = self.currentLover.followers else {return}
+        let uids = Array(followers.values)
+				self.admirers.removeAll()
+        for uid in uids {
+            Database.database().reference().child("lovers").child(uid).queryOrderedByKey().observe(.value, with: { (snapshot) in
+                print("~~~~~~~~~~~~~~~")
+                print("uid is : \(uid)")
+                print("snapshot is : \(snapshot)")
                 if let dict = snapshot.value as? [String: AnyObject]{
                     let lover = Lover(dictionary: dict)
-                    lover.id = snapshot.key
-                    if lover.id != Auth.auth().currentUser?.uid {
-                        self.admirers.append(lover)
-                    }
+                    self.admirers.append(lover)
+                } else {
+                    print()
                 }
-            }, withCancel: nil)
+            })
         }
         
     }
+    
+    
+    func loadCurrentUser() {
+        DBService.manager.getCurrentLover { (onlineLover, error) in
+            if let lover = onlineLover {
+                self.currentLover = lover
+            }
+            if let error = error {
+                print("loading current user error: \(error)")
+            }
+        }
+    }
+
 
     func setUpCollectionViewLayout() {
         admirerCV.dataSource = self
@@ -86,13 +104,22 @@ extension AdmirersVC: UICollectionViewDataSource, UICollectionViewDelegate {
         let admirer = admirers[indexPath.row]
         cell.nameLabel.text = admirer.name
 
+        let currentLoverFoods = [currentLover.firstFoodPrefer, currentLover.secondFoodPrefer, currentLover.thirdFoodPrefer]
+        let loverFoods = [admirer.firstFoodPrefer, admirer.secondFoodPrefer, admirer.thirdFoodPrefer]
+        var common = [String]()
+        for option in currentLoverFoods where option != nil {
+            if loverFoods.contains(where: {$0 == option}) {
+                common.append(option!)
+            }
+        }
+    
+        cell.faveCuisinesLabel.text = common.joined(separator: ", ")
+        
         if let image = admirer.profileImageUrl {
             cell.userImageView.loadImageUsingCacheWithUrlString(image)
-            cell.userImageView.layer.cornerRadius = cell.userImageView.frame.width / 2
-            cell.favoriteFoodImageView.layer.cornerRadius = cell.favoriteFoodImageView.frame.width / 2
-
+      
         } else {
-            cell.userImageView.image = #imageLiteral(resourceName: "user2")
+            cell.userImageView.image = #imageLiteral(resourceName: "profile")
         }
 //        cell.contentView.addSubview(button)
         cell.setNeedsLayout()
@@ -101,7 +128,7 @@ extension AdmirersVC: UICollectionViewDataSource, UICollectionViewDelegate {
 
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return admirers.isEmpty ? 0 : admirers.count
+		return admirers.count
 	}
 
 
