@@ -178,7 +178,7 @@ class UserProfileTableViewController: UITableViewController {
     }
     // MARK: - Table view data source
 
-    func convertBirthDayToAge() -> Int? {
+   public func convertBirthDayToAge() -> Int? {
         var myAge: Int?
        // let myDOB = Calendar.current.date(from: DateComponents(year: 1970, month: 9, day: 10))!
         if let ageArr = self.lover?.dateOfBirth?.components(separatedBy: "-") {
