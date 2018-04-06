@@ -24,6 +24,7 @@ class AdmirersVC: UIViewController {
         didSet {
             guard currentLover != nil else {return}
             loadData()
+            
         }
     }
 
@@ -38,20 +39,22 @@ class AdmirersVC: UIViewController {
     
     private func loadData() {
         guard let followers = self.currentLover.followers else {return}
-        let uids = Array(followers.values)
-				self.admirers.removeAll()
-        for uid in uids {
-            Database.database().reference().child("lovers").child(uid).queryOrderedByKey().observe(.value, with: { (snapshot) in
-//                print("~~~~~~~~~~~~~~~")
-//                print("uid is : \(uid)")
-//                print("snapshot is : \(snapshot)")
-                if let dict = snapshot.value as? [String: AnyObject]{
-                    let lover = Lover(dictionary: dict)
-                    self.admirers.append(lover)
-                } else {
-                    print()
+
+        let followerUids = Array(followers.values)
+      
+        Database.database().reference().child("lovers").observe(.value) { (snapshot) in
+            var onlineFollowers = [Lover]()
+            for child in snapshot.children {
+                let childDataSnapshot = child as! DataSnapshot
+                let key = childDataSnapshot.key
+                if followerUids.contains(key) {
+                    if let dict = childDataSnapshot.value as? [String: AnyObject] {
+                        let lover = Lover(dictionary: dict)
+                        onlineFollowers.append(lover)
+                    }
                 }
-            })
+            }
+            self.admirers = onlineFollowers
         }
         
     }
