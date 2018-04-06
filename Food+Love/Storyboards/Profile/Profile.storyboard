@@ -353,51 +353,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Favorite Restaurant" id="5NJ-nj-tRH">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="l7Y-9Y-jkh">
-                                        <rect key="frame" x="0.0" y="410" width="375" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l7Y-9Y-jkh" id="uBi-lS-VU6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UG7-Jg-FzX">
-                                                    <rect key="frame" x="20" y="20" width="335" height="109.5"/>
-                                                    <subviews>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BQ-ZD-1vs">
-                                                            <rect key="frame" x="20" y="20" width="295" height="69.5"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                            <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="20"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="tintColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="2BQ-ZD-1vs" secondAttribute="bottom" constant="20" id="42S-2z-rym"/>
-                                                        <constraint firstAttribute="trailing" secondItem="2BQ-ZD-1vs" secondAttribute="trailing" constant="20" id="cIg-Hi-6Ao"/>
-                                                        <constraint firstItem="2BQ-ZD-1vs" firstAttribute="top" secondItem="UG7-Jg-FzX" secondAttribute="top" constant="20" id="cnn-B1-SPC"/>
-                                                        <constraint firstItem="2BQ-ZD-1vs" firstAttribute="leading" secondItem="UG7-Jg-FzX" secondAttribute="leading" constant="20" id="tsk-4k-6mY"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="UG7-Jg-FzX" secondAttribute="bottom" constant="20" id="78i-iR-E3C"/>
-                                                <constraint firstItem="UG7-Jg-FzX" firstAttribute="leading" secondItem="uBi-lS-VU6" secondAttribute="leading" constant="20" id="CJa-Tb-tzN"/>
-                                                <constraint firstAttribute="trailing" secondItem="UG7-Jg-FzX" secondAttribute="trailing" constant="20" id="Ubb-gS-aMe"/>
-                                                <constraint firstItem="UG7-Jg-FzX" firstAttribute="top" secondItem="uBi-lS-VU6" secondAttribute="top" constant="20" id="cSo-YH-RZ5"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="Favorite Cuisines" id="ny5-tz-dY0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteCusineTV" rowHeight="200" id="aWW-98-2J9">
-                                        <rect key="frame" x="0.0" y="588" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="410" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aWW-98-2J9" id="JEQ-kx-KUF">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
@@ -467,7 +426,7 @@
                             <tableViewSection headerTitle="Favorite Food" id="Hrg-1C-2Cj">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="236" id="Nju-hH-BWc">
-                                        <rect key="frame" x="0.0" y="816" width="375" height="236"/>
+                                        <rect key="frame" x="0.0" y="638" width="375" height="236"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nju-hH-BWc" id="9BG-QP-8Rj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="235.5"/>
@@ -528,7 +487,7 @@
                             <tableViewSection headerTitle="About Me" id="vKe-Ar-72A">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="5eT-gt-5mE">
-                                        <rect key="frame" x="0.0" y="1080" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="902" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5eT-gt-5mE" id="spA-vM-a4U">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
@@ -568,7 +527,7 @@
                             <tableViewSection headerTitle="Looking For" id="cfz-aI-b7d">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="7px-2c-Ldz">
-                                        <rect key="frame" x="0.0" y="1308" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="1130" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7px-2c-Ldz" id="8Wd-vq-rte">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
@@ -617,11 +576,9 @@
                         <outlet property="aboutMeBackgroundView" destination="eiQ-6N-3MF" id="3oG-ip-Sw8"/>
                         <outlet property="aboutMeTextView" destination="DUO-Kh-iMR" id="Az3-KP-5jp"/>
                         <outlet property="ageLabel" destination="CaU-sR-j46" id="B5M-mt-YoY"/>
-                        <outlet property="faveRestaurantTextView" destination="2BQ-ZD-1vs" id="HVe-RH-N9s"/>
                         <outlet property="favoriteCuisinesCollectionView" destination="id9-Pk-4ho" id="iW2-hS-36g"/>
                         <outlet property="favoriteFoodImageView" destination="atA-PR-Xz6" id="fX7-bh-Y6m"/>
                         <outlet property="favoriteFoodLabel" destination="KIO-1I-eSl" id="fHP-US-znj"/>
-                        <outlet property="favoriteRestaurantBackgroundView" destination="UG7-Jg-FzX" id="xcw-uJ-2CU"/>
                         <outlet property="likeButton" destination="HBz-3q-cc3" id="lOs-Sz-fh3"/>
                         <outlet property="lookingForBackgroundView" destination="2G7-Ok-ut2" id="ugm-VZ-jqH"/>
                         <outlet property="lookingForTextView" destination="mQj-0v-KSF" id="XIi-bB-mtM"/>
