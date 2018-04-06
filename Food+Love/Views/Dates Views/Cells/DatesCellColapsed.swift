@@ -32,7 +32,7 @@ class DatesCellColapsed: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = Colors.red
         label.text = "23"
         return label
@@ -42,7 +42,7 @@ class DatesCellColapsed: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont(name: "Arial", size: 14)
+        label.font = UIFont(name: "Arial", size: 8)
         label.text = "Tuesday"
         return label
     }()

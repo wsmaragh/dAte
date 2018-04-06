@@ -33,7 +33,7 @@ class AdmirersVC: UIViewController {
 //        loadData()
         setUpCollectionViewLayout()
          loadCurrentUser()
-        
+        self.navigationItem.title = "Admirers"
     }
     
     private func loadData() {
@@ -42,9 +42,9 @@ class AdmirersVC: UIViewController {
 				self.admirers.removeAll()
         for uid in uids {
             Database.database().reference().child("lovers").child(uid).queryOrderedByKey().observe(.value, with: { (snapshot) in
-                print("~~~~~~~~~~~~~~~")
-                print("uid is : \(uid)")
-                print("snapshot is : \(snapshot)")
+//                print("~~~~~~~~~~~~~~~")
+//                print("uid is : \(uid)")
+//                print("snapshot is : \(snapshot)")
                 if let dict = snapshot.value as? [String: AnyObject]{
                     let lover = Lover(dictionary: dict)
                     self.admirers.append(lover)

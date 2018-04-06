@@ -81,6 +81,7 @@
 		81BE0A03205DF8B90099215D /* Lover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE0A01205DF8B80099215D /* Lover.swift */; };
 		81BE0A04205DF8B90099215D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE0A02205DF8B80099215D /* Message.swift */; };
 		81BEEEBB206832EF0098A1C8 /* ProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BEEEBA206832EF0098A1C8 /* ProfileSetup.swift */; };
+		81C81F6C2077DDE300800144 /* Admirers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C81F6B2077DDE300800144 /* Admirers.storyboard */; };
 		81D082D5206ABCEC00B44E6D /* DBService+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D082D4206ABCEC00B44E6D /* DBService+Category.swift */; };
 		81D082D7206ACB2400B44E6D /* FoodCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D082D6206ACB2400B44E6D /* FoodCategory.swift */; };
 		81D26F0620598AF800BEBC47 /* FSPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D26F0520598AF800BEBC47 /* FSPhoto.swift */; };
@@ -197,6 +198,7 @@
 		81BE0A01205DF8B80099215D /* Lover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lover.swift; sourceTree = "<group>"; };
 		81BE0A02205DF8B80099215D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		81BEEEBA206832EF0098A1C8 /* ProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetup.swift; sourceTree = "<group>"; };
+		81C81F6B2077DDE300800144 /* Admirers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admirers.storyboard; sourceTree = "<group>"; };
 		81D082D4206ABCEC00B44E6D /* DBService+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Category.swift"; sourceTree = "<group>"; };
 		81D082D6206ACB2400B44E6D /* FoodCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategory.swift; sourceTree = "<group>"; };
 		81D26F0520598AF800BEBC47 /* FSPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSPhoto.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				81AD5D922065DACE007A5963 /* Dates */,
 				81AD5D9C2065DC9E007A5963 /* Profile */,
 				8195758D2066C02B001F86F0 /* Restaurant */,
+				81C81F6D2077DDE900800144 /* Admirers */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -480,6 +483,14 @@
 				819575912066CAAE001F86F0 /* RestaurantTableViewCell.swift */,
 			);
 			path = "Restaurant Views";
+			sourceTree = "<group>";
+		};
+		81C81F6D2077DDE900800144 /* Admirers */ = {
+			isa = PBXGroup;
+			children = (
+				81C81F6B2077DDE300800144 /* Admirers.storyboard */,
+			);
+			path = Admirers;
 			sourceTree = "<group>";
 		};
 		81E615E82060C1A800347CDA /* Restaurant Search */ = {
@@ -699,7 +710,7 @@
 				TargetAttributes = {
 					817F9B42205863B10061E1B6 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -750,6 +761,7 @@
 				8106FFB7206AB75E00B02722 /* NewAdmirerCollectionViewCell.xib in Resources */,
 				81AD5D972065DBFA007A5963 /* Welcome.storyboard in Resources */,
 				81AAF7ED206815C30077AAC2 /* FavoriteRestaurantTableViewCell.xib in Resources */,
+				81C81F6C2077DDE300800144 /* Admirers.storyboard in Resources */,
 				81AD5D9B2065DC2C007A5963 /* Matches.storyboard in Resources */,
 				8157B21A20767BDF005F9259 /* UserProfileCollectionViewCell.xib in Resources */,
 				81AD5D952065DBD6007A5963 /* Discover.storyboard in Resources */,
@@ -1077,14 +1089,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8604a09-e785-46ce-8243-8d0cf7bb5161";
-				PROVISIONING_PROFILE_SPECIFIER = FoodNLove;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1099,14 +1111,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8604a09-e785-46ce-8243-8d0cf7bb5161";
-				PROVISIONING_PROFILE_SPECIFIER = FoodNLove;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

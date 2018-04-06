@@ -15,6 +15,7 @@ class DatesCell: UITableViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
+        image.layer.opacity = 0.75
         image.clipsToBounds = true
         return image
     }()
@@ -77,6 +78,7 @@ class DatesCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .gray
+        label.backgroundColor = Colors.black
         label.textAlignment = .center
         return label
     }()
@@ -115,7 +117,6 @@ class DatesCell: UITableViewCell {
                 print("Venue photo error:", error)
                 return
             }
-            photoArr?.forEach{print($0)}
             guard let prefix = photoArr?.first?.prefix else {print("No prefix");return}
             guard let width = photoArr?.first?.width else {print("No width"); return}
             guard let height = photoArr?.first?.height else {print("No height"); return}
