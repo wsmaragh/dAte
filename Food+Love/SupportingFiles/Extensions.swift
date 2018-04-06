@@ -97,7 +97,10 @@ extension UITextField {
 extension UIImageView {
 	//Image Cache
 	func loadImageUsingCacheWithUrlString(_ urlString: String) {
-		self.image = nil
+//        DispatchQueue.main.async {
+        self.image = nil
+//        }
+     
 		//check cache for image first
 		if let cachedImage = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
 			self.image = cachedImage
