@@ -32,14 +32,20 @@ class MatchesVC: UIViewController {
 	}
 	var conversationsDict = [String: Message]()
 
-
+    var currentLover: Lover! {
+        didSet {
+           // loadMatches()
+            getAllMatchedLover()
+        }
+    }
 
 	// MARK: View Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupTableview()
 		setupCollectionView()
-		getAllLoversExceptCurrent()
+		//getAllLoversExceptCurrent()
+        loadCurrentUserProfile()
 		getNewMessages()
 		setupNavBar()
 	}
@@ -86,16 +92,6 @@ class MatchesVC: UIViewController {
 	}
 
 
-	func getCurrentUser() -> Lover {
-		let uid = Auth.auth().currentUser?.uid
-		var lover: Lover!
-		DBService.manager.getLoversRef().child(uid!).observe(.value, with: { (snapshot) in
-			if let userInfoDict = snapshot.value as? [String : AnyObject] {
-				lover = Lover(dictionary: userInfoDict)
-			}
-		}, withCancel: nil)
-		return lover
-	}
 
 	func getLover(uid: String) -> Lover {
 		var lover: Lover!
@@ -116,18 +112,76 @@ class MatchesVC: UIViewController {
 		getNewMessages()
 	}
 
-	func getAllLoversExceptCurrent() {
-		Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
-			if let dict = snapshot.value as? [String: AnyObject]{
-				let lover = Lover(dictionary: dict)
-				lover.id = snapshot.key
-				if lover.id != Auth.auth().currentUser?.uid {
-					self.matches.append(lover)
-				}
-			}
-		}, withCancel: nil)
-	}
 
+
+    func loadCurrentUserProfile() {
+        DBService.manager.getCurrentLover { (onlineLover, error) in
+            if let lover = onlineLover {
+                self.currentLover = lover
+            }
+            if let error = error {
+                print("loading current user error: \(error)")
+            }
+        }
+    }
+    
+//    private func loadMatches() {
+//        guard let followers = self.currentLover.followers, let following = self.currentLover.following else {return}
+//        let followerUids = Array(followers.values)
+//        let followingUids = Array(following.values)
+//        var matchedUids = [String]()
+//        for uid in followerUids {
+//            if followingUids.contains(uid) {
+//                matchedUids.append(uid)
+//            }
+//        }
+//
+//        for uid in matchedUids {
+//      //Database.database().reference().child("lovers").child(uid).queryOrderedByKey()
+//            Database.database().reference().child("lovers").child(uid)
+//            .observe(.value, with: { (snapshot) in
+//                print("~~~~~~~~~~~~~~~")
+//                print("uid is : \(uid)")
+//                print("snapshot is : \(snapshot)")
+//                if let dict = snapshot.value as? [String: AnyObject]{
+//                    let lover = Lover(dictionary: dict)
+//                  let index = self.matches.index(where: {$0.id == lover.id})
+//                    if index == nil {
+//                    self.matches.append(lover)
+//                    }
+//                } else {
+//                    print("error getting snapshot value: match snapsho have is nil")
+//                }
+//            })
+//        }
+//    }
+    
+    func getAllMatchedLover() {
+        guard let followers = self.currentLover.followers, let following = self.currentLover.following else {return}
+        let followerUids = Array(followers.values)
+        let followingUids = Array(following.values)
+        var matchedUids = [String]()
+        for uid in followerUids {
+            if followingUids.contains(uid) {
+                matchedUids.append(uid)
+            }
+        }
+        
+        Database.database().reference().child("lovers").observe(.value) { (snapshot) in
+             var onlineMatches = [Lover]()
+            for child in snapshot.children {
+                let childDataSnapshot = child as! DataSnapshot
+                let key = childDataSnapshot.key
+                if matchedUids.contains(key) {
+                if let dict = childDataSnapshot.value as? [String: AnyObject] {
+                    let lover = Lover(dictionary: dict)
+                    onlineMatches.append(lover)
+                }
+                }
+            }
+            self.matches = onlineMatches
+        }
+    }
 
 	// Matches
 	func getNewMessages() {
@@ -207,9 +261,13 @@ extension MatchesVC: UICollectionViewDataSource {
 	//setup for each cell
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if matches.isEmpty {return collectionView.dequeueReusableCell(withReuseIdentifier: "MatchesCell", for: indexPath) as! MatchesCell}
+        
 		let match = matches[indexPath.row]
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MatchesCell", for: indexPath) as! MatchesCell
-		cell.configureCell(match: match)
+       // cell.layoutIfNeeded()
+        cell.layoutIfNeeded()
+        cell.matchImageView.image = nil
+        cell.configureCell(match: match)
 		return cell
 	}
 }
