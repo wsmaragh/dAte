@@ -346,14 +346,6 @@ extension MatchesVC {
 			DBService.manager.retrieveLover(loverId: chatVC.partnerId, completionHandler: { (onlineLover) in
 					selectedLover = onlineLover
 			})
-//			guard let selectedLover = selectedLover else {return}
-//			guard let imageUrl = selectedLover.profileImageUrl else {return}
-//			ImageService.manager.getImage(from: imageUrl, completionHandler: { (onlineImage) in
-//				selectedLoverImage = onlineImage
-//			}, errorHandler: { (error) in
-//				print(error)
-//			})
-//
 			if let selectedLover = selectedLover {
 				//get image
 				guard let imageUrl = selectedLover.profileImageUrl else {return}
