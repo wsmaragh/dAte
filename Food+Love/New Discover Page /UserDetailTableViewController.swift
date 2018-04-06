@@ -8,6 +8,7 @@
 
 import UIKit
 import expanding_collection
+import Firebase
 
 class UserDetailTableViewController: ExpandingTableViewController {
     
@@ -30,7 +31,24 @@ class UserDetailTableViewController: ExpandingTableViewController {
             //            lookingForTextView.text = lover?.bio ?? ""
         }
     }
-    let cuisines = [ "Thai", "Japanese", "Burgers", "Fried Chicken"]
+    
+    var currentFoods: [String]?
+    
+    var currentLover: Lover? {
+        didSet {
+            guard let following = currentLover?.following else {
+                self.likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
+                return
+            }
+            for (_, value) in following {
+                if value == lover!.id {
+                    self.likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
+                }
+            }
+        }
+    }
+    
+    var cuisines = [ "Thai", "Japanese", "Burgers", "Fried Chicken"]
     
     fileprivate var scrollOffsetY: CGFloat = 0
     override func viewDidLoad() {
@@ -44,14 +62,54 @@ class UserDetailTableViewController: ExpandingTableViewController {
         favoriteCuisineCollectionView.dataSource = self
         favoriteCuisineCollectionView.delegate = self
         loadData()
+        loadCurrentUser()
+    }
+    
+    
+    func convertBirthDayToAge() -> Int? {
+        var myAge: Int?
+        // let myDOB = Calendar.current.date(from: DateComponents(year: 1970, month: 9, day: 10))!
+        if let ageArr = self.lover?.dateOfBirth?.components(separatedBy: "-") {
+            guard let year =  Int(ageArr[0]), let month = Int(ageArr[1]), let day = Int(ageArr[2]) else {
+                return nil
+            }
+            let myDOB = Calendar.current.date(from: DateComponents(year: year, month: month, day: day))!
+            myAge = myDOB.age
+        }
+        return myAge
     }
     
     
     private func loadData() {
         favoriteFoodName.text = lover?.favDish ?? ""
         aboutMeTextView.text = lover?.bio ?? ""
-        lookingForTextView.text = lover?.bio ?? ""
+        lookingForTextView.text = "Someone who is ready to be an amazing partner and accept an amazing partner into their life "
         favoriteFoodImageView.image = UIImage(named: lover?.favDish ?? "bg_coffee")
+        ageLabel.text = convertBirthDayToAge()?.description ?? "30"
+        boroughLabel.text = "Brooklyn"
+        
+        let currentLoverFoods = [currentLover?.firstFoodPrefer, currentLover?.secondFoodPrefer, currentLover?.thirdFoodPrefer]
+        let loverFoods = [lover?.firstFoodPrefer, lover?.secondFoodPrefer, lover?.thirdFoodPrefer]
+//        var common = [String]()
+//        for option in currentLoverFoods where option != nil {
+//            if loverFoods.contains(where: {$0 == option}) {
+//                common.append(option!)
+//            }
+//        }
+        shareFoodLabel.text = currentFoods?.joined(separator: ", ")
+        self.cuisines = loverFoods as! [String]
+    }
+    
+    
+    func loadCurrentUser() {
+        DBService.manager.getCurrentLover { (onlineLover, error) in
+            if let lover = onlineLover {
+                self.currentLover = lover
+            }
+            if let error = error {
+                print("loading current user error: \(error)")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +138,50 @@ class UserDetailTableViewController: ExpandingTableViewController {
             $0.layer.shadowOpacity = 0.2
             $0.layer.shadowRadius = 4    }
         
+    }
+    
+    
+    
+    @IBAction func likeButton(_ sender: Any) {
+        //Add like functionality here
+        let button = sender as! UIButton
+        guard self.currentLover != nil, self.lover != nil else {return}
+        let uid = Auth.auth().currentUser!.uid
+        let ref = Database.database().reference()
+        let key = ref.child("lovers").childByAutoId().key // autoId key
+        
+        // if following, remove value from lover, remove from currentLover's following
+        if button.imageView?.image == #imageLiteral(resourceName: "like_filled") {
+            ref.child("lovers").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+                if let following = snapshot.value as? [String: AnyObject] {
+                    for (ke, value) in following {
+                        if value as! String == self.lover!.id {
+                            self.likeButton.setImage(#imageLiteral(resourceName: "like"), for: .normal)
+                            
+                            ref.child("lovers").child(uid).child("following/\(ke)").removeValue()
+                            ref.child("lovers").child(self.lover!.id).child("followers/\(ke)").removeValue()
+                        }
+                    }
+                }
+                
+            })
+            //  ref.removeAllObservers()
+            
+        }
+        else {
+            // if not following, add to currentLover's following, lover's followers
+            let following = ["following/\(key)": self.lover!.id]
+            let followers = ["followers/\(key)": uid]
+            ref.child("lovers").child(uid).updateChildValues(following)
+            ref.child("lovers").child(self.lover!.id).updateChildValues(followers)
+            
+            likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
+            guard let loverName = lover?.name else {return}
+            guard let currentUserName = Auth.auth().currentUser?.displayName else {return}
+            FCMAPIClient.manager.sendPushNotification(device: "cBY7Bsw5Ktk:APA91bFtNkbAonfDlanh4YA0A9p3y5LZCkFOQ5FCES14pMineg-T6tOdXH44Lc_3t7tQzisTfVIZJxYdk9KOhbbUMeSbnkcqrpBrQwJ9iIu3XArs3tYYr3uFPHOyEtqZ7vYxCCsbKSq_", title: "dAte", message: "Hey \(loverName), \(currentUserName) likes YOU!")
+            
+        }
+        ref.removeAllObservers()
     }
     
 }

@@ -16,10 +16,11 @@ class UserViewController: ExpandingViewController {
     fileprivate var cellsIsOpen = [Bool]()
 //    typealias ItemInfo = (image: String, title: String)
 //    fileprivate let items: [ItemInfo] = [(#imageLiteral(resourceName: "bg_food1"), "Hi there")]
-    fileprivate let favoritePlates = ["thaiFood", "pizza", "chineseFood", "tacos", "sushi"]
+    fileprivate let favoritePlates = ["Chili","Pizza", "Chinese", "Tacos", "Sushi", "Bacon", "French Fries"]
     
     var currentLover: Lover!
-    var indexPathDisplayed: IndexPath?
+    
+    var currentFoods: [String]!
     
     var lovers = [Lover]() {
         didSet {
@@ -115,15 +116,11 @@ extension UserViewController {
     }
     
     fileprivate func getViewController() -> ExpandingTableViewController {
-        let storyboard = UIStoryboard(storyboard: .NewDiscover)
         let storyB = UIStoryboard(name: "NewDiscover", bundle: nil)
         let toViewController: UserDetailTableViewController = storyB.instantiateViewController()
-        toViewController.lover = lovers[indexPathDisplayed!.row]
+        toViewController.lover = lovers[currentIndex]
+        toViewController.currentFoods = currentFoods
         return toViewController
-        //        let storyB = UIStoryboard(name: "NewDiscover", bundle: nil)
-        //
-        //        let toViewController = storyB.instantiateViewController(withIdentifier: "UserDetailTableViewController") as! UserDetailTableViewController
-        //        return toViewController
     }
     
     fileprivate func configureNavBar() {
@@ -151,11 +148,6 @@ extension UserViewController {
         let indexPath = IndexPath(row: currentIndex, section: 0)
         guard let cell = collectionView?.cellForItem(at: indexPath) as? UserProfileCollectionViewCell else { return }
         
-        //        if cell.isOpened == false {
-        //            cell.customTitle.isHidden = false
-        //            cell.overlayView.isHidden = false
-        //            cell.backgroundImageView.contentMode = .scaleToFill
-        //        }
         
         if sender.direction == .down {
             cell.overlayView.isHidden = false
@@ -175,10 +167,6 @@ extension UserViewController {
             cell.backgroundImageView.contentMode = .scaleAspectFit
             cell.customTitle.isHidden = true
             cell.overlayView.isHidden = true
-            
-            
-            
-            
             pushToViewController(getViewController())
             
             
@@ -213,6 +201,7 @@ extension UserViewController {
         
         let index = indexPath.row % lovers.count
         let lover = lovers[index]
+       
         
         //        cell.backgroundImageView.image = nil
         //        cell.favFoodImageView.image = nil
@@ -228,6 +217,7 @@ extension UserViewController {
                 common.append(option!)
             }
         }
+        self.currentFoods = common
         cell.favoriteCuisinesLabel.text = common.joined(separator: ", ")
         
         if let image = lover.profileImageUrl {
@@ -258,6 +248,7 @@ extension UserViewController {
         }
             
         else {
+    
             pushToViewController(getViewController())
             
             
@@ -278,7 +269,7 @@ extension UserViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        self.indexPathDisplayed = indexPath
+        
         //        let lover = lovers[indexPath.row]
         //        guard let cell = collectionView.cellForItem(at: indexPath) as? UserProfileCollectionViewCell else { return UICollectionViewCell() }
         //        cell.backgroundImageView.image = nil
