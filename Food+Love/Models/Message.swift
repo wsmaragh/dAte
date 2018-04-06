@@ -18,7 +18,7 @@ class Message: NSObject {
 	var videoUrl: String?
 	var timeStamp: NSNumber?
 
-	func chatPartnerId() -> String {
+	func partnerId() -> String {
 		return (fromId == Auth.auth().currentUser?.uid ? toId : fromId)
 	}
 
