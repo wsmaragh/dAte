@@ -17,8 +17,10 @@ class FeedVC: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		let discoverVC = UIViewController.storyboardInstance(storyboardName: "Discover", viewControllerIdentifiier: "DiscoverVC")
+        
+        let newDiscoverVC = UIViewController.storyboardInstance(storyboardName: "NewDiscover", viewControllerIdentifiier: "NewDiscover")
 		let admirersVC = UIViewController.storyboardInstance(storyboardName: "Discover", viewControllerIdentifiier: "AdmirersVC")
-		let pagingViewController = FixedPagingViewController(viewControllers: [discoverVC, admirersVC])
+		let pagingViewController = FixedPagingViewController(viewControllers: [newDiscoverVC, admirersVC])
 		addChildViewController(pagingViewController)
 		view.addSubview(pagingViewController.view)
 		pagingViewController.didMove(toParentViewController: self)

@@ -5,11 +5,13 @@
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import UIKit
-import Firebase
-import MobileCoreServices
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
 import Photos
+import MobileCoreServices
 import AVFoundation
-import CoreLocation
+//import CoreLocation
 
 
 class ChatVC: UIViewController {
@@ -18,23 +20,9 @@ class ChatVC: UIViewController {
 	@IBOutlet weak var profileImage: UIImageViewX!
 	@IBOutlet weak var name: UILabel!
 	@IBOutlet weak var chatCollectionView: UICollectionView!
-	@IBOutlet weak var chatSendView: ChatSendView!
 	@IBOutlet weak var inputTextField: UITextField!
+	@IBOutlet weak var sendContainerBottom: NSLayoutConstraint!
 
-	@IBOutlet var inputBar: ChatSendView!
-	override var inputAccessoryView: UIView? {
-		get {
-			self.inputBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
-			self.inputBar.clipsToBounds = true
-			return self.inputBar
-		}
-	}
-	override var canBecomeFirstResponder: Bool {
-		return true
-	}
-	override var canResignFirstResponder: Bool {
-		return true
-	}
 
 	// MARK: Properties
 	var currentUser = Auth.auth().currentUser!
@@ -48,7 +36,7 @@ class ChatVC: UIViewController {
 			chatCollectionView.layoutIfNeeded()
 		}
 	}
-	var canSendLocation = true
+//	var canSendLocation = true
 //	let locationManager = CLLocationManager()
 
 
@@ -56,50 +44,16 @@ class ChatVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
 		tabBarController?.tabBar.isHidden = true
-		inputTextField.inputAccessoryView = inputBar
-	}
-
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-//		if !self.isFirstResponder {
-//			self.becomeFirstResponder()
-//		}
-		NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.showKeyboard(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-	}
-
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-//		inputTextField.inputAccessoryView = inputBar
-//		if !self.isFirstResponder {
-//			self.becomeFirstResponder()
-//		}
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = #colorLiteral(red: 0.8270000219, green: 0.3529999852, blue: 0.2160000056, alpha: 1)
-		view.alpha = 1.0
-
-		//TextField
-//		inputTextField.inputAccessoryView = inputBar
-		inputTextField.delegate = self
-		//		inputText.delegate = self
-
-		//CollectionView
-		chatCollectionView.delegate = self
-		chatCollectionView.dataSource = self
-		let tapGesture = UITapGestureRecognizer(target: self, action: #selector (collectionViewTapped))
-		chatCollectionView.addGestureRecognizer(tapGesture)
-
-		//Location
-		//		self.locationManager.delegate = self
-
-		//NavBar
+		setupKeyboardObservers()
 		configureNavBar()
-
-		//Message
+		setupTextField()
+		setupCollectionView()
+		setupLocation()
 		getMessages()
-
 		//setup Lover
 		DBService.manager.retrieveLover(loverId: partnerId, completionHandler: { (onlineLover) in
 			if let myLover = onlineLover {
@@ -121,64 +75,13 @@ class ChatVC: UIViewController {
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(false)
 		tabBarController?.tabBar.isHidden = false
-//		self.inputTextField.resignFirstResponder()
-//		self.resignFirstResponder() //needs it to get rid of inputbar on matches
-	}
-
-	deinit {
 		NotificationCenter.default.removeObserver(self)
 	}
 
-
-
-
-	// Keyboard
-	@objc func showKeyboard(notification: Notification) {
-		if let frame = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue {
-			let height = frame.cgRectValue.height
-			self.chatCollectionView.contentInset.bottom = height
-			self.chatCollectionView.scrollIndicatorInsets.bottom = height
-			if self.messages.count > 0 {
-				self.chatCollectionView.scrollToItem(at: IndexPath.init(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
-			}
-		}
-	}
-
-	@objc func collectionViewTapped() {
-//		inputTextField.endEditing(true)
-		self.becomeFirstResponder()
-	}
-
-	// MARK: Actions
-	@IBAction func sendButtonPressed(){
-		if inputTextField.text == "" {return}
-		else {
-			sendMessage(["text": inputTextField.text! as AnyObject])
-		}
-		self.becomeFirstResponder()
-	}
-
-	@IBAction func photoButtonPressed(_ sender: UIButton) {
-		//open camera for photo
-		upload()
-
-	}
-
-	@IBAction func selectLocation(_ sender: Any) {
-		print("location pressed")
-//		canSendLocation = true
-//		if checkLocationPermission() {
-//			locationManager.startUpdatingLocation()
-//		} else {
-//			locationManager.requestWhenInUseAuthorization()
-//		}
-	}
-
-
 	private func configureNavBar() {
 		let videoChatBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camcorder"), style: .plain, target: self, action: #selector(startVideoChat))
-        let planDateBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "calendar"), style: .plain, target: self, action: #selector(planDate))
-        navigationItem.rightBarButtonItems = [videoChatBarItem, planDateBarItem]
+		let planDateBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "calendar"), style: .plain, target: self, action: #selector(planDate))
+		navigationItem.rightBarButtonItems = [videoChatBarItem, planDateBarItem]
 	}
 
 	@objc private func startVideoChat(lover: Lover) {
@@ -192,15 +95,92 @@ class ChatVC: UIViewController {
 		alertView.addAction(noOption)
 		present(alertView, animated: true, completion: nil)
 	}
-    
-    @objc private func planDate() {
-        let planDateVC = MakeDateVC()
-        guard let fromUser = Auth.auth().currentUser?.uid else {return}
-        guard let toUser = partnerId else {return}
-        planDateVC.fromUser = fromUser
-        planDateVC.toUser = toUser
-        navigationController?.pushViewController(planDateVC, animated: true)
-    }
+
+	@objc private func planDate() {
+		let planDateVC = MakeDateVC()
+		guard let fromUser = Auth.auth().currentUser?.uid else {return}
+		guard let toUser = partnerId else {return}
+		planDateVC.fromUser = fromUser
+		planDateVC.toUser = toUser
+		navigationController?.pushViewController(planDateVC, animated: true)
+	}
+
+	fileprivate func setupKeyboardObservers(){
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+	}
+
+	fileprivate func setupTextField(){
+		inputTextField.delegate = self
+	}
+
+	fileprivate func setupLocation(){
+		//Location
+		//		self.locationManager.delegate = self
+	}
+
+	fileprivate func setupCollectionView(){
+		//CollectionView
+		chatCollectionView.delegate = self
+		chatCollectionView.dataSource = self
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector (collectionViewTapped))
+		chatCollectionView.addGestureRecognizer(tapGesture)
+	}
+
+	@objc fileprivate func collectionViewTapped() {
+		inputTextField.resignFirstResponder()
+	}
+
+	// Keyboard
+	@objc fileprivate func keyboardWillShow(notification: Notification) {
+		guard let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue,
+			let animationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
+		let keyboardHeight = keyboardFrame.cgRectValue.height
+		self.sendContainerBottom.constant = keyboardHeight
+
+		UIView.animate(withDuration: animationDuration.doubleValue) {
+			self.view.layoutIfNeeded()
+			if self.messages.count > 0 {
+				self.chatCollectionView.scrollToItem(at: IndexPath.init(row: self.messages.count - 1, section: 0), at: .bottom, animated: true)
+			}
+		}
+
+	}
+
+	@objc fileprivate func keyboardWillHide(notification: Notification) {
+		guard let animationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
+		self.sendContainerBottom.constant = 0
+		UIView.animate(withDuration: animationDuration.doubleValue) {
+			self.view.layoutIfNeeded()
+		}
+	}
+
+
+	// MARK: Actions
+	@IBAction func sendButtonPressed(){
+		if inputTextField.text == "" {return}
+		else {
+			sendMessage(["text": inputTextField.text! as AnyObject])
+		}
+	}
+
+	@IBAction func photoButtonPressed(_ sender: UIButton) {
+		let imagePickerController = UIImagePickerController()
+		imagePickerController.allowsEditing = true
+		imagePickerController.delegate = self
+		imagePickerController.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
+		present(imagePickerController, animated: true, completion: nil)
+	}
+
+	@IBAction func selectLocation(_ sender: Any) {
+		print("location pressed")
+//		canSendLocation = true
+//		if checkLocationPermission() {
+//			locationManager.startUpdatingLocation()
+//		} else {
+//			locationManager.requestWhenInUseAuthorization()
+//		}
+	}
 
 
 	// Height for Text
@@ -246,7 +226,6 @@ class ChatVC: UIViewController {
 		childRef.updateChildValues(values)
 		childRef.updateChildValues(values) { (error, ref) in
 			if error != nil { print(error!); return}
-//			self.inputText.text = "" //nil
 			self.inputTextField.text = "" //nil
 			let conversationsRef = DBService.manager.getConversationsRef().child(fromId).child(toId!)
 			let messageId = childRef.key
@@ -269,7 +248,7 @@ class ChatVC: UIViewController {
 		let uploadTask = Storage.storage().reference().child("message_videos").child(fileName).putFile(from: videoURL, metadata: nil, completion: { (metadata, error) in
 			if error != nil { print("Failed to upload the video:", error!)}
 			if let videoUrl = metadata?.downloadURL()?.absoluteString {
-				if let thumbnailImage = self.thumnailImageForPrivateVideoUrl(videoUrl: videoURL){
+				if let thumbnailImage = self.thumbnailImageForPrivateVideoUrl(videoUrl: videoURL){
 					self.uploadToFirebaseStorage(thumbnailImage, completion: { (imageUrl) in
 						let properties: [String: AnyObject] = ["imageUrl":imageUrl,"imageWidth":thumbnailImage.size.width , "imageHeight":thumbnailImage.size.height,"videoUrl": videoUrl] as [String: AnyObject]
 						self.sendMessage(properties)
@@ -280,7 +259,7 @@ class ChatVC: UIViewController {
 	}
 
 	// Thumbnail of Video
-	private func thumnailImageForPrivateVideoUrl(videoUrl: URL) -> UIImage?{
+	private func thumbnailImageForPrivateVideoUrl(videoUrl: URL) -> UIImage?{
 		let asset = AVAsset.init(url: videoUrl)
 		let imageGenerator = AVAssetImageGenerator.init(asset: asset)
 		do {
@@ -306,15 +285,6 @@ class ChatVC: UIViewController {
 		}
 	}
 
-	// Image
-	@objc func upload() {
-		let imagePickerController = UIImagePickerController()
-		imagePickerController.allowsEditing = true
-		imagePickerController.delegate = self
-		imagePickerController.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
-		present(imagePickerController, animated: true, completion: nil)
-	}
-
 	// UPLOAD Image to Firebase
 	private func uploadToFirebaseStorage(_ image: UIImage, completion:@escaping (_ imageUrl: String) -> ()) {
 		let imageName = NSUUID().uuidString
@@ -328,44 +298,37 @@ class ChatVC: UIViewController {
 			})
 		}
 	}
-
 }
 
 
-///////////////////////// TextField /////////////////////////
+
 // MARK: TextField Delegate
 extension ChatVC: UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		if textField == inputTextField {
-			if inputTextField.text != "" {
-				print(inputTextField.text)
-				sendMessage(["text": inputTextField.text! as AnyObject])
-				self.becomeFirstResponder()
-			}
-		}
-//		textField.resignFirstResponder()
-		self.becomeFirstResponder()
+		guard let text = inputTextField.text else {return false}
+		if text == "" {return false}
+		sendMessage(["text": inputTextField.text! as AnyObject])
 		return true
 	}
-
 }
 
 
 
-///////////////////////// Image Picker /////////////////////////
 // MARK: ImagePicker for Photo & Video
 extension ChatVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	// pick Image or Video
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+		//Video
 		if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
 			selectedVideoForUrl(videoURL: videoURL)
-		} else {
+		}
+		//Photo
+		else {
 			selectedImageForInfo(info: info as [String : AnyObject])
 		}
 		dismiss(animated: true, completion: nil)
 	}
 
-	// Cancel Image
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		dismiss(animated: true, completion: nil)
 	}
@@ -401,7 +364,6 @@ extension ChatVC: UICollectionViewDataSource  {
 
 // MARK: CollectionView Delegate
 extension ChatVC: UICollectionViewDelegate {
-
 	func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 		if collectionView.isDragging {
 			cell.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)

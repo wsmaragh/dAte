@@ -98,7 +98,11 @@ extension DatesVC: UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.size.height * 0.25
+        if self.indexPathSelectedRow == nil {
+            return UITableViewAutomaticDimension
+        } else {
+            return view.frame.size.height * 0.25
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
