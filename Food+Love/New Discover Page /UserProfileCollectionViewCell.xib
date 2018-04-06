@@ -54,7 +54,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fry-xX-yhZ" userLabel="Overlay View">
                                 <rect key="frame" x="0.0" y="0.0" width="256" height="335"/>
                                 <subviews>
-                                    <view alpha="0.050000000000000003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fq1-rJ-vBi" userLabel="Dim View">
+                                    <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fq1-rJ-vBi" userLabel="Dim View">
                                         <rect key="frame" x="0.0" y="-0.5" width="256" height="335"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
