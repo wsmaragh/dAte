@@ -66,6 +66,9 @@
                     <navigationItem key="navigationItem" id="d66-JP-Xpd">
                         <barButtonItem key="rightBarButtonItem" image="delete" id="eJl-RU-IC8"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="UwQ-wd-GVV" kind="show" identifier="NoName" id="ONj-54-wa5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0HF-TX-bL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

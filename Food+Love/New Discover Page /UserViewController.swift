@@ -14,11 +14,12 @@ class UserViewController: ExpandingViewController {
     
     
     fileprivate var cellsIsOpen = [Bool]()
-    typealias ItemInfo = (image: UIImage, title: String)
-    fileprivate let items: [ItemInfo] = [(#imageLiteral(resourceName: "bg_food1"), "Hi there")]
-    
+//    typealias ItemInfo = (image: String, title: String)
+//    fileprivate let items: [ItemInfo] = [(#imageLiteral(resourceName: "bg_food1"), "Hi there")]
+    fileprivate let favoritePlates = ["thaiFood", "pizza", "chineseFood", "tacos", "sushi"]
     
     var currentLover: Lover!
+    var indexPathDisplayed: IndexPath?
     
     var lovers = [Lover]() {
         didSet {
@@ -80,7 +81,7 @@ class UserViewController: ExpandingViewController {
                     loverArr.append(newLover)
                 }
             }
-            self.lovers = loverArr
+            self.lovers = loverArr.filter{$0.gender == "Male"}
         }
     }
     
@@ -117,27 +118,24 @@ extension UserViewController {
         let storyboard = UIStoryboard(storyboard: .NewDiscover)
         let storyB = UIStoryboard(name: "NewDiscover", bundle: nil)
         let toViewController: UserDetailTableViewController = storyB.instantiateViewController()
+        toViewController.lover = lovers[indexPathDisplayed!.row]
         return toViewController
-//        let storyB = UIStoryboard(name: "NewDiscover", bundle: nil)
-//
-//        let toViewController = storyB.instantiateViewController(withIdentifier: "UserDetailTableViewController") as! UserDetailTableViewController
-//        return toViewController
-}
-
-fileprivate func configureNavBar() {
-    navigationItem.leftBarButtonItem?.image = navigationItem.leftBarButtonItem?.image!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
-}
-
+        //        let storyB = UIStoryboard(name: "NewDiscover", bundle: nil)
+        //
+        //        let toViewController = storyB.instantiateViewController(withIdentifier: "UserDetailTableViewController") as! UserDetailTableViewController
+        //        return toViewController
+    }
+    
+    fileprivate func configureNavBar() {
+        navigationItem.leftBarButtonItem?.image = navigationItem.leftBarButtonItem?.image!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+    }
+    
 }
 
 //MARK: Gestures
 extension UserViewController {
     
     fileprivate func addGesture(to view: UIView) {
-        
-        //        let downGesture2 = UISwipeGestureRecognizer(target: self, action: #selector(DemoViewController.swipeHandler(_:)))
-        //        downGesture2.direction = .down
-        
         let upGesture = Init(UISwipeGestureRecognizer(target: self, action: #selector(UserViewController.swipeHandler(_:)))) {
             $0.direction = .up
         }
@@ -158,8 +156,6 @@ extension UserViewController {
         //            cell.overlayView.isHidden = false
         //            cell.backgroundImageView.contentMode = .scaleToFill
         //        }
-        
-        
         
         if sender.direction == .down {
             cell.overlayView.isHidden = false
@@ -218,22 +214,35 @@ extension UserViewController {
         let index = indexPath.row % lovers.count
         let lover = lovers[index]
         
-        
         //        cell.backgroundImageView.image = nil
         //        cell.favFoodImageView.image = nil
         cell.customTitle.text = lover.name
-        //        cell.backgroundImageView.image = lover.profileImageUrl
-        //        cell.favoriteFoodNameLabel.text = lover.favDish
+//        cell.favoriteFoodNameLabel.text = lover.favDish
+        
+        let currentLoverFoods = [currentLover.firstFoodPrefer, currentLover.secondFoodPrefer, currentLover.thirdFoodPrefer]
+        let loverFoods = [lover.firstFoodPrefer, lover.secondFoodPrefer, lover.thirdFoodPrefer]
+        var common = [String]()
+        
+        for option in currentLoverFoods where option != nil {
+            if loverFoods.contains(where: {$0 == option}) {
+                common.append(option!)
+            }
+        }
+        cell.favoriteCuisinesLabel.text = common.joined(separator: ", ")
+        
         if let image = lover.profileImageUrl {
             cell.backgroundImageView.loadImageUsingCacheWithUrlString(image)
         } else {
             cell.backgroundImageView.image = #imageLiteral(resourceName: "profile")
         }
-        //        if let image = lover.favDishImageUrl {
-        //            cell.favFoodImageView.loadImageUsingCacheWithUrlString(image)
-        //        } else {
-        //            cell.favFoodImageView.image = #imageLiteral(resourceName: "profile")
-        //        }
+        if let image = lover.favDishImageUrl {
+            cell.favFoodImageView.loadImageUsingCacheWithUrlString(image)
+        } else {
+            let indexFavPlate = Int(arc4random() % UInt32(favoritePlates.count))
+            cell.favFoodImageView.image = UIImage(named: favoritePlates[indexFavPlate])
+            cell.favoriteFoodNameLabel.text = favoritePlates[indexFavPlate]
+            lovers[index].favDish = favoritePlates[indexFavPlate]
+        }
         
         cell.cellIsOpen(cellsIsOpen[index], animated: false)
     }
@@ -269,7 +278,7 @@ extension UserViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+        self.indexPathDisplayed = indexPath
         //        let lover = lovers[indexPath.row]
         //        guard let cell = collectionView.cellForItem(at: indexPath) as? UserProfileCollectionViewCell else { return UICollectionViewCell() }
         //        cell.backgroundImageView.image = nil

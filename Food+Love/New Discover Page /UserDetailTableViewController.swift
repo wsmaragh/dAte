@@ -10,7 +10,7 @@ import UIKit
 import expanding_collection
 
 class UserDetailTableViewController: ExpandingTableViewController {
-
+    
     @IBOutlet weak var shareFoodLabel: UILabel!
     @IBOutlet weak var favoriteCuisineCollectionView: UICollectionView!
     @IBOutlet weak var ageLabel: UILabel!
@@ -23,7 +23,13 @@ class UserDetailTableViewController: ExpandingTableViewController {
     @IBOutlet weak var aboutMeBackgroundView: UIView!
     @IBOutlet weak var lookingForBackgroundView: UIView!
     
-    
+    var lover: Lover? {
+        didSet {
+            //          favoriteFoodName.text = lover?.favDish ?? ""
+            //            aboutMeTextView.text = lover?.bio ?? ""
+            //            lookingForTextView.text = lover?.bio ?? ""
+        }
+    }
     let cuisines = [ "Thai", "Japanese", "Burgers", "Fried Chicken"]
     
     fileprivate var scrollOffsetY: CGFloat = 0
@@ -37,6 +43,15 @@ class UserDetailTableViewController: ExpandingTableViewController {
         configureNavBar()
         favoriteCuisineCollectionView.dataSource = self
         favoriteCuisineCollectionView.delegate = self
+        loadData()
+    }
+    
+    
+    private func loadData() {
+        favoriteFoodName.text = lover?.favDish ?? ""
+        aboutMeTextView.text = lover?.bio ?? ""
+        lookingForTextView.text = lover?.bio ?? ""
+        favoriteFoodImageView.image = UIImage(named: lover?.favDish ?? "bg_coffee")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +65,8 @@ class UserDetailTableViewController: ExpandingTableViewController {
         let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         statusBar.isHidden = false
     }
-
+    
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         let views = [aboutMeBackgroundView, lookingForBackgroundView] as [UIView]
@@ -63,14 +79,18 @@ class UserDetailTableViewController: ExpandingTableViewController {
             $0.layer.shadowColor = UIColor.lightGray.cgColor
             $0.layer.shadowOpacity = 0.2
             $0.layer.shadowRadius = 4    }
+        
     }
+    
 }
+
+
 
 
 extension UserDetailTableViewController {
     
     fileprivate func configureNavBar() {
-//        navigationItem.leftBarButtonItem?.image = navigationItem.leftBarButtonItem?.image!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        //        navigationItem.leftBarButtonItem?.image = navigationItem.leftBarButtonItem?.image!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
         navigationItem.rightBarButtonItem?.image = navigationItem.rightBarButtonItem?.image!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
     }
 }
@@ -109,14 +129,14 @@ extension UserDetailTableViewController {
 
 
 extension UserDetailTableViewController {
-   
+    
 }
 
 extension UserDetailTableViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-            return cuisines.count
-
+        return cuisines.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -136,9 +156,9 @@ extension UserDetailTableViewController: UICollectionViewDataSource, UICollectio
         //Add functionality of adding food preferences when clicked
     }
     
-//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//            let cuisine = cuisines[indexPath.row]
-//            return CGSizeFromString(cuisine)
-//        }
+    //        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    //            let cuisine = cuisines[indexPath.row]
+    //            return CGSizeFromString(cuisine)
+    //        }
     
 }
