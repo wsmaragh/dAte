@@ -40,11 +40,12 @@ class UserProfileTableViewController: UITableViewController {
                     self.likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
                 }
             }
+            loadImages()
         }
     }
     
     var photos = [#imageLiteral(resourceName: "bg_cook"), #imageLiteral(resourceName: "bg_love1"), #imageLiteral(resourceName: "bg_date2"), #imageLiteral(resourceName: "bg_desert")]
-    var cuisines = ["Thai", "Japanese", "Nigerian", "Coffee", "Tacoes"]
+//    var cuisines = ["Thai", "Japanese", "Nigerian", "Coffee", "Tacoes"]
     
     @IBOutlet weak var favoriteCuisinesCollectionView: UICollectionView!
     @IBOutlet weak var lookingForTextView: UITextView!
@@ -67,6 +68,8 @@ class UserProfileTableViewController: UITableViewController {
         super.viewDidLoad()
         favoriteCuisinesCollectionView.dataSource = self
         favoriteCuisinesCollectionView.delegate = self
+        userPhotosCollectionView.dataSource = self
+        userPhotosCollectionView.delegate = self
 //        setUpPagerView()
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         loadCurrentUser()
@@ -85,9 +88,9 @@ class UserProfileTableViewController: UITableViewController {
     func loadImages() {
         
         guard self.lover != nil else {return}
-        let url0 = currentLover!.profileImageUrl ?? ""
-        let url1 = currentLover!.profileImageUrl1 ?? ""
-        let url2 = currentLover!.profileImageUrl2 ?? ""
+        let url0 = lover!.profileImageUrl ?? ""
+        let url1 = lover!.profileImageUrl1 ?? ""
+        let url2 = lover!.profileImageUrl2 ?? ""
         
         ImageHelper.manager.getImage(from: url0, completionHandler: {
             self.profileImages[0] = $0
@@ -111,7 +114,7 @@ class UserProfileTableViewController: UITableViewController {
         userLocationLabel.text = lover?.city ?? "USA"
         favoriteFoodLabel.text = lover?.favDish ?? "N/A"
         aboutMeTextView.text = lover?.bio ?? "User hasn't say anything yet, start a dialoge to find out more."
-        faveRestaurantTextView.text = lover?.favRestaurants?[0] ?? "N/A"
+       // faveRestaurantTextView.text = lover?.favRestaurants?[0] ?? "N/A"
     
     }
     
@@ -165,7 +168,8 @@ class UserProfileTableViewController: UITableViewController {
  
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        let views = [favoriteRestaurantBackgroundView, lookingForBackgroundView, aboutMeBackgroundView] as [UIView]
+      //  let views = [favoriteRestaurantBackgroundView, lookingForBackgroundView, aboutMeBackgroundView] as [UIView]
+        let views = [lookingForBackgroundView, aboutMeBackgroundView] as [UIView]
         views.forEach {
             $0.layer.cornerRadius = 8
             $0.layer.masksToBounds = true
@@ -178,7 +182,7 @@ class UserProfileTableViewController: UITableViewController {
     }
     // MARK: - Table view data source
 
-    func convertBirthDayToAge() -> Int? {
+   public func convertBirthDayToAge() -> Int? {
         var myAge: Int?
        // let myDOB = Calendar.current.date(from: DateComponents(year: 1970, month: 9, day: 10))!
         if let ageArr = self.lover?.dateOfBirth?.components(separatedBy: "-") {
@@ -231,7 +235,7 @@ extension UserProfileTableViewController: UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == favoriteCuisinesCollectionView {
-        return cuisines.count
+        return 3
         }
         return profileImages.count
     }
@@ -239,25 +243,29 @@ extension UserProfileTableViewController: UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == userPhotosCollectionView {
-            let cell = userPhotosCollectionView.dequeueReusableCell(withReuseIdentifier: "OtherUserProfileCell", for: indexPath) as! OtherUserProfileCollectionCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OtherUserProfileCell", for: indexPath) as! OtherUserProfileCollectionCell
+            
             cell.otherUserImageView.image  = self.profileImages[indexPath.row]
             return cell
-            
         }
-        if collectionView == favoriteCuisinesCollectionView {
-        let cell = favoriteCuisinesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCuisineCell", for: indexPath) as! FaveFoodCollectionViewCell
-        let cuisine = cuisines[indexPath.row]
-        cell.configureCell(food: cuisine)
-        return cell
         
-        }
-    
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCuisineCell", for: indexPath) as! FaveFoodCollectionViewCell
+        
+        let cuisines = ["cafes", "japanese", "Chinese"]
+            let cuisine = cuisines[indexPath.row]
+            cell.faveFoodLab.text = cuisine
+        return cell
+//        if collectionView == favoriteCuisinesCollectionView {
+//        let cell = favoriteCuisinesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCuisineCell", for: indexPath) as! FaveFoodCollectionViewCell
+//        let cuisine = cuisines[indexPath.row]
+//        cell.configureCell(food: cuisine)
+//        return cell
+//
+//        }
+ 
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //Add functionality of adding food preferences when clicked
-    }
+  
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let cuisine = cuisines[indexPath.row]
