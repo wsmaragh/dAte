@@ -39,38 +39,26 @@ class UserViewController: ExpandingViewController {
                 window?.rootViewController = welcomeVC
             }
         }
+  
         
     }
     
     
     override func viewDidLoad() {
-        itemSize = CGSize(width: 256, height: 460)
-        //        itemSize = CGSize(width: 350, height: 550)
+        itemSize = CGSize(width: 356, height: 460)
         super.viewDidLoad()
+        self.navigationController?.title = "Discover"
         registerCell()
-        configureNavBar()
         addGesture(to: collectionView!)
-        //        fillCellIsOpenArray()
         loadCurrentUser()
-        //        getAllLoversExceptCurrent()
         fetchLovers()
+        configureNavBar()
         
     }
     
-    func getAllLoversExceptCurrent() {
-        var loverArr = [Lover]()
-        Database.database().reference().child("lovers").observe(.childAdded, with: { (snapshot) in
-            if let dict = snapshot.value as? [String: AnyObject]{
-                let lover = Lover(dictionary: dict)
-                lover.id = snapshot.key
-                if lover.id != Auth.auth().currentUser?.uid {
-                    loverArr.append(lover)
-                }
-            }
-        }, withCancel: nil)
-        self.lovers = loverArr
-    }
     
+
+
     private func fetchLovers() {
         var loverArr = [Lover]()
         let loverRef = Database.database().reference().child("lovers")
@@ -100,6 +88,22 @@ class UserViewController: ExpandingViewController {
     }
     
     
+    fileprivate func configureNavigationTabBar() {
+        //transparent background
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSize(width: 0, height: 2)
+        shadow.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
+
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedStringKey.foregroundColor: UIColor.white,
+            NSAttributedStringKey.shadow: shadow,
+        ]
+    }
+
 }
 
 //MARK: Helpers
@@ -124,7 +128,8 @@ extension UserViewController {
     }
     
     fileprivate func configureNavBar() {
-        navigationItem.leftBarButtonItem?.image = navigationItem.leftBarButtonItem?.image!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+//        navigationItem.leftBarButtonItem?.image = navigationItem.leftBarButtonItem?.image!.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        navigationItem.title = "Discover"
     }
     
 }
