@@ -17,34 +17,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 	var window: UIWindow?
 
-	//    override init() {
-	//        super.init()
-	//        FirebaseApp.configure()
-	//    }
+        override init() {
+            super.init()
+            FirebaseApp.configure()
+        }
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		if #available(iOS 10.0, *) {
-			// For iOS 10 display notification (sent via APNS)
-			UNUserNotificationCenter.current().delegate = self
+//        FirebaseApp.configure()
+//        configureNavigationTabBar()
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
 
-			let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-			UNUserNotificationCenter.current().requestAuthorization(
-				options: authOptions,
-				completionHandler: {_, _ in })
-		} else {
-			let settings: UIUserNotificationSettings =
-				UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-			application.registerUserNotificationSettings(settings)
-		}
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
 
-		// registring for push notifications
-		application.registerForRemoteNotifications()
+        // registring for push notifications
+        application.registerForRemoteNotifications()
 
-		// Set the messaging delegate in applicationDidFinishLaunchingWithOptions
-		Messaging.messaging().delegate = self
+        // Set the messaging delegate in applicationDidFinishLaunchingWithOptions
+        Messaging.messaging().delegate = self
 
-		// Override point for customization after application launch.
-		FirebaseApp.configure()
+        // Override point for customization after application launch.
 
 		//Google Sign-in
 		//        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -197,3 +199,22 @@ extension AppDelegate: MessagingDelegate {
 //    Messaging.messaging().apnsToken = deviceToken
 //}
 
+
+extension AppDelegate {
+    
+    fileprivate func configureNavigationTabBar() {
+        //transparent background
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+        
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSize(width: 0, height: 2)
+        shadow.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
+        
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedStringKey.foregroundColor: UIColor.white,
+            NSAttributedStringKey.shadow: shadow,
+        ]
+    }
+}
