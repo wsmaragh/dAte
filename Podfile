@@ -18,5 +18,7 @@ target 'Food+Love' do
     pod 'Parchment'
     pod 'Eureka'
     pod 'Toucan'
+    pod 'expanding-collection'
+    pod 'SwiftGen'
 
 end
