@@ -60,23 +60,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fMw-TX-IZW">
-                                        <rect key="frame" x="201" y="36" width="178" height="25"/>
+                                        <rect key="frame" x="277.5" y="36" width="25" height="25"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Love Sushi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rde-vh-zh1">
-                                                <rect key="frame" x="0.5" y="2" width="86" height="21"/>
-                                                <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meal" translatesAutoresizingMaskIntoConstraints="NO" id="rZ9-hr-fSx">
-                                                <rect key="frame" x="94.5" y="0.0" width="25" height="25"/>
+                                                <rect key="frame" x="0.5" y="0.0" width="25" height="25"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32 yrs." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOn-tZ-kad">
-                                                <rect key="frame" x="127.5" y="2" width="51" height="21"/>
-                                                <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="15"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Both Share:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Km1-9G-gmb">
@@ -143,9 +131,7 @@
             <viewLayoutGuide key="safeArea" id="g2y-Ms-W7a"/>
             <size key="customSize" width="929" height="325"/>
             <connections>
-                <outlet property="ageLabel" destination="kOn-tZ-kad" id="aco-Uh-EU6"/>
                 <outlet property="faveCuisinesLabel" destination="Xzw-l0-AgS" id="dxn-DE-cm9"/>
-                <outlet property="faveFoodLabel" destination="rde-vh-zh1" id="SPL-Ay-s82"/>
                 <outlet property="favoriteFoodImageView" destination="PIC-V3-IbM" id="Nci-Go-rFu"/>
                 <outlet property="nameLabel" destination="fsO-qF-OgI" id="p38-gk-dMK"/>
                 <outlet property="userImageView" destination="Qgt-YU-5Ks" id="g9B-FL-55y"/>
