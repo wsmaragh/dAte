@@ -21,6 +21,17 @@
 		811E410B207429E0000F0198 /* DBService+Lovers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E4107207429E0000F0198 /* DBService+Lovers.swift */; };
 		811E410C207429E0000F0198 /* DBService+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E4108207429E0000F0198 /* DBService+Messages.swift */; };
 		813E323A2058F0A80076A98F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813E32392058F0A80076A98F /* MapKit.framework */; };
+		8157B20A20767B87005F9259 /* NewDiscover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8157B20920767B87005F9259 /* NewDiscover.storyboard */; };
+		8157B20C20767BAF005F9259 /* ConfigurationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B20B20767BAE005F9259 /* ConfigurationHelper.swift */; };
+		8157B20E20767BBE005F9259 /* CollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B20D20767BBE005F9259 /* CollectionViewHelper.swift */; };
+		8157B21020767BC5005F9259 /* StoryboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B20F20767BC5005F9259 /* StoryboardHelper.swift */; };
+		8157B21220767BD1005F9259 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B21120767BD1005F9259 /* UserViewController.swift */; };
+		8157B21720767BDF005F9259 /* FaveFoodsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B21320767BDE005F9259 /* FaveFoodsCollectionViewCell.swift */; };
+		8157B21820767BDF005F9259 /* UserDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B21420767BDE005F9259 /* UserDetailTableViewController.swift */; };
+		8157B21920767BDF005F9259 /* UserProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B21520767BDE005F9259 /* UserProfileCollectionViewCell.swift */; };
+		8157B21A20767BDF005F9259 /* UserProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8157B21620767BDE005F9259 /* UserProfileCollectionViewCell.xib */; };
+		8157B21D20767C47005F9259 /* AnimatedButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B21B20767C47005F9259 /* AnimatedButtonBar.swift */; };
+		8157B21E20767C47005F9259 /* Rotatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157B21C20767C47005F9259 /* Rotatable.swift */; };
 		815B2B3F205C2F92005C1C32 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B2B3E205C2F91005C1C32 /* Extensions.swift */; };
 		815B2B41205C2FD6005C1C32 /* Theme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815B2B40205C2FD6005C1C32 /* Theme.xcassets */; };
 		816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */; };
@@ -123,6 +134,17 @@
 		811E4108207429E0000F0198 /* DBService+Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DBService+Messages.swift"; sourceTree = "<group>"; };
 		813E32382058F09F0076A98F /* Food+Love.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Food+Love.entitlements"; sourceTree = "<group>"; };
 		813E32392058F0A80076A98F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8157B20920767B87005F9259 /* NewDiscover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewDiscover.storyboard; sourceTree = "<group>"; };
+		8157B20B20767BAE005F9259 /* ConfigurationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationHelper.swift; sourceTree = "<group>"; };
+		8157B20D20767BBE005F9259 /* CollectionViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewHelper.swift; sourceTree = "<group>"; };
+		8157B20F20767BC5005F9259 /* StoryboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardHelper.swift; sourceTree = "<group>"; };
+		8157B21120767BD1005F9259 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		8157B21320767BDE005F9259 /* FaveFoodsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaveFoodsCollectionViewCell.swift; sourceTree = "<group>"; };
+		8157B21420767BDE005F9259 /* UserDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailTableViewController.swift; sourceTree = "<group>"; };
+		8157B21520767BDE005F9259 /* UserProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		8157B21620767BDE005F9259 /* UserProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileCollectionViewCell.xib; sourceTree = "<group>"; };
+		8157B21B20767C47005F9259 /* AnimatedButtonBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedButtonBar.swift; sourceTree = "<group>"; };
+		8157B21C20767C47005F9259 /* Rotatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rotatable.swift; sourceTree = "<group>"; };
 		815B2B3E205C2F91005C1C32 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		815B2B40205C2FD6005C1C32 /* Theme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Theme.xcassets; sourceTree = "<group>"; };
 		816511EF20670D5100F27F34 /* EditProfileFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +271,24 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
+		8157B20820767B3F005F9259 /* New Discover Page  */ = {
+			isa = PBXGroup;
+			children = (
+				8157B20920767B87005F9259 /* NewDiscover.storyboard */,
+				8157B20B20767BAE005F9259 /* ConfigurationHelper.swift */,
+				8157B20D20767BBE005F9259 /* CollectionViewHelper.swift */,
+				8157B20F20767BC5005F9259 /* StoryboardHelper.swift */,
+				8157B21120767BD1005F9259 /* UserViewController.swift */,
+				8157B21320767BDE005F9259 /* FaveFoodsCollectionViewCell.swift */,
+				8157B21420767BDE005F9259 /* UserDetailTableViewController.swift */,
+				8157B21520767BDE005F9259 /* UserProfileCollectionViewCell.swift */,
+				8157B21620767BDE005F9259 /* UserProfileCollectionViewCell.xib */,
+				8157B21B20767C47005F9259 /* AnimatedButtonBar.swift */,
+				8157B21C20767C47005F9259 /* Rotatable.swift */,
+			);
+			path = "New Discover Page ";
+			sourceTree = "<group>";
+		};
 		817F9B3A205863B10061E1B6 = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +310,7 @@
 		817F9B45205863B10061E1B6 /* Food+Love */ = {
 			isa = PBXGroup;
 			children = (
+				8157B20820767B3F005F9259 /* New Discover Page  */,
 				813E32382058F09F0076A98F /* Food+Love.entitlements */,
 				817F9B5D2058646E0061E1B6 /* Storyboards */,
 				817F9B5C205863D60061E1B6 /* SupportingFiles */,
@@ -696,6 +737,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8157B20A20767B87005F9259 /* NewDiscover.storyboard in Resources */,
 				817F9B51205863B10061E1B6 /* LaunchScreen.storyboard in Resources */,
 				817F9B6F2058B8840061E1B6 /* GoogleService-Info.plist in Resources */,
 				81E615FA2060E2AA00347CDA /* girlguy.gif in Resources */,
@@ -706,6 +748,7 @@
 				81AD5D972065DBFA007A5963 /* Welcome.storyboard in Resources */,
 				81AAF7ED206815C30077AAC2 /* FavoriteRestaurantTableViewCell.xib in Resources */,
 				81AD5D9B2065DC2C007A5963 /* Matches.storyboard in Resources */,
+				8157B21A20767BDF005F9259 /* UserProfileCollectionViewCell.xib in Resources */,
 				81AD5D952065DBD6007A5963 /* Discover.storyboard in Resources */,
 				8106FFB3206AB41D00B02722 /* NewDiscoverCollectionViewCell.xib in Resources */,
 				81D6A00D205A0B0C001E9302 /* date.mp4 in Resources */,
@@ -776,6 +819,7 @@
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Toucan/Toucan.framework",
+				"${BUILT_PRODUCTS_DIR}/expanding-collection/expanding_collection.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -792,6 +836,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toucan.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/expanding_collection.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -808,13 +853,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */,
+				8157B21220767BD1005F9259 /* UserViewController.swift in Sources */,
 				811E410C207429E0000F0198 /* DBService+Messages.swift in Sources */,
 				81E615F32060C3AA00347CDA /* UIViewX.swift in Sources */,
+				8157B21720767BDF005F9259 /* FaveFoodsCollectionViewCell.swift in Sources */,
 				8195758A2066B009001F86F0 /* FaveFoodCollectionViewCell.swift in Sources */,
 				819934AE2061CD440075696F /* MatchesCell.swift in Sources */,
 				811E24CB20634BDF00E7CAF5 /* ConversationCell.swift in Sources */,
 				819934B2206308D30075696F /* Conversation.swift in Sources */,
 				81E615F12060C35C00347CDA /* UIImageViewX.swift in Sources */,
+				8157B21E20767C47005F9259 /* Rotatable.swift in Sources */,
 				817AE42F206C825D006C2CA4 /* MessageFCM.swift in Sources */,
 				81EFF7F920697BE3005EA1A4 /* SearchRestView.swift in Sources */,
 				81D082D7206ACB2400B44E6D /* FoodCategory.swift in Sources */,
@@ -841,7 +889,9 @@
 				8195758F2066C8B9001F86F0 /* RestaurantDetailViewController.swift in Sources */,
 				81D082D5206ABCEC00B44E6D /* DBService+Category.swift in Sources */,
 				81D26F0A20598B7000BEBC47 /* FSSearch.swift in Sources */,
+				8157B20C20767BAF005F9259 /* ConfigurationHelper.swift in Sources */,
 				81EFF7F820697BE3005EA1A4 /* CalenderView.swift in Sources */,
+				8157B20E20767BBE005F9259 /* CollectionViewHelper.swift in Sources */,
 				81D26F1220598C9700BEBC47 /* FileManager.swift in Sources */,
 				81EFF7FB20697BE3005EA1A4 /* WeekdaysView.swift in Sources */,
 				817F9B752058B8F70061E1B6 /* DatesVC.swift in Sources */,
@@ -859,6 +909,9 @@
 				819575922066CAAE001F86F0 /* RestaurantTableViewCell.swift in Sources */,
 				81EB94082065B984006CD0AA /* FeedVC.swift in Sources */,
 				81E615E52060B9D800347CDA /* UIButtonX.swift in Sources */,
+				8157B21920767BDF005F9259 /* UserProfileCollectionViewCell.swift in Sources */,
+				8157B21D20767C47005F9259 /* AnimatedButtonBar.swift in Sources */,
+				8157B21820767BDF005F9259 /* UserDetailTableViewController.swift in Sources */,
 				818BEE80206609C200D9C62F /* StorageService+Images.swift in Sources */,
 				811E410B207429E0000F0198 /* DBService+Lovers.swift in Sources */,
 				81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */,
@@ -875,6 +928,7 @@
 				81EFF7FC20697BE3005EA1A4 /* MonthView.swift in Sources */,
 				817F9B632058B7D70061E1B6 /* LoginVC.swift in Sources */,
 				81E615F82060E1C400347CDA /* WelcomeLogoSlide.swift in Sources */,
+				8157B21020767BC5005F9259 /* StoryboardHelper.swift in Sources */,
 				8166964C20733E3500179C38 /* OtherUserProfileCollectionCell.swift in Sources */,
 				816511F020670D5100F27F34 /* EditProfileFormViewController.swift in Sources */,
 				81BE0A00205DDD5E0099215D /* UITextFieldX.swift in Sources */,
