@@ -11,7 +11,7 @@ import FirebaseStorage
 import Photos
 import MobileCoreServices
 import AVFoundation
-//import CoreLocation
+import CoreLocation
 
 
 class ChatVC: UIViewController {
@@ -29,15 +29,9 @@ class ChatVC: UIViewController {
 	var partner: Lover!
 	var partnerId: String!
 	var partnerImage: UIImage!
-
-	var messages = [Message](){
-		didSet{
-			chatCollectionView.reloadData()
-			chatCollectionView.layoutIfNeeded()
-		}
-	}
-//	var canSendLocation = true
-//	let locationManager = CLLocationManager()
+	var messages = [Message]()
+	var canSendLocation = true
+	let locationManager = CLLocationManager()
 
 
 	// MARK: View Lifecycle
@@ -115,8 +109,7 @@ class ChatVC: UIViewController {
 	}
 
 	fileprivate func setupLocation(){
-		//Location
-		//		self.locationManager.delegate = self
+		self.locationManager.delegate = self
 	}
 
 	fileprivate func setupCollectionView(){
@@ -173,13 +166,13 @@ class ChatVC: UIViewController {
 	}
 
 	@IBAction func selectLocation(_ sender: Any) {
-		print("location pressed")
-//		canSendLocation = true
-//		if checkLocationPermission() {
-//			locationManager.startUpdatingLocation()
-//		} else {
-//			locationManager.requestWhenInUseAuthorization()
-//		}
+		print("location button pressed")
+		canSendLocation = true
+		if checkLocationPermission() {
+			locationManager.startUpdatingLocation()
+		} else {
+			locationManager.requestWhenInUseAuthorization()
+		}
 	}
 
 
@@ -243,7 +236,6 @@ class ChatVC: UIViewController {
 	// Select Video
 	fileprivate func selectedVideoForUrl(videoURL: URL) {
 		let fileName = NSUUID().uuidString+".mov"
-
 		// UPLOAD
 		let uploadTask = Storage.storage().reference().child("message_videos").child(fileName).putFile(from: videoURL, metadata: nil, completion: { (metadata, error) in
 			if error != nil { print("Failed to upload the video:", error!)}
@@ -298,6 +290,19 @@ class ChatVC: UIViewController {
 			})
 		}
 	}
+
+	//Location
+	func checkLocationPermission() -> Bool {
+		var state = false
+		switch CLLocationManager.authorizationStatus() {
+		case .authorizedWhenInUse:
+			state = true
+		case .authorizedAlways:
+			state = true
+		default: break
+		}
+		return state
+	}
 }
 
 
@@ -347,12 +352,15 @@ extension ChatVC: UICollectionViewDataSource  {
 	// Cell for item at
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let message = self.messages[indexPath.item]
+		// User Message
 		if message.fromId == Auth.auth().currentUser?.uid {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserChatCell", for: indexPath) as! UserChatCell
 			cell.chatVC = self
 			cell.configureCell(message: message)
 			return cell
-		} else {
+		}
+		// Partner Message
+		else {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PartnerChatCell", for: indexPath) as! PartnerChatCell
 			cell.chatVC = self
 			cell.configureCell(message: message)
@@ -372,6 +380,34 @@ extension ChatVC: UICollectionViewDelegate {
 			})
 		}
 	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		self.inputTextField.resignFirstResponder()
+		// Image
+		if let image = self.messages[indexPath.item].imageUrl {
+			print("Image pressed")
+//			if let photo = self.items[indexPath.row].image {
+//				let info = ["viewType" : ShowExtraView.preview, "pic": photo] as [String : Any]
+//				NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+		}
+		// Video
+		else if let video = self.messages[indexPath.item].videoUrl {
+			print("Video pressed")
+
+		}
+		// Text
+		else if let text = self.messages[indexPath.item].text {
+			print("Text pressed")
+		} else if let location = self.messages[indexPath.item].location {
+			print("Location pressed")
+				//			let coordinates = (self.items[indexPath.row].content as! String).components(separatedBy: ":")
+				//			let location = CLLocationCoordinate2D.init(latitude: CLLocationDegrees(coordinates[0])!, longitude: CLLocationDegrees(coordinates[1])!)
+				//			let info = ["viewType" : ShowExtraView.map, "location": location] as [String : Any]
+				//			NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showExtraView"), object: nil, userInfo: info)
+		}
+
+	}
+
 }
 
 
@@ -403,6 +439,19 @@ extension ChatVC: UICollectionViewDelegateFlowLayout {
 	}
 }
 
+
+extension ChatVC: CLLocationManagerDelegate {
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		self.locationManager.stopUpdatingLocation()
+		if let lastLocation = locations.last {
+			if self.canSendLocation {
+				let coordinate = String(lastLocation.coordinate.latitude) + ":" + String(lastLocation.coordinate.longitude)
+				self.sendMessage(["location": coordinate as AnyObject])
+				self.canSendLocation = false
+			}
+		}
+	}
+}
 
 
 //////////////////////////////

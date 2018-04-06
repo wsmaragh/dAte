@@ -84,7 +84,7 @@ class DiscoverVC: UIViewController {
 			if let dict = snapshot.value as? [String: AnyObject]{
 				let lover = Lover(dictionary: dict)
 				lover.id = snapshot.key
-				if lover.id != Auth.auth().currentUser?.uid {
+				if lover.id != Auth.auth().currentUser?.uid && self.currentLover.genderPreference != lover.genderPreference {
                     
 					self.lovers.append(lover)
 				}

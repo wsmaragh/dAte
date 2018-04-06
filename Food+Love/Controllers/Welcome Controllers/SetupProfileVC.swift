@@ -245,6 +245,7 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 extension SetupProfileVC: UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
+		self.becomeFirstResponder()
 		return true
 	}
 }

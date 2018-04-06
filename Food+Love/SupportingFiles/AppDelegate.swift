@@ -17,11 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 	var window: UIWindow?
 
-	//    override init() {
-	//        super.init()
-	//        FirebaseApp.configure()
-	//    }
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		if #available(iOS 10.0, *) {
 			// For iOS 10 display notification (sent via APNS)

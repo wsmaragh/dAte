@@ -103,6 +103,7 @@ extension SearchRestView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let venue = self.venues[indexPath.row]
         delegate?.didItemSelect!(venueId: venue.id,rest: venue.name, address: venue.location.address ?? "No address")
+			self.endEditing(true)
     }
 }
 
