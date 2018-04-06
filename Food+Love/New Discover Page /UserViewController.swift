@@ -70,7 +70,7 @@ class UserViewController: ExpandingViewController {
                     loverArr.append(newLover)
                 }
             }
-            self.lovers = loverArr.filter{$0.gender == "Male"}
+            self.lovers = loverArr.filter{$0.gender == self.currentLover.genderPreference}
         }
     }
     

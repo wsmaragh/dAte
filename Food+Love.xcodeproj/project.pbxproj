@@ -116,6 +116,7 @@
 		81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC382065E5B100FB2174 /* MatchesVC.swift */; };
 		81F8DC3B2065E5BA00FB2174 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC3A2065E5B900FB2174 /* ChatVC.swift */; };
 		81F8DC3D2065E5E100FB2174 /* DatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC3C2065E5E100FB2174 /* DatesCell.swift */; };
+		81FB25BF2076BED700FE30B1 /* DatesCellColapsed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -232,6 +233,7 @@
 		81F8DC382065E5B100FB2174 /* MatchesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesVC.swift; sourceTree = "<group>"; };
 		81F8DC3A2065E5B900FB2174 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		81F8DC3C2065E5E100FB2174 /* DatesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesCell.swift; sourceTree = "<group>"; };
+		81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesCellColapsed.swift; sourceTree = "<group>"; };
 		F854EBC64664453D7ACE358A /* Pods-Food+Love.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food+Love.release.xcconfig"; path = "Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -555,6 +557,8 @@
 			isa = PBXGroup;
 			children = (
 				81EFF802206980D5005EA1A4 /* RestaurantTVCell.swift */,
+				81F8DC3C2065E5E100FB2174 /* DatesCell.swift */,
+				81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -644,7 +648,6 @@
 			isa = PBXGroup;
 			children = (
 				81EFF801206980CB005EA1A4 /* Cells */,
-				81F8DC3C2065E5E100FB2174 /* DatesCell.swift */,
 				81EFF7F320697BE2005EA1A4 /* CalenderView.swift */,
 				81EFF7F720697BE3005EA1A4 /* MonthView.swift */,
 				81EFF7F620697BE2005EA1A4 /* WeekdaysView.swift */,
@@ -702,12 +705,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Winston Maragh";
 				TargetAttributes = {
 					817F9B42205863B10061E1B6 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -929,6 +932,7 @@
 				81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */,
 				81BE0A03205DF8B90099215D /* Lover.swift in Sources */,
 				817F9B672058B8060061E1B6 /* SetupProfileVC.swift in Sources */,
+				81FB25BF2076BED700FE30B1 /* DatesCellColapsed.swift in Sources */,
 				81D26F1B20598D6300BEBC47 /* LocationServices.swift in Sources */,
 				81E954BB205E1CEA004036D5 /* StorageService.swift in Sources */,
 				81E954BE205E1CEA004036D5 /* DBService.swift in Sources */,
@@ -979,6 +983,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -986,6 +991,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1036,6 +1042,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1043,6 +1050,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1081,14 +1089,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8604a09-e785-46ce-8243-8d0cf7bb5161";
-				PROVISIONING_PROFILE_SPECIFIER = FoodNLove;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1103,14 +1111,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Food+Love/Food+Love.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DRF3BB53BA;
 				INFOPLIST_FILE = "$(SRCROOT)/Food+Love/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcodeable.Food-Love";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8604a09-e785-46ce-8243-8d0cf7bb5161";
-				PROVISIONING_PROFILE_SPECIFIER = FoodNLove;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

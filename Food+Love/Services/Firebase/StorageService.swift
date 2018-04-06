@@ -55,7 +55,9 @@ extension StorageService {
 		//create UploadTask
 		let uploadTask = StorageService.manager.getImagesRef().child(id).putData(data, metadata: metadata) { (storageMetadata, error) in
 			if let error = error { print("uploadTask error: \(error)") }
-			else if let storageMetadata = storageMetadata { print("storageMetadata: \(storageMetadata)") }
+//            else if let storageMetadata = storageMetadata {
+//                //print("storageMetadata: \(storageMetadata)")
+//            }
 		}
 
 		uploadTask.observe(.success) { snapshot in
