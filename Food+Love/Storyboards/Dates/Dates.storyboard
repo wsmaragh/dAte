@@ -26,7 +26,7 @@
                                     <segment title="Confirmed"/>
                                     <segment title="Pending"/>
                                 </segments>
-                                <color key="tintColor" name="appColorRed"/>
+                                <color key="tintColor" red="1" green="0.27058823529411763" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentedControl:" destination="R5Z-1D-Oiw" eventType="valueChanged" id="dfi-43-kGX"/>
                                 </connections>
@@ -91,9 +91,6 @@
     <resources>
         <namedColor name="Bg">
             <color red="0.85900002720000002" green="0.851000011" blue="0.70999997849999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="appColorRed">
-            <color red="0.82700002193450928" green="0.3529999852180481" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
