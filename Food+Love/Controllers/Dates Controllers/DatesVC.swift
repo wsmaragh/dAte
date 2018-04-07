@@ -14,7 +14,7 @@ class DatesVC: UIViewController {
     
     let indetifier1 = "Cell1"
     let indetifier2 = "cell2"
-    
+    var currentLover: Lover?
     
     @IBOutlet weak var pendingTableView: UITableView!
     @IBOutlet weak var confirmedTableView: UITableView!
@@ -41,7 +41,15 @@ class DatesVC: UIViewController {
         confirmedTableView.delegate = self
         pendingTableView.dataSource = self
         confirmedTableView.dataSource = self
-    
+        DBService.manager.getCurrentLover(completionHandler: { (lover, error) in
+            if let error = error {
+                print("No user:",error)
+                return
+            }
+            if let lover = lover {
+                self.currentLover = lover
+            }
+        })
         loadData()
     }
 
@@ -155,10 +163,20 @@ extension DatesVC: UITableViewDelegate {
         let confirm = UISwipeActionsConfiguration(actions: [UIContextualAction(style: .normal, title: "Confirm", handler: { (action, view, isConfirmed) in
             //print("Confirm button tapped")
             if tableView == self.pendingTableView {
+                //var loverFrom = ""
                 guard let refKey = self.pendingDates[indexPath.row].ref else {return}
                 let ref = Database.database().reference().child("planDate").child(refKey)
-                ref.updateChildValues(["confirmed": 1])
-                self.confirmMessage(title: "Date Confirmed", message: "Your date has been confirmed.")
+                ref.child("loverFrom").observe(.value, with: { (snapshot) in
+                    if let value = snapshot.value as? String {
+                        if self.currentLover?.id != value {
+                            ref.updateChildValues(["confirmed": 1])
+                            self.confirmMessage(title: "Date Confirmed", message: "Your date has been confirmed.")
+                        } else {
+                            self.confirmMessage(title: "Wait for response", message: "You can't confirm this Date, please wait for the confirmation of your Lover.")
+                        }
+                    }
+                })
+                
             } else {
                 guard let refKey = self.confirmedDates[indexPath.row].ref else {return}
                 let ref = Database.database().reference().child("planDate").child(refKey)

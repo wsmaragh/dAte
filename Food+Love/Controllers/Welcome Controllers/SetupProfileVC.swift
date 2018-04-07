@@ -55,11 +55,18 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		setupTextFields()
 	}
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        self.view.alpha = 1.0
+        //        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(false)
+        self.view.alpha = 0.0
+    }
 
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(false)
-//		self.navigationController?.setNavigationBarHidden(true, animated: animated)
-	}
 
 
 	fileprivate func addShadeView(){
