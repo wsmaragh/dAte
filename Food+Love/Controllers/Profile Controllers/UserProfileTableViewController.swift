@@ -154,7 +154,7 @@ class UserProfileTableViewController: UITableViewController {
             likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
             guard let loverName = lover?.name else {return}
             guard let currentUserName = Auth.auth().currentUser?.displayName else {return}
-            FCMAPIClient.manager.sendPushNotification(device: "cBY7Bsw5Ktk:APA91bFtNkbAonfDlanh4YA0A9p3y5LZCkFOQ5FCES14pMineg-T6tOdXH44Lc_3t7tQzisTfVIZJxYdk9KOhbbUMeSbnkcqrpBrQwJ9iIu3XArs3tYYr3uFPHOyEtqZ7vYxCCsbKSq_", title: "dAte", message: "Hey \(loverName), \(currentUserName) likes YOU!")
+            FCMAPIClient.manager.sendPushNotification(device: "cdqO_3YCQSE:APA91bGaCppkbnGIqxZ3NFygho_vNyPc8ptaj5K1cGJAtVTljg3an6bj0cr53GupeEvooZoabehnf4uE3L6EiMIrcvFkc-_REyZrrN5TvtTXS4Al7dRa1ydVylJoFN2FV1to14FcMBGE", title: "dAte", message: "Hey \(loverName), \(currentUserName) likes YOU!")
           
         }
         ref.removeAllObservers()

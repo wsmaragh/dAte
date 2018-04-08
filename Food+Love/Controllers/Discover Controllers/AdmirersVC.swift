@@ -34,12 +34,12 @@ class AdmirersVC: UIViewController {
 //        loadData()
         setUpCollectionViewLayout()
          loadCurrentUser()
-        
+        self.navigationItem.title = "Admirers"
     }
     
     private func loadData() {
         guard let followers = self.currentLover.followers else {return}
-        
+
         let followerUids = Array(followers.values)
       
         Database.database().reference().child("lovers").observe(.value) { (snapshot) in
