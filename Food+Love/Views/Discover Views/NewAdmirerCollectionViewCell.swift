@@ -10,11 +10,11 @@ import UIKit
 
 class NewAdmirerCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var ageLabel: UILabel!
+  
     @IBOutlet weak var userImageView: UIImageViewX!
     @IBOutlet weak var favoriteFoodImageView: UIImageViewX!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var faveFoodLabel: UILabel!
+   
     @IBOutlet weak var faveCuisinesLabel: UILabel!
 
     override func awakeFromNib() {
