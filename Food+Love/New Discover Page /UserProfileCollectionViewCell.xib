@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,8 +59,8 @@
                                         <rect key="frame" x="0.0" y="-0.5" width="256" height="335"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_coffee" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-UM-TyG" customClass="UIImageViewX" customModule="Food_Love" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="234.5" width="115" height="100.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg_coffee" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-UM-TyG" customClass="UIImageViewX" customModule="Food_Love" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="188" width="180" height="147"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                 <color key="value" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -73,16 +74,15 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZy-ao-y0u">
-                                        <rect key="frame" x="115" y="260" width="141" height="50"/>
+                                        <rect key="frame" x="115" y="259.5" width="141" height="50.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpE-Dt-OmK">
-                                        <rect key="frame" x="115" y="260" width="141" height="50"/>
+                                        <rect key="frame" x="115" y="259.5" width="141" height="50.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L24-SP-Zgn">
-                                                <rect key="frame" x="0.0" y="0.0" width="141" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="141" height="50.5"/>
                                                 <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="15"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -114,8 +114,9 @@
                                     <constraint firstItem="rpE-Dt-OmK" firstAttribute="height" secondItem="Pal-UM-TyG" secondAttribute="height" multiplier="0.5" id="yhF-8c-Wox"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name, Age" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJf-mL-hTo" userLabel="Title">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name, Age" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJf-mL-hTo" userLabel="Title">
                                 <rect key="frame" x="0.0" y="0.0" width="256" height="35"/>
+                                <color key="backgroundColor" name="appColorBlack"/>
                                 <fontDescription key="fontDescription" name="GujaratiSangamMN-Bold" family="Gujarati Sangam MN" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -166,5 +167,8 @@
     <resources>
         <image name="bg_coffee" width="5997" height="4000"/>
         <image name="bg_love1" width="1920" height="1228"/>
+        <namedColor name="appColorBlack">
+            <color red="0.23499999940395355" green="0.23499999940395355" blue="0.23499999940395355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

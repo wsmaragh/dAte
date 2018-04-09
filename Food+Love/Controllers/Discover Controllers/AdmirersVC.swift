@@ -31,10 +31,10 @@ class AdmirersVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loadData()
         setUpCollectionViewLayout()
          loadCurrentUser()
         self.navigationItem.title = "Admirers"
+				setupNavBar()
     }
     
     private func loadData() {
@@ -59,7 +59,15 @@ class AdmirersVC: UIViewController {
         
     }
     
-    
+
+	private func setupNavBar(){
+		let image : UIImage = #imageLiteral(resourceName: "Logo3")
+		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+		imageView.contentMode = .scaleAspectFit
+		imageView.image = image
+		self.navigationItem.titleView = imageView
+	}
+
     func loadCurrentUser() {
         DBService.manager.getCurrentLover { (onlineLover, error) in
             if let lover = onlineLover {

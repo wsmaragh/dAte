@@ -281,9 +281,9 @@
 			isa = PBXGroup;
 			children = (
 				8157B20920767B87005F9259 /* NewDiscover.storyboard */,
+				8157B20F20767BC5005F9259 /* StoryboardHelper.swift */,
 				8157B20B20767BAE005F9259 /* ConfigurationHelper.swift */,
 				8157B20D20767BBE005F9259 /* CollectionViewHelper.swift */,
-				8157B20F20767BC5005F9259 /* StoryboardHelper.swift */,
 				8157B21120767BD1005F9259 /* UserViewController.swift */,
 				8157B21320767BDE005F9259 /* FaveFoodsCollectionViewCell.swift */,
 				8157B21420767BDE005F9259 /* UserDetailTableViewController.swift */,

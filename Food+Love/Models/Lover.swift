@@ -108,6 +108,18 @@ class Lover: NSObject {
 		return date!
 	}
 
+	public func convertBirthDayToAge(dob: String) -> Int? {
+		var myAge: Int?
+		// let myDOB = Calendar.current.date(from: DateComponents(year: 1970, month: 9, day: 10))!
+		let ageArr = dob.components(separatedBy: "-")
+		let year =  Int(ageArr[0])
+		let month = Int(ageArr[1])
+		let day = Int(ageArr[2])
+		let myDOB = Calendar.current.date(from: DateComponents(year: year, month: month, day: day))!
+		myAge = myDOB.age
+		return myAge
+	}
+
 }
 
 
