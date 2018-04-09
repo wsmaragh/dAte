@@ -54,6 +54,7 @@ class UserDetailTableViewController: ExpandingTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let image1 = #imageLiteral(resourceName: "bg_love1")
+        self.navigationItem.setHidesBackButton(true, animated:true)
         tableView.backgroundView = UIImageView(image: image1)
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
@@ -63,7 +64,7 @@ class UserDetailTableViewController: ExpandingTableViewController {
         favoriteCuisineCollectionView.delegate = self
         loadData()
         loadCurrentUser()
-            }
+    }
     
     
     func convertBirthDayToAge() -> Int? {
@@ -178,7 +179,7 @@ class UserDetailTableViewController: ExpandingTableViewController {
             likeButton.setImage(#imageLiteral(resourceName: "like_filled"), for: .normal)
             guard let loverName = lover?.name else {return}
             guard let currentUserName = Auth.auth().currentUser?.displayName else {return}
-            FCMAPIClient.manager.sendPushNotification(device: "cxVOLMsQpdA:APA91bH2N7kS2_QXr9DozuY6ugSFWSEj0xmEjMah5Le7dQf5vZ4N_KbxBqTVtW0aV6Ken_MlqVTIWEc-Jv-_kWSUM1aPX-raAHM1OfONVz2WfTavk9AwfPyRWgtpbUzHTAVfzigF4HsZ", title: "dAte", message: "Hey \(loverName), \(currentUserName) likes YOU!")
+            FCMAPIClient.manager.sendPushNotification(device: "f5bPV5St5_Q:APA91bECWGZPtztlokyhz8dntC-nsQA-4Oe83CNPhzkpt_CJCcX87SPxYhl5QwKQCm3mDosS521zI2rdXliiIu0x6Td-MyePO6cEnTBNdgcpDcvidNWz5mtte_naClzeLRyGp47GJqaK", title: "dAte", message: "Hey \(loverName), \(currentUserName) likes YOU!")
             
         }
         ref.removeAllObservers()

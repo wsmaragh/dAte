@@ -41,7 +41,7 @@ class DiscoverVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCurrentUser()
-
+			setupNavBar()
         loadLovers()
 		setUpDiscoverCV()
 	}
@@ -77,6 +77,15 @@ class DiscoverVC: UIViewController {
 		getAllLoversExceptCurrent()
 	}
 
+	private func setupNavBar(){
+		let image : UIImage = #imageLiteral(resourceName: "Logo3")
+		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+		imageView.contentMode = .scaleAspectFit
+		imageView.image = image
+		self.navigationItem.titleView = imageView
+	}
+
+
 
 
 	func getAllLoversExceptCurrent() {
@@ -84,7 +93,7 @@ class DiscoverVC: UIViewController {
 			if let dict = snapshot.value as? [String: AnyObject]{
 				let lover = Lover(dictionary: dict)
 				lover.id = snapshot.key
-				if lover.id != Auth.auth().currentUser?.uid {
+				if lover.id != Auth.auth().currentUser?.uid && self.currentLover.genderPreference != lover.genderPreference {
                     
 					self.lovers.append(lover)
 				}
