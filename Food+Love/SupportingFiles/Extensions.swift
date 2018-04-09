@@ -110,7 +110,7 @@ extension UIImageView {
 		guard let url = URL(string: urlString) else {return}
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
 			//download hit an error so lets return out
-			if error != nil {
+			if let error = error {
 				print(error)
 				return
 			}
