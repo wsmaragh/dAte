@@ -9,7 +9,6 @@ import UIKit
 import FirebaseDatabase
 
 
-
 class DatesVC: UIViewController {
     
     let indetifier1 = "Cell1"
@@ -51,6 +50,7 @@ class DatesVC: UIViewController {
             }
         })
         loadData()
+				setupNavBar()
     }
 
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
@@ -85,7 +85,15 @@ class DatesVC: UIViewController {
             self.confirmedDates = planDates.filter{$0.confirmed == 1}
         }
     }
-    
+
+	private func setupNavBar(){
+		let image : UIImage = #imageLiteral(resourceName: "Logo3")
+		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+		imageView.contentMode = .scaleAspectFit
+		imageView.image = image
+		self.navigationItem.titleView = imageView
+	}
+
     func confirmMessage(title: String, message: String) {
         let message = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -106,7 +114,7 @@ extension DatesVC: UITableViewDelegate {
             self.indexPathSelectedRow = indexPath
         }
         
-        let reloadlist = [indexPath, previousSelection].compactMap({$0})
+        let reloadlist = [indexPath, previousSelection].flatMap({$0})
         
         tableView.reloadRows(at: reloadlist, with: UITableViewRowAnimation.automatic)
     }
