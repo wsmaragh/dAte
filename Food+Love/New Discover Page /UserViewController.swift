@@ -54,9 +54,17 @@ class UserViewController: ExpandingViewController {
         fetchLovers()
         configureNavBar()
         loadSwipeImg()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stopSwipeGift))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tapGesture)
     }
     
-    
+    @objc private func stopSwipeGift() {
+        UIView.animate(withDuration: 0.5) {
+            self.swipeRightToLeftImage.layer.opacity = 0.0
+        }
+    }
 
 
     private func fetchLovers() {
@@ -110,7 +118,6 @@ class UserViewController: ExpandingViewController {
         swipeRightToLeftImage.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
         swipeRightToLeftImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         swipeRightToLeftImage.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
     }
     
     lazy var swipeRightToLeftImage: UIImageView = {
