@@ -81,6 +81,7 @@
 		81BE0A03205DF8B90099215D /* Lover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE0A01205DF8B80099215D /* Lover.swift */; };
 		81BE0A04205DF8B90099215D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BE0A02205DF8B80099215D /* Message.swift */; };
 		81BEEEBB206832EF0098A1C8 /* ProfileSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BEEEBA206832EF0098A1C8 /* ProfileSetup.swift */; };
+		81C46B52207980AE0011760D /* swipeRightToLeft.gif in Resources */ = {isa = PBXBuildFile; fileRef = 81C46B51207980AE0011760D /* swipeRightToLeft.gif */; };
 		81C81F6C2077DDE300800144 /* Admirers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C81F6B2077DDE300800144 /* Admirers.storyboard */; };
 		81D082D5206ABCEC00B44E6D /* DBService+Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D082D4206ABCEC00B44E6D /* DBService+Category.swift */; };
 		81D082D7206ACB2400B44E6D /* FoodCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D082D6206ACB2400B44E6D /* FoodCategory.swift */; };
@@ -116,6 +117,7 @@
 		81F8DC392065E5B100FB2174 /* MatchesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC382065E5B100FB2174 /* MatchesVC.swift */; };
 		81F8DC3B2065E5BA00FB2174 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC3A2065E5B900FB2174 /* ChatVC.swift */; };
 		81F8DC3D2065E5E100FB2174 /* DatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8DC3C2065E5E100FB2174 /* DatesCell.swift */; };
+		81FB25BF2076BED700FE30B1 /* DatesCellColapsed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +199,7 @@
 		81BE0A01205DF8B80099215D /* Lover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lover.swift; sourceTree = "<group>"; };
 		81BE0A02205DF8B80099215D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		81BEEEBA206832EF0098A1C8 /* ProfileSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetup.swift; sourceTree = "<group>"; };
+		81C46B51207980AE0011760D /* swipeRightToLeft.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = swipeRightToLeft.gif; sourceTree = "<group>"; };
 		81C81F6B2077DDE300800144 /* Admirers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admirers.storyboard; sourceTree = "<group>"; };
 		81D082D4206ABCEC00B44E6D /* DBService+Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBService+Category.swift"; sourceTree = "<group>"; };
 		81D082D6206ACB2400B44E6D /* FoodCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategory.swift; sourceTree = "<group>"; };
@@ -232,6 +235,7 @@
 		81F8DC382065E5B100FB2174 /* MatchesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesVC.swift; sourceTree = "<group>"; };
 		81F8DC3A2065E5B900FB2174 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		81F8DC3C2065E5E100FB2174 /* DatesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesCell.swift; sourceTree = "<group>"; };
+		81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatesCellColapsed.swift; sourceTree = "<group>"; };
 		F854EBC64664453D7ACE358A /* Pods-Food+Love.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food+Love.release.xcconfig"; path = "Pods/Target Support Files/Pods-Food+Love/Pods-Food+Love.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,9 +281,9 @@
 			isa = PBXGroup;
 			children = (
 				8157B20920767B87005F9259 /* NewDiscover.storyboard */,
+				8157B20F20767BC5005F9259 /* StoryboardHelper.swift */,
 				8157B20B20767BAE005F9259 /* ConfigurationHelper.swift */,
 				8157B20D20767BBE005F9259 /* CollectionViewHelper.swift */,
-				8157B20F20767BC5005F9259 /* StoryboardHelper.swift */,
 				8157B21120767BD1005F9259 /* UserViewController.swift */,
 				8157B21320767BDE005F9259 /* FaveFoodsCollectionViewCell.swift */,
 				8157B21420767BDE005F9259 /* UserDetailTableViewController.swift */,
@@ -509,6 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				81E615F92060E2AA00347CDA /* girlguy.gif */,
+				81C46B51207980AE0011760D /* swipeRightToLeft.gif */,
 				81E954C2205E3288004036D5 /* flowers.gif */,
 			);
 			path = Gifs;
@@ -555,6 +560,8 @@
 			isa = PBXGroup;
 			children = (
 				81EFF802206980D5005EA1A4 /* RestaurantTVCell.swift */,
+				81F8DC3C2065E5E100FB2174 /* DatesCell.swift */,
+				81FB25BE2076BED700FE30B1 /* DatesCellColapsed.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -644,7 +651,6 @@
 			isa = PBXGroup;
 			children = (
 				81EFF801206980CB005EA1A4 /* Cells */,
-				81F8DC3C2065E5E100FB2174 /* DatesCell.swift */,
 				81EFF7F320697BE2005EA1A4 /* CalenderView.swift */,
 				81EFF7F720697BE3005EA1A4 /* MonthView.swift */,
 				81EFF7F620697BE2005EA1A4 /* WeekdaysView.swift */,
@@ -702,7 +708,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Winston Maragh";
 				TargetAttributes = {
 					817F9B42205863B10061E1B6 = {
@@ -756,6 +762,7 @@
 				817F9B4E205863B10061E1B6 /* Icons.xcassets in Resources */,
 				8195758C2066C023001F86F0 /* Restaurant.storyboard in Resources */,
 				8106FFB7206AB75E00B02722 /* NewAdmirerCollectionViewCell.xib in Resources */,
+				81C46B52207980AE0011760D /* swipeRightToLeft.gif in Resources */,
 				81AD5D972065DBFA007A5963 /* Welcome.storyboard in Resources */,
 				81AAF7ED206815C30077AAC2 /* FavoriteRestaurantTableViewCell.xib in Resources */,
 				81C81F6C2077DDE300800144 /* Admirers.storyboard in Resources */,
@@ -929,6 +936,7 @@
 				81D26F1020598C5E00BEBC47 /* MapAnnotation.swift in Sources */,
 				81BE0A03205DF8B90099215D /* Lover.swift in Sources */,
 				817F9B672058B8060061E1B6 /* SetupProfileVC.swift in Sources */,
+				81FB25BF2076BED700FE30B1 /* DatesCellColapsed.swift in Sources */,
 				81D26F1B20598D6300BEBC47 /* LocationServices.swift in Sources */,
 				81E954BB205E1CEA004036D5 /* StorageService.swift in Sources */,
 				81E954BE205E1CEA004036D5 /* DBService.swift in Sources */,
@@ -979,6 +987,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -986,6 +995,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1036,6 +1046,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1043,6 +1054,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

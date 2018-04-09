@@ -54,12 +54,12 @@
                             <view hidden="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xa4-v0-fek" userLabel="Signup">
                                 <rect key="frame" x="0.0" y="174" width="375" height="420"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g84-eW-w4w">
-                                        <rect key="frame" x="162.5" y="40" width="50" height="50"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g84-eW-w4w">
+                                        <rect key="frame" x="138" y="40" width="100" height="100"/>
                                         <color key="backgroundColor" name="appColorGray"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Ye5-bS-99X"/>
-                                            <constraint firstAttribute="width" constant="50" id="ZQe-A7-9Hp"/>
+                                            <constraint firstAttribute="height" constant="100" id="Ye5-bS-99X"/>
+                                            <constraint firstAttribute="width" constant="100" id="ZQe-A7-9Hp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -69,7 +69,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="Password" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xbU-R5-55W" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                        <rect key="frame" x="56.5" y="168" width="262.5" height="21"/>
+                                        <rect key="frame" x="56.5" y="218" width="262.5" height="21"/>
                                         <color key="textColor" name="appColorWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -78,7 +78,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="xianxianchen@ac.c4q.nyc" placeholder="Email" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDS-Y8-adU" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                        <rect key="frame" x="56.5" y="135" width="262.5" height="21"/>
+                                        <rect key="frame" x="56.5" y="185" width="262.5" height="21"/>
                                         <color key="textColor" name="appColorWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
@@ -86,8 +86,8 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="email_White"/>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Xian Xian" placeholder="First Name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Hg-gD-ydO" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
-                                        <rect key="frame" x="56.5" y="102" width="262.5" height="21"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Xian xian" placeholder="First Name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Hg-gD-ydO" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
+                                        <rect key="frame" x="56.5" y="152" width="262.5" height="21"/>
                                         <color key="textColor" name="appColorWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
@@ -96,7 +96,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvy-h1-t9d">
-                                        <rect key="frame" x="103.5" y="239" width="168" height="30"/>
+                                        <rect key="frame" x="103.5" y="289" width="168" height="30"/>
                                         <state key="normal" title="Add a video Introduction">
                                             <color key="titleColor" name="appColorWhite"/>
                                         </state>
@@ -218,7 +218,7 @@
                                                 <color key="textColor" name="appColorWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sushi" borderStyle="roundedRect" placeholder="eg. Japanese" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ogb-vL-Uoy">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Chinese" borderStyle="roundedRect" placeholder="eg. Japanese" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ogb-vL-Uoy">
                                                 <rect key="frame" x="15" y="0.0" width="247.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="cCU-mO-GkY"/>
@@ -238,7 +238,7 @@
                                                 <color key="textColor" name="appColorWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Japanese" borderStyle="roundedRect" placeholder="eg. Thai" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWR-tO-0lj">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Italian" borderStyle="roundedRect" placeholder="eg. Thai" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWR-tO-0lj">
                                                 <rect key="frame" x="14.5" y="0.0" width="248" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -255,7 +255,7 @@
                                                 <color key="textColor" name="appColorWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Italian" borderStyle="roundedRect" placeholder="eg. Caribbean" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O85-Ji-QEO">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Japanese" borderStyle="roundedRect" placeholder="eg. Caribbean" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O85-Ji-QEO">
                                                 <rect key="frame" x="14.5" y="0.0" width="248" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="tRb-0U-aMc"/>
@@ -272,7 +272,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="organization"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your favorite NYC restaurant?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8c-C3-yB9">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your favorite dish?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8c-C3-yB9">
                                         <rect key="frame" x="0.0" y="191" width="375" height="19.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" name="appColorWhite"/>
@@ -373,7 +373,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSX-7y-R7D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2399" y="411"/>
+            <point key="canvasLocation" x="2358" y="414"/>
         </scene>
         <!--Welcome-->
         <scene sceneID="M6Z-O1-fXg">
@@ -418,9 +418,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="rJd-m7-hpe" kind="show" id="Vhy-sK-gD2">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <segue destination="rJd-m7-hpe" kind="show" id="Vhy-sK-gD2"/>
                                 </connections>
                             </button>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx5-Mn-chs" customClass="UIButtonX" customModule="Food_Love" customModuleProvider="target">
@@ -480,7 +478,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eav-EQ-qxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="50"/>
+            <point key="canvasLocation" x="1572" y="50"/>
         </scene>
         <!--Login-->
         <scene sceneID="nul-Wh-fo5">
@@ -500,7 +498,7 @@
                                     <constraint firstAttribute="width" secondItem="FLU-ur-qmD" secondAttribute="height" multiplier="1:1" id="Yjx-im-WnQ"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QeN-BM-hwp" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="xianxianchen@ac.c4q.nyc" placeholder="Email" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QeN-BM-hwp" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
                                 <rect key="frame" x="47" y="293.5" width="281" height="20"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -512,7 +510,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-Fs-8NP" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="Password" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sh4-Fs-8NP" customClass="UITextFieldX" customModule="Food_Love" customModuleProvider="target">
                                 <rect key="frame" x="47" y="335.5" width="281" height="21"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -643,7 +641,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="er1-iy-lJF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2399" y="-269"/>
+            <point key="canvasLocation" x="2358" y="-274"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sr4-6E-nfs">
@@ -664,7 +662,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JY-9U-W3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="50"/>
+            <point key="canvasLocation" x="847" y="50"/>
         </scene>
     </scenes>
     <resources>

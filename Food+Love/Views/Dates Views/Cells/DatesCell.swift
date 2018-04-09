@@ -15,6 +15,8 @@ class DatesCell: UITableViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
+        image.layer.opacity = 0.75
+        image.clipsToBounds = true
         return image
     }()
     
@@ -76,6 +78,7 @@ class DatesCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .gray
+        label.backgroundColor = Colors.black
         label.textAlignment = .center
         return label
     }()
@@ -114,7 +117,6 @@ class DatesCell: UITableViewCell {
                 print("Venue photo error:", error)
                 return
             }
-            photoArr?.forEach{print($0)}
             guard let prefix = photoArr?.first?.prefix else {print("No prefix");return}
             guard let width = photoArr?.first?.width else {print("No width"); return}
             guard let height = photoArr?.first?.height else {print("No height"); return}
@@ -133,7 +135,7 @@ class DatesCell: UITableViewCell {
         ref.observeSingleEvent(of: .value) { (snapshot) in
             let value = snapshot.value as! [String: AnyObject]
             let lover = Lover(dictionary: value)
-            self.loverLabel.text = "With: \(lover.name ?? "...?")"
+            self.loverLabel.text = "With: \(lover.name)"
         }
     }
     
@@ -179,21 +181,6 @@ class DatesCell: UITableViewCell {
         infoStackView.addArrangedSubview(addressLabel)
         infoStackView.addArrangedSubview(loverLabel)
         
-        
-//        addSubview(restaurantNameLabel)
-//        restaurantNameLabel.topAnchor.constraint(equalTo: calendarImageView.topAnchor).isActive = true
-//        restaurantNameLabel.leftAnchor.constraint(equalTo: calendarImageView.rightAnchor, constant: 8).isActive = true
-//        restaurantNameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
-        
-//        addSubview(addressLabel)
-//        addressLabel.topAnchor.constraint(equalTo: restaurantNameLabel.bottomAnchor, constant: 8).isActive = true
-//        addressLabel.widthAnchor.constraint(equalTo: restaurantNameLabel.widthAnchor).isActive = true
-//        addressLabel.centerXAnchor.constraint(equalTo: restaurantNameLabel.centerXAnchor).isActive = true
-//
-//        addSubview(loverLabel)
-//        loverLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
-//        loverLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//        loverLabel.topAnchor.constraint(equalTo: monthLabel.bottomAnchor, constant: 8).isActive = true
         
     }
 }

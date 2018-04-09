@@ -55,11 +55,18 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		setupTextFields()
 	}
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        self.view.alpha = 1.0
+        //        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(false)
+        self.view.alpha = 0.0
+    }
 
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(false)
-//		self.navigationController?.setNavigationBarHidden(true, animated: animated)
-	}
 
 
 	fileprivate func addShadeView(){
@@ -176,6 +183,10 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 			showAlert(title: "No spaces allowed in password!", message: nil); return
 		}
 		AuthUserService.manager.createUser(name: name, email: email, password: password, profileImage: image)
+		sleep(2)
+		if let _ = Auth.auth().currentUser {
+			completeProfile()
+		}
 	}
 
 	func completeProfile(){
@@ -186,7 +197,14 @@ class SetupProfileVC: UIViewController, UIScrollViewDelegate {
 		guard let favRest = favoriteRestaurant.text else {return}
 		guard let zipcode = 	zipcodeTF.text else {return}
 		let gender = genderSC.selectedSegmentIndex == 0 ? "Male" : "Female"
-		let genderPreference =  genderPreferenceSC.selectedSegmentIndex == 0 ? "Male" : "Female"
+		var genderPreference = "Female"
+		switch genderPreferenceSC.selectedSegmentIndex {
+			case 0: genderPreference = "Male"
+			case 1: genderPreference = "Female"
+			case 2: genderPreference = "Any"
+			default: genderPreference = "Female"
+		}
+
 		let dobDate = dobPicker.date
 		let dob = DBService.manager.formatDateforDOB(with: dobDate)
 		print(favCat1)

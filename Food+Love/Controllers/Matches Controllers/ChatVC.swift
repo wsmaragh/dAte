@@ -19,6 +19,8 @@ class ChatVC: UIViewController {
 	// MARK: Outlets
 	@IBOutlet weak var profileImage: UIImageViewX!
 	@IBOutlet weak var name: UILabel!
+	@IBOutlet weak var foodsLabel: UILabel!
+	@IBOutlet weak var bioLabel: UILabel!
 	@IBOutlet weak var chatCollectionView: UICollectionView!
 	@IBOutlet weak var inputTextField: UITextField!
 	@IBOutlet weak var sendContainerBottom: NSLayoutConstraint!
@@ -52,8 +54,18 @@ class ChatVC: UIViewController {
 		DBService.manager.retrieveLover(loverId: partnerId, completionHandler: { (onlineLover) in
 			if let myLover = onlineLover {
 				self.name.text = myLover.name
+				if let first = myLover.firstFoodPrefer, let second = myLover.secondFoodPrefer, let third = myLover.thirdFoodPrefer {
+					self.foodsLabel.text = first + ", " + second + ", & " + third
+				} else {
+					self.foodsLabel.text = "Chinese, Italian, & Japanese"
+				}
+				if let dob = myLover.dateOfBirth {
+					let age = myLover.convertBirthDayToAge(dob: dob)
+					self.bioLabel.text = "\(age!), Astoria"
+				} else {
+					self.bioLabel.text = "28, Astoria"
+				}
 				if let imageStr = myLover.profileImageUrl{
-					//					self.profileImage.loadImageUsingCacheWithUrlString(imageStr)
 					ImageService.manager.getImage(from: imageStr, completionHandler: { (onlineImage) in
 						self.partnerImage = onlineImage
 						self.profileImage.image = onlineImage

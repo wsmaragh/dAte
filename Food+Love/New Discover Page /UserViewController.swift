@@ -53,7 +53,7 @@ class UserViewController: ExpandingViewController {
         loadCurrentUser()
         fetchLovers()
         configureNavBar()
-        
+        loadSwipeImg()
     }
     
     
@@ -70,7 +70,7 @@ class UserViewController: ExpandingViewController {
                     loverArr.append(newLover)
                 }
             }
-            self.lovers = loverArr.filter{$0.gender == "Male"}
+            self.lovers = loverArr.filter{$0.gender == self.currentLover.genderPreference}
         }
     }
     
@@ -103,6 +103,23 @@ class UserViewController: ExpandingViewController {
             NSAttributedStringKey.shadow: shadow,
         ]
     }
+    
+    private func loadSwipeImg() {
+        view.addSubview(swipeRightToLeftImage)
+        swipeRightToLeftImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        swipeRightToLeftImage.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        swipeRightToLeftImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        swipeRightToLeftImage.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+    }
+    
+    lazy var swipeRightToLeftImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage.gifImageWithName("swipeRightToLeft")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
 
 }
 
@@ -189,8 +206,6 @@ extension UserViewController {
         //        cell.customTitle.isHidden = true
         
     }
-    
-    
     
 }
 
