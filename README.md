@@ -9,7 +9,6 @@
 <p align="center">
   dAte is a iOS mobile app that matches users based on their food preferences.
   Dating based on your food preference.
-  Built over 3 1/2 weeks!!!
 </p>
 
 <p align="center">
@@ -71,7 +70,6 @@ A few of the things you can do with dAte:
 ## Project Manangement
 Project Management/Progress: 
 https://trello.com/b/U6tB0D4k/capstonetrello
-<p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
 Built over 3 1/2 weeks!!!
 
 
