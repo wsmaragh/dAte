@@ -8,6 +8,7 @@
 <p align="center">
   dAte is a iOS mobile app that matches users based on their food preferences.
   Dating based on your food preference.
+  Built over 3 1/2 weeks!!!
 </p>
 
 <p align="center">
@@ -55,6 +56,8 @@ A few of the things you can do with dAte:
 * Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
 * Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
               
+               Built over 3 1/2 weeks!!!
+
 
 ## Presentation at Venmo (in front 200-person crowd + judges)
 <p align="center">
@@ -72,12 +75,8 @@ Project Management/Progress:
 https://trello.com/b/U6tB0D4k/capstonetrello
 
 
-
-
-
 ## Acknowledgments
-
-Thanks to Intrepid/Accenture for providing us with great mentors.
-Thanks to Venmo/Paypal for hosting our project Demo.
+* Thanks to Intrepid/Accenture for providing us with great mentors.
+* Thanks to Venmo/Paypal for hosting our project Demo.
 
 
