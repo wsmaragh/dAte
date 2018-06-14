@@ -1,8 +1,3 @@
-# dAte
-Dating based on your food preference.
-
-Created by Winston Maragh, Marlon Rugama, Gloria Washington, Xianxian Chen.
-
 <h1 align="center"> dAte </h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
@@ -12,6 +7,7 @@ Created by Winston Maragh, Marlon Rugama, Gloria Washington, Xianxian Chen.
 
 <p align="center">
   dAte is a iOS mobile app that matches users based on their food preferences.
+  Dating based on your food preference.
 </p>
 
 <p align="center">
@@ -27,7 +23,7 @@ Built with Swift, dAte is one of the most feature-rich dating apps.
 **Available for iOS**
 
 <p align="center">
-  <img src = "https://i.imgur.com/W3kRNTb.png" width=500>
+  <img src = "https://i.imgur.com/W3kRNTb.png" width=700>
 </p>
 
 
@@ -43,29 +39,21 @@ A few of the things you can do with dAte:
 * Peer-to-peer Video chat
 
 <p align="center">
-  <img src = "https://i.imgur.com/W3kRNTb.png" width=350>
+  <img src = "https://i.imgur.com/W3kRNTb.png" width=400>
 </p>
 
 ## Contributors
 <p align="center">
-   <img src = "https://i.imgur.com/J5ctv0K.jpg" width=200>
-   <img src = "https://i.imgur.com/cTfBCeR.jpg" width=200>
-   <img src = "https://i.imgur.com/udLbcpB.jpg" width=200>
-   <img src = "https://i.imgur.com/IRbB54m.png" width=200>
+   <img src = "https://i.imgur.com/J5ctv0K.jpg" width=150>
+   <img src = "https://i.imgur.com/cTfBCeR.jpg" width=150>
+   <img src = "https://i.imgur.com/udLbcpB.jpg" width=150>
+   <img src = "https://i.imgur.com/IRbB54m.png" width=150>
 </p>
 
-Winston Maragh
-https://www.linkedin.com/in/wsmaragh/
-
-Marlon Rugama
-https://www.linkedin.com/in/marlon-rugama-18045232/
-
-
-Gloria Washington
-https://www.linkedin.com/in/gloria-washington-651184153/
-
-Xianxian Chen
-https://www.linkedin.com/in/xianxian-chen-270214bb/
+Winston Maragh | https://www.linkedin.com/in/wsmaragh/
+Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
+Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
+Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
               
 
 ## Presentation at Venmo (in front 200-person crowd + judges)
@@ -78,6 +66,7 @@ https://www.linkedin.com/in/xianxian-chen-270214bb/
    <img src = "https://i.imgur.com/vTLhaao.jpg" width=200>
 </p>
 
+
 ## Project Manangement
 Project Management/Progress: 
 https://trello.com/b/U6tB0D4k/capstonetrello
@@ -86,10 +75,9 @@ https://trello.com/b/U6tB0D4k/capstonetrello
 
 
 
-
-
 ## Acknowledgments
 
 Thanks to Intrepid/Accenture for providing us with great mentors.
+Thanks to Venmo/Paypal for hosting our project Demo.
 
 
