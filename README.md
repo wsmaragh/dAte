@@ -55,20 +55,16 @@ A few of the things you can do with dAte:
 </p>
 
 Winston Maragh
-https://github.com/wsmaragh
 https://www.linkedin.com/in/wsmaragh/
 
 Marlon Rugama
-https://github.com/mrugama
 https://www.linkedin.com/in/marlon-rugama-18045232/
 
 
 Gloria Washington
-https://github.com/gewashington
 https://www.linkedin.com/in/gloria-washington-651184153/
 
 Xianxian Chen
-https://github.com/XianxianChen
 https://www.linkedin.com/in/xianxian-chen-270214bb/
               
 
