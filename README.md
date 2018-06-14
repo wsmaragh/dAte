@@ -1,7 +1,7 @@
 <h1 align="center"> dAte </h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
-    <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="300">
+    <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
   </a>
 </p>
 
@@ -50,10 +50,10 @@ A few of the things you can do with dAte:
    <img src = "https://i.imgur.com/IRbB54m.png" width=150>
 </p>
 
-Winston Maragh | https://www.linkedin.com/in/wsmaragh/
-Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
-Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
-Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
+* Winston Maragh | https://www.linkedin.com/in/wsmaragh/
+* Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
+* Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
+* Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
               
 
 ## Presentation at Venmo (in front 200-person crowd + judges)
