@@ -1,4 +1,5 @@
 <h1 align="center"> dAte </h1> <br>
+<p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
@@ -71,6 +72,7 @@ A few of the things you can do with dAte:
 
 
 ## Project Manangement
+<p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
 Project Management/Progress: 
 https://trello.com/b/U6tB0D4k/capstonetrello
 
