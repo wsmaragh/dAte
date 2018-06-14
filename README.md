@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://gitpoint.co/">
+  <a>
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
     <p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
   </a>
