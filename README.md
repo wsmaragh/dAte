@@ -1,7 +1,7 @@
-<h1 align="center"> dAte </h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
-    <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="300">
+    <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
+    <p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
   </a>
 </p>
 
@@ -42,6 +42,13 @@ A few of the things you can do with dAte:
   <img src = "https://i.imgur.com/W3kRNTb.png" width=400>
 </p>
 
+## Built with 
+
+- [Swift](https://developer.apple.com/swift/)
+- [Google Firebase](https://firebase.google.com/)
+- [WebRTC](https://developer.apple.com/swift/)
+
+
 ## Contributors
 <p align="center">
    <img src = "https://i.imgur.com/J5ctv0K.jpg" width=150>
@@ -50,11 +57,10 @@ A few of the things you can do with dAte:
    <img src = "https://i.imgur.com/IRbB54m.png" width=150>
 </p>
 
-Winston Maragh | https://www.linkedin.com/in/wsmaragh/
-Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
-Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
-Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
-              
+* Winston Maragh | https://www.linkedin.com/in/wsmaragh/
+* Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
+* Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
+* Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
 
 ## Presentation at Venmo (in front 200-person crowd + judges)
 <p align="center">
@@ -70,14 +76,11 @@ Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
 ## Project Manangement
 Project Management/Progress: 
 https://trello.com/b/U6tB0D4k/capstonetrello
-
-
-
+Built over 3 1/2 weeks!!!
 
 
 ## Acknowledgments
-
-Thanks to Intrepid/Accenture for providing us with great mentors.
-Thanks to Venmo/Paypal for hosting our project Demo.
+* Thanks to Intrepid/Accenture for providing us with great mentors.
+* Thanks to Venmo/Paypal for hosting our project Demo.
 
 
