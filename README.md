@@ -1,8 +1,8 @@
 <h1 align="center"> dAte </h1> <br>
-<p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
+    <p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
   </a>
 </p>
 
@@ -56,9 +56,6 @@ A few of the things you can do with dAte:
 * Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
 * Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
 * Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
-              
-               Built over 3 1/2 weeks!!!
-
 
 ## Presentation at Venmo (in front 200-person crowd + judges)
 <p align="center">
@@ -72,9 +69,10 @@ A few of the things you can do with dAte:
 
 
 ## Project Manangement
-<p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
 Project Management/Progress: 
 https://trello.com/b/U6tB0D4k/capstonetrello
+<p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
+Built over 3 1/2 weeks!!!
 
 
 ## Acknowledgments
