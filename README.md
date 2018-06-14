@@ -1,4 +1,3 @@
-<h1 align="center"> dAte </h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
@@ -42,6 +41,13 @@ A few of the things you can do with dAte:
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=400>
 </p>
+
+## Built with 
+
+- [Swift](https://developer.apple.com/swift/)
+- [Google Firebase](https://firebase.google.com/)
+- [WebRTC](https://developer.apple.com/swift/)
+
 
 ## Contributors
 <p align="center">
