@@ -27,14 +27,16 @@ A few of the things you can do with dAte:
 
 
 ## Flow of the App
+<p align="center">
+
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-<img src="https://i.imgur.com/EDTxqY8.png" width="300"> | <img src="https://i.imgur.com/EDTxqY8.png" width="300"> 
+<img src="https://i.imgur.com/EDTxqY8.png" width="350"> | <img src="https://i.imgur.com/EDTxqY8.png" width="350"> 
 **Feed**| **Chat** |
-<img src="https://i.imgur.com/EDTxqY8.png" width="300"> | <img src="https://i.imgur.com/EDTxqY8.png" width="300"> 
+<img src="https://i.imgur.com/EDTxqY8.png" width="350"> | <img src="https://i.imgur.com/EDTxqY8.png" width="350"> 
 **Schedule a date**| **Notifications** |
-<img src="https://i.imgur.com/EDTxqY8.png" width="300"> | <img src="https://i.imgur.com/EDTxqY8.png" width="300"> 
-
+<img src="https://i.imgur.com/EDTxqY8.png" width="350"> | <img src="https://i.imgur.com/EDTxqY8.png" width="350"> 
+</p>
 
 ## Developed by:
 <p align="center">
