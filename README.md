@@ -12,7 +12,6 @@
 
 
 ## Features
-
 A few of the things you can do with dAte:
 
 * Match with users that share similiar food preferences
@@ -30,7 +29,7 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-![gif](https://i.imgur.com/EDTxqY8.png width=100) | ![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png w) | ![gif](https://i.imgur.com/EDTxqY8.png) 
 **Feed**| **Chat** |
 ![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png width=100) 
 **Schedule a date**| **Notifications** |
@@ -38,12 +37,12 @@ A few of the things you can do with dAte:
 
 
 ## Built with 
-- [Swift](https://developer.apple.com/swift/) - 
-- [Google Firebase](https://firebase.google.com/) - 
-- [WebRTC](https://developer.apple.com/swift/) - 
+- [Swift](https://developer.apple.com/swift/)
+- [Google Firebase](https://firebase.google.com/)
+- [WebRTC](https://developer.apple.com/swift/)
 
 
-## Contributors
+## Developers
 <p align="center">
    <img src = "https://i.imgur.com/J5ctv0K.jpg" width=150>
    <img src = "https://i.imgur.com/cTfBCeR.jpg" width=150>
@@ -70,6 +69,12 @@ A few of the things you can do with dAte:
 ## Project Manangement (Trello)
 Project Management/Progress: 
 https://trello.com/b/U6tB0D4k/capstonetrello
+
+
+## Requirements
+- Xcode 9.3+
+- iOS 11.3
+- Swift 4.0+
 
 ## Acknowledgments
 ** Thanks to Intrepid/Accenture for providing us with great mentors.
