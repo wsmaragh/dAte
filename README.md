@@ -113,7 +113,7 @@ Then, run the following command in Terminal:
 
 
 ## Acknowledgments
-** Thanks to Intrepid/Accenture for providing us with great mentors.
-** Thanks to Venmo/Paypal for hosting our Demo.
+* Thanks to Intrepid/Accenture for providing us with great mentors.
+* Thanks to Venmo/Paypal for hosting our Demo.
 
 
