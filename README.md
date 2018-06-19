@@ -41,19 +41,19 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
 <br/>Login/Onboarding | 
-![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
 <br/>Signup | 
 **Feed**| **Chat** |
-![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
 <br/>Choose a photo from photo library to edit by cropping | 
-![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
 <br/>Add filters to photos upload from photo library| |
 **Schedule a date**| **Notifications** |
-![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
 <br/>Choose a photo from photo library to edit by cropping | 
-![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
 <br/>Add filters to photos upload from photo library| |
 
 ## Built with 
