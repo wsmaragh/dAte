@@ -1,4 +1,4 @@
-## Introduction
+## dAte
 <p align="center">
   <a>
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
@@ -29,11 +29,11 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-<img src="https://i.imgur.com/EDTxqY8.png" width="150"> | <img src="https://i.imgur.com/EDTxqY8.png" width="150"> 
+<img src="https://i.imgur.com/EDTxqY8.png" width="300"> | <img src="https://i.imgur.com/EDTxqY8.png" width="300"> 
 **Feed**| **Chat** |
-<img src="https://i.imgur.com/EDTxqY8.png" width="150"> | <img src="https://i.imgur.com/EDTxqY8.png" width="150"> 
+<img src="https://i.imgur.com/EDTxqY8.png" width="300"> | <img src="https://i.imgur.com/EDTxqY8.png" width="300"> 
 **Schedule a date**| **Notifications** |
-<img src="https://i.imgur.com/EDTxqY8.png" width="150"> | <img src="https://i.imgur.com/EDTxqY8.png" width="150"> 
+<img src="https://i.imgur.com/EDTxqY8.png" width="300"> | <img src="https://i.imgur.com/EDTxqY8.png" width="300"> 
 
 
 ## Built with 
