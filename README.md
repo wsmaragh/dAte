@@ -29,11 +29,11 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-<img src="https://i.imgur.com/EDTxqY8.png" width="150"> ) | <img src="https://i.imgur.com/EDTxqY8.png" width="150"> 
+<img src="https://i.imgur.com/EDTxqY8.png" width="150"> | <img src="https://i.imgur.com/EDTxqY8.png" width="150"> 
 **Feed**| **Chat** |
-![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png width=100) 
+<img src="https://i.imgur.com/EDTxqY8.png" width="150"> | <img src="https://i.imgur.com/EDTxqY8.png" width="150"> 
 **Schedule a date**| **Notifications** |
-![gif](https://i.imgur.com/EDTxqY8.png width=100)| ![gif](https://i.imgur.com/EDTxqY8.png) 
+<img src="https://i.imgur.com/EDTxqY8.png" width="150"> | <img src="https://i.imgur.com/EDTxqY8.png" width="150"> 
 
 
 ## Built with 
@@ -50,10 +50,10 @@ A few of the things you can do with dAte:
    <img src = "https://i.imgur.com/IRbB54m.png" width=150>
 </p>
 
-- Winston Maragh | [LinkedIn](https://www.linkedin.com/in/wsmaragh/) |  [GitHub](https://github.com/wsmaragh)
-- Marlon Rugama | [LinkedIn](https://www.linkedin.com/in/marlon-rugama-18045232/) | [GitHub](https://github.com/mrugama)
-- Gloria Washington [LinkedIn](https://www.linkedin.com/in/gloria-washington-651184153/) | [GitHub](gewashington)
-- Xianxian Chen [LinkedIn](https://www.linkedin.com/in/xianxian-chen-270214bb/) | [GitHub](https://github.com/XianxianChen)
+- **Winston Maragh** | [LinkedIn](https://www.linkedin.com/in/wsmaragh/) |  [GitHub](https://github.com/wsmaragh)
+- **Marlon Rugama** | [LinkedIn](https://www.linkedin.com/in/marlon-rugama-18045232/) | [GitHub](https://github.com/mrugama)
+- **Gloria Washington** [LinkedIn](https://www.linkedin.com/in/gloria-washington-651184153/) | [GitHub](gewashington)
+- **Xianxian Chen** [LinkedIn](https://www.linkedin.com/in/xianxian-chen-270214bb/) | [GitHub](https://github.com/XianxianChen)
 
 
 ## Demo Presentation at Venmo (in front 200-person crowd + judges)
