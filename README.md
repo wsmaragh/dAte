@@ -41,19 +41,19 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-![gif](https://i.imgur.com/W3kRNTb.png) 
+![gif](https://i.imgur.com/EDTxqY8.png) 
 <br/>Login/Onboarding | 
-![gif](https://i.imgur.com/W3kRNTb.png) 
+![gif](https://i.imgur.com/EDTxqY8.png) 
 <br/>Signup | 
 **Feed**| **Chat** |
-![gif](https://i.imgur.com/W3kRNTb.png) 
+![gif](https://i.imgur.com/EDTxqY8.png) 
 <br/>Choose a photo from photo library to edit by cropping | 
-![gif](https://i.imgur.com/W3kRNTb.png) 
+![gif](https://i.imgur.com/EDTxqY8.png) 
 <br/>Add filters to photos upload from photo library| |
 **Schedule a date**| **Notifications** |
-![gif](https://i.imgur.com/W3kRNTb.png) 
+![gif](https://i.imgur.com/EDTxqY8.png) 
 <br/>Choose a photo from photo library to edit by cropping | 
-![gif](https://i.imgur.com/W3kRNTb.png) 
+![gif](https://i.imgur.com/EDTxqY8.png) 
 <br/>Add filters to photos upload from photo library| |
 
 ## Built with 
@@ -75,6 +75,12 @@ A few of the things you can do with dAte:
 * Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
 * Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
 * Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
+
+- [Winston Maragh](https://www.linkedin.com/in/wsmaragh/)
+- [Marlon Rugama](https://www.linkedin.com/in/marlon-rugama-18045232/)
+- [Gloria Washington](https://www.linkedin.com/in/gloria-washington-651184153/)
+- [Xianxian Chen](https://www.linkedin.com/in/xianxian-chen-270214bb/)
+
 
 ## Presentation at Venmo (in front 200-person crowd + judges)
 <p align="center">
