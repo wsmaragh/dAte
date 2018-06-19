@@ -4,10 +4,8 @@
     <p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
   </a>
 </p>
-
 <p align="center">
   dAte is a iOS mobile app that matches users based on their food preferences.
-  Dating based on your food preference.
 </p>
 
 
@@ -41,26 +39,17 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
-<br/>Login/Onboarding | 
-![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
-<br/>Signup | 
+![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png) 
 **Feed**| **Chat** |
-![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
-<br/>Choose a photo from photo library to edit by cropping | 
-![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
-<br/>Add filters to photos upload from photo library| |
+![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png) 
 **Schedule a date**| **Notifications** |
-![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
-<br/>Choose a photo from photo library to edit by cropping | 
-![gif](https://i.imgur.com/EDTxqY8.png | width=100) 
-<br/>Add filters to photos upload from photo library| |
+![gif](https://i.imgur.com/EDTxqY8.png width=100)| ![gif](https://i.imgur.com/EDTxqY8.png) 
+
 
 ## Built with 
-
-- [Swift](https://developer.apple.com/swift/)
-- [Google Firebase](https://firebase.google.com/)
-- [WebRTC](https://developer.apple.com/swift/)
+- [Swift](https://developer.apple.com/swift/) - 
+- [Google Firebase](https://firebase.google.com/) - 
+- [WebRTC](https://developer.apple.com/swift/) - 
 
 
 ## Contributors
@@ -82,7 +71,7 @@ A few of the things you can do with dAte:
 - Xianxian Chen [LinkedIn](https://www.linkedin.com/in/xianxian-chen-270214bb/) | [GitHub](https://github.com/XianxianChen)
 
 
-## Presentation at Venmo (in front 200-person crowd + judges)
+## Demo Presentation at Venmo (in front 200-person crowd + judges)
 <p align="center">
    <img src = "https://i.imgur.com/IPNN17k.jpg" width=200>
    <img src = "https://i.imgur.com/cBVDTGV.jpg" width=200>
@@ -92,15 +81,12 @@ A few of the things you can do with dAte:
    <img src = "https://i.imgur.com/vTLhaao.jpg" width=200>
 </p>
 
-
-## Project Manangement
+## Project Manangement (Trello)
 Project Management/Progress: 
 https://trello.com/b/U6tB0D4k/capstonetrello
-Built over 3 1/2 weeks!!!
-
 
 ## Acknowledgments
-* Thanks to Intrepid/Accenture for providing us with great mentors.
-* Thanks to Venmo/Paypal for hosting our project Demo.
+** Thanks to Intrepid/Accenture for providing us with great mentors.
+** Thanks to Venmo/Paypal for hosting our Demo.
 
 
