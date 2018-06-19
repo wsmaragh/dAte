@@ -76,10 +76,10 @@ A few of the things you can do with dAte:
 * Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
 * Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
 
-- [Winston Maragh](https://www.linkedin.com/in/wsmaragh/)
-- [Marlon Rugama](https://www.linkedin.com/in/marlon-rugama-18045232/)
-- [Gloria Washington](https://www.linkedin.com/in/gloria-washington-651184153/)
-- [Xianxian Chen](https://www.linkedin.com/in/xianxian-chen-270214bb/)
+- Winston Maragh [LinkedIn](https://www.linkedin.com/in/wsmaragh/)
+- Marlon Rugama [LinkedIn](https://www.linkedin.com/in/marlon-rugama-18045232/)
+- Gloria Washington [LinkedIn](https://www.linkedin.com/in/gloria-washington-651184153/)
+- Xianxian Chen [LinkedIn](https://www.linkedin.com/in/xianxian-chen-270214bb/)
 
 
 ## Presentation at Venmo (in front 200-person crowd + judges)
