@@ -10,11 +10,6 @@
   Dating based on your food preference.
 </p>
 
-<p align="center">
-  <a href="https://itunes.apple.com/us/app/gitpoint/id1251245162?mt=8">
-    <img alt="Download on the App Store" title="App Store" src="http://i.imgur.com/0n2zqHD.png" width="140">
-  </a>
-</p>
 
 ## Introduction
 
@@ -41,6 +36,25 @@ A few of the things you can do with dAte:
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=400>
 </p>
+
+
+## App Flow
+**Login/Onboarding**| **Signup View** |
+:---: | :---: |
+![gif](https://i.imgur.com/W3kRNTb.png) 
+<br/>Login/Onboarding | 
+![gif](https://i.imgur.com/W3kRNTb.png) 
+<br/>Signup | 
+**Feed**| **Chat** |
+![gif](https://i.imgur.com/W3kRNTb.png) 
+<br/>Choose a photo from photo library to edit by cropping | 
+![gif](https://i.imgur.com/W3kRNTb.png) 
+<br/>Add filters to photos upload from photo library| |
+**Schedule a date**| **Notifications** |
+![gif](https://i.imgur.com/W3kRNTb.png) 
+<br/>Choose a photo from photo library to edit by cropping | 
+![gif](https://i.imgur.com/W3kRNTb.png) 
+<br/>Add filters to photos upload from photo library| |
 
 ## Built with 
 
