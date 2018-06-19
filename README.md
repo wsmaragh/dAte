@@ -23,6 +23,7 @@ A few of the things you can do with dAte:
 
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=400>
+  <img src="https://i.imgur.com/Yvnypmtm.jpg" width="350">
 </p>
 
 
@@ -37,6 +38,7 @@ A few of the things you can do with dAte:
 **Schedule a date**| **Notifications** |
 <img src="https://i.imgur.com/EDTxqY8.png" width="350"> | <img src="https://i.imgur.com/EDTxqY8.png" width="350"> 
 </p>
+
 
 ## Developed by:
 <p align="center">
