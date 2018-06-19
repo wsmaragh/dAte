@@ -23,6 +23,11 @@ A few of the things you can do with dAte:
 
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=400>
+</p>
+
+
+## Planning the App
+<p align="center">
   <img src="https://i.imgur.com/Yvnypmtm.jpg" width="350">
 </p>
 
