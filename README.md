@@ -5,7 +5,6 @@
     <p align="center"> dAte is a iOS mobile app that matches users based on their food preferences.</p> <br>
   </a>
 </p>
-Built with Swift, dAte is one of the most feature-rich dating apps.
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=700>
 </p>
