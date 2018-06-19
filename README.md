@@ -29,7 +29,7 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-![gif](https://i.imgur.com/EDTxqY8.png w) | ![gif](https://i.imgur.com/EDTxqY8.png) 
+<img src="https://i.imgur.com/EDTxqY8.png" width="100" height="100"> ) | <img src="https://i.imgur.com/EDTxqY8.png" width="100" height="100"> 
 **Feed**| **Chat** |
 ![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png width=100) 
 **Schedule a date**| **Notifications** |
