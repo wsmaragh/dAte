@@ -1,23 +1,18 @@
 <p align="center">
   <a>
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
-    <p align="center"> Built over just 3 1/2 weeks!!! </p> <br>
+    <p align="center"> dAte is a iOS mobile app that matches users based on their food preferences.</p> <br>
   </a>
-</p>
-<p align="center">
-  dAte is a iOS mobile app that matches users based on their food preferences.
 </p>
 
 
 ## Introduction
 
 Built with Swift, dAte is one of the most feature-rich dating apps.
-
-**Available for iOS**
-
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=700>
 </p>
+**Available for iOS**
 
 
 ## Features
@@ -39,9 +34,9 @@ A few of the things you can do with dAte:
 ## App Flow
 **Login/Onboarding**| **Signup View** |
 :---: | :---: |
-![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png width=100) | ![gif](https://i.imgur.com/EDTxqY8.png) 
 **Feed**| **Chat** |
-![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png) 
+![gif](https://i.imgur.com/EDTxqY8.png) | ![gif](https://i.imgur.com/EDTxqY8.png width=100) 
 **Schedule a date**| **Notifications** |
 ![gif](https://i.imgur.com/EDTxqY8.png width=100)| ![gif](https://i.imgur.com/EDTxqY8.png) 
 
@@ -59,11 +54,6 @@ A few of the things you can do with dAte:
    <img src = "https://i.imgur.com/udLbcpB.jpg" width=150>
    <img src = "https://i.imgur.com/IRbB54m.png" width=150>
 </p>
-
-* Winston Maragh | https://www.linkedin.com/in/wsmaragh/
-* Marlon Rugama | https://www.linkedin.com/in/marlon-rugama-18045232/
-* Gloria Washington | https://www.linkedin.com/in/gloria-washington-651184153/
-* Xianxian Chen | https://www.linkedin.com/in/xianxian-chen-270214bb/
 
 - Winston Maragh | [LinkedIn](https://www.linkedin.com/in/wsmaragh/) |  [GitHub](https://github.com/wsmaragh)
 - Marlon Rugama | [LinkedIn](https://www.linkedin.com/in/marlon-rugama-18045232/) | [GitHub](https://github.com/mrugama)
