@@ -1,7 +1,7 @@
 ## dAte
 <p align="center">
   <a>
-    <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
+    <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="100">
     <p align="center"> dAte is a iOS mobile app that matches users based on their food preferences.</p> <br>
   </a>
   
