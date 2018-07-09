@@ -21,29 +21,17 @@ A few of the things you can do with dAte:
 * Receive Push notifications for likes, matches, and date reminders 
 * Peer-to-peer Video chat (in progress)
 
+## Designing & Planning
+<p align="center">
+  <img src="https://i.imgur.com/Yvnypmtm.jpg" width="350">
+  <img src="https://i.imgur.com/PqQy4QR.jpg" width="350">
+  <img src="https://i.imgur.com/TVP07We.jpg" width="350">
+  <img src="https://i.imgur.com/QF3oZWZ.jpg" width="350">
+</p>
+
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=400>
 </p>
-
-
-## Planning the App
-<p align="center">
-  <img src="https://i.imgur.com/Yvnypmtm.jpg" width="350">
-</p>
-
-
-## Flow of the App
-<p align="center">
-
-**Login/Onboarding**| **Signup View** |
-:---: | :---: |
-<img src="https://i.imgur.com/EDTxqY8.png" width="350"> | <img src="https://i.imgur.com/EDTxqY8.png" width="350"> 
-**Feed**| **Chat** |
-<img src="https://i.imgur.com/EDTxqY8.png" width="350"> | <img src="https://i.imgur.com/EDTxqY8.png" width="350"> 
-**Schedule a date**| **Notifications** |
-<img src="https://i.imgur.com/EDTxqY8.png" width="350"> | <img src="https://i.imgur.com/EDTxqY8.png" width="350"> 
-</p>
-
 
 ## Developed by:
 <p align="center">
