@@ -4,6 +4,11 @@
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="200">
     <p align="center"> dAte is a iOS mobile app that matches users based on their food preferences.</p> <br>
   </a>
+  <a>
+    <img alt="dAte" title="dAte" src="https://i.imgur.com/QPCcjJi.jpg" width="200">
+  </a>
+  
+  
 </p>
 <p align="center">
   <img src = "https://i.imgur.com/W3kRNTb.png" width=700>
