@@ -24,8 +24,8 @@ A few of the things you can do with dAte:
 ## Designing & Planning
 <p align="center">
   <img src="https://i.imgur.com/Yvnypmtm.jpg" width="350">
-  <img src="https://i.imgur.com/PqQy4QR.jpg" width="350">
   <img src="https://i.imgur.com/TVP07We.jpg" width="350">
+  <img src="https://i.imgur.com/PqQy4QR.jpg" width="350">
   <img src="https://i.imgur.com/QF3oZWZ.jpg" width="350">
 </p>
 
