@@ -9,6 +9,7 @@
 </p>
 <p align="center">
   <img alt="dAte" title="dAte" src="https://i.imgur.com/QPCcjJi.jpg" width="200">
+  <img alt="dAte" title="dAte" src="https://i.imgur.com/V8xiaJ3.jpg" width="200">  
   <img src = "https://i.imgur.com/W3kRNTb.png" width=700>
 </p>
 **Available for iOS**
@@ -30,6 +31,10 @@ A few of the things you can do with dAte:
   <img src="https://i.imgur.com/PqQy4QR.jpg" width="350">
   <img src="https://i.imgur.com/TVP07We.jpg" width="350">
   <img src="https://i.imgur.com/QF3oZWZ.jpg" width="350">
+  <img src="https://i.imgur.com/O6SUunb.jpg" width="350">
+
+
+  
 </p>
 
 <p align="center">
