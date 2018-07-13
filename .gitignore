@@ -21,6 +21,8 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+*.certSigningRequest
+*.p12
 
 ## Obj-C/Swift specific
 *.hmap
