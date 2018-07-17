@@ -56,8 +56,6 @@ A few of the things you can do with dAte:
 
 
 ## Demo Presentation at Venmo (in front 200-person crowd + judges)
-<iframe width="560" height="315" src="https://www.youtube.com/embed/I6CQJW7RpP8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 <p align="center">
    <img src = "https://i.imgur.com/IPNN17k.jpg" width=200>
    <img src = "https://i.imgur.com/cBVDTGV.jpg" width=200>
