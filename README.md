@@ -44,7 +44,6 @@ A few of the things you can do with dAte:
 ## Developed by:
 <p align="center">
    <img src = "https://i.imgur.com/J5ctv0K.jpg" width=150>
-   <img src = "https://i.imgur.com/9IHLW3L.jpg" width=150>
    <img src = "https://i.imgur.com/cTfBCeR.jpg" width=150>
    <img src = "https://i.imgur.com/udLbcpB.jpg" width=150>
    <img src = "https://i.imgur.com/IRbB54m.png" width=150>
