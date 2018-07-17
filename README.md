@@ -27,11 +27,11 @@ A few of the things you can do with dAte:
 
 ## Designing & Planning
 <p align="center">
-  <img src="https://i.imgur.com/Yvnypmtm.jpg" width="350">
-  <img src="https://i.imgur.com/PqQy4QR.jpg" width="350">
-  <img src="https://i.imgur.com/TVP07We.jpg" width="350">
-  <img src="https://i.imgur.com/QF3oZWZ.jpg" width="350">
-  <img src="https://i.imgur.com/O6SUunb.jpg" width="350">
+  <img src="https://i.imgur.com/Yvnypmtm.jpg" width="300">
+  <img src="https://i.imgur.com/PqQy4QR.jpg" width="300">
+  <img src="https://i.imgur.com/TVP07We.jpg" width="300">
+  <img src="https://i.imgur.com/QF3oZWZ.jpg" width="300">
+  <img src="https://i.imgur.com/O6SUunb.jpg" width="300">
 
 
   
@@ -56,6 +56,8 @@ A few of the things you can do with dAte:
 
 
 ## Demo Presentation at Venmo (in front 200-person crowd + judges)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I6CQJW7RpP8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 <p align="center">
    <img src = "https://i.imgur.com/IPNN17k.jpg" width=200>
    <img src = "https://i.imgur.com/cBVDTGV.jpg" width=200>
@@ -65,6 +67,12 @@ A few of the things you can do with dAte:
    <img src = "https://i.imgur.com/vTLhaao.jpg" width=200>
 </p>
 
+<p align="center">
+    <a href="https://www.youtube.com/embed/I6CQJW7RpP8" target="_blank">
+      <img src="https://i.imgur.com/pdYbAb0.png" alt="Watch Demo of dAte" width="600"  border="10" />
+    </a>
+</p>
+<p align="center">Video of dAte Demo at Venmo</p>
 
 ## Project Manangement (Trello)
 Project Management/Progress: 
