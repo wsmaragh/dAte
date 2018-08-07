@@ -12,7 +12,6 @@
   <img alt="dAte" title="dAte" src="https://i.imgur.com/V8xiaJ3.jpg" width="200">  
   <img src = "https://i.imgur.com/W3kRNTb.png" width=700>
 </p>
-**Available for iOS**
 
 
 ## Features
@@ -23,7 +22,6 @@ A few of the things you can do with dAte:
 * Send and receive chat messages (with notification)
 * Schedule a date with your match (with notification)
 * Receive Push notifications for likes, matches, and date reminders 
-* Peer-to-peer Video chat (in progress)
 
 ## Designing & Planning
 <p align="center">
@@ -32,9 +30,6 @@ A few of the things you can do with dAte:
   <img src="https://i.imgur.com/TVP07We.jpg" width="300">
   <img src="https://i.imgur.com/QF3oZWZ.jpg" width="300">
   <img src="https://i.imgur.com/O6SUunb.jpg" width="300">
-
-
-  
 </p>
 
 <p align="center">
@@ -65,12 +60,6 @@ A few of the things you can do with dAte:
    <img src = "https://i.imgur.com/vTLhaao.jpg" width=200>
 </p>
 
-<p align="center">
-    <a href="https://www.youtube.com/embed/I6CQJW7RpP8" target="_blank">
-      <img src="https://i.imgur.com/pdYbAb0.png" alt="Watch Demo of dAte" width="600"  border="10" />
-    </a>
-</p>
-<p align="center">Video of dAte Demo at Venmo</p>
 
 ## Project Manangement (Trello)
 Project Management/Progress: 
