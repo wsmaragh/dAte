@@ -1,4 +1,3 @@
-## dAte
 <p align="center">
   <a>
     <img alt="dAte" title="dAte" src="https://i.imgur.com/JiCtsAJ.png" width="100">
