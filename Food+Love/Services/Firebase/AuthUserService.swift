@@ -5,6 +5,7 @@
 //  Copyright © 2018 Winston Maragh. All rights reserved.
 
 import Firebase
+import FirebaseAuth
 import UIKit
 
 
@@ -34,15 +35,20 @@ class AuthUserService: NSObject {
 		return Auth.auth().currentUser
 	}
 
+    func createAccount(with email: String, and password: String, completion: @escaping AuthDataResultCallback) {
+        Auth.auth().createUser(withEmail: email, password: password, completion: completion)
+    }
+    
 	//Create User in Auth
 	func createUser(name: String, email: String, password: String, profileImage: UIImage) {
 		Auth.auth().createUser(withEmail: email, password: password){(user, error) in
 			if let error = error {self.delegate?.didFailCreatingUser?(self, error: error)}
-			else if let user = user {
-				let changeRequest = user.createProfileChangeRequest()
-				changeRequest.displayName = name
-				changeRequest.commitChanges(completion: {(error) in
-					if let error = error {print("changeRequest error: \(error)")}
+			
+				//let changeRequest = user.createProfileChangeRequest()
+                
+				//changeRequest.displayName = name
+				//changeRequest.commitChanges(completion: {(error) in
+            
 					else {
 						print("changeRequest was successful for username: \(name)")
 						DBService.manager.addLover(name: name, email: email, profileImage: profileImage)
@@ -52,9 +58,8 @@ class AuthUserService: NSObject {
 							}
 					}
 //					self.delegate?.didCreateUser?(self, user: user)
-				})
-			}
-		}
+				}
+		
 	}
 
 	public func updatePhoto(urlString: String) {

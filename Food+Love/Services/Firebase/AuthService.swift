@@ -7,7 +7,7 @@
 import Firebase
 import UIKit
 
-
+/*
 // Auth Delegate
 @objc protocol AuthServiceDelegate: class {
     //create user delegate protocols
@@ -35,11 +35,16 @@ class AuthService: NSObject {
 	}
 
 	//Create User in Auth
+
+    
 	func createUser(name: String, email: String, password: String, profileImage: UIImage) {
+      
+       
 		Auth.auth().createUser(withEmail: email, password: password){(user, error) in
 			if let error = error {self.delegate?.didFailCreatingUser?(self, error: error)}
 			else if let user = user {
-				let changeRequest = user.createProfileChangeRequest()
+            
+				//let changeRequest = user.createProfileChangeRequest()
 				changeRequest.displayName = name
 				changeRequest.commitChanges(completion: {(error) in
 					if let error = error {print("changeRequest error: \(error)")}
@@ -51,6 +56,7 @@ class AuthService: NSObject {
 				})
 			}
 		}
+ 
 	}
 
 	public func updatePhoto(urlString: String) {
@@ -105,3 +111,4 @@ class AuthService: NSObject {
 
 }
 
+ */

@@ -169,27 +169,27 @@ extension DBService {
 
 
 	public func updateName(name: String) {
-		guard let currentUser = AuthService.getCurrentUser() else {print("No user authenticated"); return}
+        guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["name": name])
 	}
 
 	public func updateEmail(email: String) {
-		guard let currentUser = AuthService.getCurrentUser() else {print("No user authenticated"); return}
+        guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["email": email])
 	}
 
 	public func updatePhoto(profileImageUrl: String) {
-		guard let currentUser = AuthService.getCurrentUser() else {print("No user authenticated"); return}
+		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 	}
 	public func updateProfileImages(profileImageUrl: String, imageNum: Int) {
-		guard let currentUser = AuthService.getCurrentUser() else {print("No user authenticated"); return}
+		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		if imageNum == 0 {DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl": profileImageUrl])
 		} else { DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues(["profileImageUrl\(imageNum)": profileImageUrl])
 		}
 	}
 	public func updateEditedProfileInfo(ediedDict: [String: Any?]) {
-		guard let currentUser = AuthService.getCurrentUser() else {print("No user authenticated"); return}
+		guard let currentUser = AuthUserService.getCurrentUser() else {print("No user authenticated"); return}
 		for (key, value) in ediedDict { DBService.manager.getLoversRef().child(currentUser.uid).updateChildValues([key: value])
 		}
 	}

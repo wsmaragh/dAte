@@ -64,7 +64,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var presentMonthIndex = 0
     var presentYear = 0
     var todaysDate = 0
-    var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
+    var firstWeekDayOfMonth = 0  //(Sunday-Saturday 1-7)
     
     weak var delegate: CalendarDelegate?
     
