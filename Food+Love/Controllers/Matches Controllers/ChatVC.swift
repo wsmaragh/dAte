@@ -246,21 +246,22 @@ class ChatVC: UIViewController {
 	}
 
 	// Select Video
-	fileprivate func selectedVideoForUrl(videoURL: URL) {
-		let fileName = NSUUID().uuidString+".mov"
-		// UPLOAD
-		let uploadTask = Storage.storage().reference().child("message_videos").child(fileName).putFile(from: videoURL, metadata: nil, completion: { (metadata, error) in
-			if error != nil { print("Failed to upload the video:", error!)}
-			if let videoUrl = metadata?.downloadURL()?.absoluteString {
-				if let thumbnailImage = self.thumbnailImageForPrivateVideoUrl(videoUrl: videoURL){
-					self.uploadToFirebaseStorage(thumbnailImage, completion: { (imageUrl) in
-						let properties: [String: AnyObject] = ["imageUrl":imageUrl,"imageWidth":thumbnailImage.size.width , "imageHeight":thumbnailImage.size.height,"videoUrl": videoUrl] as [String: AnyObject]
-						self.sendMessage(properties)
-					})
-				}
-			}
-		})
-	}
+    fileprivate func selectedVideoForUrl(videoURL: URL) {
+        let fileName = NSUUID().uuidString+".mov"
+        // UPLOAD
+        let uploadTask = Storage.storage().reference().child("message_videos").child(fileName).putFile(from: videoURL, metadata: nil, completion: { (metadata, error) in
+            if error != nil { print("Failed to upload the video:", error!)}
+            
+//            if let videoUrl = metadata?.downloadURL()?.absoluteString {
+//                if let thumbnailImage = self.thumbnailImageForPrivateVideoUrl(videoUrl: videoURL){
+//                    self.uploadToFirebaseStorage(thumbnailImage, completion: { (imageUrl) in
+//                        let properties: [String: AnyObject] = ["imageUrl":imageUrl,"imageWidth":thumbnailImage.size.width , "imageHeight":thumbnailImage.size.height,"videoUrl": videoUrl] as [String: AnyObject]
+//                        self.sendMessage(properties)
+//                    })
+//                }
+//            }
+        })
+    }
 
 	// Thumbnail of Video
 	private func thumbnailImageForPrivateVideoUrl(videoUrl: URL) -> UIImage?{
@@ -282,26 +283,28 @@ class ChatVC: UIViewController {
 		}else if let origionalImage = info["UIImagePickerControllerOrigionalImage"] as? UIImage {
 			selectedImageFromPicker = origionalImage
 		}
-		if let selectedImage = selectedImageFromPicker {
-			uploadToFirebaseStorage(selectedImage, completion: { (imageUrl) in
-				self.addImageToMessage(imageUrl, selectedImage)
-			})
-		}
+        // TODO: Fix
+//        if let selectedImage = selectedImageFromPicker {
+//            //ToDo: fix
+//            //uploadToFirebaseStorage(selectedImage, completion: { (imageUrl) in
+//                self.addImageToMessage(imageUrl, selectedImage)
+//            })
+//        }
 	}
 
 	// UPLOAD Image to Firebase
-	private func uploadToFirebaseStorage(_ image: UIImage, completion:@escaping (_ imageUrl: String) -> ()) {
-		let imageName = NSUUID().uuidString
-		let ref = Storage.storage().reference().child("message_images").child(imageName)
-		if let uploadData = UIImageJPEGRepresentation(image, 0.2) {
-			ref.putData(uploadData, metadata: nil, completion: { (metadata, error) in
-				if error != nil { print("Failed to Upload Image:",error!); return}
-				if let imageUrl = metadata?.downloadURL()?.absoluteString {
-					completion(imageUrl)
-				}
-			})
-		}
-	}
+//    private func uploadToFirebaseStorage(_ image: UIImage, completion:@escaping (_ imageUrl: String) -> ()) {
+//        let imageName = NSUUID().uuidString
+//        let ref = Storage.storage().reference().child("message_images").child(imageName)
+//        if let uploadData = UIImageJPEGRepresentation(image, 0.2) {
+//            ref.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+//                if error != nil { print("Failed to Upload Image:",error!); return}
+//                if let imageUrl = metadata?.downloadURL()?.absoluteString {
+//                    completion(imageUrl)
+//                }
+//            })
+//        }
+//    }
 
 	//Location
 	func checkLocationPermission() -> Bool {

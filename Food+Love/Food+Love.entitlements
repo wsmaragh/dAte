@@ -7,6 +7,7 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.xcodeable.Food-Love</string>
+		<string>$(AppIdentifierPrefix)com.xcodeable.Food-Love</string>
 	</array>
 </dict>
 </plist>

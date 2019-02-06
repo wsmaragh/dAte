@@ -48,16 +48,19 @@ extension StorageService {
             let percentage = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
             print(percentage)
         }
+        /*
         uploadTask.observe(.success) { (snapshot) in
             // Upload completed successfully
             // set job's imageURL
-            let imageURL = String.init(describing: snapshot.metadata!.downloadURL()!)
+          //  let imageURL = String.init(describing: snapshot.metadata!.downloadURL()!)
+            
             DBService.manager.updateProfileImages(profileImageUrl: imageURL, imageNum: imageIndex)
             //  DBService.manager.getPostsRef().child("\(postId)/imageURL").setValue(imageURL)
 
 
             // DBService.manager.getJobs().child("\(postId)").updateChildValues(["imageURL" :  imageURL])
         }
+ */
         uploadTask.observe(.failure) { (snapshot) in
             if let error = snapshot.error as NSError? {
                 switch(StorageErrorCode(rawValue: error.code)!) {
